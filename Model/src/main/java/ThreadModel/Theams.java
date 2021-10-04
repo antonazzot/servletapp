@@ -1,0 +1,5 @@
+package ThreadModel;
+
+public enum Theams {
+    MATH, PHISICK, LANGVAGE, MUSICK, SPORT, HIMIC, BIOLOGIC, ECONOMIC, FINANC, FACULTATIVE;
+}
