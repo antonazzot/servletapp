@@ -5,17 +5,18 @@
     <title>Title</title>
 </head>
 <body>
-<br>
+
 <h1> ADD NEW STUDENT </h1>
 
-<form id="data" action="UserActionServlet">
+<form id="data" action="UserActionServlet" >
+    <input name="act" value="add"> <input name="user" value="student"> <br>
+    Enter Student NAME: <input  name="name", type="text"> <br>
+    Enter Student Login: <input  name="login", type="text"> <br>
+    Enter Student Password: <input  name="password", type="text"> <br>
+    Enter Student age: <input  name="age", type="text"> <br>
 
-    Enter Student NAME: <input  name="userName", type="text"> <br>
-    Enter Student Login: <input  name="userName", type="text"> <br>
-    Enter Student Password: <input  name="userName", type="text"> <br>
-    Enter Student age: <input  name="userName", type="text"> <br>
-
-    <input type="submit" form="data"/>
-</form>
+    <br>
+    <br>
+   <input type="submit" form="data" />
 </body>
 </html>

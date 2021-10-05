@@ -17,7 +17,7 @@
     </select>
     <br>
     <br>
-    <input  name="user", value="student">
+    <input  name="user", value="student"> <br>
     Enter student ID: <input name ="id", type="text">
      <input type="submit" form="data"/>
 </form>
