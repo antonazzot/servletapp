@@ -11,40 +11,50 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet (value = "/checkUser")
-public class CheckSservlet extends HttpServlet {
+public class CheckServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         int id =0;
-    String login =null;
-    boolean doesItLogin = false;
-    try {
-       id = Integer.parseInt( req.getParameter("id"));
-    }
-    catch (IllegalArgumentException e) {
-        login = req.getParameter("id");
-        doesItLogin = true;
-    }
+        String login =null;
+        boolean doesItLogin = false;
+        try {
+            id = Integer.parseInt( req.getParameter("id"));
+            }
+        catch (IllegalArgumentException e) {
+            login = req.getParameter("id");
+            doesItLogin = true;
+            }
+
         UserImpl user;
+        String password = req.getParameter("password");
 
-    String password = req.getParameter("password");
-    if (doesItLogin) {
-       user = checkUser(login, password);
-    }
-    else
-     user = checkUser(id, password);
+        if (doesItLogin) {
+        user = checkUser(login, password);
+        }
+        else
+        user = checkUser(id, password);
 
-    if (user.getRole().equals(Role.ADMINISTRATOR)) {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("administratorPage.jsp");
-        requestDispatcher.forward(req,resp);
-    }
-    else  if (Role.STUDENT.equals(user.getRole())) {
-       req.setAttribute("act", "watch");
-    }
+        HttpSession session = req.getSession();
+        session.setAttribute("user", user);
+
+        if (Role.ADMINISTRATOR.equals(user.getRole())) {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("adminActList.jsp");
+            requestDispatcher.forward(req,resp);
+        }
+        else  if (Role.STUDENT.equals(user.getRole())) {
+            Writer writer = resp.getWriter();
+            writer.write("Student");
+        }
+        else  if (Role.TRAINER.equals(user.getRole())) {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("trainerActList.jsp");
+            requestDispatcher.forward(req, resp);
+        }
 
     }
 

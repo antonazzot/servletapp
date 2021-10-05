@@ -1,6 +1,7 @@
 Servlets\DAO\Dao.class
-Servlets\UserActionServlet.class
-Servlets\CheckSservlet.class
+Servlets\CheckServlet.class
 Servlets\StartPage.class
 Servlets\DAO\DaoImp.class
 Servlets\WatchServlet.class
+Servlets\Filters\UserFilter.class
+Servlets\UserActionServlet.class

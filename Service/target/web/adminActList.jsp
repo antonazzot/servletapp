@@ -9,17 +9,14 @@
 <h1> admin list </h1>
 
 <form id="data" action="watchServlet">
-   <select name="user", form="data">
-            <option value="Student">Student</option>
-            <option value="Trainer">Trainer</option>
-            <option value="Administrator">Administrator</option>
-            <option value="Group">Group</option>
+    <select name="user", form="data">
+        <option value="Student">Student</option>
+        <option value="Trainer">Trainer</option>
+        <option value="Administrator">Administrator</option>
+        <option value="Group">Group</option>
     </select>
     <br>
-    <br>
-    <br>
-    <br>
-    <select name="act", form="data1">
+       <select name="act", form="data">
         <option value="create">ADD </option>
         <option value="delete">Delete </option>
         <option value="change">Change </option>
@@ -31,7 +28,7 @@
     <br>
     <br>
     Enter  ID: <input name ="id", type="text">
-     <input type="submit" form="data" form="data1">
+    <input type="submit" form="data" value="act">
 </form>
 </body>
 </html>
