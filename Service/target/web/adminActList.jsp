@@ -10,10 +10,10 @@
 
 <form id="data" action="watchServlet">
     <select name="user", form="data">
-        <option value="Student">Student</option>
-        <option value="Trainer">Trainer</option>
-        <option value="Administrator">Administrator</option>
-        <option value="Group">Group</option>
+        <option value="student">Student</option>
+        <option value="trainer">Trainer</option>
+        <option value="administrator">Administrator</option>
+        <option value="group">Group</option>
     </select>
     <br>
        <select name="act", form="data">

@@ -2,6 +2,7 @@ package Servlets;
 
 import DataBase.DataBaseInf;
 import Servlets.DAO.DaoImp;
+import Users.Student;
 import Users.UserImpl;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet(value = "/watchServlet")
 public class WatchServlet extends HttpServlet {
@@ -25,13 +28,6 @@ public class WatchServlet extends HttpServlet {
         String act = req.getParameter("act");
         String user = req.getParameter("user");
         int id =0;
-        try {
-            if (req.getParameter("id")!=null)
-           id = Integer.parseInt( req.getParameter("id"));
-        }
-        catch (IllegalArgumentException e) {
-            resp.getWriter().write("Enter right id");
-        }
         DaoImp daoImp = new DaoImp();
 
         resp.setContentType("text/html");
@@ -43,6 +39,13 @@ public class WatchServlet extends HttpServlet {
             req.getRequestDispatcher("adminControl/adduserpage.jsp").forward(req, resp);
         }
         else if (act.equalsIgnoreCase("delete")){
+            if (req.getParameter("id")!=null ) {
+                try {
+                    id = Integer.parseInt(req.getParameter("id"));
+                } catch (IllegalArgumentException e) {
+                    resp.getWriter().write("Enter right id");
+                }
+            }
                 daoImp.deleteUser(id);
         }
         else if (act.equalsIgnoreCase("change")){
@@ -51,19 +54,32 @@ public class WatchServlet extends HttpServlet {
         else if (act.equalsIgnoreCase("watch")) {
         switch (user)
            {
-            case "student": writer.write (watch(DataBaseInf.studentHashMap));
-            case "trainer": writer.write (watch(DataBaseInf.studentHashMap));
-            case "administrator": writer.write (watch(DataBaseInf.studentHashMap));
-            case "group": writer.write (watch(DataBaseInf.studentHashMap));
+            case "student":
+              writer.write(DataBaseInf.studentHashMap.values().stream().collect(Collectors.toList()).
+                      stream().map(s->(Student)s).map(s->s.getInf()).toString());
+
+
+
+                req.getRequestDispatcher("demonstrate.jsp").forward(req,resp);
+
+            break;
+            case "trainer":
+                req.setAttribute("map", DataBaseInf.trainerHashMap);
+                req.getRequestDispatcher("demonstrate.jsp").forward(req,resp);
+
+            break;
+            case "administrator":
+                req.setAttribute("map", DataBaseInf.adminHashMap);
+                req.getRequestDispatcher("demonstrate.jsp").forward(req,resp);
+
+            break;
+            case "group":
+                req.setAttribute("map", DataBaseInf.groupHashMap);
+                req.getRequestDispatcher("demonstrate.jsp").forward(req,resp);
+            break;
             }
             }
                   }
-
-
-    private String watch(Map<Integer, UserImpl> map) {
-        return map.values().toString();
-    }
-
 
     }
 

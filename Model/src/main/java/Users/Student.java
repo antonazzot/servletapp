@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Student extends UserImpl {
 
-    private HashMap <Theams, List<Mark>> listOfMark = null;
+    private HashMap <Theams, List<Mark>> listOfMark;
 
     public Student( String name, String login, String password, int age, HashMap<Theams, List<Mark>> listOfMark) {
         super( Role.STUDENT, name, login, password, age);
@@ -25,23 +26,16 @@ public class Student extends UserImpl {
         this.listOfMark = listOfMark;
     }
 
-    public  String showInf () {
-        String inf =null;
-        List<String> stringList = new ArrayList<>();
-       for(Map.Entry<Theams, List<Mark>> entry: listOfMark.entrySet()) {
-          stringList.add( "Theams " + entry.getKey().name() + " Mark: " + '\n'
-           +entry.getValue().toString() + '\n');
-                 }
-       StringBuilder stringBuilder = new StringBuilder();
-        for (String str:
-             stringList) {
-            stringBuilder = stringBuilder.append( " " ).append(new StringBuilder(str));
+    public  String getInf () {
+    String inf;
+    ArrayList <String> strings =null;
+    for (
+    Map.Entry<Theams, List<Mark>> entry: this.listOfMark.entrySet()){
+        String temp = entry.getKey().name() + ": " + '\n' +
+               entry.getValue().stream().map(m -> m.getValuesOfMark()).collect(Collectors.toList()).toString().split("/ ");
+        strings.add(temp);
         }
-       inf = stringBuilder.toString();
-       return inf;
-    }
-    public String aboutStudent () {
-     return    toString() + showInf();
+    return inf = this.getName() + strings.toString();
     }
 
     @Override

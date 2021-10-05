@@ -1,9 +1,10 @@
 package Users;
 
-import DataBase.DataBaseInf;
+import DataBase.*;
 import ThreadModel.Salary;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Trainer extends UserImpl{
 
@@ -23,12 +24,9 @@ public class Trainer extends UserImpl{
         this.salarylist = salarylist;
     }
 
-    public void printInfAboutSalary () {
-        System.out.println(toString() + "Has next salary: ");
-        for (Salary salary:
-             salarylist) {
-            System.out.println(salary.getBigDecimalSalary().toString()   );
-        }
+    public String getInf () {
+        return "Trainer: " + this.getName() + " " + " have salsry: " + '\n' +
+                salarylist.stream().map(b -> b.getBigDecimalSalary().toString()).collect(Collectors.toList()).toString();
     }
 
     @Override

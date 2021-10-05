@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Group {
     private int id;
@@ -58,23 +59,15 @@ public class Group {
         this.theamsSet = theamsSet;
     }
 
-    public void aboutGroup ( ) {
-        System.out.println("***");
-        System.out.println("Group " + id);
-        System.out.println();
-        System.out.println(" head trainer: " + trainer.getName());
-        System.out.println(" consist of next Student: "  + "------------------");
+    public void getInf ( ) {
+        String inf = "***" + '\n' + "Treiner: " + trainer.getName() + " " +
+                " consist of next Student: " + studentMap.values().stream().map( s->s.getName()).
+        collect(Collectors.toList()).toString() + " "
+        + '\n' +
+        " *****************" +
+        +'\n' +
+                theamsSet.toArray().toString();
 
-       for(Map.Entry<Integer, Student> entry:  studentMap.entrySet()) {
-           System.out.println("Student ID " + entry.getKey().toString() + ": "  );
-           entry.getValue().aboutStudent();
-        }
-
-        System.out.println("****************");
-        for (Theams t:
-             theamsSet) {
-            System.out.println(t.name());
-        }
     }
 
     @Override
