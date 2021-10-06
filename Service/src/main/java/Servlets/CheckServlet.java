@@ -24,6 +24,11 @@ public class CheckServlet extends HttpServlet {
     private static Logger logger =  LoggerFactory.getLogger(CheckServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        UserImpl user;
+        if (req.getSession().isNew()) {req.getRequestDispatcher("/hello").forward(req, resp);}
+        else {
+            user = (UserImpl) req.getSession().getAttribute("user");
+        }
 
         int id =0;
         String login =null;
@@ -36,7 +41,7 @@ public class CheckServlet extends HttpServlet {
             doesItLogin = true;
             }
 
-        UserImpl user;
+
         String password = req.getParameter("password");
 
         if (doesItLogin) {
@@ -59,7 +64,8 @@ public class CheckServlet extends HttpServlet {
            req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
         }
         else  if (Role.TRAINER.equals(user.getRole())) {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("trainerActList.jsp");
+
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/TrainerToStartServlet");
             requestDispatcher.forward(req, resp);
         }
 
@@ -68,7 +74,6 @@ public class CheckServlet extends HttpServlet {
     private UserImpl checkUser (int id, String password) {
      DaoImp daoImp = new DaoImp();
      UserImpl user;
-
      user = itRightCondition(daoImp.getUsersMapById(id), id, password );
      return  user;
     }
@@ -78,12 +83,11 @@ public class CheckServlet extends HttpServlet {
          return  user;
     }
 
-
     private UserImpl itRightCondition (Map <Integer, UserImpl> map, int id, String password)  {
-            if (map.get(id).getPassword().equalsIgnoreCase(password))
-                return map.get(id);
-            return null;
-        }
+    if (map.get(id).getPassword().equalsIgnoreCase(password))
+    return map.get(id);
+    return null;
+    }
 
     private UserImpl itRightCondition ( String login, String password)  {
        UserImpl user;

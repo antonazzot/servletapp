@@ -6,4 +6,5 @@ Servlets\WatchServlet.class
 Servlets\Filters\UserFilter.class
 Servlets\UserActionServlet.class
 Servlets\Filters\AbstractFilter.class
+Servlets\TrainerToStartServlet.class
 Servlets\GroupCreaterServlet.class
