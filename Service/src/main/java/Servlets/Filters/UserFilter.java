@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.http.HttpRequest;
-@WebFilter( urlPatterns = {"/watchServlet"})
+@WebFilter( urlPatterns = {"/watchServlet", "/GroupCreaterServlet", "/watchServlet"})
 
 public class UserFilter extends AbstractFilter {
 
@@ -28,7 +28,7 @@ public class UserFilter extends AbstractFilter {
         String cont =request.getContextPath();
         UserImpl user = (UserImpl) session.getAttribute("user");
         if ((session == null) || (user == null ) || (Role.TRAINER.equals(user.getRole()) || Role.STUDENT.equals(user.getRole())) ) {
-            response.sendRedirect(cont + "/hello");
+            response.sendRedirect(cont + "hello.jsp");
 
         }
         filterChain.doFilter(request, response);

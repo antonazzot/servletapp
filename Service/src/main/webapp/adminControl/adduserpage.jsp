@@ -28,5 +28,10 @@
     <br>
     <br>
     <input type="submit" form="data" />
+
+    <br>
+<form  action="/web/hello">
+    <input type="submit" value="Go to LogIN page!">
+</form>
 </body>
 </html>

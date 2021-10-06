@@ -33,5 +33,9 @@
     Enter  ID: <input name ="id", type="text">
      <input type="submit" form="data" form="data1">
 </form>
+<br>
+<form  action="/web/hello">
+    <input type="submit" value="Go to LogIN page!">
+</form>
 </body>
 </html>

@@ -11,7 +11,7 @@
 <body>
 
     <form  id="data"  action="checkUser" >
-      <input name="id" type="text" placeholder="username"/>
+      <input name="id" type="text" placeholder="username or ID"/>
       <input name="password" type="text" placeholder="password"/>
      <input type="submit" form="data"/>
     </form>

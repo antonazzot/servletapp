@@ -8,6 +8,8 @@ import Users.Administrator;
 import Users.Role;
 import Users.Student;
 import Users.Trainer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -25,6 +27,7 @@ import java.util.Map;
 
 @WebServlet ("/hello")
 public class StartPage extends HttpServlet {
+    Logger log = LoggerFactory.getLogger(StartPage.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -43,8 +46,7 @@ public class StartPage extends HttpServlet {
                 Trainer trainer = new Trainer("Alex", "Ale", "pppas", 40,
                         new ArrayList<>(List.of(new Salary(new BigDecimal(4000)), new Salary(new BigDecimal(3000)) )));
         }
-            req.setAttribute("lists", new ArrayList<String>(List.of("a","b","c","d")));
-
+            log.info("Admin = {}", "Pass ={}", adminLogin, adminPassword);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("hello.jsp");
             requestDispatcher.forward(req, resp);
         }

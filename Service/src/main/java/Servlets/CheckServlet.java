@@ -4,6 +4,9 @@ import Servlets.DAO.DaoImp;
 import Users.Role;
 import Users.Student;
 import Users.UserImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +21,7 @@ import java.util.Map;
 
 @WebServlet (value = "/checkUser")
 public class CheckServlet extends HttpServlet {
+    private static Logger logger =  LoggerFactory.getLogger(CheckServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -43,7 +47,9 @@ public class CheckServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
-
+        if (user!=null) {
+            logger.info("New USER = {}", user.getRole(), user.getInf());
+        }
         if (Role.ADMINISTRATOR.equals(user.getRole())) {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("adminActList.jsp");
             requestDispatcher.forward(req,resp);

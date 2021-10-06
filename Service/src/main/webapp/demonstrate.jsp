@@ -16,6 +16,9 @@
        <c:out value = "${entry.value}" /><p>
   </c:forEach>
 
-
+<br>
+<form  action="/web/hello">
+    <input type="submit" value="Go to LogIN page!">
+</form>
 </body>
 </html>

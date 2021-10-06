@@ -30,7 +30,10 @@
 
    <p><input type="submit" value="Отправить"></p>
   </form>
-
+<br>
+<form  action="/web/hello">
+    <input type="submit" value="Go to LogIN page!">
+</form>
 
 </body>
 </html>
