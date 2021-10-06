@@ -34,8 +34,7 @@ public class WatchServlet extends HttpServlet {
         int id =0;
         DaoImp daoImp = new DaoImp();
 
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
+
         Writer writer =resp.getWriter();
 
 
@@ -46,7 +45,7 @@ public class WatchServlet extends HttpServlet {
             else
             {
                 req.setAttribute("map", mapWithInf(Role.STUDENT));
-                req.setAttribute("map1", mapWithInf(Role.TRAINER));
+                req.setAttribute("map1", individTrainerMap.theamsHashSet( mapWithInf(Role.TRAINER)));
                 req.setAttribute("set", IndividSetMap.theamsHashSet());
                 req.getRequestDispatcher("theamscreatelist.jsp").forward(req, resp);}
             }

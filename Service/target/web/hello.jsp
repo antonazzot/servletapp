@@ -6,19 +6,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Main Page</title>
+    <title>Login Page</title>
 </head>
 <body>
-<br> <br/>
-<form id="data" action="checkUser">
-    <br>
-    <br>
-    <br>
-    Enter id or login: <input name="id", type="text"> <br/>
-    <br>
-    Enter password:      <input name="password", type="text">
-    <input type="submit" form="data"/>
-</form>
 
+    <form  id="data"  action="checkUser" >
+      <input name="id" type="text" placeholder="username"/>
+      <input name="password" type="text" placeholder="password"/>
+     <input type="submit" form="data"/>
+    </form>
 </body>
 </html>

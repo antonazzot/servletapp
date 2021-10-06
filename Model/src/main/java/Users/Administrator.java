@@ -8,6 +8,9 @@ public class Administrator extends UserImpl {
         super(Role.ADMINISTRATOR, name, login, password, age);
         DataBaseInf.adminHashMap.put(this.getId(), this);
     }
+
+
+
     @Override
     public String getInf () {
         return "ID: " + getId() + " Name: " + getName() + '\n'

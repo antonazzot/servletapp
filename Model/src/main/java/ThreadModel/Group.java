@@ -88,12 +88,13 @@ public class Group {
 
     @Override
     public String toString() {
-        return "Group " + id + " head trainer: " + trainer.getName() + " consist of next Student: "
-                + "------------------" +
-                studentMap.toString() +
-                ", Group contains teams " +
-                 "------------------" +
-                theamsSet.toString()
+        return "Group  " + id + "  head trainer: " + trainer.getName() + '\n' +
+                " consist of next Student: " +'\n' +
+                 "------------------" +'\n'+
+                studentMap.values().stream().map(s->s.getName()).collect(Collectors.toList()).toArray().toString()  +
+                '\n'+   ", Group contains teams " + '\n' +
+                 "------------------" + '\n' +
+                theamsSet.toArray().toString()
                 ;
     }
 }

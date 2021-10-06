@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class GroupCreaterServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+
     }
 
     @Override

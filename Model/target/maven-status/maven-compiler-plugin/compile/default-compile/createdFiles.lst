@@ -12,3 +12,4 @@ Users\Student.class
 DataBase\DataBaseInf.class
 Users\Administrator.class
 Users\Role.class
+Action\individTrainerMap.class

@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-  <form action="GroupCreaterServlet">
+  <form id="data" action="GroupCreaterServlet">
    <p>Выберите темы для группы</p>
       <c:forEach var = "set" items="${set}">
           <c:out value = "${set.value}" />
@@ -20,11 +20,13 @@
        <input type="checkbox" name="user" value="${entry.key.id}"> </p>
     </c:forEach>
     <p>Выберите тренера для группы</p>
-        <c:forEach var = "entry1" items="${map1}">
 
-           <c:out value = "${entry1.key.name}" />
-           <input type="checkbox" name="trainer" value="${entry1.key.id}"> </p>
-        </c:forEach>
+
+            <c:forEach var = "entry1" items="${map1}">
+            <c:out value = "${entry1.key.name}" />
+            <input type="radio" name="trainer" value="${entry1.key.id}"> </p>
+             </c:forEach>
+
 
    <p><input type="submit" value="Отправить"></p>
   </form>

@@ -1,42 +1,28 @@
 package Servlets.Filters;
-import Users.Role;
-import Users.UserImpl;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.Writer;
-import java.net.http.HttpRequest;
-@WebFilter( urlPatterns = {"/watchServlet"})
-
-public class UserFilter extends AbstractFilter {
-
+@WebFilter (urlPatterns = {"/*"})
+public class AbstractFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        Filter.super.init(filterConfig);
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        HttpSession session = request.getSession(false);
-        String cont =request.getContextPath();
-        UserImpl user = (UserImpl) session.getAttribute("user");
-        if ((session == null) || (user == null ) || (Role.TRAINER.equals(user.getRole()) || Role.STUDENT.equals(user.getRole())) ) {
-            response.sendRedirect(cont + "/hello");
-
-        }
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         filterChain.doFilter(request, response);
     }
 
-
     @Override
     public void destroy() {
-
+        Filter.super.destroy();
     }
 }
