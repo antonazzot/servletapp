@@ -2,10 +2,7 @@ package Users;
 import DataBase.DataBaseInf;
 import ThreadModel.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Student extends UserImpl {
@@ -26,16 +23,20 @@ public class Student extends UserImpl {
         this.listOfMark = listOfMark;
     }
 
+    @Override
     public  String getInf () {
     String inf;
-    ArrayList <String> strings =null;
+    ArrayList <String> strings = new ArrayList<>();
     for (
     Map.Entry<Theams, List<Mark>> entry: this.listOfMark.entrySet()){
         String temp = entry.getKey().name() + ": " + '\n' +
-               entry.getValue().stream().map(m -> m.getValuesOfMark()).collect(Collectors.toList()).toString().split("/ ");
-        strings.add(temp);
+                Arrays.toString(entry.getValue().stream().
+                        map(m -> m.getValuesOfMark()).
+                        collect(Collectors.toList()).
+                        toString().split("/ "));
+        strings.add("Mark:" + temp);
         }
-    return inf = this.getName() + strings.toString();
+    return inf = "ID: " + this.getId() + " Name: " +  this.getName() + " Theams: " + strings.toString();
     }
 
     @Override

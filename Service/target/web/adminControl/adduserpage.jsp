@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ page import="java.util.*" %>
+
 <head>
     <meta charset="UTF-8">
     <title>Add page</title>
@@ -10,7 +14,7 @@
 
 <form id="data" action="UserActionServlet" >
     <input name="act" value="add">
-    Enter User Role:    <select name="role", form="data">
+    Enter User Role:    <select name="role", value="${role}">
                         <option value="Student">Student</option>
                         <option value="Trainer">Trainer</option>
                         <option value="Administrator">Administrator</option>

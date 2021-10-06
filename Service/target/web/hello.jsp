@@ -20,17 +20,5 @@
     <input type="submit" form="data"/>
 </form>
 
-
-
- <c:forEach var = "i" begin = "1" end = "5">
-         Item <c:out value = "${i}" /><p>
- </c:forEach>
-
-
- <c:forEach var = "list" items="${lists}">
-       <c:out value = "${list}" /><p>
- </c:forEach>
-
-
 </body>
 </html>

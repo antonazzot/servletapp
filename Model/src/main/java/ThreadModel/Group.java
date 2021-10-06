@@ -1,5 +1,6 @@
 package ThreadModel;
 
+import Action.IdFactory;
 import DataBase.DataBaseInf;
 import Users.*;
 import java.util.HashSet;
@@ -14,14 +15,14 @@ public class Group {
     Map <Integer, Student> studentMap;
     Set <Theams> theamsSet;
 
-    public Group(int id, Trainer trainer, Map<Integer, Student> studentMap) {
-        this.id = id;
+    public Group( Trainer trainer, Map<Integer, Student> studentMap) {
+        this.id = IdFactory.idBuilder();
         this.trainer = trainer;
         this.studentMap = studentMap;
     }
 
     public Group(int id, Trainer trainer, Map<Integer, Student> studentMap, Set<Theams> theamsSet) {
-        this.id = id;
+        this.id = IdFactory.idBuilder();
         this.trainer = trainer;
         this.studentMap = studentMap;
         this.theamsSet = theamsSet;
@@ -59,13 +60,14 @@ public class Group {
         this.theamsSet = theamsSet;
     }
 
-    public void getInf ( ) {
-        String inf = "***" + '\n' + "Treiner: " + trainer.getName() + " " +
-                " consist of next Student: " + studentMap.values().stream().map( s->s.getName()).
-        collect(Collectors.toList()).toString() + " "
-        + '\n' +
-        " *****************" +
-        +'\n' +
+    public String  getInf ( ) {
+        return  "***" + '\n' + "Treiner: " + trainer.getInf() + " " +
+                " consist of next Student: " + '\n'+ "***********"+ '\n'+
+                studentMap.values().stream().map(s->s.getInf()).peek(str->str.concat(" ****** ")).toString() +
+                " " + '\n'+
+                     + '\n' +
+                    " *****************" +
+                        +'\n' +
                 theamsSet.toArray().toString();
 
     }

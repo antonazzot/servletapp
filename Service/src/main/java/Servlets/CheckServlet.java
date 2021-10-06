@@ -2,6 +2,7 @@ package Servlets;
 import DataBase.DataBaseInf;
 import Servlets.DAO.DaoImp;
 import Users.Role;
+import Users.Student;
 import Users.UserImpl;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,8 +49,8 @@ public class CheckServlet extends HttpServlet {
             requestDispatcher.forward(req,resp);
         }
         else  if (Role.STUDENT.equals(user.getRole())) {
-            Writer writer = resp.getWriter();
-            writer.write("Student");
+           req.setAttribute("map", new HashMap<Student, String>(Map.of((Student) user, user.getInf())));
+           req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
         }
         else  if (Role.TRAINER.equals(user.getRole())) {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("trainerActList.jsp");

@@ -66,4 +66,9 @@ public class UserImpl implements User {
     public void setAge(int age) {
         this.age = age;
     }
+
+    @Override
+    public String getInf() {
+        return getId() + getName() + getRole() + getAge() ;
+    }
 }
