@@ -5,3 +5,4 @@ Servlets\DAO\DaoImp.class
 Servlets\WatchServlet.class
 Servlets\Filters\UserFilter.class
 Servlets\UserActionServlet.class
+Servlets\GroupCreaterServlet.class

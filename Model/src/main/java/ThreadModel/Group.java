@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Group {
+    private String name;
     private int id;
     private Trainer trainer;
     Map <Integer, Student> studentMap;
@@ -19,13 +20,18 @@ public class Group {
         this.id = IdFactory.idBuilder();
         this.trainer = trainer;
         this.studentMap = studentMap;
+        this.name = "Group_"+Integer.toString(this.id);
+        DataBaseInf.groupHashMap.put(this.id, this);
     }
 
-    public Group(int id, Trainer trainer, Map<Integer, Student> studentMap, Set<Theams> theamsSet) {
+    public Group(Trainer trainer, Map<Integer, Student> studentMap, Set<Theams> theamsSet) {
         this.id = IdFactory.idBuilder();
         this.trainer = trainer;
         this.studentMap = studentMap;
         this.theamsSet = theamsSet;
+        this.name = "Group_"+Integer.toString(this.id);
+        DataBaseInf.groupHashMap.put(this.id, this);
+
     }
 
     public int getId() {
@@ -58,6 +64,14 @@ public class Group {
 
     public void setTheamsSet(Set<Theams> theamsSet) {
         this.theamsSet = theamsSet;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String  getInf ( ) {

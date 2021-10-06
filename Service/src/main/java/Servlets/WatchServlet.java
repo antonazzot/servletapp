@@ -3,7 +3,7 @@ package Servlets;
 import DataBase.DataBaseInf;
 import Servlets.DAO.DaoImp;
 import ThreadModel.Group;
-import ThreadModel.Theams;
+import Action.*;
 import Users.*;
 
 import javax.servlet.ServletConfig;
@@ -43,10 +43,11 @@ public class WatchServlet extends HttpServlet {
             if (!user.equals("group")) {
             req.setAttribute("role", user);
             req.getRequestDispatcher("adminControl/adduserpage.jsp").forward(req, resp);}
-            else  if (user.equals("group"))
+            else
             {
                 req.setAttribute("map", mapWithInf(Role.STUDENT));
                 req.setAttribute("map1", mapWithInf(Role.TRAINER));
+                req.setAttribute("set", IndividSetMap.theamsHashSet());
                 req.getRequestDispatcher("theamscreatelist.jsp").forward(req, resp);}
             }
 
@@ -66,29 +67,31 @@ public class WatchServlet extends HttpServlet {
                         writer.write("changepage");
         }
         else if (act.equalsIgnoreCase("watch")) {
-        switch (user)
-           {
-            case "student":
+            if (!user.equals("group")) {
+                switch (user) {
+                    case "student":
 
-                req.setAttribute("map", mapWithInf(Role.STUDENT));
-                req.getRequestDispatcher("demonstrate.jsp").forward(req,resp);
+                        req.setAttribute("map", mapWithInf(Role.STUDENT));
+                        req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
 
-            break;
-            case "trainer":
+                        break;
+                    case "trainer":
 
-                req.setAttribute("map", mapWithInf(Role.TRAINER));
-                req.getRequestDispatcher("demonstrate.jsp").forward(req,resp);
+                        req.setAttribute("map", mapWithInf(Role.TRAINER));
+                        req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
 
-            break;
-            case "administrator":
-                req.setAttribute("map", mapWithInf(Role.ADMINISTRATOR));
-                req.getRequestDispatcher("demonstrate.jsp").forward(req,resp);
+                        break;
+                    case "administrator":
+                        req.setAttribute("map", mapWithInf(Role.ADMINISTRATOR));
+                        req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
+                        break;
 
-            break;
-            case "group":
-                req.setAttribute("map", groupStringHashMap());
-                req.getRequestDispatcher("demonstrate.jsp").forward(req,resp);
-            break;
+                }
+            }
+            else   {
+                   req.setAttribute("map", groupStringHashMap());
+                   req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
+
             }
             }
                   }

@@ -1,4 +1,5 @@
 ThreadModel\Salary.class
+Action\IndividSetMap.class
 Action\IdFactory.class
 ThreadModel\Mark.class
 Users\Trainer.class
