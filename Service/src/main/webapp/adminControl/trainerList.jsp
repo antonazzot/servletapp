@@ -29,7 +29,7 @@
     </form>
 
 <br>
-<form  action="/web/hello">
+<form  action="logout">
     <input type="submit" value="Go to LogIN page!">
 </form>
 </body>

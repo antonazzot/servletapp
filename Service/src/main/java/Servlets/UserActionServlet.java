@@ -2,6 +2,8 @@ package Servlets;
 
 import Servlets.DAO.DaoImp;
 import Users.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,7 @@ import java.util.HashMap;
 
 @WebServlet ("/UserActionServlet")
 public class UserActionServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(UserActionServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -36,6 +39,7 @@ public class UserActionServlet extends HttpServlet {
         if (act.equalsIgnoreCase("add")){
             UserImpl user = checkRole(role, name, login, password, age);
             req.getRequestDispatcher("adminActList.jsp").forward(req, resp);
+            logger.info("add user = {role, name, login, age}", role, name, login, age);
         }
     }
 

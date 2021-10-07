@@ -9,7 +9,6 @@
     <title>Login Page</title>
 </head>
 <body>
-
     <form  id="data"  action="checkUser" >
       <input name="id" type="text" placeholder="username or ID"/>
       <input name="password" type="text" placeholder="password"/>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.http.HttpRequest;
-@WebFilter( urlPatterns = {"/watchServlet/*", "/GroupCreaterServlet/*", "/watchServlet/*"})
+//@WebFilter( urlPatterns = {"watchServlet", "/GroupCreaterServlet/*", "/WatchServlet"})
 
 public class UserFilter extends AbstractFilter {
 
@@ -24,13 +24,19 @@ public class UserFilter extends AbstractFilter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        HttpSession session = request.getSession(false);
 
-        UserImpl user = (UserImpl) session.getAttribute("user");
-        if ((session == null) || (user == null ) || (Role.TRAINER.equals(user.getRole()) || Role.STUDENT.equals(user.getRole())) ) {
-            request.getRequestDispatcher("/hello").forward(request, response);
-
+        try {
+            HttpSession session = request.getSession(false);
+            UserImpl user = (UserImpl) session.getAttribute("user");
+            if (session.getAttribute("user") == null || (user == null) || (!Role.ADMINISTRATOR.equals(user.getRole())))
+               response.sendRedirect("/web/hello");
+            filterChain.doFilter(request, response);
+        } catch (IllegalArgumentException e) {
+          response.sendRedirect("/web/hello");
+            filterChain.doFilter(request, response);
         }
+
+
         filterChain.doFilter(request, response);
     }
 

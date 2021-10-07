@@ -22,11 +22,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @WebServlet(value = "/watchServlet")
+
 public class WatchServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-    }
+         }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String act = req.getParameter("act");

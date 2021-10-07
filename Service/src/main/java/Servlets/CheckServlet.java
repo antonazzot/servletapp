@@ -6,7 +6,6 @@ import Users.Student;
 import Users.UserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,22 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet (value = "/checkUser")
 public class CheckServlet extends HttpServlet {
-    private static Logger logger =  LoggerFactory.getLogger(CheckServlet.class);
+    private static final Logger logger =  LoggerFactory.getLogger(CheckServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserImpl user;
-        if (req.getSession().isNew()) {req.getRequestDispatcher("/hello").forward(req, resp);}
-        else {
-            user = (UserImpl) req.getSession().getAttribute("user");
+        if (req.getSession().isNew()) {
+            resp.sendRedirect("/web/hello.jsp");
         }
 
-        int id =0;
+        int id  = 0;
         String login =null;
         boolean doesItLogin = false;
         try {
@@ -52,9 +49,9 @@ public class CheckServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
-        if (user!=null) {
-            logger.info("New USER = {}", user.getRole(), user.getInf());
-        }
+
+
+
         if (Role.ADMINISTRATOR.equals(user.getRole())) {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("adminActList.jsp");
             requestDispatcher.forward(req,resp);
@@ -90,13 +87,11 @@ public class CheckServlet extends HttpServlet {
     }
 
     private UserImpl itRightCondition ( String login, String password)  {
-       UserImpl user;
-      Map<Integer, UserImpl> allUser = new HashMap<>();
-      allUser.putAll(DataBaseInf.adminHashMap);
+        UserImpl user;
+        Map<Integer, UserImpl> allUser = new HashMap<>();
+        allUser.putAll(DataBaseInf.adminHashMap);
         allUser.putAll(DataBaseInf.studentHashMap);
         allUser.putAll(DataBaseInf.trainerHashMap);
-
-
         for (Map.Entry<Integer, UserImpl> entry: allUser.entrySet()) {
            if (entry.getValue().getLogin().equalsIgnoreCase(login) &&
            entry.getValue().getPassword().equals(password))
@@ -105,7 +100,6 @@ public class CheckServlet extends HttpServlet {
                return user;
            }
         }
-
         return null;
     }
 
