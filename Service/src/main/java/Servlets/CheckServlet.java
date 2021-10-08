@@ -70,6 +70,7 @@ public class CheckServlet extends HttpServlet {
                     .stream().filter(g ->g.getTrainer().getId()== user.getId()).findAny().get();
             Map<Integer, Student> studentHashMap =group.getStudentMap();
             Set<Theams> theams = group.getTheamsSet();
+            session.setAttribute("group", group);
             req.setAttribute("set", theams);
             req.setAttribute("map", studentHashMap);
 

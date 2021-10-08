@@ -2,6 +2,7 @@ package Servlets;
 
 import Servlets.DAO.DaoImp;
 import ThreadModel.Group;
+import ThreadModel.Mark;
 import ThreadModel.Theams;
 import Users.Student;
 import Users.Trainer;
@@ -36,8 +37,8 @@ public class GroupCreaterServlet extends HttpServlet {
         }
 
         DaoImp daoImp =  new DaoImp();
-        HashMap<Integer, Student> studentMap = studentMapCreater(student);
         Set<Theams> theamsSet = theamsSetcreater(theams);
+        HashMap<Integer, Student> studentMap = studentMapCreater(student, theamsSet);
         Trainer trainer1 = (Trainer) daoImp.getUser(trainerID);
         Group group = new Group(trainer1, studentMap, theamsSet);
         req.getRequestDispatcher("adminActList.jsp").forward(req, resp);
@@ -56,15 +57,21 @@ public class GroupCreaterServlet extends HttpServlet {
         return result;
     }
 
-    private HashMap<Integer, Student> studentMapCreater(String [] student) {
+    private HashMap<Integer, Student> studentMapCreater(String [] student, Set<Theams> theamsSet) {
         int temp [] = new int [student.length];
         DaoImp daoImp =  new DaoImp();
         HashMap<Integer, Student> result = new HashMap<>();
         for (int i = 0; i < student.length; i++) {
             temp[i]=Integer.parseInt(student[i]);
             Student student1 = (Student) daoImp.getUser(temp[i]);
-            result.put(student1.getId(), student1);
+            for (Theams th:
+                 theamsSet) {
+               student1.addTheam(th);
+         }
+                       result.put(student1.getId(), student1);
         }
         return result;
     }
+
+
 }

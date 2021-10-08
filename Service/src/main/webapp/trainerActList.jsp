@@ -13,7 +13,7 @@
 <br>
 <h1> Trainer control List </h1>
 
- <form id="data" action="/traineract">
+ <form id="data" action="traineract">
 
   <p>Выберите студента из группы</p>
     <c:forEach var = "entry" items="${map}">
@@ -36,6 +36,7 @@
         <option value="watch">Watch  MARK</option>
         </select>
 
+     <p><input name="mark" type="text" placeholder="ADD MARK"/><p>
      <p><input type="submit" value="Отправить"></p>
     </form>
 

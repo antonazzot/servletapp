@@ -22,6 +22,10 @@ public class Student extends UserImpl {
     public void setListOfMark(HashMap<Theams, List<Mark>> listOfMark) {
         this.listOfMark = listOfMark;
     }
+    public void addTheam (Theams theams) {
+        if (!this.listOfMark.containsKey(theams))
+            this.listOfMark.put(theams, new ArrayList<Mark>());
+    }
 
     @Override
     public  String getInf () {
