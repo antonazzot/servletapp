@@ -1,6 +1,8 @@
 package Servlets;
 import DataBase.DataBaseInf;
 import Servlets.DAO.DaoImp;
+import ThreadModel.Group;
+import ThreadModel.Theams;
 import Users.Role;
 import Users.Student;
 import Users.UserImpl;
@@ -14,8 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @WebServlet (value = "/checkUser")
 public class CheckServlet extends HttpServlet {
@@ -61,9 +66,16 @@ public class CheckServlet extends HttpServlet {
            req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
         }
         else  if (Role.TRAINER.equals(user.getRole())) {
+            Group group = DataBaseInf.groupHashMap.values()
+                    .stream().filter(g ->g.getTrainer().getId()== user.getId()).findAny().get();
+            Map<Integer, Student> studentHashMap =group.getStudentMap();
+            Set<Theams> theams = group.getTheamsSet();
+            req.setAttribute("set", theams);
+            req.setAttribute("map", studentHashMap);
 
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/TrainerToStartServlet");
-            requestDispatcher.forward(req, resp);
+          req.getRequestDispatcher("trainerActList.jsp").forward(req,resp);
+         //  RequestDispatcher requestDispatcher = req.getRequestDispatcher("adminControl/trainerList.jsp");
+
         }
 
     }

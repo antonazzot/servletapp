@@ -61,12 +61,7 @@ public class GroupCreaterServlet extends HttpServlet {
         DaoImp daoImp =  new DaoImp();
         HashMap<Integer, Student> result = new HashMap<>();
         for (int i = 0; i < student.length; i++) {
-            try {
-                temp[i]=Integer.parseInt(student[i]);
-            }
-            catch (IllegalArgumentException e) {
-                return null;
-            }
+            temp[i]=Integer.parseInt(student[i]);
             Student student1 = (Student) daoImp.getUser(temp[i]);
             result.put(student1.getId(), student1);
         }

@@ -1,12 +1,13 @@
+Servlets\StartPage.class
+Servlets\DAO\DaoImp.class
+Servlets\UserActionServlet.class
+Servlets\Filters\AbstractFilter.class
 Servlets\DAO\Dao.class
 Servlets\CheckServlet.class
 Servlets\LogOutServlet.class
-Servlets\StartPage.class
-Servlets\DAO\DaoImp.class
 Servlets\Filters\TrainerFilter.class
 Servlets\WatchServlet.class
 Servlets\Filters\UserFilter.class
-Servlets\UserActionServlet.class
-Servlets\Filters\AbstractFilter.class
 Servlets\TrainerToStartServlet.class
 Servlets\GroupCreaterServlet.class
+Servlets\TrainerActServlet.class

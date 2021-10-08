@@ -1,14 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>It adminLisst</title>
+    <title>Test Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+
 <br>
 <h1> Trainer control List </h1>
 
- <form id="data" action="">
+ <form id="data" action="/traineract">
 
       <p>Выберите студентов из группы</p>
       <c:forEach var = "entry" items="${map}">
@@ -32,5 +35,7 @@
 <form  action="logout">
     <input type="submit" value="Go to LogIN page!">
 </form>
+
+
 </body>
 </html>

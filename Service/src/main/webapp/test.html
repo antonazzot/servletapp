@@ -27,3 +27,9 @@
 </form>
 </body>
 </html>
+<p>Выберите студентов из группы</p>
+<c:forEach var = "entry" items="${map}">
+    <c:out value = "${entry.value.name}" />
+    <input type="radio" name="student" value="${entry.key.id}"> </p>
+</c:forEach>
+<br>
