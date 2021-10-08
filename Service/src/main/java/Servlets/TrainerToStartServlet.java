@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-@WebServlet("TrainerToStartServlet")
+@WebServlet("/TrainerToStartServlet")
 public class TrainerToStartServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(TrainerToStartServlet.class);
     @Override

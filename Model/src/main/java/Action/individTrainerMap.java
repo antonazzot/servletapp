@@ -21,7 +21,6 @@ public class individTrainerMap {
             for (Group group:
                     DataBaseInf.groupHashMap.values()) {
                 map.remove(group.getTrainer());
-
             }
 
 
