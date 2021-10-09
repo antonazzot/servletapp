@@ -36,10 +36,13 @@ public class TrainerActServlet extends HttpServlet {
 
         }
          else  {
-            req.setAttribute("map", getIntegerIntegerHashMap(theam, student));
-            HashMap<List<Mark>, Student> studentHashMap = new HashMap<>();
-            studentHashMap.put( student.getListOfMark().get(Theams.valueOf(theam)), student);
-            req.setAttribute("thst" , studentHashMap);
+
+             req.setAttribute("map", student.getListOfMark());
+             req.setAttribute("student", student);
+        //    req.setAttribute("map", getIntegerIntegerHashMap(theam, student));
+         //   HashMap<List<Mark>, Student> studentHashMap = new HashMap<>();
+        //    studentHashMap.put( student.getListOfMark().get(Theams.valueOf(theam)), student);
+        //    req.setAttribute("thst" , studentHashMap);
             req.getRequestDispatcher("listofmarkforchange.jsp").forward(req, resp);
         }
 
