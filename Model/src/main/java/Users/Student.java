@@ -25,6 +25,7 @@ public class Student extends UserImpl {
     public void addTheam (Theams theams) {
         if (!this.listOfMark.containsKey(theams))
             this.listOfMark.put(theams, new ArrayList<Mark>());
+
     }
 
     @Override

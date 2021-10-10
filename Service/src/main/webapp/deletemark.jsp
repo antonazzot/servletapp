@@ -13,19 +13,21 @@
  <p>Name: ${student} </p>
 
   <p>ВВедите новое значение для изменения оценки</p>
-
-    <form id="data" action="changeandcreatemark">
-    <input type="hidden" name="student" value="${student.id}"/>
-<input type="hidden" name="act" value="change"/>
+  <p>либо выберите оценку для удаления</p>
+ <form id="data" action="changeandcreatemark">
+<input type="hidden" name="student" value="${student.id}"/>
+<input type="hidden" name="act" value="delete"/>
     <c:forEach var = "entry" items="${map}">
     <c:out value = "${entry.key}" /> <br>
-    <input type="hidden" name="th" value="${entry.key}"/>
+
+<input type="hidden" name="th" value="${entry.key}"/>
 
      <c:forEach var = "list" items="${entry.value}">
-                <input type="text"  name="marks"  placeholder="${list.valuesOfMark}"> <br>
+     <c:out value = "${list.valuesOfMark}" />
+      <input type="checkbox"  name="mark"  value="${list.valuesOfMark}"> <br>
+
        </c:forEach>
      </c:forEach>
-
 
      <p><input type="submit" form="data" value="Отправить"></p>
   </form>

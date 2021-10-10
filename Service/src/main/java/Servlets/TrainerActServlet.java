@@ -24,6 +24,7 @@ public class TrainerActServlet extends HttpServlet {
       String mark = req.getParameter("mark");
       DaoImp daoImp = new DaoImp();
       Student student = (Student) daoImp.getUser(Integer.parseInt(user));
+      Theams th = Theams.valueOf(theam);
 
 
         if (act.equalsIgnoreCase("create")) {
@@ -35,26 +36,33 @@ public class TrainerActServlet extends HttpServlet {
             req.getRequestDispatcher(doAdd(student, theam, mark)).forward(req, resp);
 
         }
-         else  {
-
-             req.setAttribute("map", student.getListOfMark());
+         else
+         if (act.equalsIgnoreCase("watch"))
+        {
+            req.setAttribute("student", student);
+            req.setAttribute("map", student.getListOfMark());
+            req.getRequestDispatcher("watchmark.jsp").forward(req,resp);
+        }
+         else  if  (act.equalsIgnoreCase("delete")) {
              req.setAttribute("student", student);
-        //    req.setAttribute("map", getIntegerIntegerHashMap(theam, student));
-         //   HashMap<List<Mark>, Student> studentHashMap = new HashMap<>();
-        //    studentHashMap.put( student.getListOfMark().get(Theams.valueOf(theam)), student);
-        //    req.setAttribute("thst" , studentHashMap);
-            req.getRequestDispatcher("listofmarkforchange.jsp").forward(req, resp);
-        }
+             req.setAttribute("map", getHashMapforTheam(th, student));
+             req.getRequestDispatcher("deletemark.jsp").forward(req,resp);
+             }
+         else  if  (act.equalsIgnoreCase("change")) {
+             req.setAttribute("student", student);
+             req.setAttribute("map", getHashMapforTheam(th, student));
+             req.getRequestDispatcher("listofmarkforchange.jsp").forward(req,resp);
+         }
+         }
 
-    }
 
-    private HashMap<Integer, Integer> getIntegerIntegerHashMap(String theam, Student student) {
-        ArrayList <Mark> markArrayList = (ArrayList<Mark>) student.getListOfMark().get(Theams.valueOf(theam));
-        HashMap <Integer, Integer> marksWithIndex  = new HashMap<>();
-        for (int i = 0; i < markArrayList.size(); i++) {
-            marksWithIndex.put(i,markArrayList.get(i).getValuesOfMark());
-        }
-        return marksWithIndex;
+
+
+    private HashMap<Theams, List<Mark>> getHashMapforTheam (Theams th, Student student) {
+        HashMap<Theams, List<Mark>> result =new HashMap<>();
+        result.put(th,  student.getListOfMark().get(th));
+
+        return result;
     }
 
     private String doAdd(Student student,  String theam ,String mark) {
@@ -66,8 +74,12 @@ public class TrainerActServlet extends HttpServlet {
         catch (IllegalArgumentException e) {
             return "exeception.jsp";
         }
-
-            student.getListOfMark().get(Theams.valueOf(theam)).add(new Mark(Integer.parseInt(mark)));
+            if (student.getListOfMark().containsKey(theam)) {
+            student.getListOfMark().get(Theams.valueOf(theam)).add(new Mark(Integer.parseInt(mark)));}
+            else {
+                student.addTheam(Theams.valueOf(theam));
+                student.getListOfMark().get(Theams.valueOf(theam)).add(new Mark(Integer.parseInt(mark)));
+            }
             return result;
     }
 }
