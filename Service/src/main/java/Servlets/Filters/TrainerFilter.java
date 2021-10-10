@@ -13,24 +13,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-//@WebFilter(urlPatterns = {"TrainerToStartServlet" , "/TrainerToStartServlet/*", "/TrainerToStartServlet"})
+@WebFilter(urlPatterns = {"/traineract", "/changeandcreatemark"})
 public class TrainerFilter extends AbstractFilter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if (!request.getSession(false).isNew()) {
-            try {
-                HttpSession session = request.getSession(false);
-                UserImpl user = (UserImpl) session.getAttribute("user");
-                if (session.getAttribute("user") == null || (user == null) || (!Role.TRAINER.equals(user.getRole())))
-                    response.sendRedirect("/web/hello");
-                filterChain.doFilter(request, response);
-            } catch (IllegalArgumentException e) {
-                response.sendRedirect("/web/hello");;
-                filterChain.doFilter(request, response);
+        if (request.getSession(false).isNew()) {
+         HttpSession session = request.getSession(false);
+         if (session.getAttribute("user") == null ) {
+         response.sendRedirect("/web/hello");
+                filterChain.doFilter(request, response);}
+                else
+                    try {
+                        UserImpl user = (UserImpl) request.getSession().getAttribute("user");
+                        if (user==null || (!Role.TRAINER.equals(user.getRole())))
+                            response.sendRedirect("/web/hello");
+                    }
+                    catch (IllegalArgumentException e) {
+                        response.sendRedirect("/web/hello");}
             }
+        else  {
+            try {
+                UserImpl user = (UserImpl) request.getSession().getAttribute("user");
+                if (user==null || (!Role.TRAINER.equals(user.getRole())))
+                    response.sendRedirect("/web/hello");
+            }
+            catch (IllegalArgumentException e) {
+                response.sendRedirect("/web/hello");}
         }
         filterChain.doFilter(request, response);
-    }
-}
+        }
+
+        }

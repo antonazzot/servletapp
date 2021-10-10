@@ -10,13 +10,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.http.HttpRequest;
-//@WebFilter( urlPatterns = {"watchServlet", "/GroupCreaterServlet/*", "/WatchServlet"})
-
+@WebFilter( urlPatterns = {"/watchServlet", "/GroupCreaterServlet" })
 public class UserFilter extends AbstractFilter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     @Override

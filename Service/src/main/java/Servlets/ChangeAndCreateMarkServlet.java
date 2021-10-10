@@ -30,9 +30,7 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
              req.setAttribute("map", group.getStudentMap());
             req.getRequestDispatcher(change(theam, marks, student)).forward(req, resp);
          }
-        else {
 
-         }
         req.setAttribute("set", group.getTheamsSet());
         req.setAttribute("map", group.getStudentMap());
         req.getRequestDispatcher(delete(theam, mark, student)).forward(req, resp);

@@ -1,6 +1,6 @@
 Servlets\StartPage.class
 Servlets\DAO\DaoImp.class
-Servlets\UserActionServlet.class
+Servlets\Filters\StartFilter.class
 Servlets\Filters\AbstractFilter.class
 Servlets\ChangeAndCreateMarkServlet.class
 Servlets\DAO\Dao.class
