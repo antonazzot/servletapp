@@ -35,8 +35,7 @@ public class CheckServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("adminActList.jsp");
             requestDispatcher.forward(req, resp);
         } else if (Role.STUDENT.equals(user.getRole())) {
-            req.setAttribute("map", new HashMap<Student, String>(Map.of((Student) user, user.getInf())));
-            req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
+                req.getRequestDispatcher("/studentservlet").forward(req, resp);
         } else if (Role.TRAINER.equals(user.getRole())) {
             Group group = DataBaseInf.groupHashMap.values()
                     .stream().filter(g -> g.getTrainer().getId() == user.getId()).findAny().get();

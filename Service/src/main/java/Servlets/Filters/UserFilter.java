@@ -23,19 +23,20 @@ public class UserFilter extends AbstractFilter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        try {
+
             HttpSession session = request.getSession(false);
-            UserImpl user = (UserImpl) session.getAttribute("user");
-            if (session.getAttribute("user") == null || (user == null) || (!Role.ADMINISTRATOR.equals(user.getRole())))
+              if (session==null || session.getAttribute("user") == null )
                response.sendRedirect("/web/hello");
-            filterChain.doFilter(request, response);
-        } catch (IllegalArgumentException e) {
-          response.sendRedirect("/web/hello");
-            filterChain.doFilter(request, response);
-        }
+          else {
+                   UserImpl user = (UserImpl) session.getAttribute("user");
+                  if ((user == null) || (!Role.ADMINISTRATOR.equals(user.getRole())))
+                      response.sendRedirect("/web/hello");
+                  else if ((Role.ADMINISTRATOR.equals(user.getRole()))) {
+                      filterChain.doFilter(request, response);
+                  }
+              }
 
 
-        filterChain.doFilter(request, response);
     }
 
 
