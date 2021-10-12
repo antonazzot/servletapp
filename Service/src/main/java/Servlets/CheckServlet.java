@@ -31,6 +31,7 @@ public class CheckServlet extends HttpServlet {
         UserImpl user = (UserImpl) req.getSession().getAttribute("user");
         HttpSession session = req.getSession();
 
+
         if (Role.ADMINISTRATOR.equals(user.getRole())) {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("adminActList.jsp");
             requestDispatcher.forward(req, resp);

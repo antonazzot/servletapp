@@ -2,35 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>It adminLisst</title>
+    <title>It adminList</title>
 </head>
 <body>
 <br>
-<h1> admin list </h1>
+<h1> Add salary list </h1>
 
 <form id="data" action="watchServlet">
-    <select name="act", form="data">
-        <option value="create">ADD Trainer</option>
-        <option value="delete">Delete Trainer</option>
-        <option value="change">Change Trainer</option>
-        <option value="watch">Watch Trainer</option>
-    </select>
+
+    <c:forEach var = "entry" items="${map}">
+        <c:out value = "${entry.key}" />   <input type="checkbox" name="trainer" value="${entry.key.id}"> </p>
+        <br>
+        <c:forEach var = "list" items="${entry.value}">
+            <c:out value = "${list.bigDecimalSalary}" /> <br>
+        </c:forEach>
+    </c:forEach>
+
     <br>
-    <br>
-    <input  name="user", value="student"> <br>
-    Enter student ID: <input name ="id", type="text">
-    <input type="submit" form="data"/>
-    <h1>  </h1>
+    <p><input type="text" name="sal" value=""></p>
+    <p><input type="submit" form="data" value="Добавить"></p>
+
+    <form action="avarage.jsp">
+        <button type="submit"   > AVARADGE SALARY </button>
+    </form>
 </form>
+
 <br>
+
 <form  action="logout">
     <input type="submit" value="Go to LogIN page!">
 </form>
 </body>
 </html>
-<p>Выберите студентов из группы</p>
-<c:forEach var = "entry" items="${map}">
-    <c:out value = "${entry.value.name}" />
-    <input type="radio" name="student" value="${entry.key.id}"> </p>
-</c:forEach>
-<br>

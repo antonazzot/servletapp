@@ -63,7 +63,7 @@ public class WatchServlet extends HttpServlet {
                 req.getRequestDispatcher("adminActList.jsp").forward(req, resp);
         }
         else if (act.equalsIgnoreCase("change")){
-                        writer.write("changepage");
+                        writer.write("Page not exist");
         }
         else if (act.equalsIgnoreCase("watch")) {
             if (!user.equals("group")) {
@@ -77,6 +77,7 @@ public class WatchServlet extends HttpServlet {
                     case "trainer":
 
                         req.setAttribute("map", mapWithInf(Role.TRAINER));
+
                         req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
 
                         break;
@@ -96,7 +97,8 @@ public class WatchServlet extends HttpServlet {
                   }
 
 
-            private HashMap<UserImpl, String>  mapWithInf (Role role)  {
+
+    private HashMap<UserImpl, String>  mapWithInf (Role role)  {
                 HashMap<UserImpl, String> hashMap = new HashMap<>();
                 if (Role.STUDENT.equals(role)) {
                 for (Map.Entry<Integer, UserImpl> entry: DataBaseInf.studentHashMap.entrySet()) {

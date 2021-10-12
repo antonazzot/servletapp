@@ -39,7 +39,7 @@ public class StartPage extends HttpServlet {
                 Administrator administrator = new Administrator( "Anton", adminLogin, adminPassword, 30);
 
                Student student = new Student("Anton Tsyrkunou" , "ant", "pas", 27
-               , new HashMap<>(Map.of(Theams.MUSICK, new ArrayList<>(List.of(new Mark(50),new Mark(50)
+               , new HashMap<>(Map.of(Theams.MUSIC, new ArrayList<>(List.of(new Mark(50),new Mark(50)
                ,new Mark(70),new Mark(90), new Mark(100))))));
                DataBaseInf.studentHashMap.put(student.getId(), student);
 
@@ -47,6 +47,7 @@ public class StartPage extends HttpServlet {
                         new ArrayList<>(List.of(new Salary(new BigDecimal(4000)), new Salary(new BigDecimal(3000)) )));
         }
             log.info("Admin = {}", "Pass ={}", adminLogin, adminPassword);
+
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("hello.jsp");
             requestDispatcher.forward(req, resp);
         }

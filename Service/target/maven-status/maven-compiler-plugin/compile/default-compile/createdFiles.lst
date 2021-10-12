@@ -1,12 +1,16 @@
 Servlets\StartPage.class
 Servlets\DAO\DaoImp.class
+Servlets\TrainerAddSalaryServlet.class
 Servlets\UserActionServlet.class
 Servlets\Filters\StartFilter.class
 Servlets\Filters\AbstractFilter.class
 Servlets\ChangeAndCreateMarkServlet.class
+Servlets\CalculateAvarageSalaryServlet.class
 Servlets\DAO\Dao.class
+Servlets\SalaryAdderServlet.class
 Servlets\CheckServlet.class
 Servlets\LogOutServlet.class
+Servlets\AvarageSalaryServlet.class
 Servlets\Filters\StudentFilter.class
 Servlets\Filters\TrainerFilter.class
 Servlets\WatchServlet.class

@@ -1,13 +1,17 @@
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\Filters\UserFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\LogOutServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\StartPage.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\AvarageSalaryServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\CalculateAvarageSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\ChangeAndCreateMarkServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\TrainerAddSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\WatchServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\StudentServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\CheckServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\Filters\TrainerFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\Filters\AbstractFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\Filters\StartFilter.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\SalaryAdderServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\DAO\DaoImp.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\DAO\Dao.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\UserActionServlet.java

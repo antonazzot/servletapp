@@ -30,6 +30,15 @@
     Enter  ID: <input name ="id", type="text">
     <input type="submit" form="data" value="act">
 </form>
+
+<br>
+<form action="addSalary">
+<button type="submit"   > ADD SALARY </button>
+</form>
+
+<form action="avarageSalary">
+<button type="submit"   > AVARAGE SALARY </button>
+</form>
 <br>
 <form  action="logout">
     <input type="submit" value="Go to LogIN page!">
