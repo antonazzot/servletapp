@@ -17,26 +17,22 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@WebServlet ("/GroupCreaterServlet")
+@WebServlet("/GroupCreaterServlet")
 public class GroupCreaterServlet extends HttpServlet {
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String [] theams = req.getParameterValues("th");
+        String[] theams = req.getParameterValues("th");
         String trainer = req.getParameter("trainer");
-        String [] student = req.getParameterValues("user");
-       int trainerID = 0;
-        try {trainerID = Integer.parseInt(trainer);}
-        catch (IllegalArgumentException e ) {
-
+        String[] student = req.getParameterValues("user");
+        int trainerID = 0;
+        try {
+            trainerID = Integer.parseInt(trainer);
+        } catch (IllegalArgumentException e) {
+            resp.getWriter().write("введено неверное значение");
         }
 
-        DaoImp daoImp =  new DaoImp();
+        DaoImp daoImp = new DaoImp();
         Set<Theams> theamsSet = theamsSetcreater(theams);
         HashMap<Integer, Student> studentMap = studentMapCreater(student, theamsSet);
         Trainer trainer1 = (Trainer) daoImp.getUser(trainerID);
@@ -46,10 +42,10 @@ public class GroupCreaterServlet extends HttpServlet {
     }
 
     private Set<Theams> theamsSetcreater(String[] theams) {
-        Set <Theams> result = new HashSet<>();
+        Set<Theams> result = new HashSet<>();
         for (int i = 0; i < theams.length; i++) {
-            for (int j=0; j<Theams.values().length; j++) {
-                if (theams[i].equalsIgnoreCase(Theams.values()[j].name())){
+            for (int j = 0; j < Theams.values().length; j++) {
+                if (theams[i].equalsIgnoreCase(Theams.values()[j].name())) {
                     result.add(Theams.values()[j]);
                 }
             }
@@ -57,18 +53,18 @@ public class GroupCreaterServlet extends HttpServlet {
         return result;
     }
 
-    private HashMap<Integer, Student> studentMapCreater(String [] student, Set<Theams> theamsSet) {
-        int temp [] = new int [student.length];
-        DaoImp daoImp =  new DaoImp();
+    private HashMap<Integer, Student> studentMapCreater(String[] student, Set<Theams> theamsSet) {
+        int temp[] = new int[student.length];
+        DaoImp daoImp = new DaoImp();
         HashMap<Integer, Student> result = new HashMap<>();
         for (int i = 0; i < student.length; i++) {
-            temp[i]=Integer.parseInt(student[i]);
+            temp[i] = Integer.parseInt(student[i]);
             Student student1 = (Student) daoImp.getUser(temp[i]);
-            for (Theams th:
-                 theamsSet) {
-               student1.addTheam(th);
-         }
-                       result.put(student1.getId(), student1);
+            for (Theams th :
+                    theamsSet) {
+                student1.addTheam(th);
+            }
+            result.put(student1.getId(), student1);
         }
         return result;
     }

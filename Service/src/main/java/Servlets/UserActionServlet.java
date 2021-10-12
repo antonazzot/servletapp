@@ -1,9 +1,11 @@
 package Servlets;
+
 import Servlets.DAO.DaoImp;
 import Users.Administrator;
 import Users.Student;
 import Users.Trainer;
 import Users.UserImpl;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,9 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet({"/UserActionServlet"})
 public class UserActionServlet extends HttpServlet {
-    public UserActionServlet() {
-    }
-
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String act = req.getParameter("act");
         String role = req.getParameter("role");
@@ -25,7 +24,6 @@ public class UserActionServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         int age = 0;
-
         try {
             if (req.getParameter("age") != null) {
                 age = Integer.parseInt(req.getParameter("id"));
@@ -33,17 +31,14 @@ public class UserActionServlet extends HttpServlet {
         } catch (IllegalArgumentException var11) {
             resp.getWriter().write("Введен неверный параметр");
         }
-
-        new DaoImp();
         if (act.equalsIgnoreCase("add")) {
             this.checkRole(role, name, login, password, age);
             req.getRequestDispatcher("adminActList.jsp").forward(req, resp);
         }
-
     }
 
-    private UserImpl checkRole(String role, String name, String login, String pass, int age) {
-        Object user;
+    private void checkRole(String role, String name, String login, String pass, int age) {
+        UserImpl user;
         if (role.equalsIgnoreCase("administrator")) {
             user = new Administrator(name, login, pass, age);
         } else if (role.equalsIgnoreCase("trainer")) {
@@ -51,7 +46,5 @@ public class UserActionServlet extends HttpServlet {
         } else {
             user = new Student(name, login, pass, age, new HashMap());
         }
-
-        return (UserImpl)user;
     }
 }

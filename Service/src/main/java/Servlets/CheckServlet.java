@@ -1,4 +1,5 @@
 package Servlets;
+
 import DataBase.DataBaseInf;
 import Servlets.DAO.DaoImp;
 import ThreadModel.Group;
@@ -8,6 +9,7 @@ import Users.Student;
 import Users.UserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,13 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet (value = "/checkUser")
+@WebServlet(value = "/checkUser")
 public class CheckServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(CheckServlet.class);
 
@@ -36,16 +35,26 @@ public class CheckServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("adminActList.jsp");
             requestDispatcher.forward(req, resp);
         } else if (Role.STUDENT.equals(user.getRole())) {
-                req.getRequestDispatcher("/studentservlet").forward(req, resp);
+            req.getRequestDispatcher("/studentservlet").forward(req, resp);
         } else if (Role.TRAINER.equals(user.getRole())) {
+            if (DataBaseInf.groupHashMap.values()
+                    .stream()
+                    .anyMatch(g -> g.getTrainer().getId() == user.getId()))
+            {
             Group group = DataBaseInf.groupHashMap.values()
-                    .stream().filter(g -> g.getTrainer().getId() == user.getId()).findAny().get();
-            Map<Integer, Student> studentHashMap = group.getStudentMap();
-            Set<Theams> theams = group.getTheamsSet();
-            session.setAttribute("group", group);
-            req.setAttribute("set", theams);
-            req.setAttribute("map", studentHashMap);
-            req.getRequestDispatcher("trainerActList.jsp").forward(req, resp);
+                    .stream()
+                    .filter(g -> g.getTrainer().getId() == user.getId())
+                    .findAny()
+                    .get();
+                Map<Integer, Student> studentHashMap = group.getStudentMap();
+                Set<Theams> theams = group.getTheamsSet();
+                session.setAttribute("group", group);
+                req.setAttribute("set", theams);
+                req.setAttribute("map", studentHashMap);
+                req.getRequestDispatcher("trainerActList.jsp").forward(req, resp);
+            }
+            else {
+                req.getRequestDispatcher("groupnotexist.jsp").forward(req,resp);}
         }
 
     }

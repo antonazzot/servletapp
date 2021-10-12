@@ -25,9 +25,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet ("/hello")
+@WebServlet("/hello")
 public class StartPage extends HttpServlet {
     Logger log = LoggerFactory.getLogger(StartPage.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -36,16 +37,16 @@ public class StartPage extends HttpServlet {
             String adminLogin = servletContext.getInitParameter("AdminLogin");
             String adminPassword = servletContext.getInitParameter("AdminPassword");
             if (!DataBaseInf.adminHashMap.containsValue(DataBaseInf.adminHashMap.get(1))) {
-                Administrator administrator = new Administrator( "Anton", adminLogin, adminPassword, 30);
+                Administrator administrator = new Administrator("Anton", adminLogin, adminPassword, 30);
 
-               Student student = new Student("Anton Tsyrkunou" , "ant", "pas", 27
-               , new HashMap<>(Map.of(Theams.MUSIC, new ArrayList<>(List.of(new Mark(50),new Mark(50)
-               ,new Mark(70),new Mark(90), new Mark(100))))));
-               DataBaseInf.studentHashMap.put(student.getId(), student);
+                Student student = new Student("Anton Tsyrkunou", "ant", "pas", 27
+                        , new HashMap<>(Map.of(Theams.MUSIC, new ArrayList<>(List.of(new Mark(50), new Mark(50)
+                        , new Mark(70), new Mark(90), new Mark(100))))));
+                DataBaseInf.studentHashMap.put(student.getId(), student);
 
                 Trainer trainer = new Trainer("Alex", "Ale", "pppas", 40,
-                        new ArrayList<>(List.of(new Salary(new BigDecimal(4000)), new Salary(new BigDecimal(3000)) )));
-        }
+                        new ArrayList<>(List.of(new Salary(new BigDecimal(4000)), new Salary(new BigDecimal(3000)))));
+            }
             log.info("Admin = {}", "Pass ={}", adminLogin, adminPassword);
 
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("hello.jsp");
