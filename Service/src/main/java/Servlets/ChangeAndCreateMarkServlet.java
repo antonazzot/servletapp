@@ -53,9 +53,9 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
                     return "exeception.jsp";
                 }
             }
-            else return "trainerActList.jsp";
+            else return "TrainerControlPage/trainerActList.jsp";
         }
-        return "trainerActList.jsp";
+        return "TrainerControlPage/trainerActList.jsp";
     }
 
     private String delete(String theam, String mark, Student student) {
@@ -69,6 +69,6 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
             return "exeception.jsp";
         }
 
-        return "trainerActList.jsp";
+        return "TrainerControlPage/trainerActList.jsp";
     }
 }

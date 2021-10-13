@@ -32,7 +32,7 @@
      <p><input type="submit" form="data" value="Отправить"></p>
   </form>
 <br>
-<form  action="trainerActList.jsp">
+<form  action="TrainerControlPage/trainerActList.jsp">
     <input type="submit" value="Go to Main Page">
 </form>
 <br>

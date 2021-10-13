@@ -31,7 +31,7 @@
   </form>
 <br>
 <br>
-<form  action="trainerActList.jsp">
+<form  action="TrainerControlPage/trainerActList.jsp">
     <input type="submit" value="Go to Main Page">
 </form>
 <br>

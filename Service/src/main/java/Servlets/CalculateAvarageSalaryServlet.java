@@ -42,7 +42,7 @@ public class CalculateAvarageSalaryServlet extends HttpServlet {
         } else writer.write("ВВедено неверное значение");
         req.setAttribute("trainer", trainer);
         req.setAttribute("avarage", longavaragessalary);
-        req.getRequestDispatcher("avaragesalarywatch.jsp").forward(req, resp);
+        req.getRequestDispatcher("adminControl/avaragesalarywatch.jsp").forward(req, resp);
     }
 
     private long avarageSalaryCalc(List<Salary> salaryArrayList, int time) {

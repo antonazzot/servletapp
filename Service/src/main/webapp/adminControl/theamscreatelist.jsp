@@ -30,10 +30,11 @@
 
    <p><input type="submit" value="Отправить"></p>
   </form>
-  <form  action="adminActList.jsp">
+  <form  action="adminControl/adminActList.jsp">
       <input type="submit" value="Go to Main Admin!">
   </form>
 <br>
+
 <form  action="logout">
     <input type="submit" value="LogOut!">
 </form>

@@ -42,7 +42,7 @@ public class WatchServlet extends HttpServlet {
                 req.setAttribute("map", mapWithInf(Role.STUDENT));
                 req.setAttribute("map1", individTrainerMap.theamsHashSet(mapWithInf(Role.TRAINER)));
                 req.setAttribute("set", IndividSetMap.theamsHashSet());
-                req.getRequestDispatcher("theamscreatelist.jsp").forward(req, resp);
+                req.getRequestDispatcher("adminControl/theamscreatelist.jsp").forward(req, resp);
             }
         } else if (act.equalsIgnoreCase("delete")) {
             if (req.getParameter("id") != null) {
@@ -53,7 +53,7 @@ public class WatchServlet extends HttpServlet {
                 }
             }
             daoImp.deleteUser(id);
-            req.getRequestDispatcher("adminActList.jsp").forward(req, resp);
+            req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("change")) {
             writer.write("Page not exist");
         } else if (act.equalsIgnoreCase("watch")) {

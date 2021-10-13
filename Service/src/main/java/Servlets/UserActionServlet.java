@@ -36,7 +36,7 @@ public class UserActionServlet extends HttpServlet {
         }
         if (act.equalsIgnoreCase("add")) {
             this.checkRole(role, name, login, password, age);
-            req.getRequestDispatcher("adminActList.jsp").forward(req, resp);
+            req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
         }
     }
 

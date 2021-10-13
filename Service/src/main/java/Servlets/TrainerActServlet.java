@@ -41,16 +41,16 @@ public class TrainerActServlet extends HttpServlet {
         } else if (act.equalsIgnoreCase("watch")) {
             req.setAttribute("student", student);
             req.setAttribute("map", student.getListOfMark());
-            req.getRequestDispatcher("watchmark.jsp").forward(req, resp);
+            req.getRequestDispatcher("TrainerControlPage/watchmark.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("delete")) {
             req.setAttribute("student", student);
             req.setAttribute("map", getHashMapforTheam(th, student));
-            req.getRequestDispatcher("deletemark.jsp").forward(req, resp);
+            req.getRequestDispatcher("TrainerControlPage/deletemark.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("change")) {
 
             req.setAttribute("student", student);
             req.setAttribute("map", getHashMapforTheam(th, student));
-            req.getRequestDispatcher("listofmarkforchange.jsp").forward(req, resp);
+            req.getRequestDispatcher("TrainerControlPage/listofmarkforchange.jsp").forward(req, resp);
         }
     }
 
@@ -62,7 +62,7 @@ public class TrainerActServlet extends HttpServlet {
 
     private String doAdd(Student student, String theam, String mark) {
         int tempMark = 0;
-        String result = "trainerActList.jsp";
+        String result = "TrainerControlPage/trainerActList.jsp";
         try {
             tempMark = Integer.parseInt(mark);
         } catch (IllegalArgumentException e) {

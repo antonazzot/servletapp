@@ -33,7 +33,7 @@ public class CheckServlet extends HttpServlet {
 
 
         if (Role.ADMINISTRATOR.equals(user.getRole())) {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("adminActList.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("adminControl/adminActList.jsp");
             requestDispatcher.forward(req, resp);
         } else if (Role.STUDENT.equals(user.getRole())) {
             req.getRequestDispatcher("/studentservlet").forward(req, resp);
@@ -52,7 +52,7 @@ public class CheckServlet extends HttpServlet {
                 session.setAttribute("group", group);
                 req.setAttribute("set", theams);
                 req.setAttribute("map", studentHashMap);
-                req.getRequestDispatcher("trainerActList.jsp").forward(req, resp);
+                req.getRequestDispatcher("TrainerControlPage/trainerActList.jsp").forward(req, resp);
             }
             else {
                 req.getRequestDispatcher("groupnotexist.jsp").forward(req,resp);}

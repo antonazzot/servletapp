@@ -7,29 +7,32 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<br>
-<h1> Add salary list </h1>
 
-<form id="data" action="addSalaryForTrainer">
+<h1> Trainer control List </h1>
+
+ <p>Name: ${student.name} </p>
+
+  <p>Оценки Студента:</p>
+  <p></p>
+ <form id="data" action="TrainerControlPage/trainerActList.jsp">
+
 
          <c:forEach var = "entry" items="${map}">
-         <c:out value = "${entry.key}" />  <input type="radio" name="trainer" value="${entry.key.id}" >
-           <br>
+         <c:out value = "${entry.key}" /> <br>
           <c:forEach var = "list" items="${entry.value}">
-           <c:out value = "${list.bigDecimalSalary}" /> <br>
+           <c:out value = "${list.valuesOfMark}" /> <br>
             </c:forEach>
           </c:forEach>
 
-    <br>  <p><h1> Выбирите тренера и введите значение зарплаты для добавления </h1>
-    <p><input type="text" name="sal" ></p>
-     <p><input type="submit" form="data" value="Отправить"></p>
-</form>
-
+     <p><input type="submit" form="data" value="Вернуться на главную страницу"></p>
+  </form>
 <br>
-
+<br>
 <br>
 <form  action="logout">
     <input type="submit" value="LogOut!">
 </form>
+
+
 </body>
 </html>

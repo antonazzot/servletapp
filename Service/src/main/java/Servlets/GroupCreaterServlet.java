@@ -42,7 +42,7 @@ public class GroupCreaterServlet extends HttpServlet {
         Trainer trainer1 = (Trainer) daoImp.getUser(trainerID);
         Group group = new Group(trainer1, studentMap, theamsSet);
         log.info("Administrator = {}", "Group = {}", req.getSession().getAttribute("user"), group);
-        req.getRequestDispatcher("adminActList.jsp").forward(req, resp);
+        req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
 
     }
 

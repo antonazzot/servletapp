@@ -31,7 +31,7 @@ public class StudentServlet extends HttpServlet {
         studentIndInf.put(student, student.getListOfMark());
         log.info("Student = {}", student.getInf());
         req.setAttribute("mapmap", studentIndInf);
-        req.getRequestDispatcher("studentinf.jsp").forward(req, resp);
+        req.getRequestDispatcher("StudentPage/studentinf.jsp").forward(req, resp);
 
     }
 }

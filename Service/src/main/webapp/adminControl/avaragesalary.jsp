@@ -26,7 +26,9 @@
 </form>
 
 <br>
-
+  <form  action="adminControl/adminActList.jsp">
+      <input type="submit" value="Go to Main Admin!">
+  </form>
 <br>
 <form  action="logout">
     <input type="submit" value="LogOut!">

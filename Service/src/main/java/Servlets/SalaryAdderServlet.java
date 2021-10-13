@@ -37,7 +37,7 @@ public class SalaryAdderServlet extends HttpServlet {
                 Trainer trainer = (Trainer) daoImp.getUser(id);
                 trainer.getSalarylist().add(new Salary(new BigDecimal(salary)));
                 log.info( "Traner = {}", "AddSalary = {}", trainer, salary );
-                result = "adminActList.jsp";
+                result = "adminControl/adminActList.jsp";
             } catch (IllegalArgumentException e) {
                 result = "exeception.jsp";
             }
