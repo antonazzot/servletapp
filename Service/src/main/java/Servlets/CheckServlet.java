@@ -29,6 +29,7 @@ public class CheckServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserImpl user = (UserImpl) req.getSession().getAttribute("user");
         HttpSession session = req.getSession();
+        logger.info("User = {}", user);
 
 
         if (Role.ADMINISTRATOR.equals(user.getRole())) {

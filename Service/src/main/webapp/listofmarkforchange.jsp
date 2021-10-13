@@ -31,9 +31,12 @@
   </form>
 <br>
 <br>
+<form  action="trainerActList.jsp">
+    <input type="submit" value="Go to Main Page">
+</form>
 <br>
 <form  action="logout">
-    <input type="submit" value="Go to LogIN page!">
+    <input type="submit" value="LogOut">
 </form>
 
 

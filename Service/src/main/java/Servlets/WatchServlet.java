@@ -5,6 +5,8 @@ import Servlets.DAO.DaoImp;
 import ThreadModel.Group;
 import Action.*;
 import Users.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 
 @WebServlet(value = "/watchServlet")
 public class WatchServlet extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(WatchServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String act = req.getParameter("act");

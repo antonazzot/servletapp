@@ -1,10 +1,13 @@
 package Servlets;
 
 import Servlets.DAO.DaoImp;
+import Servlets.Filters.StartFilter;
 import ThreadModel.Group;
 import ThreadModel.Mark;
 import ThreadModel.Theams;
 import Users.Student;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +18,7 @@ import java.io.IOException;
 
 @WebServlet("/changeandcreatemark")
 public class ChangeAndCreateMarkServlet extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(ChangeAndCreateMarkServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String studentId = req.getParameter("student");
@@ -28,6 +32,7 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
         if (act.equalsIgnoreCase("change")) {
             req.setAttribute("set", group.getTheamsSet());
             req.setAttribute("map", group.getStudentMap());
+            log.info("Trainer = {}", "Student = {}", "Mark = {}", req.getSession().getAttribute("user"), student, mark);
             req.getRequestDispatcher(change(theam, marks, student)).forward(req, resp);
         }
         req.setAttribute("set", group.getTheamsSet());

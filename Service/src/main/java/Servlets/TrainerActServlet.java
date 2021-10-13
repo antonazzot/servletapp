@@ -5,6 +5,8 @@ import ThreadModel.Group;
 import ThreadModel.Mark;
 import ThreadModel.Theams;
 import Users.Student;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import java.util.*;
 
 @WebServlet("/traineract")
 public class TrainerActServlet extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(TrainerActServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String user = req.getParameter("user");
@@ -30,6 +33,7 @@ public class TrainerActServlet extends HttpServlet {
             Group group = (Group) req.getSession().getAttribute("group");
             Map<Integer, Student> studentHashMap = group.getStudentMap();
             Set<Theams> theams = group.getTheamsSet();
+            log.info("Act = {}", "Student ={}", "Theam = {}", "Mark = {}", act, student, theam, mark );
             req.setAttribute("set", theams);
             req.setAttribute("map", studentHashMap);
             req.getRequestDispatcher(doAdd(student, theam, mark)).forward(req, resp);
@@ -43,6 +47,7 @@ public class TrainerActServlet extends HttpServlet {
             req.setAttribute("map", getHashMapforTheam(th, student));
             req.getRequestDispatcher("deletemark.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("change")) {
+
             req.setAttribute("student", student);
             req.setAttribute("map", getHashMapforTheam(th, student));
             req.getRequestDispatcher("listofmarkforchange.jsp").forward(req, resp);

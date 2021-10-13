@@ -2,9 +2,12 @@ package Servlets;
 
 import DataBase.DataBaseInf;
 import Servlets.DAO.DaoImp;
+import Servlets.Filters.StartFilter;
 import ThreadModel.Salary;
 import Users.Trainer;
 import Users.UserImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +23,7 @@ import java.util.Map;
 
 @WebServlet("/avarageSalary")
 public class AvarageSalaryServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("map", salaryHashMap());

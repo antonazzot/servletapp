@@ -32,6 +32,9 @@
      <p><input type="submit" form="data" value="Отправить"></p>
   </form>
 <br>
+<form  action="trainerActList.jsp">
+    <input type="submit" value="Go to Main Page">
+</form>
 <br>
 <br>
 <form  action="logout">

@@ -3,6 +3,8 @@ package Servlets;
 import Servlets.DAO.DaoImp;
 import ThreadModel.Salary;
 import Users.Trainer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ import java.math.BigDecimal;
 
 @WebServlet("/addSalaryForTrainer")
 public class SalaryAdderServlet extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(SalaryAdderServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String trainerId = req.getParameter("trainer");
@@ -33,6 +36,7 @@ public class SalaryAdderServlet extends HttpServlet {
                 int salary = Integer.parseInt(sal);
                 Trainer trainer = (Trainer) daoImp.getUser(id);
                 trainer.getSalarylist().add(new Salary(new BigDecimal(salary)));
+                log.info( "Traner = {}", "AddSalary = {}", trainer, salary );
                 result = "adminActList.jsp";
             } catch (IllegalArgumentException e) {
                 result = "exeception.jsp";

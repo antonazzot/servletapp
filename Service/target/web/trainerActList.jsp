@@ -24,7 +24,7 @@
       <p>Выберите тему </p>
        <c:forEach var = "set" items="${set}">
                <c:out value = "${set}" />
-               <input type="checkbox" name="th" value="${set}"> </p>
+               <input type="radio" name="th" value="${set}"> </p>
             </c:forEach>
 
 
@@ -42,7 +42,7 @@
 
 <br>
 <form  action="logout">
-    <input type="submit" value="Go to LogIN page!">
+    <input type="submit" value="LogOut!">
 </form>
 
 

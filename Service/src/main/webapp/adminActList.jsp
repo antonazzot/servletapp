@@ -27,8 +27,8 @@
 
     <br>
     <br>
-    Enter  ID: <input name ="id", type="text">
-    <input type="submit" form="data" value="act">
+    Enter User ID for delete: <input name ="id", type="text"> <br>
+    <input type="submit" form="data" value="Do act">
 </form>
 
 <br>
@@ -41,7 +41,7 @@
 </form>
 <br>
 <form  action="logout">
-    <input type="submit" value="Go to LogIN page!">
+    <input type="submit" value="LogOut!">
 </form>
 </body>
 </html>

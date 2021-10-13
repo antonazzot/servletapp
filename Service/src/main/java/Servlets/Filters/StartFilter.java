@@ -3,6 +3,8 @@ package Servlets.Filters;
 import DataBase.DataBaseInf;
 import Servlets.DAO.DaoImp;
 import Users.UserImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -15,10 +17,15 @@ import java.util.Map;
 
 @WebFilter("/checkUser")
 public class StartFilter extends AbstractFilter {
+    private static final Logger log = LoggerFactory.getLogger(StartFilter.class);
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+        if (request.getSession(false)==null || request.getSession(false).isNew()) {
+            response.sendRedirect("/web/hello");
+        }
         UserImpl user;
         int id = 0;
         String login = null;
@@ -37,6 +44,7 @@ public class StartFilter extends AbstractFilter {
         HttpSession session = request.getSession();
         if (user != null) {
         session.setAttribute("user", user);
+        log.info("SessionWithUserCreate = {}", user);
         request.getRequestDispatcher("/checkUser").forward(request, response);}
         else request.getRequestDispatcher("exeception.jsp").forward(request,response);
         filterChain.doFilter(request, response);

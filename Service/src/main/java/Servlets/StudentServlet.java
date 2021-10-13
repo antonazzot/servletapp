@@ -5,6 +5,8 @@ import ThreadModel.Mark;
 import ThreadModel.Theams;
 import Users.Student;
 import Users.UserImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +20,7 @@ import java.util.List;
 
 @WebServlet("/studentservlet")
 public class StudentServlet extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(StudentServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -26,6 +29,7 @@ public class StudentServlet extends HttpServlet {
         Student student = (Student) daoImp.getUser(user.getId());
         HashMap<Student, HashMap<Theams, List<Mark>>> studentIndInf = new HashMap<>();
         studentIndInf.put(student, student.getListOfMark());
+        log.info("Student = {}", student.getInf());
         req.setAttribute("mapmap", studentIndInf);
         req.getRequestDispatcher("studentinf.jsp").forward(req, resp);
 

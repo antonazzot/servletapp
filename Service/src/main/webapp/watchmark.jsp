@@ -10,11 +10,11 @@
 
 <h1> Trainer control List </h1>
 
- <p>Name: ${student} </p>
+ <p>Name: ${student.name} </p>
 
-  <p>Оцценки Студента:</p>
+  <p>Оценки Студента:</p>
   <p></p>
- <form id="data" action="">
+ <form id="data" action="trainerActList.jsp">
 
 
          <c:forEach var = "entry" items="${map}">
@@ -24,13 +24,13 @@
             </c:forEach>
           </c:forEach>
 
-     <p><input type="submit" form="data" value="Отправить"></p>
+     <p><input type="submit" form="data" value="Вернуться на главную страницу"></p>
   </form>
 <br>
 <br>
 <br>
 <form  action="logout">
-    <input type="submit" value="Go to LogIN page!">
+    <input type="submit" value="LogOut!">
 </form>
 
 

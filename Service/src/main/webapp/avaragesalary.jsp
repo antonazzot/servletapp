@@ -29,7 +29,7 @@
 
 <br>
 <form  action="logout">
-    <input type="submit" value="Go to LogIN page!">
+    <input type="submit" value="LogOut!">
 </form>
 </body>
 </html>

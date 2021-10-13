@@ -1,11 +1,14 @@
 package Servlets;
 
 import Servlets.DAO.DaoImp;
+import Servlets.Filters.StartFilter;
 import ThreadModel.Group;
 import ThreadModel.Mark;
 import ThreadModel.Theams;
 import Users.Student;
 import Users.Trainer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 
 @WebServlet("/GroupCreaterServlet")
 public class GroupCreaterServlet extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(GroupCreaterServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -37,6 +41,7 @@ public class GroupCreaterServlet extends HttpServlet {
         HashMap<Integer, Student> studentMap = studentMapCreater(student, theamsSet);
         Trainer trainer1 = (Trainer) daoImp.getUser(trainerID);
         Group group = new Group(trainer1, studentMap, theamsSet);
+        log.info("Administrator = {}", "Group = {}", req.getSession().getAttribute("user"), group);
         req.getRequestDispatcher("adminActList.jsp").forward(req, resp);
 
     }

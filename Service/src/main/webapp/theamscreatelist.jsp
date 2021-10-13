@@ -11,7 +11,7 @@
    <p>Выберите темы для группы</p>
       <c:forEach var = "set" items="${set}">
           <c:out value = "${set.value}" />
-          <input type="checkbox" name="th" value="${set.value}"> </p>
+          <input type="checkbox" name="th" value="${set.value}"> <br>
        </c:forEach>
 
     <p>Выберите студентов для группы</p>
@@ -30,9 +30,12 @@
 
    <p><input type="submit" value="Отправить"></p>
   </form>
+  <form  action="adminActList.jsp">
+      <input type="submit" value="Go to Main Admin!">
+  </form>
 <br>
 <form  action="logout">
-    <input type="submit" value="Go to LogIN page!">
+    <input type="submit" value="LogOut!">
 </form>
 
 </body>

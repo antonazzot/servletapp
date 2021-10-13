@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = {"/watchServlet", "/GroupCreaterServlet", "/avarageSalary", "/calculateAvarageSalary", "/addSalaryForTrainer", "/addSalary"})
+@WebFilter(urlPatterns = {"/watchServlet", "/GroupCreaterServlet",
+        "/avarageSalary", "/calculateAvarageSalary",
+        "/addSalaryForTrainer", "/addSalary", "/adminActList.jsp"})
 public class UserFilter extends AbstractFilter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
