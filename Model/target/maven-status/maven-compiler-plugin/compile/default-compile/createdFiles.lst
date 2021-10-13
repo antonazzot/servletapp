@@ -7,7 +7,6 @@ ThreadModel\Theams.class
 Users\UserImpl.class
 ThreadModel\Group.class
 Users\User.class
-Action\ActionBase.class
 Users\Student.class
 DataBase\DataBaseInf.class
 Users\Administrator.class
