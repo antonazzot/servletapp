@@ -1,7 +1,6 @@
 package Servlets;
 
 import DataBase.DataBaseInf;
-import Servlets.DAO.DaoImp;
 import ThreadModel.Group;
 import ThreadModel.Theams;
 import Users.Role;
@@ -55,7 +54,7 @@ public class CheckServlet extends HttpServlet {
                 req.getRequestDispatcher("TrainerControlPage/trainerActList.jsp").forward(req, resp);
             }
             else {
-                req.getRequestDispatcher("groupnotexist.jsp").forward(req,resp);}
+                req.getRequestDispatcher("TrainerControlPage/groupnotexist.jsp").forward(req,resp);}
         }
 
     }

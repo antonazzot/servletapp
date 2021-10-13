@@ -1,7 +1,7 @@
 package Servlets;
 
 import DataBase.DataBaseInf;
-import Servlets.DAO.DaoImp;
+import Repository.DAO.DaoImp;
 import ThreadModel.Salary;
 import Users.Trainer;
 import Users.UserImpl;
@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @WebServlet("/addSalary")
 public class TrainerAddSalaryServlet extends HttpServlet {

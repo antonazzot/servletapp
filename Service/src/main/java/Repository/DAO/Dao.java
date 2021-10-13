@@ -1,4 +1,4 @@
-package Servlets.DAO;
+package Repository.DAO;
 
 import Users.Role;
 import Users.User;

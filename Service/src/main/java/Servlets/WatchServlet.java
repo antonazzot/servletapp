@@ -1,27 +1,22 @@
 package Servlets;
 
 import DataBase.DataBaseInf;
-import Servlets.DAO.DaoImp;
+import Repository.DAO.DaoImp;
 import ThreadModel.Group;
 import Action.*;
 import Users.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.*;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @WebServlet(value = "/watchServlet")
 public class WatchServlet extends HttpServlet {

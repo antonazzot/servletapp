@@ -1,6 +1,6 @@
 package Servlets;
 
-import Servlets.DAO.DaoImp;
+import Repository.DAO.DaoImp;
 import ThreadModel.Salary;
 import Users.Trainer;
 import org.slf4j.Logger;

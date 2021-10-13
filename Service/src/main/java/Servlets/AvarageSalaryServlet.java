@@ -1,13 +1,10 @@
 package Servlets;
 
 import DataBase.DataBaseInf;
-import Servlets.DAO.DaoImp;
-import Servlets.Filters.StartFilter;
+import Repository.DAO.DaoImp;
 import ThreadModel.Salary;
 import Users.Trainer;
 import Users.UserImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

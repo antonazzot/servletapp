@@ -1,7 +1,7 @@
 package Servlets.Filters;
 
 import DataBase.DataBaseInf;
-import Servlets.DAO.DaoImp;
+import Repository.DAO.DaoImp;
 import Users.UserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

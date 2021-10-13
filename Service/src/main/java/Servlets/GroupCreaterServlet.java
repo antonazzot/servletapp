@@ -1,16 +1,13 @@
 package Servlets;
 
-import Servlets.DAO.DaoImp;
-import Servlets.Filters.StartFilter;
+import Repository.DAO.DaoImp;
 import ThreadModel.Group;
-import ThreadModel.Mark;
 import ThreadModel.Theams;
 import Users.Student;
 import Users.Trainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @WebServlet("/GroupCreaterServlet")
 public class GroupCreaterServlet extends HttpServlet {

@@ -1,4 +1,4 @@
-package Servlets.DAO;
+package Repository.DAO;
 
 import DataBase.DataBaseInf;
 import ThreadModel.Mark;

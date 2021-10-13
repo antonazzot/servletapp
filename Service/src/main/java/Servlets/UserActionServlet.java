@@ -1,6 +1,5 @@
 package Servlets;
 
-import Servlets.DAO.DaoImp;
 import Users.Administrator;
 import Users.Student;
 import Users.Trainer;

@@ -1,7 +1,6 @@
 package Servlets;
 
-import Servlets.DAO.DaoImp;
-import Servlets.Filters.StartFilter;
+import Repository.DAO.DaoImp;
 import ThreadModel.Group;
 import ThreadModel.Mark;
 import ThreadModel.Theams;
