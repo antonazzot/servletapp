@@ -21,7 +21,7 @@
      <input type="submit" form="data"/>
 </form>
 <br>
-  <form  action="adminControl/adminActList.jsp">
+  <form  action="hello">
       <input type="submit" value="Go to Main Admin!">
   </form>
 <br>

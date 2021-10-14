@@ -17,6 +17,10 @@
   </c:forEach>
 
 <br>
+  <form  action="hello">
+      <input type="submit" value="Go to Main Page!">
+  </form>
+<br>
 <form  action="logout">
     <input type="submit" value="LogOut">
 </form>

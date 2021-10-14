@@ -75,7 +75,7 @@ public class Group {
     }
 
     public String  getInf ( ) {
-        return  "***" + '\n' + "Treiner: " + trainer.getInf() + " " +
+        return  "***" + " " + '\n' + " Treiner: " + trainer.getInf() +  " " +
                 " consist of next Student: " + '\n'+ "***********"+ '\n'+
                 studentMap.values().stream().map(s->s.getInf()).peek(str->str.concat(" ****** ")).toString() +
                 " " + '\n'+

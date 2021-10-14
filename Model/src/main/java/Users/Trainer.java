@@ -30,9 +30,7 @@ public class Trainer extends UserImpl{
         if (this.salarylist.size()!=0) {
         l = this.salarylist.stream().map(salary ->
                 salary.getBigDecimalSalary()).count() / (long) this.salarylist.size();}
-        return "ID: " + getId() +  "Trainer name : " + this.getName() + "  " + " have salsry: " + '\n' +
-                salarylist.stream().map(b -> b.getBigDecimalSalary().toString()).collect(Collectors.toList()).toString()
-                + " " + '\n' + " avarage salary - "  + l;
+        return "ID: " + getId() +  "Trainer name : " + this.getName() + "  " + salarylist.toArray().toString();
     }
 
     @Override

@@ -30,7 +30,7 @@
 
    <p><input type="submit" value="Отправить"></p>
   </form>
-  <form  action="adminControl/adminActList.jsp">
+  <form  action="hello">
       <input type="submit" value="Go to Main Admin!">
   </form>
 <br>

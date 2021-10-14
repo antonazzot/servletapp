@@ -28,7 +28,7 @@ public class StartPage extends HttpServlet {
     Logger log = LoggerFactory.getLogger(StartPage.class);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet (HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         {

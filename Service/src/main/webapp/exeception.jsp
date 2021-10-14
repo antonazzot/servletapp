@@ -11,6 +11,10 @@
 <h1> Введено неверное значение </h1>
 
 <br>
+  <form  action="hello">
+      <input type="submit" value="Go to Main Page!">
+  </form>
+<br>
 <form  action="logout">
     <input type="submit" value="Go to LogIN page!">
 </form>

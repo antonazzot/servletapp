@@ -13,7 +13,7 @@
 <p>Name: ${trainer}  have got avarage salary ${avarage} </p>
 
 <br>
-<form  action="adminControl/adminActList.jsp">
+<form  action="hello">
     <input type="submit" value="Go to Main Admin!">
 </form>
 <br>

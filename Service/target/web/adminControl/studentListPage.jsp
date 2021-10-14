@@ -34,7 +34,7 @@
      <input type="submit" form="data" form="data1">
 </form>
 <br>
-  <form  action="adminControl/adminActList.jsp">
+  <form  action="hello">
       <input type="submit" value="Go to Main Admin!">
   </form>
 <br>

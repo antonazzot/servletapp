@@ -23,12 +23,13 @@
         <option value="watch">Watch </option>
     </select>
     <br>
+    Enter User ID for delete: <input name ="id", type="text"> <br>
     <br>
 
     <br>
     <br>
-    Enter User ID for delete: <input name ="id", type="text"> <br>
-    <input type="submit" form="data" value="Do act">
+
+    <input type="submit" form="data" value="  Do act   ">
 </form>
 
 <br>

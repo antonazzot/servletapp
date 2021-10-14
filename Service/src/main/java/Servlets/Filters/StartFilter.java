@@ -20,7 +20,6 @@ public class StartFilter extends AbstractFilter {
     private static final Logger log = LoggerFactory.getLogger(StartFilter.class);
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         if (request.getSession(false)==null || request.getSession(false).isNew()) {
