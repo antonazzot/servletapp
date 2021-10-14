@@ -19,7 +19,7 @@ public class LogOutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         UserImpl user = (UserImpl) session.getAttribute("user");
-        log.info("UserOut = {}", user);
+        log.info("UserOut = {}", user.getId());
         session.invalidate();
         resp.sendRedirect("/web/hello");
     }

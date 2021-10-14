@@ -2,8 +2,13 @@ package DataBase;
 import ThreadModel.*;
 import Users.*;
 import java.util.*;
+/*
+A class that imitation  database
+*/
 
-public class DataBaseInf {
+public final class DataBaseInf {
+    private DataBaseInf() {
+    }
     public static Map<Integer, UserImpl> studentHashMap = new HashMap<Integer, UserImpl>();
     public static Map <Integer, UserImpl> trainerHashMap = new HashMap <>();
     public static Map <Integer, Theams> theamsHashMap = new HashMap <>();

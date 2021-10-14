@@ -35,15 +35,21 @@ public class DaoImp extends Dao {
 
     @Override
     public void updateUser(int id,  User user) {
-
+    UserImpl old = getUser(id);
+    UserImpl newuser = (UserImpl)user;
+    old.setRole(newuser.getRole());
+    old.setAge(newuser.getAge());
+    old.setLogin(newuser.getLogin());
+    old.setName(newuser.getName());
+    old.setPassword(newuser.getPassword());
     }
 
     @Override
     public void deleteUser(int id) {
     if ( getUsersMapById(id)!=null)
       getUsersMapById(id).remove(id);
-
     }
+
     public HashMap<Integer, UserImpl> getUsersMapById (int id) {
 
         if (DataBaseInf.adminHashMap.containsKey(id)) {

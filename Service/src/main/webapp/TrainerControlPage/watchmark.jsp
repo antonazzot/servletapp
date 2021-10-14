@@ -14,7 +14,7 @@
 
   <p>Оценки Студента:</p>
   <p></p>
- <form id="data" action="TrainerControlPage/trainerActList.jsp">
+ <form id="data" action="/checkUser">
 
 
          <c:forEach var = "entry" items="${map}">
