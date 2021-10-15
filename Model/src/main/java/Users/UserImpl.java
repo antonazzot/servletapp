@@ -78,12 +78,23 @@ public class UserImpl implements User {
     }
 
     @Override
+    public String toString() {
+        return "UserImpl{" +
+                "id=" + id +
+                ", role=" + role +
+                ", name='" + name + '\'' +
+                ", login='" + login + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(id, role, name, login, password, age);
     }
 
     @Override
     public String getInf() {
-        return getId() + getName() + getRole() + getAge() ;
+        return getId() + getName() + getRole() + getAge() + getPassword();
     }
 }

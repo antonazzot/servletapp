@@ -20,8 +20,7 @@ import java.util.*;
 public class GroupCreaterServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(GroupCreaterServlet.class);
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] theams = req.getParameterValues("th");
         String trainer = req.getParameter("trainer");
         String[] student = req.getParameterValues("user");
@@ -29,7 +28,7 @@ public class GroupCreaterServlet extends HttpServlet {
         try {
             trainerID = Integer.parseInt(trainer);
         } catch (IllegalArgumentException e) {
-            resp.getWriter().write("введено неверное значение");
+            req.getRequestDispatcher("exeception.jsp").forward(req, resp);
         }
 
         DaoImp daoImp = new DaoImp();
@@ -37,7 +36,7 @@ public class GroupCreaterServlet extends HttpServlet {
         HashMap<Integer, Student> studentMap = studentMapCreater(student, theamsSet);
         Trainer trainer1 = (Trainer) daoImp.getUser(trainerID);
         Group group = new Group(trainer1, studentMap, theamsSet);
-        log.info("Administrator = {}", "Group = {}", req.getSession().getAttribute("user"), group);
+        log.info("Group = {}",  group);
         req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
 
     }

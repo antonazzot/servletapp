@@ -46,9 +46,7 @@ public class Student extends UserImpl {
 
     @Override
     public String toString() {
-        return "Student: " + this.getName() +
-                "have got next profit" +'\n'
-                ;
+      return   super.toString();
     }
 
 

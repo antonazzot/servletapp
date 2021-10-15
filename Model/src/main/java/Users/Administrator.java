@@ -11,7 +11,10 @@ public class Administrator extends UserImpl {
 
     @Override
     public String getInf () {
-        return "ID: " + getId() + " Name: " + getName() + '\n'
-                + "Login: " + getLogin() + " Age: " + getAge();
+        return super.getInf();
+    }
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

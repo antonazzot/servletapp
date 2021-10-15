@@ -10,7 +10,7 @@
 <br>
 <h1> Add salary list </h1>
 
-<form id="data" action="addSalaryForTrainer">
+<form id="data" method = "post" action="addSalaryForTrainer">
 
          <c:forEach var = "entry" items="${map}">
          <c:out value = "${entry.key}" />  <input type="radio" name="trainer" value="${entry.key.id}" >

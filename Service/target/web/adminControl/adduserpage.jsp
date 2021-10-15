@@ -12,8 +12,8 @@
 
 <h1> ADD NEW USER </h1>
 
-<form id="data" action="UserActionServlet" >
-    <input type="hidden" name="act" value="add"/>
+<form id="data" method = "post" action="UserActionServlet" >
+
     <input type="hidden" name="role" value="${role}"/>
 
     <br>

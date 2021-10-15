@@ -19,17 +19,15 @@ import java.math.BigDecimal;
 public class SalaryAdderServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(SalaryAdderServlet.class);
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String trainerId = req.getParameter("trainer");
         String sal = req.getParameter("sal");
         req.getRequestDispatcher(salaryresultadder(trainerId, sal)).forward(req, resp);
     }
 
-
     private String salaryresultadder(String tr, String sal) {
         String result = null;
         DaoImp daoImp = new DaoImp();
-
         if (tr != null && sal != null) {
             try {
                 int id = Integer.parseInt(tr);

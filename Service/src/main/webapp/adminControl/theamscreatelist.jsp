@@ -8,7 +8,7 @@
 </head>
 <h1> ADD NEW Group </h1>
 <body>
-  <form id="data" action="GroupCreaterServlet">
+  <form id="data" method = "post" action="GroupCreaterServlet">
    <p>Выберите темы для группы</p>
       <c:forEach var = "set" items="${set}">
           <c:out value = "${set.value}" />
