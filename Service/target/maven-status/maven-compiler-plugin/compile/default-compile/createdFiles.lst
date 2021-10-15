@@ -3,6 +3,7 @@ Servlets\TrainerAddSalaryServlet.class
 Servlets\UserActionServlet.class
 Servlets\Filters\StartFilter.class
 Servlets\Filters\AbstractFilter.class
+Servlets\ActionChangeServlet.class
 Servlets\ChangeAndCreateMarkServlet.class
 Repository\DAO\DaoImp.class
 Servlets\CalculateAvarageSalaryServlet.class
@@ -14,6 +15,8 @@ Servlets\AvarageSalaryServlet.class
 Servlets\Filters\StudentFilter.class
 Servlets\Filters\TrainerFilter.class
 Servlets\WatchServlet.class
+Servlets\ChangeUser.class
+Servlets\UpdateGroup.class
 Servlets\Filters\UserFilter.class
 Servlets\GroupCreaterServlet.class
 Servlets\TrainerActServlet.class

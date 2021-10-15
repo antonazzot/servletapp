@@ -21,6 +21,10 @@ public class TrainerActServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(TrainerActServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getParameter("user").equals("") || req.getParameter("th").equals("")) {
+            req.getRequestDispatcher("exeception.jsp").forward(req, resp);
+        }
+
         String user = req.getParameter("user");
         String theam = req.getParameter("th");
         String act = req.getParameter("act");

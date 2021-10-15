@@ -1,3 +1,4 @@
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\ChangeUser.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\Filters\UserFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\LogOutServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\StartPage.java
@@ -13,8 +14,10 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\Filters\A
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Repository\DAO\DaoImp.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\Filters\StartFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\SalaryAdderServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\UpdateGroup.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Repository\DAO\Dao.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\UserActionServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\GroupCreaterServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\ActionChangeServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\TrainerActServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\Filters\StudentFilter.java

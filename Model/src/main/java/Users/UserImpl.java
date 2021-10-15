@@ -95,6 +95,7 @@ public class UserImpl implements User {
 
     @Override
     public String getInf() {
-        return getId() + getName() + getRole() + getAge() + getPassword();
+        return "ID " +  getId() + " NAME: " + getName() +
+              " ROLE: " + getRole() + " AGE: " +  getAge() + " PASSWORD: " + getPassword();
     }
 }

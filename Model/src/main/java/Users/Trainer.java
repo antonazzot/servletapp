@@ -31,7 +31,7 @@ public class Trainer extends UserImpl{
         l = this.salarylist.stream().map(salary ->
                 salary.getBigDecimalSalary()).count() / (long) this.salarylist.size();}
 
-        return super.getInf() + "  " + salarylist.toArray().toString();
+        return super.getInf() + "  " + salarylist.toString();
     }
 
     @Override

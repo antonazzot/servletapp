@@ -1,9 +1,10 @@
 package Servlets;
 
+import Action.IndividSetMap;
+import Action.individTrainerMap;
 import DataBase.DataBaseInf;
 import Repository.DAO.DaoImp;
 import ThreadModel.Group;
-import Action.*;
 import Users.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,20 +15,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(value = "/watchServlet")
 public class WatchServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(WatchServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String act = req.getParameter("act");
         String user = req.getParameter("user");
         int id = 0;
         DaoImp daoImp = new DaoImp();
-        Writer writer = resp.getWriter();
 
         if (act.equalsIgnoreCase("create")) {
             if (!user.equals("group")) {
@@ -49,40 +49,71 @@ public class WatchServlet extends HttpServlet {
                 try {
                     id = Integer.parseInt(req.getParameter("id"));
                 } catch (IllegalArgumentException e) {
-                   req.getRequestDispatcher("exeception.jsp").forward(req, resp);
+                    req.getRequestDispatcher("exeception.jsp").forward(req, resp);
                 }
             }
             log.info("Delete entity ={}", id);
             daoImp.deleteUser(id);
             req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("change")) {
-            log.info("Change entity ={}", user);
-            req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
-        } else if (act.equalsIgnoreCase("watch")) {
             if (!user.equals("group")) {
-                switch (user) {
-                    case "student":
-                        log.info("Watch student ={}", user);
-                        req.setAttribute("map", mapWithInf(Role.STUDENT));
-                        req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
-                        break;
-                    case "trainer":
-                        log.info("Watch student ={}", user);
-                        req.setAttribute("map", mapWithInf(Role.TRAINER));
-                        req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
-                        break;
-                    case "administrator":
-                        log.info("Watch student ={}", user);
-                        req.setAttribute("map", mapWithInf(Role.ADMINISTRATOR));
-                        req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
-                        break;
-                }
+                log.info("Change entity ={}", user);
+                req.setAttribute("map", mapToChange(user));
+                req.getRequestDispatcher("adminControl/changeUser.jsp").forward(req, resp);
             } else {
-                log.info("Watch group ={}", user);
-                req.setAttribute("map", groupStringHashMap());
-                req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
+                req.setAttribute("map", DataBaseInf.groupHashMap);
+                req.getRequestDispatcher("adminControl/changeGroup.jsp").forward(req, resp);
             }
+
+
+    } else if(act.equalsIgnoreCase("watch"))
+
+    {
+        if (!user.equals("group")) {
+            req.setAttribute("map", forDemonstratePage(user));
+            req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
+
+        } else {
+            log.info("Watch group ={}", user);
+            req.setAttribute("map", groupStringHashMap());
+            req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
         }
+    }
+
+}
+
+
+    private HashMap <UserImpl, String> forDemonstratePage (String user) {
+        HashMap <UserImpl, String> result =  new HashMap<>();
+        switch (user) {
+            case "student":
+                result = mapWithInf(Role.STUDENT);
+                 break;
+            case "trainer":
+                result = mapWithInf(Role.TRAINER);
+                break;
+            case "administrator":
+                result = mapWithInf(Role.ADMINISTRATOR);
+                break;
+        }
+        return result;
+    }
+
+    private  HashMap <Integer, UserImpl> mapToChange(String user)  {
+        HashMap <Integer, UserImpl> result =  new HashMap<>();
+        switch (user) {
+            case "student":
+                result = (HashMap<Integer, UserImpl>) DataBaseInf.studentHashMap;
+                break;
+            case "trainer":
+                log.info("Watch student ={}", user);
+                result = (HashMap<Integer, UserImpl>) DataBaseInf.trainerHashMap;
+                break;
+            case "administrator":
+                result = (HashMap<Integer, UserImpl>) DataBaseInf.adminHashMap;
+                break;
+                  }
+                  return result;
     }
 
 
@@ -115,7 +146,7 @@ public class WatchServlet extends HttpServlet {
     private HashMap<Group, String> groupStringHashMap() {
         HashMap<Group, String> hashMap = new HashMap<>();
         for (Map.Entry<Integer, Group> entry : DataBaseInf.groupHashMap.entrySet()) {
-            Group group = (Group) entry.getValue();
+            Group group = entry.getValue();
             String inf = group.getInf();
             hashMap.put(group, inf);
         }

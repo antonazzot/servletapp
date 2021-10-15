@@ -7,25 +7,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-
-
-
-<br>
 <h1> Trainer control List </h1>
-
- <form id="data" action="traineract">
-
+<form id="data" action="traineract">
   <p>Выберите студента из группы</p>
     <c:forEach var = "entry" items="${map}">
        <c:out value = "${entry.value.name}" />
        <input type="radio" name="user" value="${entry.key}"> </p>
     </c:forEach>
 
-      <p>Выберите тему </p>
+      <p>Выберите тему</p>
        <c:forEach var = "set" items="${set}">
                <c:out value = "${set}" />
                <input type="radio" name="th" value="${set}"> </p>
-            </c:forEach>
+       </c:forEach>
 
 
       <p>Выберите необходимое действие</p>
@@ -44,7 +38,5 @@
 <form  action="logout">
     <input type="submit" value="LogOut!">
 </form>
-
-
 </body>
 </html>

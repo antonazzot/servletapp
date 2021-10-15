@@ -22,23 +22,16 @@ public class GroupCreaterServlet extends HttpServlet {
     @Override
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] theams = req.getParameterValues("th");
-        String trainer = req.getParameter("trainer");
+        int trainerID = Integer.parseInt(req.getParameter("trainer"));
         String[] student = req.getParameterValues("user");
-        int trainerID = 0;
-        try {
-            trainerID = Integer.parseInt(trainer);
-        } catch (IllegalArgumentException e) {
-            req.getRequestDispatcher("exeception.jsp").forward(req, resp);
-        }
 
         DaoImp daoImp = new DaoImp();
         Set<Theams> theamsSet = theamsSetcreater(theams);
         HashMap<Integer, Student> studentMap = studentMapCreater(student, theamsSet);
-        Trainer trainer1 = (Trainer) daoImp.getUser(trainerID);
-        Group group = new Group(trainer1, studentMap, theamsSet);
+        Trainer trainer = (Trainer) daoImp.getUser(trainerID);
+        Group group = new Group(trainer, studentMap, theamsSet);
         log.info("Group = {}",  group);
         req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
-
     }
 
     private Set<Theams> theamsSetcreater(String[] theams) {
