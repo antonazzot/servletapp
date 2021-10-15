@@ -31,43 +31,54 @@ public class WatchServlet extends HttpServlet {
 
         if (act.equalsIgnoreCase("create")) {
             if (!user.equals("group")) {
+                // add user
+                log.info("Create user ={}", user);
                 req.setAttribute("role", user);
                 req.getRequestDispatcher("adminControl/adduserpage.jsp").forward(req, resp);
             } else {
+                // add group
+                log.info("Create group ={}", user);
                 req.setAttribute("map", mapWithInf(Role.STUDENT));
                 req.setAttribute("map1", individTrainerMap.theamsHashSet(mapWithInf(Role.TRAINER)));
                 req.setAttribute("set", IndividSetMap.theamsHashSet());
                 req.getRequestDispatcher("adminControl/theamscreatelist.jsp").forward(req, resp);
             }
         } else if (act.equalsIgnoreCase("delete")) {
+            // delete entity by id (user and group)
             if (req.getParameter("id") != null) {
                 try {
                     id = Integer.parseInt(req.getParameter("id"));
                 } catch (IllegalArgumentException e) {
-                    resp.getWriter().write("Enter right id");
+                   req.getRequestDispatcher("exeception.jsp").forward(req, resp);
                 }
             }
+            log.info("Delete entity ={}", id);
             daoImp.deleteUser(id);
             req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("change")) {
-            writer.write("Page not exist");
+            log.info("Change entity ={}", user);
+            req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("watch")) {
             if (!user.equals("group")) {
                 switch (user) {
                     case "student":
+                        log.info("Watch student ={}", user);
                         req.setAttribute("map", mapWithInf(Role.STUDENT));
                         req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
                         break;
                     case "trainer":
+                        log.info("Watch student ={}", user);
                         req.setAttribute("map", mapWithInf(Role.TRAINER));
                         req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
                         break;
                     case "administrator":
+                        log.info("Watch student ={}", user);
                         req.setAttribute("map", mapWithInf(Role.ADMINISTRATOR));
                         req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
                         break;
                 }
             } else {
+                log.info("Watch group ={}", user);
                 req.setAttribute("map", groupStringHashMap());
                 req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
             }

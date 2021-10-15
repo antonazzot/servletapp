@@ -13,12 +13,9 @@
 <h1> ADD NEW USER </h1>
 
 <form id="data" action="UserActionServlet" >
-    <input name="act" value="add">
-    Enter User Role:    <select name="role", value="${role}">
-                        <option value="Student">Student</option>
-                        <option value="Trainer">Trainer</option>
-                        <option value="Administrator">Administrator</option>
-</select>
+    <input type="hidden" name="act" value="add"/>
+    <input type="hidden" name="role" value="${role}"/>
+
     <br>
     Enter User NAME: <input  name="name", type="text"> <br>
     Enter User Login: <input  name="login", type="text"> <br>

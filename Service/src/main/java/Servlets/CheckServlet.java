@@ -33,15 +33,16 @@ public class CheckServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserImpl user = (UserImpl) req.getSession().getAttribute("user");
         HttpSession session = req.getSession();
-        logger.info("User = {}", user);
-
-
+        //authorization block
         if (Role.ADMINISTRATOR.equals(user.getRole())) {
+            logger.info("UserRole ={}", user.getRole());
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("adminControl/adminActList.jsp");
             requestDispatcher.forward(req, resp);
         } else if (Role.STUDENT.equals(user.getRole())) {
+            logger.info("UserRole ={}", user.getRole());
             req.getRequestDispatcher("/studentservlet").forward(req, resp);
         } else if (Role.TRAINER.equals(user.getRole())) {
+            logger.info("UserRole ={}", user.getRole());
             if (DataBaseInf.groupHashMap.values()
                     .stream()
                     .anyMatch(g -> g.getTrainer().getId() == user.getId()))

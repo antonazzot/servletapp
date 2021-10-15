@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Page</title>
+    <title>Group create Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
+<h1> ADD NEW Group </h1>
 <body>
   <form id="data" action="GroupCreaterServlet">
    <p>Выберите темы для группы</p>
@@ -19,9 +20,8 @@
        <c:out value = "${entry.key.name}" />
        <input type="checkbox" name="user" value="${entry.key.id}"> </p>
     </c:forEach>
+
     <p>Выберите тренера для группы</p>
-
-
             <c:forEach var = "entry1" items="${map1}">
             <c:out value = "${entry1.key.name}" />
             <input type="radio" name="trainer" value="${entry1.key.id}"> </p>

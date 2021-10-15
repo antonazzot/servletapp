@@ -29,17 +29,22 @@ public class StartFilter extends AbstractFilter {
         int id = 0;
         String login = null;
         boolean doesItLogin = false;
+        // provides the ability to log in either by login or by id
         try {
             id = Integer.parseInt(request.getParameter("id"));
         } catch (IllegalArgumentException e) {
             login = request.getParameter("id");
+            log.info("Enter by login = {}", login);
             doesItLogin = true;
         }
         String password = request.getParameter("password");
         if (doesItLogin) {
+            //Authentication by login
             user = checkUser(login, password);
         } else
+            //Authentication by id
             user = checkUser(id, password);
+
         HttpSession session = request.getSession();
         if (user != null) {
         session.setAttribute("user", user);

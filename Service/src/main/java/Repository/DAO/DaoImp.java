@@ -1,6 +1,7 @@
 package Repository.DAO;
 
 import DataBase.DataBaseInf;
+import ThreadModel.Group;
 import ThreadModel.Mark;
 import ThreadModel.Theams;
 import Users.*;
@@ -46,8 +47,12 @@ public class DaoImp extends Dao {
 
     @Override
     public void deleteUser(int id) {
-    if ( getUsersMapById(id)!=null)
+    if (getUsersMapById(id)!=null)
       getUsersMapById(id).remove(id);
+    else
+          if ( DataBaseInf.groupHashMap.values().stream().anyMatch(g->g.getId()==id))
+              DataBaseInf.groupHashMap.remove(id);
+
     }
 
     public HashMap<Integer, UserImpl> getUsersMapById (int id) {
