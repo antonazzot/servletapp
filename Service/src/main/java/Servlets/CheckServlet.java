@@ -19,6 +19,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
+/**
+ Servlet providing  authorizes the user and redirects to a specific page
+ //In first startfilter do authentication by id and login, and authorization,
+but I decided to divide it into different blocks
+ **/
 
 @WebServlet(value = "/checkUser")
 public class CheckServlet extends HttpServlet {
@@ -40,7 +45,7 @@ public class CheckServlet extends HttpServlet {
             requestDispatcher.forward(req, resp);
         } else if (Role.STUDENT.equals(user.getRole())) {
             logger.info("UserRole ={}", user.getRole());
-            req.getRequestDispatcher("/studentservlet").forward(req, resp);
+            req.getRequestDispatcher("StudentPage/studentstartpage.jsp").forward(req, resp);
         } else if (Role.TRAINER.equals(user.getRole())) {
             logger.info("UserRole ={}", user.getRole());
             if (DataBaseInf.groupHashMap.values()

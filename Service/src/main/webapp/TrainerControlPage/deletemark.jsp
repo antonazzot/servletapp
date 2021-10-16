@@ -14,7 +14,7 @@
 
   <p>ВВедите новое значение для изменения оценки</p>
   <p>либо выберите оценку для удаления</p>
- <form id="data" action="changeandcreatemark">
+ <form id="data" method = "post" action="changeandcreatemark">
 <input type="hidden" name="student" value="${student.id}"/>
 <input type="hidden" name="act" value="delete"/>
     <c:forEach var = "entry" items="${map}">
@@ -32,7 +32,7 @@
      <p><input type="submit" form="data" value="Отправить"></p>
   </form>
 <br>
-<form  action="TrainerControlPage/trainerActList.jsp">
+<form  action="hello">
     <input type="submit" value="Go to Main Page">
 </form>
 <br>

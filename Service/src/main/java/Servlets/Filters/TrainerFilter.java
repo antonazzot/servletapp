@@ -1,7 +1,6 @@
 package Servlets.Filters;
 
 import Users.Role;
-import Users.Trainer;
 import Users.UserImpl;
 
 import javax.servlet.FilterChain;

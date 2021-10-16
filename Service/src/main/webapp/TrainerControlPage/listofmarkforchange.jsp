@@ -10,11 +10,11 @@
 
 <h1> Trainer control List </h1>
 
- <p>Name: ${student} </p>
+ <p>Name: ${student.name} </p>
 
   <p>ВВедите новое значение для изменения оценки</p>
 
-    <form id="data" action="changeandcreatemark">
+    <form id="data" method = "post" action="changeandcreatemark">
     <input type="hidden" name="student" value="${student.id}"/>
 <input type="hidden" name="act" value="change"/>
     <c:forEach var = "entry" items="${map}">
@@ -31,7 +31,7 @@
   </form>
 <br>
 <br>
-<form  action="TrainerControlPage/trainerActList.jsp">
+<form  action="hello">
     <input type="submit" value="Go to Main Page">
 </form>
 <br>

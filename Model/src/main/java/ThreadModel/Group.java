@@ -75,26 +75,12 @@ public class Group {
     }
 
     public String  getInf ( ) {
-        return  "***" + " " + '\n' + " Treiner: " + trainer.getInf() +  " " +
-                " consist of next Student: " + '\n'+ "***********"+ '\n'+
-                studentMap.values().stream().map(s->s.getInf()).peek(str->str.concat(" ****** ")).toString() +
-                " " + '\n'+
-                     + '\n' +
-                    " *****************" +
-                        +'\n' +
-                theamsSet.toArray().toString();
+        return  toString()+ name+ id +studentMap.values().toString();
 
     }
 
     @Override
     public String toString() {
-        return "Group  " + id + "  head trainer: " + trainer.getName() + '\n' +
-                " consist of next Student: " +'\n' +
-                 "------------------" +'\n'+
-                studentMap.values().stream().map(s->s.getName()).collect(Collectors.toList()).toArray().toString()  +
-                '\n'+   ", Group contains teams " + '\n' +
-                 "------------------" + '\n' +
-                theamsSet.toArray().toString()
-                ;
+        return "Group  " + id + "  head trainer: " + trainer.getName()+"  ";
     }
 }

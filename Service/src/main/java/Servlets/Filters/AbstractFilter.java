@@ -9,7 +9,7 @@ import java.io.IOException;
 @WebFilter(urlPatterns = {"/*"})
 public class AbstractFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

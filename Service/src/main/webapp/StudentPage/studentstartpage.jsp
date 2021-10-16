@@ -12,23 +12,8 @@
 
  <p>Name: ${student.name} </p>
 
-  <p>Информация о вашей успеваемости</p>
-
-
-
-    <c:forEach var = "entry" items="${mapmap}">
-
-     <c:forEach var = "map" items="${entry.value}">
-                <c:out value = "${map.key}" /> <br>
-                    <c:forEach var = "list" items="${map.value}">
-                                <c:out value = "${list.valuesOfMark}" /> <br>
-                       </c:forEach>
-       </c:forEach>
-     </c:forEach>
-
-
-
-<br>
+  <p>Страница студента </p>
+<a href="studentservlet" > Смотреть оценки </a>
 <br>
 <br>
 <form  action="logout">

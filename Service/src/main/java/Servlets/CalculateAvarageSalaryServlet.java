@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
-import java.math.BigDecimal;
 import java.util.List;
 
-
+/**
+ Servlet make calculate avarage salary
+ **/
 @WebServlet("/calculateAvarageSalary")
 public class CalculateAvarageSalaryServlet extends HttpServlet {
-    @Override
+        @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String trainerId = req.getParameter("trainer");
         String sal = req.getParameter("sal");
         DaoImp daoImp = new DaoImp();
         Trainer trainer = null;
         long longavaragessalary = 0;
-        BigDecimal avarageSalary = null;
-        Writer writer = resp.getWriter();
+            Writer writer = resp.getWriter();
         if (trainerId != null) {
             int id = Integer.parseInt(trainerId);
             trainer = (Trainer) daoImp.getUser(id);

@@ -62,8 +62,7 @@ public class StartFilter extends AbstractFilter {
     }
 
     private UserImpl checkUser(String login, String password) {
-        UserImpl user = itRightCondition(login, password);
-        return user;
+        return itRightCondition(login, password);
     }
 
     private UserImpl itRightCondition(Map<Integer, UserImpl> map, int id, String password) {

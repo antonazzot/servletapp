@@ -17,7 +17,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ Servlet
+ providing users with role Student
+ watch himself marks
+ **/
 @WebServlet("/studentservlet")
 public class StudentServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(StudentServlet.class);
@@ -29,7 +33,8 @@ public class StudentServlet extends HttpServlet {
         Student student = (Student) daoImp.getUser(user.getId());
         HashMap<Student, HashMap<Theams, List<Mark>>> studentIndInf = new HashMap<>();
         studentIndInf.put(student, student.getListOfMark());
-        log.info("Student = {}", student.getInf());
+        log.info("Student logIn= {}", student.getInf());
+        req.setAttribute("student", student);
         req.setAttribute("mapmap", studentIndInf);
         req.getRequestDispatcher("StudentPage/studentinf.jsp").forward(req, resp);
     }

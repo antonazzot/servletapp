@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-
+/**
+ Servlet add salary to the trainer by inf
+ took in JSP
+ **/
 @WebServlet("/addSalaryForTrainer")
 public class SalaryAdderServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(SalaryAdderServlet.class);
@@ -34,7 +37,7 @@ public class SalaryAdderServlet extends HttpServlet {
                 int salary = Integer.parseInt(sal);
                 Trainer trainer = (Trainer) daoImp.getUser(id);
                 trainer.getSalarylist().add(new Salary(new BigDecimal(salary)));
-                log.info( "Traner = {}", "AddSalary = {}", trainer, salary );
+                log.info( "Traner  = {}", "AddSalary = {}", trainer, salary );
                 result = "adminControl/adminActList.jsp";
             } catch (IllegalArgumentException e) {
                 result = "exeception.jsp";

@@ -10,7 +10,7 @@
 <br>
 <h1> Avarage salary list </h1>
 
-<p>Name: ${trainer}  have got avarage salary ${avarage} </p>
+<p>Name: ${trainer.name}  have got avarage salary ${avarage} </p>
 
 <br>
 <form  action="hello">

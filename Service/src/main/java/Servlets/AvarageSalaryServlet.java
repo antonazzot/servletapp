@@ -15,8 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-
+/**
+ Servlet give information to jsp for  calculate avarage salary
+ **/
 @WebServlet("/avarageSalary")
 public class AvarageSalaryServlet extends HttpServlet {
 

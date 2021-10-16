@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ This servlet  creates some user depending on the selected role
+ **/
+
 @WebServlet({"/UserActionServlet"})
 public class UserActionServlet extends HttpServlet {
     static final Logger log = LoggerFactory.getLogger(UserActionServlet.class);
@@ -25,11 +29,8 @@ public class UserActionServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         int age =0;
-        try {
-            if (req.getParameter("age") != null) {
-                age = Integer.parseInt(req.getParameter("age"));
-            }
-        } catch (IllegalArgumentException e) {
+        try {age = Integer.parseInt(req.getParameter("age"));
+                    } catch (IllegalArgumentException e) {
             req.getRequestDispatcher("exeception.jsp").forward(req, resp);
         }
             // add some user

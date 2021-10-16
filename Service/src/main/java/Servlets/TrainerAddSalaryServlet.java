@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+    Servlet  provides  information to JSP
+ for add salary to the trainer
+ **/
 @WebServlet("/addSalary")
 public class TrainerAddSalaryServlet extends HttpServlet {
     @Override

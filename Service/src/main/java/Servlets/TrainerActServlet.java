@@ -15,7 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
+/**
+Servlet
+ providing users with role Trainer
+ do choose some action with student entity
 
+ **/
 @WebServlet("/traineract")
 public class TrainerActServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(TrainerActServlet.class);
@@ -65,19 +70,17 @@ public class TrainerActServlet extends HttpServlet {
     }
 
     private String doAdd(Student student, String theam, String mark) {
-        int tempMark = 0;
+        int tempMark;
         String result = "TrainerControlPage/trainerActList.jsp";
         try {
             tempMark = Integer.parseInt(mark);
         } catch (IllegalArgumentException e) {
             return "exeception.jsp";
         }
-        if (student.getListOfMark().containsKey(theam)) {
-            student.getListOfMark().get(Theams.valueOf(theam)).add(new Mark(tempMark));
-        } else {
+        if (!student.getListOfMark().containsKey(theam)) {
             student.addTheam(Theams.valueOf(theam));
-            student.getListOfMark().get(Theams.valueOf(theam)).add(new Mark(tempMark));
         }
+        student.getListOfMark().get(Theams.valueOf(theam)).add(new Mark(tempMark));
         return result;
     }
 }

@@ -1,9 +1,6 @@
 package Servlets;
 
 import DataBase.DataBaseInf;
-import ThreadModel.Mark;
-import ThreadModel.Salary;
-import ThreadModel.Theams;
 import Users.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,16 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+/**
+ It's start servlet
+ witch create user with Admin role by context inf,
+ and make some session revision
+ **/
 @WebServlet("/hello")
 public class StartPage extends HttpServlet {
     Logger log = LoggerFactory.getLogger(StartPage.class);
-
     @Override
     protected void doGet (HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

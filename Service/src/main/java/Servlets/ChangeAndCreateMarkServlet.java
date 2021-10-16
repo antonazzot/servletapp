@@ -14,12 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+/**
+ Servlet make change marks of the student by data
+ took from JSP
+ **/
 @WebServlet("/changeandcreatemark")
 public class ChangeAndCreateMarkServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(ChangeAndCreateMarkServlet.class);
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String studentId = req.getParameter("student");
         String theam = req.getParameter("th");
         String [] marks = req.getParameterValues("marks");
@@ -41,19 +44,21 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
 
     private String change(String theam, String[] mark, Student student) {
         for (int i = 0; i < mark.length; i++) {
-            if (mark[i] != null) {
-                try {
-                    int markvalues = Integer.parseInt(mark[i]);
+
+                if (mark[i] != null && !mark[i].equals("")) {
+                        try {
+                            int markvalues = Integer.parseInt(mark[i]);
                     student.getListOfMark()
                             .get(Theams.valueOf(theam))
                             .get(i)
-                            .setValuesOfMark(markvalues);
-                } catch (IllegalArgumentException e) {
+                            .setValuesOfMark(markvalues);}
+
+                 catch (IllegalArgumentException e) {
                     return "exeception.jsp";
                 }
-            }
-            else return "TrainerControlPage/trainerActList.jsp";
+                }
         }
+
         return "TrainerControlPage/trainerActList.jsp";
     }
 

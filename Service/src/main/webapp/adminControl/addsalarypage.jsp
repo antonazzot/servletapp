@@ -13,7 +13,7 @@
 <form id="data" method = "post" action="addSalaryForTrainer">
 
          <c:forEach var = "entry" items="${map}">
-         <c:out value = "${entry.key}" />  <input type="radio" name="trainer" value="${entry.key.id}" >
+         <c:out value = "${entry.key.name}" />  <input type="radio" name="trainer" value="${entry.key.id}" >
            <br>
           <c:forEach var = "list" items="${entry.value}">
            <c:out value = "${list.bigDecimalSalary}" /> <br>

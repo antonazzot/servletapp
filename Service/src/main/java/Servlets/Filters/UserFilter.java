@@ -13,7 +13,8 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = {"/watchServlet", "/GroupCreaterServlet",
         "/avarageSalary", "/calculateAvarageSalary",
-        "/addSalaryForTrainer", "/addSalary", "/adminActList.jsp"})
+        "/addSalaryForTrainer", "/addSalary", "/changeUserServlet", "/calculateAvarageSalary",
+         "/updateUser","/updateGroup" ,"/UserActionServlet" })
 public class UserFilter extends AbstractFilter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

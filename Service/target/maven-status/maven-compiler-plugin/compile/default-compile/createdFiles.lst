@@ -1,4 +1,5 @@
 Servlets\StartPage.class
+Servlets\GroupUpdateActionServlet.class
 Servlets\TrainerAddSalaryServlet.class
 Servlets\UserActionServlet.class
 Servlets\Filters\StartFilter.class

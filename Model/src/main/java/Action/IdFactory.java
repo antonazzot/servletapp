@@ -1,9 +1,8 @@
 package Action;
-/*
-A class that factory individual id for every
+/**
+This class factory individual id for every
 essence in database
-*/
-
+**/
 public final class IdFactory {
     private IdFactory() {
     }
