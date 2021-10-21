@@ -9,7 +9,7 @@ A class that imitation  database
 public final class DataBaseInf {
     private DataBaseInf() {
     }
-    public static Map<Integer, UserImpl> studentHashMap = new HashMap<Integer, UserImpl>();
+    public static Map<Integer, UserImpl> studentHashMap = new HashMap<>();
     public static Map <Integer, UserImpl> trainerHashMap = new HashMap <>();
     public static Map <Integer, Theams> theamsHashMap = new HashMap <>();
     public static Map <Integer, UserImpl> adminHashMap = new HashMap <>();
