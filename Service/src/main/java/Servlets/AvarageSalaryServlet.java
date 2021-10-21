@@ -1,7 +1,7 @@
 package Servlets;
 
 import DataBase.DataBaseInf;
-import Repository.DAO.DaoImp;
+import DAO.DaoImp;
 import ThreadModel.Salary;
 import Users.Trainer;
 import Users.UserImpl;

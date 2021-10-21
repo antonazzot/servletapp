@@ -43,6 +43,10 @@
 <button type="submit"   > AVARAGE SALARY </button>
 </form>
 <br>
+<form action="fromdb">
+<button type="submit"   > ALLUSSER </button>
+</form>
+<br>
 <form  action="logout">
     <input type="submit" value="LogOut!">
 </form>

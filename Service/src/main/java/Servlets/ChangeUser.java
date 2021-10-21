@@ -1,6 +1,6 @@
 package Servlets;
 
-import Repository.DAO.DaoImp;
+import DAO.DaoImp;
 import Users.UserImpl;
 
 import javax.servlet.ServletException;

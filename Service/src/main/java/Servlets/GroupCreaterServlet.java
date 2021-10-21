@@ -1,6 +1,6 @@
 package Servlets;
 
-import Repository.DAO.DaoImp;
+import DAO.DaoImp;
 import ThreadModel.Group;
 import ThreadModel.Theams;
 import Users.Student;

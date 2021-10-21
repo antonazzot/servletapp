@@ -1,7 +1,7 @@
 package Servlets;
 
 import DataBase.DataBaseInf;
-import Repository.DAO.DataBaseConnection;
+import DAO.DataBaseConnection;
 import Users.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +32,15 @@ public class StartPage extends HttpServlet {
             String adminPassword = servletContext.getInitParameter("AdminPassword");
             HttpSession session = req.getSession();
             if (!DataBaseInf.adminHashMap.containsValue(DataBaseInf.adminHashMap.get(1))) {
-                Administrator administrator = new Administrator("Anton", adminLogin, adminPassword, 30);
-               DataBaseConnection.create(administrator);
+               Administrator administrator = (Administrator) new Administrator()
+                       .withId(1)
+                       .withRole(Role.ADMINISTRATOR)
+                       .withName("Anton")
+                       .withLogin("admin")
+                       .withPassword("pass")
+                       .withAge(34);
+               DataBaseInf.adminHashMap.put(1, administrator);
+
             }
             log.info("Admin = {}", "Pass ={}", adminLogin, adminPassword);
 

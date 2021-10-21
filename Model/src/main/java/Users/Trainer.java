@@ -2,40 +2,47 @@ package Users;
 
 import DataBase.*;
 import ThreadModel.*;
+import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-public class Trainer extends UserImpl{
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString
+public class Trainer extends UserImpl {
 
     private List<Salary> salarylist;
 
-    public Trainer( String name, String login, String password, int age, List <Salary> salarylist ) {
-        super( Role.TRAINER, name, login, password, age);
-        this.salarylist = salarylist;
-        DataBaseInf.trainerHashMap.put(this.getId(), this);
+    public Trainer withName (String name) {
+        setName(name);
+        return this;
     }
-
-    public List<Salary> getSalarylist() {
-        return salarylist;
+    public Trainer withLogin (String login) {
+        setLogin(login);
+        return this;
     }
-
-    public void setSalarylist(List<Salary> salarylist) {
-        this.salarylist = salarylist;
+    public Trainer withPassword (String password) {
+        setPassword(password);
+        return this;
     }
-
+    public Trainer withAge (Integer age) {
+        setAge(age);
+        return this;
+    }
+    public Trainer addSalary (Salary salary) {
+        getSalarylist().add(salary);
+        return this;
+    }
     @Override
-    public String getInf () {
-        long l =0;
-        if (this.salarylist.size()!=0) {
-        l = this.salarylist.stream().map(salary ->
-                salary.getBigDecimalSalary()).count() / (long) this.salarylist.size();}
-
+    public String getInf() {
+        long l = 0;
+        if (this.salarylist.size() != 0) {
+            l = this.salarylist.stream().map(salary ->
+                    salary.getBigDecimalSalary()).count() / (long) this.salarylist.size();
+        }
         return super.getInf() + "  " + salarylist.toString();
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }
+

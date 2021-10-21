@@ -3,7 +3,7 @@ package Servlets;
 import Action.IndividSetMap;
 import Action.individTrainerMap;
 import DataBase.DataBaseInf;
-import Repository.DAO.DaoImp;
+import DAO.DaoImp;
 import ThreadModel.Group;
 import ThreadModel.Theams;
 import Users.*;

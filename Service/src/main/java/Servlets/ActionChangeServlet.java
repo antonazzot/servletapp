@@ -1,6 +1,6 @@
 package Servlets;
 
-import Repository.DAO.DaoImp;
+import DAO.DaoImp;
 import Users.Role;
 import Users.UserImpl;
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ public class ActionChangeServlet extends HttpServlet {
         String name = req.getParameter("name").equals("") ? user.getName():req.getParameter("name");
         int age = req.getParameter("age").equals("") ? user.getAge():Integer.parseInt(req.getParameter("age"));
 
-        daoImp.updateUser(id, new UserImpl(Role.valueOf(role.toUpperCase()), name, login, pass, age));
+       // daoImp.updateUser(id, new UserImpl(Role.valueOf(role.toUpperCase()), name, login, pass, age));
         log.info("UserUpdate = {}", id, role, name, login, pass , age);
         req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
     }

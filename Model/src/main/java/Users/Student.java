@@ -1,31 +1,44 @@
 package Users;
 import DataBase.DataBaseInf;
 import ThreadModel.*;
+import lombok.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString
 public class Student extends UserImpl {
 
     private HashMap <Theams, List<Mark>> listOfMark;
 
-    public Student( String name, String login, String password, int age, HashMap<Theams, List<Mark>> listOfMark) {
-        super( Role.STUDENT, name, login, password, age);
-        this.listOfMark = listOfMark;
-        DataBaseInf.studentHashMap.put(this.getId(), this);
+
+    public Student withName (String name) {
+        setName(name);
+        return this;
+    }
+    public Student withLogin (String login) {
+        setLogin(login);
+        return this;
+    }
+    public Student withPassword (String password) {
+        setPassword(password);
+        return this;
+    }
+    public Student withAge (Integer age) {
+        setAge(age);
+        return this;
+    }
+    public Student addListOfMark (Mark mark) {
+
+        return this;
     }
 
-    public HashMap<Theams, List<Mark>> getListOfMark() {
-        return listOfMark;
-    }
-
-    public void setListOfMark(HashMap<Theams, List<Mark>> listOfMark) {
-        this.listOfMark = listOfMark;
-    }
     public void addTheam (Theams theams) {
         if (!this.listOfMark.containsKey(theams))
             this.listOfMark.put(theams, new ArrayList<Mark>());
-
     }
 
     @Override
@@ -43,14 +56,6 @@ public class Student extends UserImpl {
         }
     return inf = "ID: " + this.getId() + " Name: " +  this.getName() + " Theams: " + strings.toString();
     }
-
-    @Override
-    public String toString() {
-      return   super.toString();
-    }
-
-
-
 
 }
 
