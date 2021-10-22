@@ -41,33 +41,35 @@ public class UserActionServlet extends HttpServlet {
     private void checkRole(String role, String name, String login, String pass, int age) {
         UserImpl user;
         if (role.equalsIgnoreCase("administrator")) {
-            user = new Administrator()
-                    .withRole(Role.ADMINISTRATOR)
-                    .withName(name)
-                    .withLogin(login)
-                    .withPassword(pass)
-                    .withAge(age);
+            user =  new Administrator()
+                  .withRole(Role.ADMINISTRATOR)
+                   .withName(name)
+                   .withLogin(login)
+                   .withPassword(pass)
+                   .withAge(age);
+
+
             RepositoryFactory.getRepository().saveUser(user);
 
             log.info("Administrator  add = {}", user);
         } else if (role.equalsIgnoreCase("trainer")) {
-            user = new Trainer()
+            Trainer trainer = (Trainer) new Trainer()
                     .withRole(Role.TRAINER)
                     .withName(name)
                     .withLogin(login)
                     .withPassword(pass)
                     .withAge(age);
-            RepositoryFactory.getRepository().saveUser(user);
-            log.info("Trainer  add = {}", user);
+            RepositoryFactory.getRepository().saveUser(trainer);
+            log.info("Trainer  add = {}", trainer);
         } else {
-            user = new Student()
+            Student student = (Student) new Student()
                     .withRole(Role.STUDENT)
                     .withName(name)
                     .withLogin(login)
                     .withPassword(pass)
                     .withAge(age);
-            RepositoryFactory.getRepository().saveUser(user);
-            log.info("Student add = {}", user);
+            RepositoryFactory.getRepository().saveUser(student);
+            log.info("Student add = {}", student);
         }
     }
 }

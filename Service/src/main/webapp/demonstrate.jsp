@@ -12,7 +12,7 @@
 <br> <br/>
 
  <c:forEach var = "entry" items="${map}">
-       <c:out value = "${entry.key.name}" />
+       <c:out value = "${entry.key}" />
        <c:out value = "${entry.value}" /><p>
   </c:forEach>
 

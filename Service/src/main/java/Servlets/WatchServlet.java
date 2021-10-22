@@ -4,6 +4,7 @@ import Action.IndividSetMap;
 import Action.individTrainerMap;
 import DataBase.DataBaseInf;
 import DAO.DaoImp;
+import Repository.RepositoryFactory;
 import ThreadModel.Group;
 import ThreadModel.Theams;
 import Users.*;
@@ -94,17 +95,17 @@ public class WatchServlet extends HttpServlet {
     This method providing represent of information about
     user with @mapWithInf() method
    **/
-    private HashMap <UserImpl, String> forDemonstratePage (String user) {
-        HashMap <UserImpl, String> result =  new HashMap<>();
+    private HashMap <Integer, UserImpl> forDemonstratePage (String user) {
+        HashMap  <Integer, UserImpl> result =  new HashMap<>();
         switch (user) {
             case "student":
-                result = mapWithInf(Role.STUDENT);
+                result = RepositoryFactory.getRepository().allStudent();
                  break;
             case "trainer":
-                result = mapWithInf(Role.TRAINER);
+                result = RepositoryFactory.getRepository().allTrainer();
                 break;
             case "administrator":
-                result = mapWithInf(Role.ADMINISTRATOR);
+                result = RepositoryFactory.getRepository().allAdmin();
                 break;
         }
         return result;

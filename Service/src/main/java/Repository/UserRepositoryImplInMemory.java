@@ -2,7 +2,7 @@ package Repository;
 
 import Users.*;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,28 +26,28 @@ public class UserRepositoryImplInMemory implements UserRepository {
     }
 
     @Override
-    public List<User> allUser() {
+    public HashMap<Integer, UserImpl> allUser() {
         return null;
     }
 
     @Override
-    public List<Trainer> allTrainer() {
+    public HashMap<Integer, UserImpl> allTrainer() {
         return null;
     }
 
     @Override
-    public List<Student> allStudent() {
+    public HashMap<Integer, UserImpl> allStudent() {
         return null;
     }
 
     @Override
-    public List<Administrator> allAdmin() {
+    public HashMap<Integer, UserImpl> allAdmin() {
         return null;
     }
 
     @Override
-    public Optional<UserImpl> getUserById(Integer id) {
-        return Optional.empty();
+    public UserImpl getUserById(Integer id) {
+        return null;
     }
 
     @Override

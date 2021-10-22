@@ -2,6 +2,7 @@ package Servlets;
 
 import DataBase.DataBaseInf;
 import DAO.DataBaseConnection;
+import Repository.RepositoryFactory;
 import Users.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class StartPage extends HttpServlet {
     @Override
     protected void doGet (HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        {
+           {
             ServletContext servletContext = getServletContext();
             String adminLogin = servletContext.getInitParameter("AdminLogin");
             String adminPassword = servletContext.getInitParameter("AdminPassword");
@@ -39,6 +40,7 @@ public class StartPage extends HttpServlet {
                        .withLogin("admin")
                        .withPassword("pass")
                        .withAge(34);
+                RepositoryFactory.getRepository().saveUser(administrator);
                DataBaseInf.adminHashMap.put(1, administrator);
 
             }

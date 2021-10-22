@@ -2,15 +2,15 @@ package Repository;
 
 import Users.*;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Optional;
 
 public interface UserRepository {
-    List <User> allUser ();
-    List <Trainer> allTrainer ();
-    List <Student>  allStudent ();
-    List <Administrator> allAdmin ();
-    Optional <UserImpl> getUserById (Integer id);
+    HashMap<Integer, UserImpl> allUser ();
+    HashMap<Integer, UserImpl> allTrainer ();
+    HashMap<Integer, UserImpl> allStudent ();
+    HashMap<Integer, UserImpl> allAdmin ();
+    UserImpl getUserById (Integer id);
     UserImpl saveUser (UserImpl user);
     Optional <UserImpl> removeUser (Integer id);
  }

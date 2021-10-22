@@ -6,11 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.*;
 
 public class UserRepositoryImplPostgres implements UserRepository {
 
@@ -33,17 +29,18 @@ public class UserRepositoryImplPostgres implements UserRepository {
 
 
     @Override
-    public List<User> allUser() {
-        ArrayList <User> users = new ArrayList<>();
+    public HashMap <Integer, UserImpl> allUser() {
+        HashMap <Integer, UserImpl> users = new HashMap<>();
         try {
             Connection connection = datasourse.getConnection();
            PreparedStatement ps =  connection.prepareStatement("select * from users;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 UserImpl user = new UserImpl();
-                users.add(
+                Integer userId =  rs.getInt("id");
+                users.put( userId ,
                         user
-                                .withId(rs.getInt("id"))
+                                .withId(userId)
                                 .withRole(checkRole(rs.getInt("role_id")))
                                 .withLogin(rs.getString("login"))
                                 .withPassword(rs.getString("password"))
@@ -72,17 +69,19 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public List<Trainer> allTrainer() {
-        ArrayList <Trainer> trainers = new ArrayList<>();
+    public HashMap<Integer, UserImpl> allTrainer() {
+        HashMap <Integer, UserImpl> trainers = new HashMap<>();
         try {
             Connection connection = datasourse.getConnection();
             PreparedStatement ps =  connection.prepareStatement("select * from users where role_id=2;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Trainer trainer = new Trainer();
-                trainers.add(
+                Integer trainerId = rs.getInt("id");
+                trainers.put( trainerId,
                         (Trainer) trainer
-                                .withId(rs.getInt("id"))
+                                .withId(trainerId)
+                                .withRole(checkRole(rs.getInt("role_id")))
                                 .withLogin(rs.getString("login"))
                                 .withPassword(rs.getString("password"))
                                 .withName(rs.getString("name"))
@@ -100,21 +99,23 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public List<Student> allStudent() {
-        ArrayList <Student> students = new ArrayList<>();
+    public HashMap<Integer, UserImpl> allStudent() {
+        HashMap<Integer, UserImpl> students = new HashMap<>();
         try {
             Connection connection = datasourse.getConnection();
             PreparedStatement ps =  connection.prepareStatement("select * from users where role_id=3;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Student student = new Student();
-                students.add(
+                Integer studentId = rs.getInt("id");
+                students.put(studentId,
                         (Student) student
-                                .withId(rs.getInt("id"))
+                                .withId(studentId)
                                 .withLogin(rs.getString("login"))
                                 .withPassword(rs.getString("password"))
                                 .withName(rs.getString("name"))
                                 .withAge(rs.getInt("age"))
+                                .withRole(checkRole(rs.getInt("role_id")))
 
 
 
@@ -129,21 +130,23 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public List<Administrator> allAdmin() {
-        ArrayList <Administrator> administrators = new ArrayList<>();
+    public HashMap<Integer, UserImpl> allAdmin() {
+        HashMap<Integer, UserImpl> administrators = new HashMap<>();
         try {
             Connection connection = datasourse.getConnection();
             PreparedStatement ps =  connection.prepareStatement("select * from users where role_id=3;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Administrator administrator = new Administrator();
-                administrators.add(
+                Integer adminId = rs.getInt("id");
+                administrators.put(adminId,
                         (Administrator) administrator
-                                .withId(rs.getInt("id"))
+                                .withId(adminId)
                                 .withLogin(rs.getString("login"))
                                 .withPassword(rs.getString("password"))
                                 .withName(rs.getString("name"))
                                 .withAge(rs.getInt("age"))
+                                .withRole(checkRole(rs.getInt("role_id")))
 
                 );
             }
@@ -156,8 +159,26 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public Optional<UserImpl> getUserById(Integer id) {
-        return Optional.empty();
+    public UserImpl getUserById(Integer id) {
+        UserImpl user =  new UserImpl();
+        try {
+            Connection connection = datasourse.getConnection();
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM users where id="+"(?)");
+            ps.setInt(1, id);
+            ResultSet rs =ps.executeQuery();
+            while (rs.next()){
+                user = user
+                        .withId(rs.getInt("id"))
+                        .withLogin(rs.getString("login"))
+                        .withPassword(rs.getString("password"))
+                        .withName(rs.getString("name"))
+                        .withAge(rs.getInt("age"))
+                        .withRole(checkRole(rs.getInt("role_id")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override

@@ -4,8 +4,8 @@ import Action.IdFactory;
 import lombok.*;
 
 import java.util.Objects;
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @EqualsAndHashCode
 @ToString
@@ -18,11 +18,11 @@ public class UserImpl implements User {
     private int age;
 
     public UserImpl withId (Integer id) {
-        this.id =id;
+        setId(id);
         return this;
     }
     public UserImpl withRole (Role role) {
-        this.role =role;
+        setRole(role);
         return this;
     }
     public UserImpl withName (String name) {
