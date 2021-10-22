@@ -60,4 +60,9 @@ public class UserRepositoryImplInMemory implements UserRepository {
         return Optional.empty();
     }
 
+    @Override
+    public HashMap<Integer, UserImpl> freeTrainer() {
+        return null;
+    }
+
 }

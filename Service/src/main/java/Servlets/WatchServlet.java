@@ -5,6 +5,7 @@ import Action.individTrainerMap;
 import DataBase.DataBaseInf;
 import DAO.DaoImp;
 import Repository.RepositoryFactory;
+import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Group;
 import ThreadModel.Theams;
 import Users.*;
@@ -38,19 +39,26 @@ public class WatchServlet extends HttpServlet {
         int id = 0;
         DaoImp daoImp = new DaoImp();
 
+
         if (act.equalsIgnoreCase("create")) {
-            if (!user.equals("group")) {
+            if (!user.equals("group") && !user.equals("theam")) {
                 // add user
                 log.info("Create user ={}", user);
                 req.setAttribute("role", user);
                 req.getRequestDispatcher("adminControl/adduserpage.jsp").forward(req, resp);
             } else {
-                // add group
-                log.info("Create group ={}", user);
-                req.setAttribute("map", mapWithInf(Role.STUDENT));
-                req.setAttribute("map1", individTrainerMap.theamsHashSet(mapWithInf(Role.TRAINER)));
-                req.setAttribute("set", IndividSetMap.theamsHashSet());
-                req.getRequestDispatcher("adminControl/theamscreatelist.jsp").forward(req, resp);
+                if (!user.equals("theam")) {
+                    // add group
+                    log.info("Create group ={}", user);
+                    req.setAttribute("mapIS", RepositoryFactory.getRepository().allStudent());
+                    req.setAttribute("mapITr", RepositoryFactory.getRepository().freeTrainer());
+                    req.setAttribute("mapITe", ThreadRepositoryImpl.getInstance().freeTheams());
+                    req.getRequestDispatcher("adminControl/theamscreatelist.jsp").forward(req, resp);
+                }
+                else
+                {
+                    req.getRequestDispatcher("adminControl/theamadd.jsp").forward(req, resp);
+                }
             }
         } else if (act.equalsIgnoreCase("delete")) {
             // delete entity by id (user and group)
@@ -62,7 +70,7 @@ public class WatchServlet extends HttpServlet {
                 }
             }
             log.info("Delete entity ={}", id);
-            daoImp.deleteUser(id);
+            RepositoryFactory.getRepository().removeUser(id);
             req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
 
         } else if (act.equalsIgnoreCase("change")) {
@@ -78,15 +86,22 @@ public class WatchServlet extends HttpServlet {
 
         } else if(act.equalsIgnoreCase("watch"))
             {
-            if (!user.equals("group")) {
+            if (!user.equals("group") && !user.equals("theam") ) {
             req.setAttribute("map", forDemonstratePage(user));
             req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
 
-            } else {
+            } else
+            if (!user.equals("theam"))
+            {
             log.info("Watch group ={}", user);
             req.setAttribute("map", groupStringHashMap());
             req.getRequestDispatcher("adminControl/demonstrategroup.jsp").forward(req, resp);
              }
+            else
+            {
+                req.setAttribute("map", ThreadRepositoryImpl.getInstance().allTheams());
+                req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
+            }
     }
 
 }

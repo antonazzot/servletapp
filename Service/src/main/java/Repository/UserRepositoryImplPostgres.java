@@ -1,5 +1,7 @@
 package Repository;
 
+import Repository.ThreadModelRep.ThreadRepositoryImpl;
+import ThreadModel.Theams;
 import Users.*;
 
 import java.sql.Connection;
@@ -26,7 +28,6 @@ public class UserRepositoryImplPostgres implements UserRepository {
         }
         return instance;
     }
-
 
     @Override
     public HashMap <Integer, UserImpl> allUser() {
@@ -86,7 +87,6 @@ public class UserRepositoryImplPostgres implements UserRepository {
                                 .withPassword(rs.getString("password"))
                                 .withName(rs.getString("name"))
                                 .withAge(rs.getInt("age"))
-
 
                 );
             }
@@ -212,6 +212,47 @@ public class UserRepositoryImplPostgres implements UserRepository {
 
     @Override
     public Optional<UserImpl> removeUser(Integer id) {
-        return Optional.empty();
+        UserImpl user = getUserById(id);
+        try {
+            Connection connection = datasourse.getConnection();
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM users where id =" + "(?)");
+
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            return Optional.ofNullable(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(user);
     }
+    @Override
+    public HashMap<Integer, UserImpl> freeTrainer() {
+        HashMap <Integer, UserImpl> result = new HashMap<>();
+        ArrayList <Integer> busyTrainerId = new ArrayList<>();
+        if (ThreadRepositoryImpl.getInstance().allGroup().isEmpty())
+            return  allTrainer();
+        try {
+            Connection connection = datasourse.getConnection();
+            PreparedStatement ps =  connection.prepareStatement("select trainer_id" +
+                    " from group");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                busyTrainerId.add(rs.getInt("trainer_id"));
+            }
+            for (UserImpl trainer:
+            allTrainer().values()) {
+                for (int i = 0; i < busyTrainerId.size(); i++) {
+                    if (trainer.getId() != busyTrainerId.get(i))
+                        result.put(trainer.getId(), trainer);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+
 }

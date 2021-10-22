@@ -13,4 +13,5 @@ public interface UserRepository {
     UserImpl getUserById (Integer id);
     UserImpl saveUser (UserImpl user);
     Optional <UserImpl> removeUser (Integer id);
+     HashMap<Integer, UserImpl> freeTrainer();
  }

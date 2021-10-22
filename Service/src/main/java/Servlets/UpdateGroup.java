@@ -39,32 +39,33 @@ public class UpdateGroup extends HttpServlet {
     }
 
     private ArrayList <Trainer> getFreedomTrainer () {
-        ArrayList <Trainer> freedoomTrainer = new ArrayList<>();
-        ArrayList <Trainer> trainers =
-               (ArrayList<Trainer>) DataBaseInf.groupHashMap.values().stream()
-                       .map(g -> g.getTrainer())
-                       .collect(Collectors.toList());
-
-        for (int i = 0; i < DataBaseInf.trainerHashMap.size(); i++) {
-            Trainer trainer = (Trainer) DataBaseInf.trainerHashMap.get(i);
-            for (Trainer tr:
-                    trainers) {
-            if (tr!=null &&  trainer!=null && trainer.getId()!=tr.getId())
-                freedoomTrainer.add(trainer);
-        }
-    }
-        return freedoomTrainer;
+//        ArrayList <Trainer> freedoomTrainer = new ArrayList<>();
+//        ArrayList <Trainer> trainers =
+//               (ArrayList<Trainer>) DataBaseInf.groupHashMap.values().stream()
+//                       .map(g -> g.getTrainer())
+//                       .collect(Collectors.toList());
+//
+//        for (int i = 0; i < DataBaseInf.trainerHashMap.size(); i++) {
+//            Trainer trainer = (Trainer) DataBaseInf.trainerHashMap.get(i);
+//            for (Trainer tr:
+//                    trainers) {
+//            if (tr!=null &&  trainer!=null && trainer.getId()!=tr.getId())
+//                freedoomTrainer.add(trainer);
+//        }
+//    }
+//        return freedoomTrainer;
+        return null;
     }
     private HashSet<Theams> theamsSetcreater(Set <Theams> grth) {
         HashSet<Theams> result = new HashSet<>();
-        ArrayList<Theams> allTh  = new ArrayList<>(List.of(Theams.values()));
-        for (Theams theams : allTh) {
-            for (int j = 0; j < grth.size(); j++) {
-                if (!grth.contains(theams)) {
-                    result.add(theams);
-                }
-            }
-        }
+//        ArrayList<Theams> allTh  = new ArrayList<>(List.of(Theams.values()));
+//        for (Theams theams : allTh) {
+//            for (int j = 0; j < grth.size(); j++) {
+//                if (!grth.contains(theams)) {
+//                    result.add(theams);
+//                }
+//            }
+//        }
         return result;
     }
 }

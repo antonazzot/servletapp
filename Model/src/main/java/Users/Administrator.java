@@ -4,7 +4,7 @@ import DataBase.DataBaseInf;
 import ThreadModel.Mark;
 import lombok.*;
 
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)

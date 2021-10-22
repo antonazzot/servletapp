@@ -16,6 +16,7 @@
         <option value="trainer">Trainer</option>
         <option value="administrator">Administrator</option>
         <option value="group">Group</option>
+        <option value="theam">Theam</option>
     </select>
     <br>
        <select name="act", form="data">

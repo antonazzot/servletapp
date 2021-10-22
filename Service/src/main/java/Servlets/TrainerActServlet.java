@@ -36,7 +36,7 @@ public class TrainerActServlet extends HttpServlet {
         String mark = req.getParameter("mark");
         DaoImp daoImp = new DaoImp();
         Student student = (Student) daoImp.getUser(Integer.parseInt(user));
-        Theams th = Theams.valueOf(theam);
+      //  Theams th = Theams.valueOf(theam);
 
         if (act.equalsIgnoreCase("create")) {
             Group group = (Group) req.getSession().getAttribute("group");
@@ -53,12 +53,12 @@ public class TrainerActServlet extends HttpServlet {
             req.getRequestDispatcher("TrainerControlPage/watchmark.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("delete")) {
             req.setAttribute("student", student);
-            req.setAttribute("map", getHashMapforTheam(th, student));
+        //    req.setAttribute("map", getHashMapforTheam(th, student));
             req.getRequestDispatcher("TrainerControlPage/deletemark.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("change")) {
 
             req.setAttribute("student", student);
-            req.setAttribute("map", getHashMapforTheam(th, student));
+        //    req.setAttribute("map", getHashMapforTheam(th, student));
             req.getRequestDispatcher("TrainerControlPage/listofmarkforchange.jsp").forward(req, resp);
         }
     }
@@ -78,9 +78,9 @@ public class TrainerActServlet extends HttpServlet {
             return "exeception.jsp";
         }
         if (!student.getListOfMark().containsKey(theam)) {
-            student.addTheam(Theams.valueOf(theam));
+       //     student.addTheam(Theams.valueOf(theam));
         }
-        student.getListOfMark().get(Theams.valueOf(theam)).add(new Mark(tempMark));
+       // student.getListOfMark().get(Theams.valueOf(theam)).add(new Mark(tempMark));
         return result;
     }
 }
