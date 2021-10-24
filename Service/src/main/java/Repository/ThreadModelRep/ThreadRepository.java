@@ -13,6 +13,7 @@ import Users.UserImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.Set;
 
 public interface ThreadRepository {
     HashMap <Integer, Group> allGroup ();
@@ -20,4 +21,5 @@ public interface ThreadRepository {
     HashMap <Trainer, ArrayList<Salary>> trainerSalary ();
     HashMap <Student,HashMap<Theams, ArrayList<Mark>>> studentTheamMark ();
     Theams theamById (Integer id);
+    Set <Theams> theamFromGroup (Integer groupId);
 }

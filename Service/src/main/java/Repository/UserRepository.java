@@ -2,6 +2,7 @@ package Repository;
 
 import Users.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -13,5 +14,6 @@ public interface UserRepository {
     UserImpl getUserById (Integer id);
     UserImpl saveUser (UserImpl user);
     Optional <UserImpl> removeUser (Integer id);
-     HashMap<Integer, UserImpl> freeTrainer();
+    HashMap<Integer, UserImpl> freeTrainer();
+   ArrayList <UserImpl> studentFromGroup (Integer groupId);
  }

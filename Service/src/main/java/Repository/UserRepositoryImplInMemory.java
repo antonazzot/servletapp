@@ -2,6 +2,7 @@ package Repository;
 
 import Users.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -62,6 +63,11 @@ public class UserRepositoryImplInMemory implements UserRepository {
 
     @Override
     public HashMap<Integer, UserImpl> freeTrainer() {
+        return null;
+    }
+
+    @Override
+    public ArrayList< UserImpl> studentFromGroup(Integer groupId) {
         return null;
     }
 

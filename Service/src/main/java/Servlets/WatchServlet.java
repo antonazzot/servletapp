@@ -174,12 +174,12 @@ public class WatchServlet extends HttpServlet {
     /**
      This method  given  data for demonstrate  information about group
      **/
-    private HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<Student>>> groupStringHashMap() {
-        HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<Student>>> hashMap = new HashMap<>();
-        for (Map.Entry<Integer, Group> entry : DataBaseInf.groupHashMap.entrySet()) {
+    private HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<UserImpl>>> groupStringHashMap() {
+        HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<UserImpl>>> hashMap = new HashMap<>();
+        for (Map.Entry<Integer, Group> entry : ThreadRepositoryImpl.getInstance().allGroup().entrySet()) {
             Group group = entry.getValue();
-            ArrayList <Theams> theams = new ArrayList<>(group.getTheamsSet());
-            ArrayList<Student> students = new ArrayList<>(group.getStudentMap().values());
+            ArrayList <Theams> theams = new ArrayList<>(ThreadRepositoryImpl.getInstance().theamFromGroup(group.getId()));
+            ArrayList<UserImpl> students = RepositoryFactory.getRepository().studentFromGroup(group.getId());
             hashMap.put(group, new HashMap<>(Map.of(theams,students)));
         }
         return hashMap;

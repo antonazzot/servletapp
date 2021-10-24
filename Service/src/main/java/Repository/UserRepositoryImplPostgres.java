@@ -227,24 +227,39 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
     @Override
     public HashMap<Integer, UserImpl> freeTrainer() {
-        HashMap <Integer, UserImpl> result = new HashMap<>();
-        ArrayList <Integer> busyTrainerId = new ArrayList<>();
+
         if (ThreadRepositoryImpl.getInstance().allGroup().isEmpty())
             return  allTrainer();
+        else {
+            try {
+                ArrayList <UserImpl> busyTrainer = new ArrayList<>();
+                Connection connection = datasourse.getConnection();
+                PreparedStatement ps = connection.prepareStatement("select *" +
+                        "from \"group\"");
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    busyTrainer.add(getUserById(rs.getInt("trainer_id")));
+                }
+              return freeTrainerexecute(busyTrainer);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList < UserImpl> studentFromGroup(Integer groupId) {
+        ArrayList < UserImpl> result =  new ArrayList<>();
         try {
             Connection connection = datasourse.getConnection();
-            PreparedStatement ps =  connection.prepareStatement("select trainer_id" +
-                    " from group");
+            PreparedStatement ps = connection.prepareStatement("select student_id" +
+                    "from student_group where group_id = " + groupId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                busyTrainerId.add(rs.getInt("trainer_id"));
-            }
-            for (UserImpl trainer:
-            allTrainer().values()) {
-                for (int i = 0; i < busyTrainerId.size(); i++) {
-                    if (trainer.getId() != busyTrainerId.get(i))
-                        result.put(trainer.getId(), trainer);
-                }
+                UserImpl user = getUserById(rs.getInt("student_id"));
+                result.add(user);
             }
 
         } catch (SQLException e) {
@@ -253,6 +268,17 @@ public class UserRepositoryImplPostgres implements UserRepository {
         return result;
     }
 
+    private HashMap <Integer, UserImpl> freeTrainerexecute(ArrayList<UserImpl> busyTrainer) {
+        HashMap <Integer, UserImpl> result =  new HashMap<>(allTrainer());
+        for (UserImpl alltrainer :
+                allTrainer().values()) {
+        for (UserImpl busyTr : busyTrainer) {
+                  if (alltrainer.getId() == busyTr.getId())
+                    result.remove(busyTr.getId());
+            }
+        }
+        return result;
+    }
 
 
 }

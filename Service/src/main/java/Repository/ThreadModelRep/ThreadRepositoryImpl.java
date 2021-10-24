@@ -3,6 +3,7 @@ package Repository.ThreadModelRep;
 import Repository.RepositoryDatasourse;
 import Repository.RepositoryFactory;
 import Repository.UserRepositoryImplPostgres;
+import Servlets.WatchServlet;
 import ThreadModel.Group;
 import ThreadModel.Mark;
 import ThreadModel.Salary;
@@ -10,19 +11,20 @@ import ThreadModel.Theams;
 import Users.Student;
 import Users.Trainer;
 import Users.UserImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ThreadRepositoryImpl implements ThreadRepository {
     RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
+    private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImpl.class);
     private static ThreadRepositoryImpl instance;
 
 
@@ -75,6 +77,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
                 int theamId = rs.getInt("id");
                 result.put(theamId,
                         new Theams()
+                                .withId(theamId)
                                 .withValue(rs.getString("theam_name"))
 
                 );
@@ -112,7 +115,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
         HashMap<Student, HashMap<Theams, ArrayList<Mark>>> studentTheamMarkMap = new HashMap<>();
         try {
             Connection connection = datasourse.getConnection();
-            PreparedStatement ps = connection.prepareStatement("select * from salary");
+            PreparedStatement ps = connection.prepareStatement("select * from mark");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                        studentTheamMarkMap.put(
@@ -140,11 +143,11 @@ public class ThreadRepositoryImpl implements ThreadRepository {
         Theams theams = null;
         try {
             Connection connection = datasourse.getConnection();
-            PreparedStatement ps = connection.prepareStatement("select * from theam where id = (?)");
-            ps.setInt(1, id);
+            PreparedStatement ps = connection.prepareStatement("select * from theam where id = " + id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 theams = new Theams()
+                        .withId(rs.getInt("id"))
                         .withValue(rs.getString("theam_name"));
             }
 
@@ -152,6 +155,24 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             e.printStackTrace();
         }
         return theams;
+    }
+
+    @Override
+    public Set<Theams> theamFromGroup(Integer groupId) {
+        Set <Theams> result = new HashSet<>();
+        try {
+            Connection connection = datasourse.getConnection();
+            PreparedStatement ps = connection.prepareStatement(
+                    "select theam_id from theam_group where group_id = " + groupId
+            );
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result.add(theamById(rs.getInt("theam_id")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public void addTheam (String theam) {
@@ -169,12 +190,13 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
         }
 
     }
 
     public void addGroup (List<UserImpl> studentList, List <Integer> theamsIdList, Integer trainerId) {
-         int groupId =0;
+
         try {
             Connection connection = datasourse.getConnection();
             PreparedStatement ps = connection.prepareStatement(
@@ -184,10 +206,61 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             ps.setString(1, trainerId.toString()+"'s_Group");
             ps.setInt(2, trainerId);
             ps.executeUpdate();
+            int groupId = getGroupId(trainerId);
+            insertIntoStudent_Group(groupId, studentList);
+            insertIntoTheam_Group(groupId, theamsIdList);
+
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
+
+    }
+
+    private void insertIntoTheam_Group(int groupId, List<Integer> theamsIdList) {
+        try {
+            Connection connection = datasourse.getConnection();
+            for (Integer i:
+                    theamsIdList) {
+                PreparedStatement ps = connection.prepareStatement(
+                        "INSERT INTO theam_group (group_id, theam_id) " +
+                                "Values (?,?)"
+                );
+                ps.setInt(1, groupId);
+                ps.setInt(2, i);
+                ps.executeUpdate();
+                ps.close();
+                          }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void insertIntoStudent_Group(int groupId, List<UserImpl> studentList) {
+        try {
+            Connection connection = datasourse.getConnection();
+            for (UserImpl student:
+                    studentList) {
+                PreparedStatement ps = connection.prepareStatement(
+                        "INSERT INTO student_group (group_id, student_id) " +
+                                "Values (?,?)"
+                );
+                ps.setInt(1, groupId);
+                ps.setInt(2, student.getId());
+                ps.executeUpdate();
+                ps.close();
+                          }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getGroupId(int trainerId) {
+        int  groupId = 0;
         try {
             Connection connection = datasourse.getConnection();
             PreparedStatement ps = connection.prepareStatement(
@@ -197,65 +270,78 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             while (rs.next()) {
                 groupId = rs.getInt("id");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            Connection connection = datasourse.getConnection();
-            for (UserImpl student:
-                 studentList) {
-                PreparedStatement ps = connection.prepareStatement(
-                        "INSERT INTO student_group (group_id, student_id) " +
-                                "Values (?, ?)"
-                );
-               ps.setInt(1, groupId);
-               ps.setInt(2, student.getId());
-            }
+            return groupId;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try {
-            Connection connection = datasourse.getConnection();
-            for (Integer i:
-                    theamsIdList) {
-                PreparedStatement ps = connection.prepareStatement(
-                        "INSERT INTO theam_group (group_id, theam_id) " +
-                                "Values (?, ?)"
-                );
-                ps.setInt(1, groupId);
-                ps.setInt(2, i);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        return  groupId;
     }
 
     public HashMap<Integer, Theams> freeTheams() {
-        HashMap <Integer, Theams> result = new HashMap<>();
-        ArrayList <Integer> busyTheamId = new ArrayList<>();
-        if (allGroup().isEmpty()) return allTheams();
+        HashMap <Integer,Theams> busyTheam = getBuzyTeam();
+        HashMap <Integer,Theams> freeTh = new HashMap<>(allTheams());
+        log.info("free Start {}" , busyTheam.values());
+        if (allGroup().isEmpty())
+            {
+            return allTheams();}
+        else {
+            log.info("in for {}" , busyTheam.values());
+                for (Theams allTh:
+                    allTheams().values()) {
+                    for (Theams bTh:
+                         busyTheam.values()) {
+                        if (allTh.getId() == bTh.getId() ) {
+                           freeTh.remove(allTh.getId());
+                        }
+                    }
+
+                }
+
+            return freeTh;
+       }
+//
+    }
+
+    private HashMap<Integer, Theams> getBuzyTeam() {
+        HashMap<Integer, Theams>  busyTheam = new HashMap<>();
+        log.info("in buzy method");
         try {
             Connection connection = datasourse.getConnection();
-            PreparedStatement ps =  connection.prepareStatement("select theam_id" +
-                    " from theam_group");
+            PreparedStatement ps = connection.prepareStatement("select *" +
+                    "from theam_group");
+            ResultSet rs = ps.executeQuery();
+            log.info("connection over");
+            while (rs.next()) {
+                Theams theams = theamById(rs.getInt("theam_id"));
+                log.info("team take by id ={}"+theams.getId(), theams.getTheamName());
+                busyTheam.put( theams.getId(),
+                        theams
+                );
+                log.info("BUZY theam ADD = {}"+theams.getId(), theams.getTheamName());
+            }
+        } catch (SQLException e) {
+            log.info("error", e.getMessage());
+            e.printStackTrace();
+        }
+        return busyTheam;
+    }
+
+    private Integer findTheamIdByTheamName(Theams theams) {
+               int theamID = 0;
+                try {
+            Connection connection = datasourse.getConnection();
+            PreparedStatement ps = connection.prepareStatement("select id " +
+                    "from theam  where theam_name = "+theams.getTheamName());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                busyTheamId.add(rs.getInt("theam_id"));
-            }
-            for (Integer i:
-                    allTheams().keySet()) {
-                for (int j = 0; j < busyTheamId.size(); j++) {
-                    if (i != busyTheamId.get(j))
-                        result.put(i, theamById(i));
+              theamID =   rs.getInt("id");
                 }
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result;
+     return  theamID;
     }
+
 }
