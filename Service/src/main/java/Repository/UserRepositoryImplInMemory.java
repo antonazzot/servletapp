@@ -52,8 +52,8 @@ public class UserRepositoryImplInMemory implements UserRepository {
     }
 
     @Override
-    public UserImpl saveUser(UserImpl user) {
-        return null;
+    public int saveUser(UserImpl user) {
+        return 0;
     }
 
     @Override
@@ -68,6 +68,11 @@ public class UserRepositoryImplInMemory implements UserRepository {
 
     @Override
     public ArrayList< UserImpl> studentFromGroup(Integer groupId) {
+        return null;
+    }
+
+    @Override
+    public UserImpl getUserByParam(String name, String login, String pass, int age) {
         return null;
     }
 

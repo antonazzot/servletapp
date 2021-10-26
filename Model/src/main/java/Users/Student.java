@@ -31,6 +31,11 @@ public class Student extends UserImpl {
         setAge(age);
         return this;
     }
+    public Student withTheamMark (HashMap <Theams, List<Mark>> theamsListHashMap) {
+        setListOfMark(theamsListHashMap);
+        return this;
+    }
+
     public Student addListOfMark (Mark mark) {
 
         return this;

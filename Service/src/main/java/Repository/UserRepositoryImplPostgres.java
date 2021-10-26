@@ -3,13 +3,14 @@ package Repository;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Theams;
 import Users.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-
+@Slf4j
 public class UserRepositoryImplPostgres implements UserRepository {
 
     private static UserRepositoryImplPostgres instance;
@@ -37,10 +38,10 @@ public class UserRepositoryImplPostgres implements UserRepository {
            PreparedStatement ps =  connection.prepareStatement("select * from users;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                UserImpl user = new UserImpl();
+
                 Integer userId =  rs.getInt("id");
                 users.put( userId ,
-                        user
+                        new UserImpl()
                                 .withId(userId)
                                 .withRole(checkRole(rs.getInt("role_id")))
                                 .withLogin(rs.getString("login"))
@@ -88,6 +89,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
                                 .withName(rs.getString("name"))
                                 .withAge(rs.getInt("age"))
 
+
                 );
             }
 
@@ -110,13 +112,13 @@ public class UserRepositoryImplPostgres implements UserRepository {
                 Integer studentId = rs.getInt("id");
                 students.put(studentId,
                         (Student) student
+                                .withTheamMark(new HashMap<>())
                                 .withId(studentId)
                                 .withLogin(rs.getString("login"))
                                 .withPassword(rs.getString("password"))
                                 .withName(rs.getString("name"))
                                 .withAge(rs.getInt("age"))
                                 .withRole(checkRole(rs.getInt("role_id")))
-
 
 
                 );
@@ -182,22 +184,26 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public UserImpl saveUser(UserImpl user) {
+    public int  saveUser(UserImpl user) {
+       int userId =0;
         try {
             Connection connection = datasourse.getConnection();
             PreparedStatement ps = connection.prepareStatement("INSERT INTO users (name, login, password, age, role_id) " +
-                    "Values (?, ?, ?, ?, ?)");
+                    "Values (?, ?, ?, ?, ?) returning id");
 
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getPassword());
             ps.setInt(4, user.getAge());
             ps.setInt(5, userGetRoleForDB(user.getRole()));
-            ps.executeUpdate();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                userId = rs.getInt("id");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return userId;
     }
 
     private int userGetRoleForDB(Role role) {
@@ -266,6 +272,40 @@ public class UserRepositoryImplPostgres implements UserRepository {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public UserImpl getUserByParam(String name, String login, String pass, int age) {
+        UserImpl user = new UserImpl();
+        log.info("Get userByPARAM = {}", name, login, pass, age);
+        try {
+            Connection connection = datasourse.getConnection();
+            log.info("in try block", name, login, pass, age);
+            PreparedStatement ps = connection.prepareStatement(
+                    "select * from users " +
+                            " where \"name\" = "   +  name +
+                            " and \"login\" = " + login +
+                            " and \"password\" = " + pass +
+                            " and \"age\" = " + age
+                            );
+
+            ResultSet rs =ps.executeQuery();
+            log.info("After ps block");
+            while (rs.next()){
+                user = user
+                        .withId(rs.getInt("id"))
+                        .withLogin(rs.getString("login"))
+                        .withPassword(rs.getString("password"))
+                        .withName(rs.getString("name"))
+                        .withAge(rs.getInt("age"))
+                        .withRole(checkRole(rs.getInt("role_id")));
+                log.info("after while");
+            }
+        } catch (SQLException e) {
+            log.info(e.getMessage());
+            e.printStackTrace();
+        }
+        return user;
     }
 
     private HashMap <Integer, UserImpl> freeTrainerexecute(ArrayList<UserImpl> busyTrainer) {

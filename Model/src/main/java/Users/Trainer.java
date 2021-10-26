@@ -4,6 +4,7 @@ import DataBase.*;
 import ThreadModel.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @AllArgsConstructor
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 @ToString
 public class Trainer extends UserImpl {
 
-    private List<Salary> salarylist;
+    private List<Salary> salarylist = new ArrayList<>();
 
     public Trainer withName (String name) {
         setName(name);
@@ -33,6 +34,10 @@ public class Trainer extends UserImpl {
     }
     public Trainer addSalary (Salary salary) {
         getSalarylist().add(salary);
+        return this;
+    }
+    public Trainer withSalary (List <Salary> salarylist) {
+        setSalarylist(salarylist);
         return this;
     }
     @Override

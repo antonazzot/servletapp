@@ -5,10 +5,7 @@ import DataBase.DataBaseInf;
 import Users.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +16,7 @@ public class Group {
     private int id;
     private String name;
     private UserImpl trainer;
-    Map<Integer, Student> studentMap;
+    Map<Integer, UserImpl> studentMap;
     Set<Theams> theamsSet;
 
     public Group withId(Integer id) {
@@ -33,6 +30,15 @@ public class Group {
 
     public Group withTrainer(UserImpl user) {
         setTrainer(user);
+        return this;
+    }
+
+    public Group withStudents (HashMap <Integer, UserImpl> students) {
+        setStudentMap(students);
+        return this;
+    }
+    public Group withTheam (Set <Theams> theams) {
+        setTheamsSet(theams);
         return this;
     }
 

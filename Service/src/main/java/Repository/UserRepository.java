@@ -12,8 +12,9 @@ public interface UserRepository {
     HashMap<Integer, UserImpl> allStudent ();
     HashMap<Integer, UserImpl> allAdmin ();
     UserImpl getUserById (Integer id);
-    UserImpl saveUser (UserImpl user);
+    int  saveUser (UserImpl user);
     Optional <UserImpl> removeUser (Integer id);
     HashMap<Integer, UserImpl> freeTrainer();
-   ArrayList <UserImpl> studentFromGroup (Integer groupId);
+    ArrayList <UserImpl> studentFromGroup (Integer groupId);
+    UserImpl getUserByParam (String name, String login, String pass, int age);
  }
