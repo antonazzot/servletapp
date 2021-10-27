@@ -27,7 +27,6 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImpl.class);
     private static ThreadRepositoryImpl instance;
 
-
     private ThreadRepositoryImpl () {
     }
 
@@ -50,7 +49,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int groupId = rs.getInt("id");
-               UserImpl user =   RepositoryFactory.getRepository()
+                UserImpl user =   RepositoryFactory.getRepository()
                         .getUserById(rs.getInt("trainer_id"));
                 result.put(groupId,
                         new Group()
@@ -61,7 +60,6 @@ public class ThreadRepositoryImpl implements ThreadRepository {
                                         studentsFromGroup(groupId)
                                 )
                                 .withTheam(theamFromGroup(groupId))
-
                         );
             }
         } catch (SQLException e) {
@@ -83,7 +81,6 @@ public class ThreadRepositoryImpl implements ThreadRepository {
                         new Theams()
                                 .withId(theamId)
                                 .withValue(rs.getString("theam_name"))
-
                 );
             }
         } catch (SQLException e) {
@@ -96,7 +93,6 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     public HashMap<Trainer, List<Salary>> trainerSalary() {
         HashMap<Trainer, List<Salary>> result = new HashMap<>();
         ArrayList<Integer> trainersIDList = new ArrayList<>(RepositoryFactory.getRepository().allTrainer().keySet());
-
         try {
             Connection connection = datasourse.getConnection();
             for (Integer trainerId:
@@ -121,7 +117,6 @@ public class ThreadRepositoryImpl implements ThreadRepository {
                                     new Salary()
                                             .withValue(salaryValue)
                             );
-
                 }
                 result.put(
                         trainer,
@@ -129,7 +124,6 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
                 );
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -149,7 +143,6 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             while (rs.next()) {
                         theams.add(allTheams().get(rs.getInt("theam_id")));
                        Theams theam = allTheams().get(rs.getInt("theam_id"));
-
             }
             for (Theams theam:
                  theams) {
@@ -159,7 +152,6 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             e.printStackTrace();
         }
         studentTheamMarkMap.put(RepositoryFactory.getRepository().allStudent().get(studentId), theamsListHashMap);
-
         return  studentTheamMarkMap;
     }
 
@@ -173,9 +165,33 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             ps.setInt(2, theam.getId());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-               int tempMarkValue = rs.getInt("mark_value");
+                int tempMarkValue = rs.getInt("mark_value");
+                if (!rs.wasNull() && tempMarkValue!=0)
+                {
                marks.add(new Mark(tempMarkValue));
-               log.info("Marks ={}", theam.getTheamName() + " " + tempMarkValue);
+               log.info("Marks ={}", theam.getTheamName() + " " + tempMarkValue);}
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.info("Marks ={}", e.getMessage());
+        }
+        return marks;
+    }
+
+    public HashMap<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId) {
+        HashMap<Integer, Mark> marks = new HashMap<>();
+        log.info("In getMarkListMethd getTheam method = {}",theam.getTheamName()+studentId);
+        try {
+            Connection connection = datasourse.getConnection();
+            PreparedStatement ps = connection.prepareStatement("select * from mark where student_id = ? and theam_id = ? " );
+            ps.setInt(1, studentId);
+            ps.setInt(2, theam.getId());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int markId = rs.getInt("id");
+                int tempMarkValue = rs.getInt("mark_value");
+                marks.put(markId ,new Mark(tempMarkValue));
+                log.info("Marks ={}", theam.getTheamName() + " " + tempMarkValue);
             }
 
         } catch (SQLException e) {
@@ -481,8 +497,8 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             ResultSet rs = ps.executeQuery();
                log.info("After ps before whule ={}", studentId+ " "+theamID+" " + markValue);
             if (rs.next()) {
-                rs.getInt("mark_value");
-                if (rs.wasNull())
+                  int tempMarkValue = rs.getInt("mark_value");
+                if (rs.wasNull() || tempMarkValue==0 )
                 {
                     log.info("in while 'if' section", studentId+ " "+theamID+" " + markValue);
                     updateMark(studentId, theamID, markValue);
@@ -521,7 +537,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     }
 
     private void updateMark(int studentId, int theamID, int markValue) {
-        log.info("in update section", studentId+ " "+theamID+" " + markValue);
+        log.info("in update section = {}", studentId+ " "+theamID+" " + markValue);
         try {
             Connection connection = datasourse.getConnection();
             PreparedStatement ps = connection.prepareStatement(
@@ -529,11 +545,46 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
             ps.setInt(1, markValue);
             ps.setInt(2, studentId);
-            ps.setInt(2, theamID);
+            ps.setInt(3, theamID);
             ps.executeQuery();
 
         } catch (SQLException e) {
-            log.info("error", e.getMessage());
+            log.info("error ={}", e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteMarksById(int[] tempMarksId) {
+        try {
+            Connection connection = datasourse.getConnection();
+            for (int j : tempMarksId) {
+                PreparedStatement ps = connection.prepareStatement(
+                        "delete from mark where id = ? ");
+                ps.setInt(1, j);
+                ps.executeQuery();
+            }
+        } catch (SQLException e) {
+            log.info("error ={}", e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void changeMark(HashMap<Integer, Integer> markIdMarkValue) {
+        try {
+            Connection connection = datasourse.getConnection();
+           for (Map.Entry <Integer, Integer> entry: markIdMarkValue.entrySet()) {
+               int tempId = entry.getKey();
+               int tempMarkValue = entry.getValue();
+               log.info("In changeRepository = {}", tempId + " " + tempMarkValue );
+               PreparedStatement ps = connection.prepareStatement(
+                       "update mark set mark_value = ? where id = ?");
+               ps.setInt(1, tempMarkValue);
+               ps.setInt(2, tempId);
+               ps.executeUpdate();
+               log.info("after execute" );
+           }
+        } catch (SQLException e) {
+            log.info("error ={}", e.getMessage());
             e.printStackTrace();
         }
     }

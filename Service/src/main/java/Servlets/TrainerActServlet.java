@@ -54,19 +54,19 @@ public class TrainerActServlet extends HttpServlet {
             req.setAttribute("set", theams);
             req.setAttribute("map", studentHashMap);
             req.getRequestDispatcher(doAdd(userID, theam, mark)).forward(req, resp);
-
         } else if (act.equalsIgnoreCase("watch")) {
             req.setAttribute("student", student);
             req.setAttribute("map", getTheamsListHashMap(userID, tempth));
             req.getRequestDispatcher("TrainerControlPage/watchmark.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("delete")) {
             req.setAttribute("student", student);
-        //    req.setAttribute("map", getHashMapforTheam(th, student));
+            req.setAttribute("theamth", tempth);
+            req.setAttribute("map", ThreadRepositoryImpl.getInstance().getMarkIDListbyTheam(tempth, userID));
             req.getRequestDispatcher("TrainerControlPage/deletemark.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("change")) {
-
             req.setAttribute("student", student);
-        //    req.setAttribute("map", getHashMapforTheam(th, student));
+            req.setAttribute("theamth", tempth);
+           req.setAttribute("map", ThreadRepositoryImpl.getInstance().getMarkIDListbyTheam(tempth, userID));
             req.getRequestDispatcher("TrainerControlPage/listofmarkforchange.jsp").forward(req, resp);
         }
     }
