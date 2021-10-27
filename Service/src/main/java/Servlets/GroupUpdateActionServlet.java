@@ -54,14 +54,14 @@ public class GroupUpdateActionServlet extends HttpServlet {
             }
             if (theamsInGroupForDelete.length!=0) {
                 for (String s : theamsInGroupForDelete) {
-                    if (!s.equals(""))
-                        group.getTheamsSet().remove(Theams.valueOf(s.toUpperCase()));
+              //      if (!s.equals(""))
+                    //    group.getTheamsSet().remove(Theams.valueOf(s.toUpperCase()));
                 }
             }
             if (theamForAdd.length!=0) {
                 for (String s : theamForAdd) {
-                    if (!s.equals(""))
-                        group.getTheamsSet().add(Theams.valueOf(s.toUpperCase()));
+               //     if (!s.equals(""))
+                   //     group.getTheamsSet().add(Theams.valueOf(s.toUpperCase()));
                 }
             }
         if (trainerInGroupForDelete == 0 ) {

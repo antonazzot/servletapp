@@ -1,6 +1,7 @@
 package Servlets;
 
 import DAO.DaoImp;
+import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Salary;
 import Users.Trainer;
 import org.slf4j.Logger;
@@ -30,14 +31,11 @@ public class SalaryAdderServlet extends HttpServlet {
 
     private String salaryresultadder(String tr, String sal) {
         String result = null;
-        DaoImp daoImp = new DaoImp();
-        if (tr != null && sal != null) {
+         if (tr != null && sal != null) {
             try {
                 int id = Integer.parseInt(tr);
                 int salary = Integer.parseInt(sal);
-                Trainer trainer = (Trainer) daoImp.getUser(id);
-                trainer.getSalarylist().add(new Salary(new BigDecimal(salary)));
-                log.info( "Traner  = {}", "AddSalary = {}", trainer, salary );
+                ThreadRepositoryImpl.getInstance().addSalaryToTrainer(id, salary);
                 result = "adminControl/adminActList.jsp";
             } catch (IllegalArgumentException e) {
                 result = "exeception.jsp";
@@ -45,7 +43,6 @@ public class SalaryAdderServlet extends HttpServlet {
 
         }
         return result;
-
 
     }
 

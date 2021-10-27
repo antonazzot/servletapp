@@ -1,8 +1,11 @@
 package Servlets;
 
 import DAO.DaoImp;
+import Repository.RepositoryFactory;
+import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Salary;
 import Users.Trainer;
+import Users.UserImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,8 +32,8 @@ public class CalculateAvarageSalaryServlet extends HttpServlet {
             Writer writer = resp.getWriter();
         if (trainerId != null) {
             int id = Integer.parseInt(trainerId);
-            trainer = (Trainer) daoImp.getUser(id);
-
+            HashMap<Trainer, List<Salary>> trainerListHashMap = ThreadRepositoryImpl.getInstance().trainerSalary();
+            trainer = trainerListHashMap.keySet().stream().filter(t -> t.getId() == id).findAny().get();
             try {
                 int avarageValue = Integer.parseInt(sal);
                 if (avarageValue > trainer.getSalarylist().size()) {

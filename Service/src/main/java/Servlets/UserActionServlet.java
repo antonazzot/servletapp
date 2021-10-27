@@ -2,6 +2,7 @@ package Servlets;
 
 import Action.IdFactory;
 import Repository.RepositoryFactory;
+import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import Users.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +60,10 @@ public class UserActionServlet extends HttpServlet {
                     .withLogin(login)
                     .withPassword(pass)
                     .withAge(age);
-            RepositoryFactory.getRepository().saveUser(trainer);
+
+            int trainerId =  RepositoryFactory.getRepository().saveUser(trainer);
+            log.info("returning value TrainerId ={}", trainerId);
+            ThreadRepositoryImpl.getInstance().addTrainerToSalaryTable(trainerId);
             log.info("Trainer  add = {}", trainer);
         } else {
             Student student = (Student) new Student()
@@ -68,7 +72,8 @@ public class UserActionServlet extends HttpServlet {
                     .withLogin(login)
                     .withPassword(pass)
                     .withAge(age);
-            RepositoryFactory.getRepository().saveUser(student);
+           int studentId = RepositoryFactory.getRepository().saveUser(student);
+
             log.info("Student add = {}", student);
         }
     }

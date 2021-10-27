@@ -1,6 +1,8 @@
 package Servlets;
 
 import DAO.DaoImp;
+import Repository.RepositoryFactory;
+import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Mark;
 import ThreadModel.Theams;
 import Users.Student;
@@ -29,10 +31,8 @@ public class StudentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         UserImpl user = (UserImpl) session.getAttribute("user");
-        DaoImp daoImp = new DaoImp();
-        Student student = (Student) daoImp.getUser(user.getId());
-        HashMap<Student, HashMap<Theams, List<Mark>>> studentIndInf = new HashMap<>();
-        studentIndInf.put(student, student.getListOfMark());
+        UserImpl student = (Student) RepositoryFactory.getRepository().getUserById(user.getId());
+        HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentIndInf = ThreadRepositoryImpl.getInstance().studentTheamMark(student.getId());
         log.info("Student logIn= {}", student.getInf());
         req.setAttribute("student", student);
         req.setAttribute("mapmap", studentIndInf);

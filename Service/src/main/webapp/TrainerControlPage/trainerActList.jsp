@@ -17,8 +17,8 @@
 
       <p>Выберите тему</p>
        <c:forEach var = "set" items="${set}">
-               <c:out value = "${set}" />
-               <input type="radio" name="th" value="${set}"> </p>
+               <c:out value = "${set.theamName}" />
+               <input type="radio" name="th" value="${set.id}"> </p>
        </c:forEach>
 
 

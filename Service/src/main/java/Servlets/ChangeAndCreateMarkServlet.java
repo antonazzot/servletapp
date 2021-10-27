@@ -43,35 +43,35 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
     }
 
     private String change(String theam, String[] mark, Student student) {
-        for (int i = 0; i < mark.length; i++) {
-
-                if (mark[i] != null && !mark[i].equals("")) {
-                        try {
-                            int markvalues = Integer.parseInt(mark[i]);
-                    student.getListOfMark()
-                            .get(Theams.valueOf(theam))
-                            .get(i)
-                            .setValuesOfMark(markvalues);}
-
-                 catch (IllegalArgumentException e) {
-                    return "exeception.jsp";
-                }
-                }
-        }
+//        for (int i = 0; i < mark.length; i++) {
+//
+//                if (mark[i] != null && !mark[i].equals("")) {
+//                        try {
+//                            int markvalues = Integer.parseInt(mark[i]);
+//                    student.getListOfMark()
+//                            .get(Theams.valueOf(theam))
+//                            .get(i)
+//                            .setValuesOfMark(markvalues);}
+//
+//                 catch (IllegalArgumentException e) {
+//                    return "exeception.jsp";
+//                }
+//                }
+//        }
 
         return "TrainerControlPage/trainerActList.jsp";
     }
 
     private String delete(String theam, String mark, Student student) {
-        try {
-            int tempMark = Integer.parseInt(mark);
-            Mark temp = student.getListOfMark().get(Theams.valueOf(theam)).stream()
-                    .filter(m -> m.getValuesOfMark() == tempMark)
-                    .findAny().get();
-            student.getListOfMark().get(Theams.valueOf(theam)).remove(temp);
-        } catch (IllegalArgumentException e) {
-            return "exeception.jsp";
-        }
+//        try {
+//            int tempMark = Integer.parseInt(mark);
+//            Mark temp = student.getListOfMark().get(Theams.valueOf(theam)).stream()
+//                    .filter(m -> m.getValuesOfMark() == tempMark)
+//                    .findAny().get();
+//            student.getListOfMark().get(Theams.valueOf(theam)).remove(temp);
+//        } catch (IllegalArgumentException e) {
+//            return "exeception.jsp";
+//        }
 
         return "TrainerControlPage/trainerActList.jsp";
     }

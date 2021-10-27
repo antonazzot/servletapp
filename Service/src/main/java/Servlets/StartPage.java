@@ -32,18 +32,21 @@ public class StartPage extends HttpServlet {
             String adminLogin = servletContext.getInitParameter("AdminLogin");
             String adminPassword = servletContext.getInitParameter("AdminPassword");
             HttpSession session = req.getSession();
-            if (!DataBaseInf.adminHashMap.containsValue(DataBaseInf.adminHashMap.get(1))) {
+             {
                Administrator administrator = (Administrator) new Administrator()
-                       .withId(1)
                        .withRole(Role.ADMINISTRATOR)
                        .withName("Anton")
                        .withLogin("admin")
                        .withPassword("pass")
                        .withAge(34);
+               if (RepositoryFactory.getRepository().allUser().values().stream()
+                     .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
+                             u.getPassword().equals(administrator.getPassword()) &&
+                             u.getName().equals(administrator.getName()) &&
+                             u.getAge()==administrator.getAge())
+                )
                 RepositoryFactory.getRepository().saveUser(administrator);
-               DataBaseInf.adminHashMap.put(1, administrator);
-
-            }
+             }
             log.info("Admin = {}", "Pass ={}", adminLogin, adminPassword);
 
             if (session.getAttribute("user")!=null)  {

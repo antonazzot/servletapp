@@ -31,6 +31,11 @@ public class Student extends UserImpl {
         setAge(age);
         return this;
     }
+    public Student withTheamMark (HashMap <Theams, List<Mark>> theamsListHashMap) {
+        setListOfMark(theamsListHashMap);
+        return this;
+    }
+
     public Student addListOfMark (Mark mark) {
 
         return this;
@@ -45,15 +50,15 @@ public class Student extends UserImpl {
     public  String getInf () {
     String inf;
     ArrayList <String> strings = new ArrayList<>();
-    for (
-    Map.Entry<Theams, List<Mark>> entry: this.listOfMark.entrySet()){
-        String temp = entry.getKey().name() + ": " + '\n' +
-                Arrays.toString(entry.getValue().stream().
-                        map(m -> m.getValuesOfMark()).
-                        collect(Collectors.toList()).
-                        toString().split("/ "));
-        strings.add("Mark:" + temp);
-        }
+//    for (
+//    Map.Entry<Theams, List<Mark>> entry: this.listOfMark.entrySet()){
+//        String temp = entry.getKey().name() + ": " + '\n' +
+//                Arrays.toString(entry.getValue().stream().
+//                        map(m -> m.getValuesOfMark()).
+//                        collect(Collectors.toList()).
+//                        toString().split("/ "));
+//        strings.add("Mark:" + temp);
+//        }
     return inf = "ID: " + this.getId() + " Name: " +  this.getName() + " Theams: " + strings.toString();
     }
 
