@@ -40,11 +40,11 @@ public class ThreadRepositoryImpl implements ThreadRepository {
         }
         return instance;
     }
+
     @Override
     public HashMap<Integer, Group> allGroup() {
         HashMap<Integer, Group> result = new HashMap<>();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection();) {
             PreparedStatement ps = connection.prepareStatement("select * from \"group\"");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -71,8 +71,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     @Override
     public HashMap<Integer, Theams> allTheams() {
         HashMap<Integer, Theams> result = new HashMap<>();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = connection.prepareStatement("select * from theam");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -93,8 +92,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     public HashMap<Trainer, List<Salary>> trainerSalary() {
         HashMap<Trainer, List<Salary>> result = new HashMap<>();
         ArrayList<Integer> trainersIDList = new ArrayList<>(RepositoryFactory.getRepository().allTrainer().keySet());
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             for (Integer trainerId:
                     trainersIDList) {
                 UserImpl user = RepositoryFactory.getRepository().getUserById(trainerId);
@@ -134,8 +132,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     public HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMark( int studentId) {
         HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMarkMap = new HashMap<>();
         HashMap <Theams, List <Mark>> theamsListHashMap = new HashMap<>();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = connection.prepareStatement("select * from mark where student_id = ?");
             ps.setInt(1, studentId);
             ResultSet rs = ps.executeQuery();
@@ -158,8 +155,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     public List<Mark> getMarkListbyTheam(Theams theam, int studentId) {
         List <Mark> marks = new ArrayList<>();
         log.info("In getMarkListMethd getTheam method = {}",theam.getTheamName()+studentId);
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = connection.prepareStatement("select * from mark where student_id = ? and theam_id = ? " );
             ps.setInt(1, studentId);
             ps.setInt(2, theam.getId());
@@ -181,8 +177,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     public HashMap<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId) {
         HashMap<Integer, Mark> marks = new HashMap<>();
         log.info("In getMarkListMethd getTheam method = {}",theam.getTheamName()+studentId);
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = connection.prepareStatement("select * from mark where student_id = ? and theam_id = ? " );
             ps.setInt(1, studentId);
             ps.setInt(2, theam.getId());
@@ -204,8 +199,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     @Override
     public Theams theamById(Integer id) {
         Theams theams = null;
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = connection.prepareStatement("select * from theam where id = " + id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
@@ -223,8 +217,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     @Override
     public Set<Theams> theamFromGroup(Integer groupId) {
         Set <Theams> result = new HashSet<>();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(
                     "select * from theam_group where group_id = " + groupId
             );
@@ -241,8 +234,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     @Override
     public HashMap<Integer, UserImpl> studentsFromGroup(int groupId) {
         HashMap<Integer, UserImpl> result = new HashMap<>();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(
                     "select * from student_group where group_id = " + groupId
             );
@@ -263,8 +255,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
         if (!allTheams().values().stream().map(Theams::getTheamName)
                 .collect(Collectors.toList()).contains(theam))
         {
-            try {
-                Connection connection = datasourse.getConnection();
+            try (Connection connection = datasourse.getConnection()) {
                 PreparedStatement ps = connection.prepareStatement(
                         "INSERT INTO theam (theam_name) " +
                                 "Values (?)"
@@ -281,8 +272,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
     public void addGroup (List<UserImpl> studentList, List <Integer> theamsIdList, Integer trainerId) {
 
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(
                     "INSERT INTO \"group\" (name, trainer_id)" +
                             "Values (?,?)"
@@ -294,8 +284,6 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             insertIntoStudent_Group(groupId, studentList);
             insertIntoTheam_Group(groupId, theamsIdList);
             insertIntoMarkTable(studentList,theamsIdList);
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -305,8 +293,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     }
 
     private void insertIntoMarkTable(List<UserImpl> studentList, List<Integer> theamsIdList) {
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             for (Integer i:
                     theamsIdList) {
                 for (UserImpl student :
@@ -328,8 +315,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     }
 
     private void insertIntoTheam_Group(int groupId, List<Integer> theamsIdList) {
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             for (Integer i:
                     theamsIdList) {
                 PreparedStatement ps = connection.prepareStatement(
@@ -348,8 +334,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     }
 
     private void insertIntoStudent_Group(int groupId, List<UserImpl> studentList) {
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()) {
             for (UserImpl student:
                     studentList) {
                 PreparedStatement ps = connection.prepareStatement(
@@ -369,8 +354,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
     private int getGroupId(int trainerId) {
         int  groupId = 0;
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement(
                     "select id from \"group\" where trainer_id = "+trainerId
             );
@@ -414,8 +398,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     private HashMap<Integer, Theams> getBuzyTeam() {
         HashMap<Integer, Theams>  busyTheam = new HashMap<>();
         log.info("in buzy method");
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement("select *" +
                     "from theam_group");
             ResultSet rs = ps.executeQuery();
@@ -453,8 +436,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     }
 
     public void addSalaryToTrainer (int trainerId, int salaryValue ) {
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement(
                     "insert into salary (trainer_id, salary_value)" +
                             " values (?, ?)");
@@ -470,8 +452,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
     }
     public void addTrainerToSalaryTable (int trainerId) {
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement(
                     "insert into salary (trainer_id)" +
                             "values (?)" );
@@ -488,8 +469,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
 
     public void addMarkToStudent(int studentId, int theamID, int markValue) {
-           try {
-            Connection connection = datasourse.getConnection();
+           try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement(
                     "select * from mark where student_id = ? and theam_id = ?");
             ps.setInt(1, studentId);
@@ -520,8 +500,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
     private void insertMark(int studentId, int theamID, int markValue) {
         log.info("in insert section", studentId+ " "+theamID+" " + markValue);
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement(
                     "insert into mark (mark_value, student_id, theam_id) values (?, ?, ?)");
 
@@ -538,8 +517,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
     private void updateMark(int studentId, int theamID, int markValue) {
         log.info("in update section = {}", studentId+ " "+theamID+" " + markValue);
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement(
                     "update mark set mark_value = ? where student_id = ? and theam_id = ?");
 
@@ -555,8 +533,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     }
 
     public void deleteMarksById(int[] tempMarksId) {
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             for (int j : tempMarksId) {
                 PreparedStatement ps = connection.prepareStatement(
                         "delete from mark where id = ? ");
@@ -570,8 +547,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     }
 
     public void changeMark(HashMap<Integer, Integer> markIdMarkValue) {
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
            for (Map.Entry <Integer, Integer> entry: markIdMarkValue.entrySet()) {
                int tempId = entry.getKey();
                int tempMarkValue = entry.getValue();

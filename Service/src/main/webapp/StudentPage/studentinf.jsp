@@ -17,14 +17,13 @@
 
 
     <c:forEach var = "entry" items="${mapmap}">
-
-     <c:forEach var = "map" items="${entry.value}">
-                <c:out value = "${map.key}" /> <br>
+     <c:forEach var = "map" items="${entry.value.name}">
+                <c:out value = "${map.key.theamName}" /> <br>
                     <c:forEach var = "list" items="${map.value}">
                                 <c:out value = "${list.valuesOfMark}" /> <br>
-                       </c:forEach>
+                 </c:forEach>
        </c:forEach>
-     </c:forEach>
+   </c:forEach>
 
 
 

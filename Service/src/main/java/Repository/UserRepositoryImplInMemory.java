@@ -57,7 +57,7 @@ public class UserRepositoryImplInMemory implements UserRepository {
     }
 
     @Override
-    public Optional<UserImpl> removeUser(Integer id) {
+    public Optional<UserImpl> removeUser(Integer id, String entity) {
         return Optional.empty();
     }
 

@@ -31,7 +31,7 @@ public class StudentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         UserImpl user = (UserImpl) session.getAttribute("user");
-        UserImpl student = (Student) RepositoryFactory.getRepository().getUserById(user.getId());
+        UserImpl student =  RepositoryFactory.getRepository().getUserById(user.getId());
         HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentIndInf = ThreadRepositoryImpl.getInstance().studentTheamMark(student.getId());
         log.info("Student logIn= {}", student.getInf());
         req.setAttribute("student", student);

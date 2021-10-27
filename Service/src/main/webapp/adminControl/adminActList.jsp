@@ -26,7 +26,7 @@
         <option value="watch">Watch </option>
     </select>
     <br>
-    Enter User ID for delete: <input name ="id", type="text"> <br>
+    Enter User ID for delete: <input name ="id", type="number"> <br>
     <br>
 
     <br>

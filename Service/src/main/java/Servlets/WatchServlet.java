@@ -36,7 +36,7 @@ public class WatchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String act = req.getParameter("act");
         String user = req.getParameter("user");
-        int id = 0;
+        int entityId = 0;
         DaoImp daoImp = new DaoImp();
 
 
@@ -61,17 +61,21 @@ public class WatchServlet extends HttpServlet {
                 }
             }
         } else if (act.equalsIgnoreCase("delete")) {
-            // delete entity by id (user and group)
-            if (req.getParameter("id") != null) {
                 try {
-                    id = Integer.parseInt(req.getParameter("id"));
-                } catch (IllegalArgumentException e) {
+                     entityId = Integer.parseInt(req.getParameter("id"));
+                }
+                catch (IllegalArgumentException e) {
                     req.getRequestDispatcher("exeception.jsp").forward(req, resp);
                 }
-            }
-            log.info("Delete entity ={}", id);
-            RepositoryFactory.getRepository().removeUser(id);
-            req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
+                if (user.equals("student") || user.equals("trainer") || user.equals("administrator")){
+                    RepositoryFactory.getRepository().removeUser(entityId, user);
+                    }
+                else
+
+                if (user.equals("theam")) {
+
+                }
+                req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
 
         } else if (act.equalsIgnoreCase("change")) {
             // change entity

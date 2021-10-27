@@ -33,8 +33,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     @Override
     public HashMap <Integer, UserImpl> allUser() {
         HashMap <Integer, UserImpl> users = new HashMap<>();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
            PreparedStatement ps =  connection.prepareStatement("select * from users;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -73,8 +72,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     @Override
     public HashMap<Integer, UserImpl> allTrainer() {
         HashMap <Integer, UserImpl> trainers = new HashMap<>();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps =  connection.prepareStatement("select * from users where role_id=2;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -103,8 +101,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     @Override
     public HashMap<Integer, UserImpl> allStudent() {
         HashMap<Integer, UserImpl> students = new HashMap<>();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps =  connection.prepareStatement("select * from users where role_id=3;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -134,8 +131,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     @Override
     public HashMap<Integer, UserImpl> allAdmin() {
         HashMap<Integer, UserImpl> administrators = new HashMap<>();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps =  connection.prepareStatement("select * from users where role_id=3;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -163,8 +159,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     @Override
     public UserImpl getUserById(Integer id) {
         UserImpl user =  new UserImpl();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM users where id="+"(?)");
             ps.setInt(1, id);
             ResultSet rs =ps.executeQuery();
@@ -186,8 +181,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     @Override
     public int  saveUser(UserImpl user) {
        int userId =0;
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement("INSERT INTO users (name, login, password, age, role_id) " +
                     "Values (?, ?, ?, ?, ?) returning id");
 
@@ -217,19 +211,84 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public Optional<UserImpl> removeUser(Integer id) {
-        UserImpl user = getUserById(id);
-        try {
-            Connection connection = datasourse.getConnection();
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM users where id =" + "(?)");
+    public Optional<UserImpl> removeUser(Integer id, String entity) {
+        try (Connection connection = datasourse.getConnection()){
+            switch (entity) {
+                case "administrator":
+                {
+                    PreparedStatement ps = connection.prepareStatement("DELETE FROM users where id = ?");
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
+                } break;
+                case "trainer":
+                {
+                    PreparedStatement ps = connection.prepareStatement("DELETE FROM salary where trainer_id = ?");
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
+                    ps.close();
+                    PreparedStatement ps1 = connection.prepareStatement("DELETE FROM group where trainer_id = ?");
+                    ps1.setInt(1, id);
+                    ps1.executeUpdate();
+                    ps1.close();
+                    PreparedStatement ps2 = connection.prepareStatement("DELETE FROM users where id = ?");
+                    ps2.setInt(1, id);
+                    ps2.executeUpdate();
+                    ps2.close();
+                } break;
+                case "student":
+                {
+                    PreparedStatement ps = connection.prepareStatement("DELETE FROM student_group where student_id = ?");
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
+                    ps.close();
+                    PreparedStatement ps1 = connection.prepareStatement("DELETE FROM mark where student_id = ?");
+                    ps1.setInt(1, id);
+                    ps1.executeUpdate();
+                    ps1.close();
+                    PreparedStatement ps2 = connection.prepareStatement("DELETE FROM users where id = ?");
+                    ps2.setInt(1, id);
+                    ps2.executeUpdate();
+                    ps2.close();
+                } break;
+                case "group":
+                {
+                    PreparedStatement ps = connection.prepareStatement("DELETE FROM student_group where group_id = ?");
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
+                    ps.close();
+                    PreparedStatement ps1 = connection.prepareStatement("DELETE FROM theam_group where group_id = ?");
+                    ps1.setInt(1, id);
+                    ps1.executeUpdate();
+                    ps1.close();
+                    PreparedStatement ps2 = connection.prepareStatement("DELETE FROM group where id = ?");
+                    ps2.setInt(1, id);
+                    ps2.executeUpdate();
+                    ps2.close();
+                } break;
+                case "theam":
+                {
+                    PreparedStatement ps = connection.prepareStatement("DELETE FROM mark where theam_id = ?");
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
+                    ps.close();
+                    PreparedStatement ps1 = connection.prepareStatement("DELETE FROM theam_group where theam_id = ?");
+                    ps1.setInt(1, id);
+                    ps1.executeUpdate();
+                    ps1.close();
+                    PreparedStatement ps2 = connection.prepareStatement("DELETE FROM theam where id = ?");
+                    ps2.setInt(1, id);
+                    ps2.executeUpdate();
+                    ps2.close();
+                } break;
+            }
 
-            ps.setInt(1, id);
-            ps.executeUpdate();
-            return Optional.ofNullable(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.ofNullable(user);
+
+
+
+        return null;
     }
     @Override
     public HashMap<Integer, UserImpl> freeTrainer() {
@@ -237,9 +296,8 @@ public class UserRepositoryImplPostgres implements UserRepository {
         if (ThreadRepositoryImpl.getInstance().allGroup().isEmpty())
             return  allTrainer();
         else {
-            try {
+            try (Connection connection = datasourse.getConnection()){
                 ArrayList <UserImpl> busyTrainer = new ArrayList<>();
-                Connection connection = datasourse.getConnection();
                 PreparedStatement ps = connection.prepareStatement("select *" +
                         "from \"group\"");
                 ResultSet rs = ps.executeQuery();
@@ -258,8 +316,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     @Override
     public ArrayList < UserImpl> studentFromGroup(Integer groupId) {
         ArrayList < UserImpl> result =  new ArrayList<>();
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement("select student_id" +
                     "from student_group where group_id = " + groupId);
             ResultSet rs = ps.executeQuery();
@@ -278,8 +335,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     public UserImpl getUserByParam(String name, String login, String pass, int age) {
         UserImpl user = new UserImpl();
         log.info("Get userByPARAM = {}", name, login, pass, age);
-        try {
-            Connection connection = datasourse.getConnection();
+        try (Connection connection = datasourse.getConnection()){
             log.info("in try block", name, login, pass, age);
             PreparedStatement ps = connection.prepareStatement(
                     "select * from users " +

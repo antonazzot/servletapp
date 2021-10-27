@@ -9,7 +9,6 @@ Repository\RepositoryFactory$1.class
 Repository\RepositoryFactory.class
 Servlets\TheamAddServlet.class
 Servlets\SalaryAdderServlet.class
-Servlets\WatchFromDB.class
 Servlets\CheckServlet.class
 Servlets\LogOutServlet.class
 Servlets\AvarageSalaryServlet.class
