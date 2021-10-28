@@ -212,43 +212,18 @@ public class UserRepositoryImplPostgres implements UserRepository {
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
+        // cascade delete for entity
+        if (entity.equals("student") || entity.equals("trainer") || entity.equals("administrator")){
+            entity = "user";
+        }
         try (Connection connection = datasourse.getConnection()){
             switch (entity) {
-                case "administrator":
+                case "user":
                 {
                     PreparedStatement ps = connection.prepareStatement("DELETE FROM users where id = ?");
                     ps.setInt(1, id);
                     ps.executeUpdate();
-                } break;
-                case "trainer":
-                {
-                    PreparedStatement ps = connection.prepareStatement("DELETE FROM salary where trainer_id = ?");
-                    ps.setInt(1, id);
-                    ps.executeUpdate();
                     ps.close();
-                    PreparedStatement ps1 = connection.prepareStatement("DELETE FROM group where trainer_id = ?");
-                    ps1.setInt(1, id);
-                    ps1.executeUpdate();
-                    ps1.close();
-                    PreparedStatement ps2 = connection.prepareStatement("DELETE FROM users where id = ?");
-                    ps2.setInt(1, id);
-                    ps2.executeUpdate();
-                    ps2.close();
-                } break;
-                case "student":
-                {
-                    PreparedStatement ps = connection.prepareStatement("DELETE FROM student_group where student_id = ?");
-                    ps.setInt(1, id);
-                    ps.executeUpdate();
-                    ps.close();
-                    PreparedStatement ps1 = connection.prepareStatement("DELETE FROM mark where student_id = ?");
-                    ps1.setInt(1, id);
-                    ps1.executeUpdate();
-                    ps1.close();
-                    PreparedStatement ps2 = connection.prepareStatement("DELETE FROM users where id = ?");
-                    ps2.setInt(1, id);
-                    ps2.executeUpdate();
-                    ps2.close();
                 } break;
                 case "group":
                 {
@@ -290,6 +265,13 @@ public class UserRepositoryImplPostgres implements UserRepository {
 
         return null;
     }
+
+    @Override
+    public UserImpl updateUser(UserImpl user) {
+
+        return null;
+    }
+
     @Override
     public HashMap<Integer, UserImpl> freeTrainer() {
 
@@ -314,11 +296,12 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public ArrayList < UserImpl> studentFromGroup(Integer groupId) {
-        ArrayList < UserImpl> result =  new ArrayList<>();
+    public ArrayList <UserImpl> studentFromGroup(Integer groupId) {
+        ArrayList <UserImpl> result =  new ArrayList<>();
         try (Connection connection = datasourse.getConnection()){
-            PreparedStatement ps = connection.prepareStatement("select student_id" +
-                    "from student_group where group_id = " + groupId);
+            PreparedStatement ps = connection.prepareStatement("select *" +
+                    "from student_group where group_id = ?");
+            ps.setInt(1, groupId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 UserImpl user = getUserById(rs.getInt("student_id"));

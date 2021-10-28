@@ -62,6 +62,11 @@ public class UserRepositoryImplInMemory implements UserRepository {
     }
 
     @Override
+    public UserImpl updateUser(UserImpl user) {
+        return null;
+    }
+
+    @Override
     public HashMap<Integer, UserImpl> freeTrainer() {
         return null;
     }

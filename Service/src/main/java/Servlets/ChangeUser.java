@@ -1,6 +1,7 @@
 package Servlets;
 
 import DAO.DaoImp;
+import Repository.RepositoryFactory;
 import Users.UserImpl;
 
 import javax.servlet.ServletException;
@@ -19,8 +20,7 @@ public class ChangeUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        DaoImp daoImp = new DaoImp();
-        UserImpl user = daoImp.getUser(id);
+        UserImpl user = RepositoryFactory.getRepository().getUserById(id);
         req.setAttribute("id", user.getId());
         req.setAttribute("role", user.getRole());
         req.setAttribute("login", user.getLogin());

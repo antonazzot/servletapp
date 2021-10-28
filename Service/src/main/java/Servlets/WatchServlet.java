@@ -37,7 +37,6 @@ public class WatchServlet extends HttpServlet {
         String act = req.getParameter("act");
         String user = req.getParameter("user");
         int entityId = 0;
-        DaoImp daoImp = new DaoImp();
 
 
         if (act.equalsIgnoreCase("create")) {
