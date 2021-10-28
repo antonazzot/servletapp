@@ -32,7 +32,7 @@ public class StudentServlet extends HttpServlet {
         HttpSession session = req.getSession();
         UserImpl user = (UserImpl) session.getAttribute("user");
         UserImpl student =  RepositoryFactory.getRepository().getUserById(user.getId());
-        HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentIndInf = ThreadRepositoryImpl.getInstance().studentTheamMark(student.getId());
+        HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentIndInf = ThreadRepositoryImpl.getInstance().studentTheamMark(user.getId());
         log.info("Student logIn= {}", student.getInf());
         req.setAttribute("student", student);
         req.setAttribute("mapmap", studentIndInf);

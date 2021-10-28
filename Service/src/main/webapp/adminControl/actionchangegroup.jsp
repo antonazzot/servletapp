@@ -9,46 +9,66 @@
 <h1> Update Group </h1>
 
 <body>
-  <form id="data"  action="updateActionGroup">
-   <p>Внесите данные для изменения</p>
-    <input name="id" type="hidden"  value = "${id}" /> <br>
 
+
+   <p>Внесите данные для изменения</p>
+    <form id="data"  action="updateActionGroup">
     <p>Студенты группы, выберите студента для удаления из группы </p>
       <c:forEach var = "gs" items="${groupst}">
-             <c:out value = "${gs.value.name}" />
-             <input type="checkbox" name="grstid" value="${gs.key}" ><br>
+             <c:out value = "${gs.name}" />
+             <input type="checkbox" name="grstid" value="${gs.id}" ><br>
       </c:forEach>
+      <input name="id" type="hidden"  value = "${id}" /> <br>
+      <input type="submit" form="data" value="Удалить студента">
+      <hr>
+    </form>
 
-      <p>Все студенты , выберите студента для добавления в группу </p>
+     <form id="data"  action="updateActionGroup">
+      <p>Выберите студента для добавления в группу </p>
            <c:forEach var = "as" items="${allst}">
                       <c:out value = "${as.value.name}" />
                       <input type="checkbox" name="astid" value="${as.key}" ><br>
            </c:forEach>
+           <input name="id" type="hidden"  value = "${id}" /> <br>
+           <input type="submit" form="data" value="Добавить студента">
+      <hr>
+      </form>
 
+      <form id="data"  action="updateActionGroup">
         <p>Темы группы, выберите тему для удаления из группы </p>
              <c:forEach var = "gth" items="${groupth}">
-                   <c:out value = "${gth}" />
-                   <input type="checkbox" name="grth" value="${gth}"> <br>
+                   <c:out value = "${gth.theamName}" />
+                   <input type="checkbox" name="grth" value="${gth.id}"> <br>
              </c:forEach>
+             <input name="id" type="hidden"  value = "${id}" /> <br>
+             <input type="submit" form="data" value="Удалить тему">
+      <hr>
+      </form>
 
+
+      <form id="data"  action="updateActionGroup">
           <p>Все доступные темы, выберите тему для добавления в группу </p>
                <c:forEach var = "fth" items="${freeth}">
-                          <c:out value = "${fth}" />
-                          <input type="checkbox" name="frth" value="${fth}" > <br>
+                          <c:out value = "${fth.value.theamName}" />
+                          <input type="checkbox" name="frth" value="${fth.key}" > <br>
                 </c:forEach>
+                <input name="id" type="hidden"  value = "${id}" /> <br>
+                <input type="submit" form="data" value="Добавить тему">
+    <hr>
+          </form>
 
-            <p>Тренер группы , выберите тренера для удаления из группы </p>
-                <input type="checkbox" name="grtr" value=${grouptr.id} > ${grouptr.name} <input/>
 
-               <p>Свободные тренеры, выберите тренера для добавления тренера, либо замены существующего </p>
+            <form id="data"  action="updateActionGroup">
+                 <p> выберите тренера для добавления тренера, либо замены существующего </p>
                  <c:forEach var = "ftr" items="${freetr}">
-                 <c:out value = "${ftr.name}" />
-                 <input type="radio" name="frtr" value="${ftr.id}" >
-                       </c:forEach>
+                 <c:out value = "${ftr.value.name}" />
 
-   <p><input type="submit" form="data" value="Отправить">
-  </form>
-  <br>
+                 <input type="radio" name="frtr" value="${ftr.key}" >
+           </c:forEach>
+        <input name="id" type="hidden"  value = "${id}" /> <br>
+        <p><input type="submit" form="data" value="Заменить">
+         </form>
+        <br>
 
   <form  action="hello">
       <input type="submit" value="Go to Main Admin!">

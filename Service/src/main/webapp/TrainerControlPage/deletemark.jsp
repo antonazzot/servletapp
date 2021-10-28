@@ -11,7 +11,7 @@
 <h1> Trainer control List </h1>
 
  <p>Name: ${student.name} </p>
- <p>Theam: "${teamth.theamName}" </p>
+ <p>Theam: ${teamth.theamName} </p>
 
   <p>Выберите оценку для удаления</p>
  <form id="data"  action="changeandcreatemark">

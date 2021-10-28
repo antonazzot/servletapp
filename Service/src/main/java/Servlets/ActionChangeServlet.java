@@ -1,6 +1,7 @@
 package Servlets;
 
 import DAO.DaoImp;
+import Repository.RepositoryFactory;
 import Users.Role;
 import Users.UserImpl;
 import org.slf4j.Logger;
@@ -24,9 +25,7 @@ public class ActionChangeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int id = Integer.parseInt(req.getParameter("id"));
-        DaoImp daoImp = new DaoImp();
-        UserImpl user;
-        user =daoImp.getUser(id);
+        UserImpl user = RepositoryFactory.getRepository().getUserById(id);
 
         String role = req.getParameter("role");
         String login = req.getParameter("login").equals("") ? user.getLogin():req.getParameter("login");
@@ -34,8 +33,16 @@ public class ActionChangeServlet extends HttpServlet {
         String name = req.getParameter("name").equals("") ? user.getName():req.getParameter("name");
         int age = req.getParameter("age").equals("") ? user.getAge():Integer.parseInt(req.getParameter("age"));
 
-       // daoImp.updateUser(id, new UserImpl(Role.valueOf(role.toUpperCase()), name, login, pass, age));
-        log.info("UserUpdate = {}", id, role, name, login, pass , age);
+        user.withRole(Role.valueOf(role.toUpperCase()))
+                .withId(id)
+                .withName(name)
+                .withLogin(login)
+                .withPassword(pass)
+                .withAge(age);
+
+
+        RepositoryFactory.getRepository().updateUser(user);
+        log.info("UserUpdate = {}", id+"  "+role+"  "+name+"  "+login+"  "+pass+"  "+age);
         req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
     }
 }

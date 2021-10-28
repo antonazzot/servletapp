@@ -39,6 +39,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
             while (rs.next()) {
 
                 Integer userId =  rs.getInt("id");
+                if (!rs.rowDeleted())
                 users.put( userId ,
                         new UserImpl()
                                 .withId(userId)
@@ -76,8 +77,10 @@ public class UserRepositoryImplPostgres implements UserRepository {
             PreparedStatement ps =  connection.prepareStatement("select * from users where role_id=2;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                if (!rs.wasNull() || !rs.getString("login").equals("")) {
                 Trainer trainer = new Trainer();
                 Integer trainerId = rs.getInt("id");
+                if (!rs.rowDeleted())
                 trainers.put( trainerId,
                         (Trainer) trainer
                                 .withId(trainerId)
@@ -88,7 +91,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
                                 .withAge(rs.getInt("age"))
 
 
-                );
+                );}
             }
 
 
@@ -105,8 +108,10 @@ public class UserRepositoryImplPostgres implements UserRepository {
             PreparedStatement ps =  connection.prepareStatement("select * from users where role_id=3;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                if (!rs.wasNull() || !rs.getString("login").equals("")) {
                 Student student = new Student();
                 Integer studentId = rs.getInt("id");
+                    if (!rs.rowDeleted())
                 students.put(studentId,
                         (Student) student
                                 .withTheamMark(new HashMap<>())
@@ -117,8 +122,8 @@ public class UserRepositoryImplPostgres implements UserRepository {
                                 .withAge(rs.getInt("age"))
                                 .withRole(checkRole(rs.getInt("role_id")))
 
-
                 );
+                }
             }
 
 
@@ -132,11 +137,13 @@ public class UserRepositoryImplPostgres implements UserRepository {
     public HashMap<Integer, UserImpl> allAdmin() {
         HashMap<Integer, UserImpl> administrators = new HashMap<>();
         try (Connection connection = datasourse.getConnection()){
-            PreparedStatement ps =  connection.prepareStatement("select * from users where role_id=3;");
+            PreparedStatement ps =  connection.prepareStatement("select * from users where role_id=1;");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                if (!rs.wasNull() || !rs.getString("login").equals("")) {
                 Administrator administrator = new Administrator();
                 Integer adminId = rs.getInt("id");
+                    if (!rs.rowDeleted())
                 administrators.put(adminId,
                         (Administrator) administrator
                                 .withId(adminId)
@@ -146,7 +153,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
                                 .withAge(rs.getInt("age"))
                                 .withRole(checkRole(rs.getInt("role_id")))
 
-                );
+                );}
             }
 
 
@@ -216,6 +223,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
         if (entity.equals("student") || entity.equals("trainer") || entity.equals("administrator")){
             entity = "user";
         }
+        log.info("In remove method ={}", "ID: " + id + " Entity: " + entity);
         try (Connection connection = datasourse.getConnection()){
             switch (entity) {
                 case "user":
@@ -227,29 +235,15 @@ public class UserRepositoryImplPostgres implements UserRepository {
                 } break;
                 case "group":
                 {
-                    PreparedStatement ps = connection.prepareStatement("DELETE FROM student_group where group_id = ?");
-                    ps.setInt(1, id);
-                    ps.executeUpdate();
-                    ps.close();
-                    PreparedStatement ps1 = connection.prepareStatement("DELETE FROM theam_group where group_id = ?");
-                    ps1.setInt(1, id);
-                    ps1.executeUpdate();
-                    ps1.close();
-                    PreparedStatement ps2 = connection.prepareStatement("DELETE FROM group where id = ?");
+
+                    PreparedStatement ps2 = connection.prepareStatement("DELETE FROM \"group\" where id = ?");
                     ps2.setInt(1, id);
                     ps2.executeUpdate();
                     ps2.close();
                 } break;
                 case "theam":
                 {
-                    PreparedStatement ps = connection.prepareStatement("DELETE FROM mark where theam_id = ?");
-                    ps.setInt(1, id);
-                    ps.executeUpdate();
-                    ps.close();
-                    PreparedStatement ps1 = connection.prepareStatement("DELETE FROM theam_group where theam_id = ?");
-                    ps1.setInt(1, id);
-                    ps1.executeUpdate();
-                    ps1.close();
+
                     PreparedStatement ps2 = connection.prepareStatement("DELETE FROM theam where id = ?");
                     ps2.setInt(1, id);
                     ps2.executeUpdate();
@@ -258,6 +252,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
             }
 
         } catch (SQLException e) {
+            log.info("SQL EROR ={}", e.getMessage());
             e.printStackTrace();
         }
 
@@ -268,8 +263,23 @@ public class UserRepositoryImplPostgres implements UserRepository {
 
     @Override
     public UserImpl updateUser(UserImpl user) {
+        try (Connection connection = datasourse.getConnection()){
+            PreparedStatement ps = connection.prepareStatement("update users set age = ?, " +
+                    "login = ?, name= ?, password =?, role_id = ? " +
+                    "where id = ? ");
+            ps.setInt(1, user.getAge());
+            ps.setString(2, user.getLogin());
+            ps.setString(3,user.getName());
+            ps.setString(4, user.getPassword());
+            ps.setInt(5, userGetRoleForDB(user.getRole()));
+            ps.setInt(6, user.getId());
+            ps.executeUpdate();
 
-        return null;
+        } catch (SQLException e) {
+            log.info("User update fail = {}", e.getMessage());
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override

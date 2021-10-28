@@ -12,7 +12,7 @@
   <form id="data"  action="GroupCreaterServlet">
    <p>Выберите темы для группы</p>
       <c:forEach var = "th" items="${mapITe}">
-          <c:out value = "${th.value}" />
+          <c:out value = "${th.value.theamName}" />
           <input type="checkbox" name="th" value="${th.key}"> <br>
        </c:forEach>
 

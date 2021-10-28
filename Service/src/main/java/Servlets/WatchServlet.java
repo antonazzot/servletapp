@@ -66,26 +66,25 @@ public class WatchServlet extends HttpServlet {
                 catch (IllegalArgumentException e) {
                     req.getRequestDispatcher("exeception.jsp").forward(req, resp);
                 }
-                if (user.equals("student") || user.equals("trainer") || user.equals("administrator")){
-                    RepositoryFactory.getRepository().removeUser(entityId, user);
-                    }
-                else
-
-                if (user.equals("theam")) {
-
-                }
+                RepositoryFactory.getRepository().removeUser(entityId, user);
                 req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
 
         } else if (act.equalsIgnoreCase("change")) {
             // change entity
-            if (!user.equals("group")) {
+            if (!user.equals("group") && !user.equals("theam")) {
                 log.info("Change entity ={}", user);
                 req.setAttribute("map", mapToChange(user));
                 req.getRequestDispatcher("adminControl/changeUser.jsp").forward(req, resp);
-            } else {
+            } else
+                if (user.equals("theam")) {
                 req.setAttribute("map", DataBaseInf.groupHashMap);
                 req.getRequestDispatcher("adminControl/changeGroup.jsp").forward(req, resp);
             }
+            if (user.equals("group")) {
+                req.setAttribute("map", ThreadRepositoryImpl.getInstance().allGroup());
+                req.getRequestDispatcher("adminControl/changeGroup.jsp").forward(req, resp);
+            }
+
 
         } else if(act.equalsIgnoreCase("watch"))
             {
@@ -103,7 +102,7 @@ public class WatchServlet extends HttpServlet {
             else
             {
                 req.setAttribute("map", ThreadRepositoryImpl.getInstance().allTheams());
-                req.getRequestDispatcher("demonstrate.jsp").forward(req, resp);
+                req.getRequestDispatcher("adminControl/theamdemonstrate.jsp").forward(req, resp);
             }
     }
 
@@ -135,14 +134,14 @@ public class WatchServlet extends HttpServlet {
         HashMap <Integer, UserImpl> result =  new HashMap<>();
         switch (user) {
             case "student":
-                result = (HashMap<Integer, UserImpl>) DataBaseInf.studentHashMap;
+                result = RepositoryFactory.getRepository().allStudent();
                 break;
             case "trainer":
                 log.info("Watch student ={}", user);
-                result = (HashMap<Integer, UserImpl>) DataBaseInf.trainerHashMap;
+                result = RepositoryFactory.getRepository().allTrainer();
                 break;
             case "administrator":
-                result = (HashMap<Integer, UserImpl>) DataBaseInf.adminHashMap;
+                result = RepositoryFactory.getRepository().allAdmin();
                 break;
                   }
                   return result;

@@ -13,7 +13,7 @@
   <p></p>
  <form id="data" action="hello">
          <c:forEach var = "entry" items="${map}">
-         <c:out value = "${entry.key}" /> <br>
+         <c:out value = "${entry.key.theamName}" /> <br>
           <c:forEach var = "list" items="${entry.value}">
            <c:out value = "${list.valuesOfMark}" /> <br>
             </c:forEach>
