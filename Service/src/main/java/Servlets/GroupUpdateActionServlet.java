@@ -2,6 +2,7 @@ package Servlets;
 
 import DataBase.DataBaseInf;
 import DAO.DaoImp;
+import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Group;
 import ThreadModel.Theams;
 import Users.Student;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+
 /**
  Servlet make change in the group by data
  took from JSP
@@ -25,13 +28,32 @@ public class GroupUpdateActionServlet extends HttpServlet {
     static final Logger log = LoggerFactory.getLogger(UserActionServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        int [] studentInGroupForDeletedId = checkAndConverterParamToInt(req.getParameterValues("grstid"));
-        int [] studentForAddId = checkAndConverterParamToInt(req.getParameterValues("astid"));
-        int [] theamsInGroupForDeleteId = checkAndConverterParamToInt(req.getParameterValues("astid"));
-        int [] theamForAddId = checkAndConverterParamToInt(req.getParameterValues("frth"));
-        int newTrainerId = req.getParameter("frtr").equals("") ? 0 : Integer.parseInt(req.getParameter("frtr"));
-
+        int [] entytiIdforact = null;
+        String act = req.getParameter("act");
+        int groupId = Integer.parseInt(req.getParameter("id"));
+        switch (act) {
+            case "studentdelete":
+                entytiIdforact = checkAndConverterParamToInt(req.getParameterValues("grstid"));
+                break;
+            case "studentadd":
+                entytiIdforact = checkAndConverterParamToInt(req.getParameterValues("astid"));
+                break;
+            case "theamdelete":
+                entytiIdforact = checkAndConverterParamToInt(req.getParameterValues("grth"));
+                break;
+            case "theamadd":
+                entytiIdforact = checkAndConverterParamToInt(req.getParameterValues("frth"));
+                break;
+            case "trainer":
+                int newTrainerId = req.getParameter("frtr").equals("") ? 0 : Integer.parseInt(req.getParameter("frtr"));
+                entytiIdforact  = new int [1];
+                entytiIdforact [0] = newTrainerId;
+                break;
+        }
+        log.info("In sservlet updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
+        ThreadRepositoryImpl.getInstance().updateGroup(groupId, act, entytiIdforact );
+        req.setAttribute("map", ThreadRepositoryImpl.getInstance().allGroup());
+        req.getRequestDispatcher("adminControl/actionchangegroup.jsp").forward(req, resp);
 
     }
 

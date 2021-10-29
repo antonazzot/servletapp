@@ -77,8 +77,8 @@ public class WatchServlet extends HttpServlet {
                 req.getRequestDispatcher("adminControl/changeUser.jsp").forward(req, resp);
             } else
                 if (user.equals("theam")) {
-                req.setAttribute("map", DataBaseInf.groupHashMap);
-                req.getRequestDispatcher("adminControl/changeGroup.jsp").forward(req, resp);
+                req.setAttribute("map", ThreadRepositoryImpl.getInstance().allTheams());
+                req.getRequestDispatcher("adminControl/changeTheam.jsp").forward(req, resp);
             }
             if (user.equals("group")) {
                 req.setAttribute("map", ThreadRepositoryImpl.getInstance().allGroup());

@@ -564,5 +564,81 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             e.printStackTrace();
         }
     }
+
+    public void updateGroup(int groupId, String act, int[] entytiIdforact) {
+        log.info("In repository updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
+        try (Connection connection = datasourse.getConnection()) {
+            switch (act) {
+                case "studentdelete":
+                    for (int i = 0; i < entytiIdforact.length; i++) {
+                        PreparedStatement ps = connection.prepareStatement
+                                ("delete from student_group where student_id = ? and group_id =?");
+                        ps.setInt(1, entytiIdforact[i]);
+                        ps.setInt(2, groupId);
+                        ps.executeUpdate();
+                        ps.close();
+                    }
+                    break;
+                case "studentadd":
+                    for (int i = 0; i < entytiIdforact.length; i++) {
+                        PreparedStatement ps = connection.prepareStatement
+                                ("insert into student_group (student_id, group_id)  values (?, ?)");
+                        ps.setInt(1, entytiIdforact[i]);
+                        ps.setInt(2, groupId);
+                        ps.executeUpdate();
+                        ps.close();
+                    }
+                    break;
+                case "theamdelete":
+                    for (int i = 0; i < entytiIdforact.length; i++) {
+                        PreparedStatement ps = connection.prepareStatement
+                                ("delete from theam_group where theam_id = ? and group_id =?");
+                        ps.setInt(1, entytiIdforact[i]);
+                        ps.setInt(2, groupId);
+                        ps.executeUpdate();
+                        ps.close();
+                    }
+                    break;
+                case "theamadd":
+                    for (int i = 0; i < entytiIdforact.length; i++) {
+                        PreparedStatement ps = connection.prepareStatement
+                                ("insert into theam_group (theam_id, group_id) values (?, ?) ");
+                        ps.setInt(1, entytiIdforact[i]);
+                        ps.setInt(2, groupId);
+                        ps.executeUpdate();
+                        ps.close();
+                    }
+                    break;
+                case "trainer":
+                    PreparedStatement ps = connection.prepareStatement
+                            ("update \"group\" set trainer_id = ? where id = ? ");
+                    ps.setInt(1, entytiIdforact[0]);
+                    ps.setInt(2, groupId);
+                    ps.executeUpdate();
+                    ps.close();
+                    break;
+            }
+        }
+        catch (SQLException e) {
+            log.info("EROR in SQL = {} ", e.getMessage());
+                    }
+
+    }
+
+    public void updateTheam(int theamId, String theamName) {
+        try (Connection connection = datasourse.getConnection()){
+
+                log.info("In updateTheamRepository = {}", theamId + " " + theamName );
+                PreparedStatement ps = connection.prepareStatement(
+                        "update theam set theam_name = ? where id = ?");
+                ps.setString(1, theamName);
+                ps.setInt(2, theamId);
+                ps.executeUpdate();
+
+        } catch (SQLException e) {
+            log.info("error ={}", e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
 

@@ -33,3 +33,4 @@ Repository\ThreadModelRep\ThreadRepositoryImpl.class
 Servlets\GroupCreaterServlet.class
 Servlets\StudentServlet.class
 Repository\UserRepositoryImplInMemory.class
+Servlets\TheamUpdateServlet.class
