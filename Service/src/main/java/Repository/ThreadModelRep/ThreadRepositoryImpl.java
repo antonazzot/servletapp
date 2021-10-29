@@ -151,7 +151,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
         studentTheamMarkMap.put(RepositoryFactory.getRepository().allStudent().get(studentId), theamsListHashMap);
         return  studentTheamMarkMap;
     }
-
+    @Override
     public List<Mark> getMarkListbyTheam(Theams theam, int studentId) {
         List <Mark> marks = new ArrayList<>();
         log.info("In getMarkListMethd getTheam method = {}",theam.getTheamName()+studentId);
@@ -173,7 +173,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
         }
         return marks;
     }
-
+    @Override
     public HashMap<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId) {
         HashMap<Integer, Mark> marks = new HashMap<>();
         log.info("In getMarkListMethd getTheam method = {}",theam.getTheamName()+studentId);

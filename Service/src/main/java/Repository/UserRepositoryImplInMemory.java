@@ -1,13 +1,19 @@
 package Repository;
 
+import DataBase.DataBaseInf;
+import ThreadModel.Group;
 import Users.*;
+import lombok.extern.slf4j.Slf4j;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-
+@Slf4j
 public class UserRepositoryImplInMemory implements UserRepository {
     private static UserRepositoryImplInMemory instance;
     public static Map <Integer, Trainer> userMap = new ConcurrentHashMap<>();
@@ -28,42 +34,90 @@ public class UserRepositoryImplInMemory implements UserRepository {
 
     @Override
     public HashMap<Integer, UserImpl> allUser() {
-        return null;
+        HashMap <Integer, UserImpl> allUsers = new HashMap<>();
+        allUsers.putAll(DataBaseInf.trainerHashMap);
+        allUsers.putAll(DataBaseInf.studentHashMap);
+        allUsers.putAll(DataBaseInf.trainerHashMap);
+        return allUsers;
     }
 
     @Override
     public HashMap<Integer, UserImpl> allTrainer() {
-        return null;
+      return (HashMap<Integer, UserImpl>) DataBaseInf.trainerHashMap;
     }
 
     @Override
     public HashMap<Integer, UserImpl> allStudent() {
-        return null;
+        return (HashMap<Integer, UserImpl>) DataBaseInf.studentHashMap;
     }
 
     @Override
     public HashMap<Integer, UserImpl> allAdmin() {
-        return null;
+        return (HashMap<Integer, UserImpl>) DataBaseInf.adminHashMap;
     }
 
     @Override
     public UserImpl getUserById(Integer id) {
-        return null;
+        return allUser().get(id);
     }
 
     @Override
     public int saveUser(UserImpl user) {
-        return 0;
+        switch (user.getRole()) {
+            case ADMINISTRATOR: DataBaseInf.adminHashMap.put(user.getId(),user);
+            break;
+            case TRAINER: DataBaseInf.trainerHashMap.put(user.getId(), user);
+            break;
+            case STUDENT: DataBaseInf.studentHashMap.put(user.getId(), user);
+        }
+        return user.getId();
     }
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-        return Optional.empty();
+        if (entity.equals("student") || entity.equals("trainer") || entity.equals("administrator")){
+            entity = "user";
+        }
+        log.info("In remove method ={}", "ID: " + id + " Entity: " + entity);
+        try {
+            switch (entity) {
+                case "user":
+                {
+                    UserImpl user = allUser().get(id);
+                    switch (user.getRole()) {
+                        case ADMINISTRATOR: DataBaseInf.adminHashMap.remove(id);
+                            break;
+                        case TRAINER: DataBaseInf.trainerHashMap.remove(id);
+                            break;
+                        case STUDENT: DataBaseInf.studentHashMap.remove(id);
+                    }
+                } break;
+                case "group":
+                {
+                   DataBaseInf.groupHashMap.remove(id);
+                } break;
+                case "theam":
+                {
+                    DataBaseInf.theamsHashMap.remove(id);
+                } break;
+            }
+
+        } catch (IllegalArgumentException e) {
+            log.info("SQL EROR ={}", e.getMessage());
+            e.printStackTrace();
+        }
+        return  Optional.empty();
     }
 
     @Override
     public UserImpl updateUser(UserImpl user) {
-        return null;
+        UserImpl newUser = allUser().get(user.getId());
+        newUser.withRole(user.getRole())
+                .withName(user.getName())
+                .withLogin(user.getLogin())
+                .withPassword(user.getPassword())
+                .withAge(user.getAge());
+        return newUser;
     }
 
     @Override
@@ -73,12 +127,17 @@ public class UserRepositoryImplInMemory implements UserRepository {
 
     @Override
     public ArrayList< UserImpl> studentFromGroup(Integer groupId) {
-        return null;
-    }
+        Group group = DataBaseInf.groupHashMap.get(groupId);
+        return (ArrayList<UserImpl>) group.getStudentMap().values();
+     }
 
     @Override
     public UserImpl getUserByParam(String name, String login, String pass, int age) {
-        return null;
+               return allUser().values().stream().filter(user ->
+                user.getName().equalsIgnoreCase(name)
+                && user.getPassword().equalsIgnoreCase(pass)
+                && user.getLogin().equalsIgnoreCase(login)
+                && user.getAge() == age).findAny().get();
     }
 
 }

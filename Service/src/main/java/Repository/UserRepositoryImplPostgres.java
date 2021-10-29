@@ -255,9 +255,6 @@ public class UserRepositoryImplPostgres implements UserRepository {
             log.info("SQL EROR ={}", e.getMessage());
             e.printStackTrace();
         }
-
-
-
         return null;
     }
 

@@ -53,7 +53,7 @@ public class GroupUpdateActionServlet extends HttpServlet {
         log.info("In sservlet updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
         ThreadRepositoryImpl.getInstance().updateGroup(groupId, act, entytiIdforact );
         req.setAttribute("map", ThreadRepositoryImpl.getInstance().allGroup());
-        req.getRequestDispatcher("adminControl/actionchangegroup.jsp").forward(req, resp);
+        req.getRequestDispatcher("adminControl/changeGroup.jsp").forward(req, resp);
 
     }
 

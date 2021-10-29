@@ -14,4 +14,5 @@ public final class DataBaseInf {
     public static Map <Integer, Theams> theamsHashMap = new HashMap <>();
     public static Map <Integer, UserImpl> adminHashMap = new HashMap <>();
     public static Map <Integer, Group> groupHashMap = new HashMap <>();
+    public static Map <Integer, Theams> theamsMap = new HashMap<>();
     }

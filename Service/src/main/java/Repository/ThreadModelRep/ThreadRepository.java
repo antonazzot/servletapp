@@ -17,6 +17,9 @@ public interface ThreadRepository {
     HashMap <Integer, Theams> allTheams();
     HashMap <Trainer, List<Salary>> trainerSalary ();
     HashMap <UserImpl,HashMap<Theams, List<Mark>>> studentTheamMark (int StudentId);
+
+    List<Mark> getMarkListbyTheam(Theams theam, int studentId);
+
     Theams theamById (Integer id);
     Set <Theams> theamFromGroup (Integer groupId);
     HashMap <Integer, UserImpl> studentsFromGroup (int groupId);
