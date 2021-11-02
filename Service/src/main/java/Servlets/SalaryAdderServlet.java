@@ -1,10 +1,6 @@
 package Servlets;
 
-import DAO.DaoImp;
 import Repository.ThreadModelRep.ThreadRepositoryFactory;
-import Repository.ThreadModelRep.ThreadRepositoryImpl;
-import ThreadModel.Salary;
-import Users.Trainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 /**
  Servlet add salary to the trainer by inf

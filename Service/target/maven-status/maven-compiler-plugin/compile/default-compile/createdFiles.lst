@@ -1,9 +1,7 @@
-DAO\DaoImp.class
 Repository\RepositoryTypes.class
 Repository\UserRepositoryImplPostgres.class
 Servlets\TrainerAddSalaryServlet.class
 Servlets\UserActionServlet.class
-DAO\Dao.class
 Servlets\Filters\AbstractFilter.class
 Repository\RepositoryFactory$1.class
 Repository\RepositoryFactory.class
@@ -28,7 +26,6 @@ Servlets\Filters\StartFilter.class
 Servlets\ActionChangeServlet.class
 Servlets\ChangeAndCreateMarkServlet.class
 Servlets\CalculateAvarageSalaryServlet.class
-DAO\DataBaseConnection.class
 Servlets\Filters\StudentFilter.class
 Servlets\Filters\TrainerFilter.class
 Servlets\Filters\UserFilter.class

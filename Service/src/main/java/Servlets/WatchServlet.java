@@ -1,12 +1,8 @@
 package Servlets;
 
-import Action.IndividSetMap;
-import Action.individTrainerMap;
 import DataBase.DataBaseInf;
-import DAO.DaoImp;
 import Repository.RepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryFactory;
-import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Group;
 import ThreadModel.Theams;
 import Users.*;

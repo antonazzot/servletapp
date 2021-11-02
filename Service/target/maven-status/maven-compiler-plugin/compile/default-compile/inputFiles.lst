@@ -1,7 +1,6 @@
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\TheamUpdateServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\ChangeUser.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\Filters\UserFilter.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\DAO\Dao.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\AvarageSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\CalculateAvarageSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\ChangeAndCreateMarkServlet.java
@@ -26,11 +25,9 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Repository\UserRep
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\StudentServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\Filters\AbstractFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Repository\ThreadModelRep\ThreadRepositoryImplInMemory.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\DAO\DataBaseConnection.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\GroupUpdateActionServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Repository\RepositoryFactory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\UpdateGroup.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\DAO\DaoImp.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Repository\RepositoryTypes.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\UserActionServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\Servlets\GroupCreaterServlet.java

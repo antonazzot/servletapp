@@ -1,21 +1,16 @@
 package Servlets;
 
-import Action.IdFactory;
 import Repository.RepositoryFactory;
-import Repository.ThreadModelRep.ThreadRepositoryFactory;
-import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import Users.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  This servlet  creates some user depending on the selected role

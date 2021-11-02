@@ -1,6 +1,5 @@
 package Servlets;
 
-import Action.IdFactory;
 import Repository.RepositoryFactory;
 import Users.Administrator;
 import Users.Role;
@@ -42,8 +41,8 @@ public class StartPage extends HttpServlet {
                Administrator administrator = (Administrator) new Administrator()
                        .withRole(Role.ADMINISTRATOR)
                        .withName("Anton")
-                       .withLogin("admin")
-                       .withPassword("pass")
+                       .withLogin(adminLogin)
+                       .withPassword(adminPassword)
                        .withAge(34);
 
                log.info("Types of using memory ={}", properties.getProperty("repository.type"));

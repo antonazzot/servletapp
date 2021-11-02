@@ -1,12 +1,8 @@
 package Servlets;
 
-import DataBase.DataBaseInf;
-import DAO.DaoImp;
 import Repository.ThreadModelRep.ThreadRepositoryFactory;
-import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Salary;
 import Users.Trainer;
-import Users.UserImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 /**
     Servlet  provides  information to JSP
  for add salary to the trainer

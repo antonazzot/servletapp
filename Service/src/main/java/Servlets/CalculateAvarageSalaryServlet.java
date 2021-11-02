@@ -1,12 +1,8 @@
 package Servlets;
 
-import DAO.DaoImp;
-import Repository.RepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryFactory;
-import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Salary;
 import Users.Trainer;
-import Users.UserImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +23,6 @@ public class CalculateAvarageSalaryServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String trainerId = req.getParameter("trainer");
         String sal = req.getParameter("sal");
-        DaoImp daoImp = new DaoImp();
         Trainer trainer = null;
         long longavaragessalary = 0;
             Writer writer = resp.getWriter();

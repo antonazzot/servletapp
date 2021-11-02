@@ -1,6 +1,6 @@
 package Repository;
 
-import Users.*;
+import Users.UserImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,5 +17,5 @@ public interface UserRepository {
     UserImpl updateUser (UserImpl user);
     HashMap<Integer, UserImpl> freeTrainer();
     ArrayList <UserImpl> studentFromGroup (Integer groupId);
-    UserImpl getUserByParam (String name, String login, String pass, int age);
+
  }

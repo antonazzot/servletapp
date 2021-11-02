@@ -1,8 +1,9 @@
 package Users;
 
-import DataBase.DataBaseInf;
-import ThreadModel.Mark;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 
 @AllArgsConstructor

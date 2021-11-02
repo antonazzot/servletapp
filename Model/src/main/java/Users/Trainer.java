@@ -1,12 +1,10 @@
 package Users;
 
-import DataBase.*;
-import ThreadModel.*;
+import ThreadModel.Salary;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

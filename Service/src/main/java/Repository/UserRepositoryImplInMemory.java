@@ -155,13 +155,5 @@ public class UserRepositoryImplInMemory implements UserRepository {
         return new ArrayList<>(group.getStudentMap().values());
      }
 
-    @Override
-    public UserImpl getUserByParam(String name, String login, String pass, int age) {
-               return allUser().values().stream().filter(user ->
-                user.getName().equalsIgnoreCase(name)
-                && user.getPassword().equalsIgnoreCase(pass)
-                && user.getLogin().equalsIgnoreCase(login)
-                && user.getAge() == age).findAny().get();
-    }
 
 }

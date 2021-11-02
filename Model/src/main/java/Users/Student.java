@@ -1,10 +1,12 @@
 package Users;
-import DataBase.DataBaseInf;
-import ThreadModel.*;
+
+import ThreadModel.Mark;
+import ThreadModel.Theams;
 import lombok.*;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -36,11 +38,6 @@ public class Student extends UserImpl {
         return this;
     }
 
-    public Student addListOfMark (Mark mark) {
-
-        return this;
-    }
-
     public void addTheam (Theams theams) {
         if (!this.listOfMark.containsKey(theams))
             this.listOfMark.put(theams, new ArrayList<Mark>());
@@ -48,18 +45,7 @@ public class Student extends UserImpl {
 
     @Override
     public  String getInf () {
-    String inf;
-    ArrayList <String> strings = new ArrayList<>();
-//    for (
-//    Map.Entry<Theams, List<Mark>> entry: this.listOfMark.entrySet()){
-//        String temp = entry.getKey().name() + ": " + '\n' +
-//                Arrays.toString(entry.getValue().stream().
-//                        map(m -> m.getValuesOfMark()).
-//                        collect(Collectors.toList()).
-//                        toString().split("/ "));
-//        strings.add("Mark:" + temp);
-//        }
-    return inf = "ID: " + this.getId() + " Name: " +  this.getName() + " Theams: " + strings.toString();
+    return toString();
     }
 
 }

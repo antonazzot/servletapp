@@ -2,7 +2,6 @@ package Servlets;
 
 import Repository.RepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryFactory;
-import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Group;
 import ThreadModel.Mark;
 import ThreadModel.Theams;

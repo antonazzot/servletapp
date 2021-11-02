@@ -9,10 +9,9 @@ essence in database
 public final class IdFactory {
     private IdFactory() {
     }
-
-    private static int generalID = 0;
+    private static volatile int generalID = 0;
     public static synchronized int  idBuilder() {
         AtomicInteger id =  new AtomicInteger(generalID++);
-        return generalID;
+        return id.get();
     }
 }

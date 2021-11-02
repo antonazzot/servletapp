@@ -325,38 +325,38 @@ public class UserRepositoryImplPostgres implements UserRepository {
         return result;
     }
 
-    @Override
-    public UserImpl getUserByParam(String name, String login, String pass, int age) {
-        UserImpl user = new UserImpl();
-        log.info("Get userByPARAM = {}", "Name:" +  name + " Login: " + login + " Password: " +
-                 pass + " Age: " +  age);
-        try (Connection connection = datasourse.getConnection()){
-            PreparedStatement ps = connection.prepareStatement(
-                    "select * from users " +
-                            " where \"name\" = "   +  name +
-                            " and \"login\" = " + login +
-                            " and \"password\" = " + pass +
-                            " and \"age\" = " + age
-                            );
-
-            ResultSet rs =ps.executeQuery();
-            log.info("After ps block");
-            while (rs.next()){
-                user = user
-                        .withId(rs.getInt("id"))
-                        .withLogin(rs.getString("login"))
-                        .withPassword(rs.getString("password"))
-                        .withName(rs.getString("name"))
-                        .withAge(rs.getInt("age"))
-                        .withRole(checkRole(rs.getInt("role_id")));
-                log.info("after while");
-            }
-        } catch (SQLException e) {
-            log.info(e.getMessage());
-            e.printStackTrace();
-        }
-        return user;
-    }
+//    @Override
+//    public UserImpl getUserByParam(String name, String login, String pass, int age) {
+//        UserImpl user = new UserImpl();
+//        log.info("Get userByPARAM = {}", "Name:" +  name + " Login: " + login + " Password: " +
+//                 pass + " Age: " +  age);
+//        try (Connection connection = datasourse.getConnection()){
+//            PreparedStatement ps = connection.prepareStatement(
+//                    "select * from users " +
+//                            " where \"name\" = "   +  name +
+//                            " and \"login\" = " + login +
+//                            " and \"password\" = " + pass +
+//                            " and \"age\" = " + age
+//                            );
+//
+//            ResultSet rs =ps.executeQuery();
+//            log.info("After ps block");
+//            while (rs.next()){
+//                user = user
+//                        .withId(rs.getInt("id"))
+//                        .withLogin(rs.getString("login"))
+//                        .withPassword(rs.getString("password"))
+//                        .withName(rs.getString("name"))
+//                        .withAge(rs.getInt("age"))
+//                        .withRole(checkRole(rs.getInt("role_id")));
+//                log.info("after while");
+//            }
+//        } catch (SQLException e) {
+//            log.info(e.getMessage());
+//            e.printStackTrace();
+//        }
+//        return user;
+//    }
 
     private HashMap <Integer, UserImpl> freeTrainerexecute(ArrayList<UserImpl> busyTrainer) {
         HashMap <Integer, UserImpl> result =  new HashMap<>(allTrainer());

@@ -1,12 +1,9 @@
 package Servlets;
 
-import DAO.DaoImp;
 import Repository.RepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryFactory;
-import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Mark;
 import ThreadModel.Theams;
-import Users.Student;
 import Users.UserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

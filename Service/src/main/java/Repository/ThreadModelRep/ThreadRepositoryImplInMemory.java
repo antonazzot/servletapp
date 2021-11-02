@@ -128,7 +128,7 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
             .withTrainer(RepositoryFactory.getRepository().getUserById(trainerId))
             .withTheam(theams);
         log.info("Group was create = {}", "Group name:" + group.getName() +
-                " group student: " +group.getStudentMap().values().toString()  +" " + group.getTheamsSet().toString());
+                " group student: " +group.getStudentMap().values()  +" " + group.getTheamsSet().toString());
         DataBaseInf.groupHashMap.put(group.getId(), group);
     }
 
@@ -187,8 +187,7 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
     public void deleteMarksById(int[] tempMarksId, int theamId, int studentid) {
        Student student = (Student) DataBaseInf.studentHashMap.get(studentid);
        Theams tempTheam = theamById(theamId);
-        for (int i = 0; i < tempMarksId.length; i++) {
-            int tempId = tempMarksId[i];
+        for (int tempId : tempMarksId) {
             Mark markforDelete = student.getListOfMark().get(tempTheam).stream().filter(mark -> mark.getId() == tempId).findAny().get();
             student.getListOfMark().get(tempTheam).remove(markforDelete);
         }
