@@ -2,6 +2,7 @@ package Servlets;
 
 import Action.IdFactory;
 import Repository.RepositoryFactory;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import Users.*;
 import org.slf4j.Logger;
@@ -28,6 +29,7 @@ public class UserActionServlet extends HttpServlet {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
+
         int age =0;
         try {age = Integer.parseInt(req.getParameter("age"));
                     } catch (IllegalArgumentException e) {
@@ -43,7 +45,7 @@ public class UserActionServlet extends HttpServlet {
         UserImpl user;
         if (role.equalsIgnoreCase("administrator")) {
             user =  new Administrator()
-                  .withRole(Role.ADMINISTRATOR)
+                    .withRole(Role.ADMINISTRATOR)
                    .withName(name)
                    .withLogin(login)
                    .withPassword(pass)
@@ -63,8 +65,6 @@ public class UserActionServlet extends HttpServlet {
 
             int trainerId =  RepositoryFactory.getRepository().saveUser(trainer);
             log.info("returning value TrainerId ={}", trainerId);
-            ThreadRepositoryImpl.getInstance().addTrainerToSalaryTable(trainerId);
-            log.info("Trainer  add = {}", trainer);
         } else {
             Student student = (Student) new Student()
                     .withRole(Role.STUDENT)

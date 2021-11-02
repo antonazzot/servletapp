@@ -21,10 +21,17 @@ public class RepositoryFactory {
     }
 
     public static UserRepository getRepository () {
+
         switch (TYPES) {
-            case MEMORY:  return  UserRepositoryImplInMemory.getInstance();
-            case POSTGRES: return UserRepositoryImplPostgres.getInstance();
+            case MEMORY:
+                return  UserRepositoryImplInMemory.getInstance();
+
+            case POSTGRES:
+                return UserRepositoryImplPostgres.getInstance();
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + TYPES);
         }
-        return UserRepositoryImplPostgres.getInstance();
+
     }
 }

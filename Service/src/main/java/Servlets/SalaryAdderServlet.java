@@ -1,6 +1,7 @@
 package Servlets;
 
 import DAO.DaoImp;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Salary;
 import Users.Trainer;
@@ -35,7 +36,7 @@ public class SalaryAdderServlet extends HttpServlet {
             try {
                 int id = Integer.parseInt(tr);
                 int salary = Integer.parseInt(sal);
-                ThreadRepositoryImpl.getInstance().addSalaryToTrainer(id, salary);
+                ThreadRepositoryFactory.getRepository().addSalaryToTrainer(id, salary);
                 result = "adminControl/adminActList.jsp";
             } catch (IllegalArgumentException e) {
                 result = "exeception.jsp";

@@ -2,6 +2,7 @@ package Servlets;
 
 import DataBase.DataBaseInf;
 import DAO.DaoImp;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Salary;
 import Users.Trainer;
@@ -30,7 +31,7 @@ public class TrainerAddSalaryServlet extends HttpServlet {
     }
 
     private HashMap<Trainer, List<Salary>> salaryHashMap() {
-       return ThreadRepositoryImpl.getInstance().trainerSalary();
+       return ThreadRepositoryFactory.getRepository().trainerSalary();
     }
 }
 

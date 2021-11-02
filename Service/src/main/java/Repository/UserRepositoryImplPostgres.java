@@ -1,7 +1,6 @@
 package Repository;
 
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
-import ThreadModel.Theams;
 import Users.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Optional;
 @Slf4j
 public class UserRepositoryImplPostgres implements UserRepository {
 
@@ -82,7 +83,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
                 Integer trainerId = rs.getInt("id");
                 if (!rs.rowDeleted())
                 trainers.put( trainerId,
-                        (Trainer) trainer
+                        trainer
                                 .withId(trainerId)
                                 .withRole(checkRole(rs.getInt("role_id")))
                                 .withLogin(rs.getString("login"))
@@ -113,7 +114,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
                 Integer studentId = rs.getInt("id");
                     if (!rs.rowDeleted())
                 students.put(studentId,
-                        (Student) student
+                        student
                                 .withTheamMark(new HashMap<>())
                                 .withId(studentId)
                                 .withLogin(rs.getString("login"))
@@ -145,7 +146,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
                 Integer adminId = rs.getInt("id");
                     if (!rs.rowDeleted())
                 administrators.put(adminId,
-                        (Administrator) administrator
+                        administrator
                                 .withId(adminId)
                                 .withLogin(rs.getString("login"))
                                 .withPassword(rs.getString("password"))
@@ -204,6 +205,9 @@ public class UserRepositoryImplPostgres implements UserRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        if (userGetRoleForDB(user.getRole())==2) {
+           addTrainerToSalaryTable(userId);
+        }
         return userId;
     }
 
@@ -255,7 +259,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
             log.info("SQL EROR ={}", e.getMessage());
             e.printStackTrace();
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
@@ -324,9 +328,9 @@ public class UserRepositoryImplPostgres implements UserRepository {
     @Override
     public UserImpl getUserByParam(String name, String login, String pass, int age) {
         UserImpl user = new UserImpl();
-        log.info("Get userByPARAM = {}", name, login, pass, age);
+        log.info("Get userByPARAM = {}", "Name:" +  name + " Login: " + login + " Password: " +
+                 pass + " Age: " +  age);
         try (Connection connection = datasourse.getConnection()){
-            log.info("in try block", name, login, pass, age);
             PreparedStatement ps = connection.prepareStatement(
                     "select * from users " +
                             " where \"name\" = "   +  name +
@@ -365,6 +369,23 @@ public class UserRepositoryImplPostgres implements UserRepository {
         }
         return result;
     }
+
+    private void addTrainerToSalaryTable(int trainerId) {
+        try (Connection connection = datasourse.getConnection()){
+            PreparedStatement ps = connection.prepareStatement(
+                    "insert into salary (trainer_id)" +
+                            "values (?)" );
+            ps.setInt(1, trainerId);
+            ps.executeUpdate();
+            log.info("connection over");
+
+        } catch (SQLException e) {
+            log.info("error = {}", e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 }

@@ -11,14 +11,14 @@
 <h1> Trainer control List </h1>
 
  <p>Name: ${student.name} </p>
-  <p>Theam: ${tempth.theamName} </p>
+  <p>Theam: ${th.theamName}  </p>
 
   <p>ВВедите новое значение для изменения оценки</p>
 
     <form id="data"  action="changeandcreatemark">
     <input type="hidden" name="student" value="${student.id}"/>
     <input type="hidden" name="act" value="change"/>
-    <input type="hidden" name="th" value="${tempth.id}"/>
+    <input type="hidden" name="th" value="${th.id}"/>
 
     <c:forEach var = "entry" items="${map}">
     <c:out value = "${entry.value.valuesOfMark}" /> <br>

@@ -11,13 +11,13 @@
 <h1> Trainer control List </h1>
 
  <p>Name: ${student.name} </p>
- <p>Theam: ${teamth.theamName} </p>
+ <p>Theam: ${th.theamName}  </p>
 
   <p>Выберите оценку для удаления</p>
  <form id="data"  action="changeandcreatemark">
 <input type="hidden" name="student" value="${student.id}"/>
 <input type="hidden" name="act" value="delete"/>
-<input type="hidden" name="th" value="${teamth.id}"/>
+<input type="hidden" name="th" value="${th.id}"/>
     <c:forEach var = "entry" items="${map}">
         <c:out value = "${entry.value.valuesOfMark}" />
         <input type="checkbox"  name="marks"  value="${entry.key}"> <br>

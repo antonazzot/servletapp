@@ -1,5 +1,6 @@
 package Servlets;
 
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 
 import javax.servlet.ServletException;
@@ -14,8 +15,8 @@ public class TheamUpdateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        int theamId = Integer.parseInt(req.getParameter("thid"));
        String theamName = req.getParameter("thname");
-        ThreadRepositoryImpl.getInstance().updateTheam(theamId, theamName);
-        req.setAttribute("map", ThreadRepositoryImpl.getInstance().allTheams());
+        ThreadRepositoryFactory.getRepository().updateTheam(theamId, theamName);
+        req.setAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
         req.getRequestDispatcher("adminControl/changeTheam.jsp").forward(req, resp);
     }
 }

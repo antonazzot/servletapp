@@ -1,9 +1,10 @@
 package Servlets;
 
-import DataBase.DataBaseInf;
-import DAO.DataBaseConnection;
+import Action.IdFactory;
 import Repository.RepositoryFactory;
-import Users.*;
+import Users.Administrator;
+import Users.Role;
+import Users.UserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Properties;
+
 /**
  It's start servlet
  witch create user with Admin role by context inf,
@@ -32,6 +35,9 @@ public class StartPage extends HttpServlet {
             String adminLogin = servletContext.getInitParameter("AdminLogin");
             String adminPassword = servletContext.getInitParameter("AdminPassword");
             HttpSession session = req.getSession();
+               Properties properties = new Properties();
+               properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
+
              {
                Administrator administrator = (Administrator) new Administrator()
                        .withRole(Role.ADMINISTRATOR)
@@ -39,6 +45,9 @@ public class StartPage extends HttpServlet {
                        .withLogin("admin")
                        .withPassword("pass")
                        .withAge(34);
+
+               log.info("Types of using memory ={}", properties.getProperty("repository.type"));
+
                if (RepositoryFactory.getRepository().allUser().values().stream()
                      .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
                              u.getPassword().equals(administrator.getPassword()) &&
@@ -46,8 +55,9 @@ public class StartPage extends HttpServlet {
                              u.getAge()==administrator.getAge())
                 )
                 RepositoryFactory.getRepository().saveUser(administrator);
+                 log.info("Admin = {}", administrator.getInf());
              }
-            log.info("Admin = {}", "Pass ={}", adminLogin, adminPassword);
+
 
             if (session.getAttribute("user")!=null)  {
             UserImpl user = (UserImpl) session.getAttribute("user");

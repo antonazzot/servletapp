@@ -2,16 +2,12 @@ package Repository.ThreadModelRep;
 
 import Repository.RepositoryDatasourse;
 import Repository.RepositoryFactory;
-import Repository.UserRepositoryImplPostgres;
-import Servlets.WatchServlet;
 import ThreadModel.Group;
 import ThreadModel.Mark;
 import ThreadModel.Salary;
 import ThreadModel.Theams;
-import Users.Student;
 import Users.Trainer;
 import Users.UserImpl;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -162,9 +158,10 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int tempMarkValue = rs.getInt("mark_value");
+                int markId = rs.getInt("id");
                 if (!rs.wasNull() && tempMarkValue!=0)
                 {
-               marks.add(new Mark(tempMarkValue));
+               marks.add(new Mark(markId, tempMarkValue));
                log.info("Marks ={}", theam.getTheamName() + " " + tempMarkValue);}
             }
         } catch (SQLException e) {
@@ -185,7 +182,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             while (rs.next()) {
                 int markId = rs.getInt("id");
                 int tempMarkValue = rs.getInt("mark_value");
-                marks.put(markId ,new Mark(tempMarkValue));
+                marks.put(markId ,new Mark(markId, tempMarkValue));
                 log.info("Marks ={}", theam.getTheamName() + " " + tempMarkValue);
             }
 
@@ -250,8 +247,8 @@ public class ThreadRepositoryImpl implements ThreadRepository {
         return result;
 
     }
-
-    public void addTheam (String theam) {
+    @Override
+    public void addTheam(String theam) {
         if (!allTheams().values().stream().map(Theams::getTheamName)
                 .collect(Collectors.toList()).contains(theam))
         {
@@ -269,8 +266,8 @@ public class ThreadRepositoryImpl implements ThreadRepository {
         }
 
     }
-
-    public void addGroup (List<UserImpl> studentList, List <Integer> theamsIdList, Integer trainerId) {
+    @Override
+    public void addGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
 
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(
@@ -369,7 +366,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
         }
         return  groupId;
     }
-
+    @Override
     public HashMap<Integer, Theams> freeTheams() {
         HashMap <Integer,Theams> busyTheam = getBuzyTeam();
         HashMap <Integer,Theams> freeTh = new HashMap<>(allTheams());
@@ -412,30 +409,13 @@ public class ThreadRepositoryImpl implements ThreadRepository {
                 log.info("BUZY theam ADD = {}"+theams.getId(), theams.getTheamName());
             }
         } catch (SQLException e) {
-            log.info("error", e.getMessage());
+            log.info("error ={}", e.getMessage());
             e.printStackTrace();
         }
         return busyTheam;
     }
-
-    private Integer findTheamIdByTheamName(Theams theams) {
-               int theamID = 0;
-                try {
-            Connection connection = datasourse.getConnection();
-            PreparedStatement ps = connection.prepareStatement("select id " +
-                    "from theam  where theam_name = "+theams.getTheamName());
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-              theamID =   rs.getInt("id");
-                }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-     return  theamID;
-    }
-
-    public void addSalaryToTrainer (int trainerId, int salaryValue ) {
+    @Override
+    public void addSalaryToTrainer(int trainerId, int salaryValue ) {
         try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement(
                     "insert into salary (trainer_id, salary_value)" +
@@ -446,28 +426,14 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             log.info("connection over");
 
         } catch (SQLException e) {
-            log.info("error", e.getMessage());
-            e.printStackTrace();
-        }
-
-    }
-    public void addTrainerToSalaryTable (int trainerId) {
-        try (Connection connection = datasourse.getConnection()){
-            PreparedStatement ps = connection.prepareStatement(
-                    "insert into salary (trainer_id)" +
-                            "values (?)" );
-            ps.setInt(1, trainerId);
-            ps.executeUpdate();
-            log.info("connection over");
-
-        } catch (SQLException e) {
-            log.info("error", e.getMessage());
+            log.info("error ={}", e.getMessage());
             e.printStackTrace();
         }
 
     }
 
 
+    @Override
     public void addMarkToStudent(int studentId, int theamID, int markValue) {
            try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement(
@@ -480,12 +446,12 @@ public class ThreadRepositoryImpl implements ThreadRepository {
                   int tempMarkValue = rs.getInt("mark_value");
                 if (rs.wasNull() || tempMarkValue==0 )
                 {
-                    log.info("in while 'if' section", studentId+ " "+theamID+" " + markValue);
+                    log.info("in while 'if' section = {}", studentId+ " "+theamID+" " + markValue);
                     updateMark(studentId, theamID, markValue);
                 }
 
                 else {
-                    log.info("in while 'else' section", studentId+ " "+theamID+" " + markValue);
+                    log.info("in while 'else' section = {}", studentId+ " "+theamID+" " + markValue);
                     insertMark( studentId,  theamID,  markValue);
                 }
 
@@ -493,13 +459,13 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             log.info("connection over");
 
         } catch (SQLException e) {
-            log.info("error", e.getMessage());
+            log.info("error = {}", e.getMessage());
             e.printStackTrace();
         }
     }
 
     private void insertMark(int studentId, int theamID, int markValue) {
-        log.info("in insert section", studentId+ " "+theamID+" " + markValue);
+        log.info("in insert section = {} ", studentId+ " "+theamID+" " + markValue);
         try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement(
                     "insert into mark (mark_value, student_id, theam_id) values (?, ?, ?)");
@@ -510,7 +476,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             ps.executeQuery();
 
         } catch (SQLException e) {
-            log.info("error", e.getMessage());
+            log.info("error = {}", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -531,8 +497,8 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             e.printStackTrace();
         }
     }
-
-    public void deleteMarksById(int[] tempMarksId) {
+    @Override
+    public void deleteMarksById(int[] tempMarksId, int theamId) {
         try (Connection connection = datasourse.getConnection()){
             for (int j : tempMarksId) {
                 PreparedStatement ps = connection.prepareStatement(
@@ -545,8 +511,8 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             e.printStackTrace();
         }
     }
-
-    public void changeMark(HashMap<Integer, Integer> markIdMarkValue) {
+    @Override
+    public void changeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
         try (Connection connection = datasourse.getConnection()){
            for (Map.Entry <Integer, Integer> entry: markIdMarkValue.entrySet()) {
                int tempId = entry.getKey();
@@ -564,46 +530,46 @@ public class ThreadRepositoryImpl implements ThreadRepository {
             e.printStackTrace();
         }
     }
-
+    @Override
     public void updateGroup(int groupId, String act, int[] entytiIdforact) {
         log.info("In repository updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
         try (Connection connection = datasourse.getConnection()) {
             switch (act) {
                 case "studentdelete":
-                    for (int i = 0; i < entytiIdforact.length; i++) {
+                    for (int item : entytiIdforact) {
                         PreparedStatement ps = connection.prepareStatement
                                 ("delete from student_group where student_id = ? and group_id =?");
-                        ps.setInt(1, entytiIdforact[i]);
+                        ps.setInt(1, item);
                         ps.setInt(2, groupId);
                         ps.executeUpdate();
                         ps.close();
                     }
                     break;
                 case "studentadd":
-                    for (int i = 0; i < entytiIdforact.length; i++) {
+                    for (int value : entytiIdforact) {
                         PreparedStatement ps = connection.prepareStatement
                                 ("insert into student_group (student_id, group_id)  values (?, ?)");
-                        ps.setInt(1, entytiIdforact[i]);
+                        ps.setInt(1, value);
                         ps.setInt(2, groupId);
                         ps.executeUpdate();
                         ps.close();
                     }
                     break;
                 case "theamdelete":
-                    for (int i = 0; i < entytiIdforact.length; i++) {
+                    for (int k : entytiIdforact) {
                         PreparedStatement ps = connection.prepareStatement
                                 ("delete from theam_group where theam_id = ? and group_id =?");
-                        ps.setInt(1, entytiIdforact[i]);
+                        ps.setInt(1, k);
                         ps.setInt(2, groupId);
                         ps.executeUpdate();
                         ps.close();
                     }
                     break;
                 case "theamadd":
-                    for (int i = 0; i < entytiIdforact.length; i++) {
+                    for (int j : entytiIdforact) {
                         PreparedStatement ps = connection.prepareStatement
                                 ("insert into theam_group (theam_id, group_id) values (?, ?) ");
-                        ps.setInt(1, entytiIdforact[i]);
+                        ps.setInt(1, j);
                         ps.setInt(2, groupId);
                         ps.executeUpdate();
                         ps.close();
@@ -624,7 +590,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
                     }
 
     }
-
+    @Override
     public void updateTheam(int theamId, String theamName) {
         try (Connection connection = datasourse.getConnection()){
 

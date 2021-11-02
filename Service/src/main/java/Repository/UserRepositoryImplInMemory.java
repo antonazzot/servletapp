@@ -1,22 +1,21 @@
 package Repository;
 
+import Action.IdFactory;
 import DataBase.DataBaseInf;
 import ThreadModel.Group;
-import Users.*;
+import Users.Student;
+import Users.Trainer;
+import Users.UserImpl;
 import lombok.extern.slf4j.Slf4j;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+
 @Slf4j
 public class UserRepositoryImplInMemory implements UserRepository {
     private static UserRepositoryImplInMemory instance;
-    public static Map <Integer, Trainer> userMap = new ConcurrentHashMap<>();
 
     private UserRepositoryImplInMemory() {
     }
@@ -37,7 +36,7 @@ public class UserRepositoryImplInMemory implements UserRepository {
         HashMap <Integer, UserImpl> allUsers = new HashMap<>();
         allUsers.putAll(DataBaseInf.trainerHashMap);
         allUsers.putAll(DataBaseInf.studentHashMap);
-        allUsers.putAll(DataBaseInf.trainerHashMap);
+        allUsers.putAll(DataBaseInf.adminHashMap);
         return allUsers;
     }
 
@@ -63,12 +62,20 @@ public class UserRepositoryImplInMemory implements UserRepository {
 
     @Override
     public int saveUser(UserImpl user) {
+        user.withId(IdFactory.idBuilder());
         switch (user.getRole()) {
-            case ADMINISTRATOR: DataBaseInf.adminHashMap.put(user.getId(),user);
+            case ADMINISTRATOR: DataBaseInf.adminHashMap.put(user.getId(), user);
             break;
-            case TRAINER: DataBaseInf.trainerHashMap.put(user.getId(), user);
+            case TRAINER: {
+                Trainer trainer = (Trainer) user;
+                ((Trainer) user).withSalary(new ArrayList<>());
+                DataBaseInf.trainerHashMap.put(user.getId(), trainer);}
             break;
-            case STUDENT: DataBaseInf.studentHashMap.put(user.getId(), user);
+            case STUDENT: {
+                Student student = (Student)user;
+                student.withTheamMark(new HashMap<>());
+                DataBaseInf.studentHashMap.put(user.getId(), user);
+            }
         }
         return user.getId();
     }
@@ -122,13 +129,30 @@ public class UserRepositoryImplInMemory implements UserRepository {
 
     @Override
     public HashMap<Integer, UserImpl> freeTrainer() {
-        return null;
+        HashMap <Integer, UserImpl> result =  new HashMap<>(DataBaseInf.trainerHashMap);
+        if (DataBaseInf.groupHashMap.values().isEmpty()) {
+            return (HashMap<Integer, UserImpl>) DataBaseInf.trainerHashMap;
+        }
+        else  {
+
+            ArrayList <UserImpl> busyTrainers = (ArrayList<UserImpl>) DataBaseInf.groupHashMap.values().stream()
+                    .map(Group::getTrainer).collect(Collectors.toList());
+            for (UserImpl trainer:
+                DataBaseInf.trainerHashMap.values()) {
+                for (UserImpl busyTrainer:
+                    busyTrainers ) {
+                    if (trainer.getId() == busyTrainer.getId())
+                        result.remove(trainer.getId());
+                }
+            }
+        }
+        return  result;
     }
 
     @Override
-    public ArrayList< UserImpl> studentFromGroup(Integer groupId) {
+    public ArrayList<UserImpl> studentFromGroup(Integer groupId) {
         Group group = DataBaseInf.groupHashMap.get(groupId);
-        return (ArrayList<UserImpl>) group.getStudentMap().values();
+        return new ArrayList<>(group.getStudentMap().values());
      }
 
     @Override

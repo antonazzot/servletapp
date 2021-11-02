@@ -1,6 +1,7 @@
 package Servlets;
 
 import Repository.RepositoryFactory;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Group;
 import ThreadModel.Mark;
@@ -43,7 +44,7 @@ public class TrainerActServlet extends HttpServlet {
         String act = req.getParameter("act");
         String mark = req.getParameter("mark");
         Student student = (Student) RepositoryFactory.getRepository().allStudent().get(userID);
-        Theams tempth = ThreadRepositoryImpl.getInstance().theamById(Integer.parseInt(theam));
+        Theams tempth = ThreadRepositoryFactory.getRepository().theamById(Integer.parseInt(theam));
 
         if (act.equalsIgnoreCase("create")) {
             Group group = (Group) req.getSession().getAttribute("group");
@@ -59,21 +60,22 @@ public class TrainerActServlet extends HttpServlet {
             req.getRequestDispatcher("TrainerControlPage/watchmark.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("delete")) {
             req.setAttribute("student", student);
-            req.setAttribute("theamth", tempth);
-            req.setAttribute("map", ThreadRepositoryImpl.getInstance().getMarkIDListbyTheam(tempth, userID));
+            req.setAttribute("th", tempth);
+            req.setAttribute("map", ThreadRepositoryFactory.getRepository().getMarkIDListbyTheam(tempth, userID));
             req.getRequestDispatcher("TrainerControlPage/deletemark.jsp").forward(req, resp);
         } else if (act.equalsIgnoreCase("change")) {
             req.setAttribute("student", student);
-            req.setAttribute("tempth", tempth);
-           req.setAttribute("map", ThreadRepositoryImpl.getInstance().getMarkIDListbyTheam(tempth, userID));
+            req.setAttribute("th", tempth);
+           req.setAttribute("map", ThreadRepositoryFactory.getRepository().getMarkIDListbyTheam(tempth, userID));
             req.getRequestDispatcher("TrainerControlPage/listofmarkforchange.jsp").forward(req, resp);
         }
     }
 
     private HashMap<Theams, List<Mark>> getTheamsListHashMap(int userID, Theams tempth) {
-        log.info("In servlet getTheam method = {}", userID+tempth.getTheamName());
-        return new HashMap<>(
-                Map.of(tempth, ThreadRepositoryImpl.getInstance().getMarkListbyTheam(tempth, userID) ));
+        Student student = (Student) RepositoryFactory.getRepository().getUserById(userID);
+        HashMap<Theams, List<Mark>> result = new HashMap<>();
+        result.put(tempth, ThreadRepositoryFactory.getRepository().getMarkListbyTheam(tempth, student.getId()));
+        return  result;
     }
 
     private HashMap<Theams, List<Mark>> getHashMapforTheam(Theams th, Student student) {
@@ -93,7 +95,7 @@ public class TrainerActServlet extends HttpServlet {
             return "exeception.jsp";
         }
         log.info("in servlet add ={}", userId+" "+tempTheamID+" " + tempMark);
-        ThreadRepositoryImpl.getInstance().addMarkToStudent(userId, tempTheamID, tempMark);
+        ThreadRepositoryFactory.getRepository().addMarkToStudent(userId, tempTheamID, tempMark);
         return result;
     }
 }

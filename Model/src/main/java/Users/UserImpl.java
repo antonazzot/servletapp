@@ -44,7 +44,7 @@ public class UserImpl implements User {
 
     @Override
     public String getInf() {
-        return "ID " +  getId() + " NAME: " + getName() +
+        return "ID " +  getId() + " NAME: " + getName() + "Login: " + getLogin() +
               " ROLE: " + getRole() + " AGE: " +  getAge() + " PASSWORD: " + getPassword();
     }
 }

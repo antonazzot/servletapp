@@ -2,6 +2,7 @@ package Servlets;
 
 import DAO.DaoImp;
 import Repository.RepositoryFactory;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Salary;
 import Users.Trainer;
@@ -32,7 +33,7 @@ public class CalculateAvarageSalaryServlet extends HttpServlet {
             Writer writer = resp.getWriter();
         if (trainerId != null) {
             int id = Integer.parseInt(trainerId);
-            HashMap<Trainer, List<Salary>> trainerListHashMap = ThreadRepositoryImpl.getInstance().trainerSalary();
+            HashMap<Trainer, List<Salary>> trainerListHashMap = ThreadRepositoryFactory.getRepository().trainerSalary();
             trainer = trainerListHashMap.keySet().stream().filter(t -> t.getId() == id).findAny().get();
             try {
                 int avarageValue = Integer.parseInt(sal);

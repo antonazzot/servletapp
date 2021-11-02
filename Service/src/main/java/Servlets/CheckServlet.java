@@ -1,6 +1,7 @@
 package Servlets;
 
 import DataBase.DataBaseInf;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Group;
 import ThreadModel.Theams;
@@ -49,12 +50,12 @@ public class CheckServlet extends HttpServlet {
             req.getRequestDispatcher("StudentPage/studentstartpage.jsp").forward(req, resp);
         } else if (Role.TRAINER.equals(user.getRole())) {
             logger.info("UserRole ={}", user.getRole());
-            if (ThreadRepositoryImpl.getInstance().allGroup()
+            if (ThreadRepositoryFactory.getRepository().allGroup()
                     .values()
                     .stream()
                     .anyMatch(g -> g.getTrainer().getId() == user.getId()))
             {
-            Group group = ThreadRepositoryImpl.getInstance().allGroup()
+            Group group = ThreadRepositoryFactory.getRepository().allGroup()
                     .values()
                     .stream()
                     .filter(g -> g.getTrainer().getId() == user.getId())

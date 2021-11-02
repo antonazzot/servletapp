@@ -2,6 +2,7 @@ package Servlets;
 
 import DataBase.DataBaseInf;
 import DAO.DaoImp;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Group;
 import ThreadModel.Theams;
@@ -51,8 +52,8 @@ public class GroupUpdateActionServlet extends HttpServlet {
                 break;
         }
         log.info("In sservlet updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
-        ThreadRepositoryImpl.getInstance().updateGroup(groupId, act, entytiIdforact );
-        req.setAttribute("map", ThreadRepositoryImpl.getInstance().allGroup());
+        ThreadRepositoryFactory.getRepository().updateGroup(groupId, act, entytiIdforact );
+        req.setAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
         req.getRequestDispatcher("adminControl/changeGroup.jsp").forward(req, resp);
 
     }

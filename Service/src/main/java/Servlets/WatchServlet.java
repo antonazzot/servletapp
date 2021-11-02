@@ -5,6 +5,7 @@ import Action.individTrainerMap;
 import DataBase.DataBaseInf;
 import DAO.DaoImp;
 import Repository.RepositoryFactory;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Group;
 import ThreadModel.Theams;
@@ -51,7 +52,7 @@ public class WatchServlet extends HttpServlet {
                     log.info("Create group ={}", user);
                     req.setAttribute("mapIS", RepositoryFactory.getRepository().allStudent());
                     req.setAttribute("mapITr", RepositoryFactory.getRepository().freeTrainer());
-                    req.setAttribute("mapITe", ThreadRepositoryImpl.getInstance().freeTheams());
+                    req.setAttribute("mapITe", ThreadRepositoryFactory.getRepository().freeTheams());
                     req.getRequestDispatcher("adminControl/theamscreatelist.jsp").forward(req, resp);
                 }
                 else
@@ -77,11 +78,11 @@ public class WatchServlet extends HttpServlet {
                 req.getRequestDispatcher("adminControl/changeUser.jsp").forward(req, resp);
             } else
                 if (user.equals("theam")) {
-                req.setAttribute("map", ThreadRepositoryImpl.getInstance().allTheams());
+                req.setAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
                 req.getRequestDispatcher("adminControl/changeTheam.jsp").forward(req, resp);
             }
             if (user.equals("group")) {
-                req.setAttribute("map", ThreadRepositoryImpl.getInstance().allGroup());
+                req.setAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
                 req.getRequestDispatcher("adminControl/changeGroup.jsp").forward(req, resp);
             }
 
@@ -101,7 +102,7 @@ public class WatchServlet extends HttpServlet {
              }
             else
             {
-                req.setAttribute("map", ThreadRepositoryImpl.getInstance().allTheams());
+                req.setAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
                 req.getRequestDispatcher("adminControl/theamdemonstrate.jsp").forward(req, resp);
             }
     }
@@ -178,9 +179,9 @@ public class WatchServlet extends HttpServlet {
      **/
     private HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<UserImpl>>> groupStringHashMap() {
         HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<UserImpl>>> hashMap = new HashMap<>();
-        for (Map.Entry<Integer, Group> entry : ThreadRepositoryImpl.getInstance().allGroup().entrySet()) {
+        for (Map.Entry<Integer, Group> entry : ThreadRepositoryFactory.getRepository().allGroup().entrySet()) {
             Group group = entry.getValue();
-            ArrayList <Theams> theams = new ArrayList<>(ThreadRepositoryImpl.getInstance().theamFromGroup(group.getId()));
+            ArrayList <Theams> theams = new ArrayList<>(ThreadRepositoryFactory.getRepository().theamFromGroup(group.getId()));
             ArrayList<UserImpl> students = RepositoryFactory.getRepository().studentFromGroup(group.getId());
             hashMap.put(group, new HashMap<>(Map.of(theams,students)));
         }

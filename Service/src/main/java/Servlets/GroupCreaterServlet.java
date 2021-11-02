@@ -2,6 +2,7 @@ package Servlets;
 
 import DAO.DaoImp;
 import Repository.RepositoryFactory;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Group;
 import ThreadModel.Theams;
@@ -41,7 +42,7 @@ public class GroupCreaterServlet extends HttpServlet {
                 .map(u -> RepositoryFactory.getRepository()
                         .getUserById(Integer.parseInt(u))).collect(Collectors.toList());
         try {
-            ThreadRepositoryImpl.getInstance().addGroup(studentList, thId, trainerID);
+            ThreadRepositoryFactory.getRepository().addGroup(studentList, thId, trainerID);
         req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);}
         catch (IllegalArgumentException e) {
 

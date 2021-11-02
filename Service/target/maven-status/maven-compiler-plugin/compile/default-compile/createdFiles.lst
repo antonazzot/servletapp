@@ -8,6 +8,7 @@ Servlets\Filters\AbstractFilter.class
 Repository\RepositoryFactory$1.class
 Repository\RepositoryFactory.class
 Servlets\TheamAddServlet.class
+Repository\UserRepositoryImplInMemory$1.class
 Servlets\SalaryAdderServlet.class
 Servlets\CheckServlet.class
 Servlets\LogOutServlet.class
@@ -16,9 +17,11 @@ Servlets\WatchServlet.class
 Repository\ThreadModelRep\ThreadRepository.class
 Servlets\ChangeUser.class
 Servlets\UpdateGroup.class
+Repository\ThreadModelRep\ThreadRepositoryFactory$1.class
 Servlets\TrainerActServlet.class
 Repository\UserRepository.class
 Repository\RepositoryDatasourse.class
+Repository\ThreadModelRep\ThreadRepositoryFactory.class
 Servlets\StartPage.class
 Servlets\GroupUpdateActionServlet.class
 Servlets\Filters\StartFilter.class
@@ -30,6 +33,7 @@ Servlets\Filters\StudentFilter.class
 Servlets\Filters\TrainerFilter.class
 Servlets\Filters\UserFilter.class
 Repository\ThreadModelRep\ThreadRepositoryImpl.class
+Repository\ThreadModelRep\ThreadRepositoryImplInMemory.class
 Servlets\GroupCreaterServlet.class
 Servlets\StudentServlet.class
 Repository\UserRepositoryImplInMemory.class

@@ -1,9 +1,6 @@
 package Repository.ThreadModelRep;
 
 import Repository.RepositoryTypes;
-import Repository.UserRepository;
-import Repository.UserRepositoryImplInMemory;
-import Repository.UserRepositoryImplPostgres;
 
 import java.io.IOException;
 import java.util.Properties;

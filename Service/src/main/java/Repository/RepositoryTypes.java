@@ -8,8 +8,8 @@ import java.util.Map;
 public enum RepositoryTypes {
     MEMORY ("memory"),
     POSTGRES ("postgres");
-    private static Map<String, RepositoryTypes> value2Enum = initValue2Enum();
-    private static Map<RepositoryTypes, String> enum2Value = initEnum2Value();
+    private static final Map<String, RepositoryTypes> value2Enum = initValue2Enum();
+    private static final Map<RepositoryTypes, String> enum2Value = initEnum2Value();
 
     private final String type;
 

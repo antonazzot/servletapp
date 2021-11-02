@@ -1,6 +1,7 @@
 package Servlets;
 
 import Repository.RepositoryFactory;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import Repository.ThreadModelRep.ThreadRepositoryImpl;
 
 import javax.servlet.ServletException;
@@ -14,7 +15,7 @@ public class TheamAddServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       String theamName =  req.getParameter("theam");
-      ThreadRepositoryImpl.getInstance().addTheam(theamName);
+        ThreadRepositoryFactory.getRepository().addTheam(theamName);
       req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
     }
 }
