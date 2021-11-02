@@ -16,6 +16,7 @@
         <option value="trainer">Trainer</option>
         <option value="administrator">Administrator</option>
         <option value="group">Group</option>
+        <option value="theam">Theam</option>
     </select>
     <br>
        <select name="act", form="data">
@@ -25,7 +26,7 @@
         <option value="watch">Watch </option>
     </select>
     <br>
-    Enter User ID for delete: <input name ="id", type="text"> <br>
+    Enter User ID for delete: <input name ="id", type="number"> <br>
     <br>
 
     <br>
@@ -43,6 +44,7 @@
 <button type="submit"   > AVARAGE SALARY </button>
 </form>
 <br>
+
 <form  action="logout">
     <input type="submit" value="LogOut!">
 </form>

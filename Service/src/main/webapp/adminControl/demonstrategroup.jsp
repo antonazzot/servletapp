@@ -8,19 +8,23 @@
 <body>
 
  <c:forEach var = "entry" items="${map}">
-       <c:out value = "${entry.key}" />
+       <p> Название группы: </p>
+       <c:out value = "${entry.key.name}" />
+       <p> Id группы: </p>
+       <c:out value = "${entry.key.id}" />
+       <p> Тренер группы: </p>
+       <c:out value = "${entry.key.trainer.name}" />
           <c:forEach var = "map1" items="${entry.value}"> <br>
-                <p> Темы группы </p>
+                <p> Темы группы: </p>
                          <c:forEach var = "theam" items="${map1.key}">
-                                  <c:out value = "${theam}" /> <br>
+                                  <c:out value = "${theam.theamName}" /> <br>
                           </c:forEach><br>
-                 <p> Студенты группы </p>
+                <p> Студенты группы: </p>
                           <c:forEach var = "student" items="${map1.value}">
                                   <c:out value = "${student.name}" /> <br>
                           </c:forEach>
 
-           </c:forEach> <br>
-       <c:out value = "${entry.value}" /><p>
+          </c:forEach> <br> <hr />
   </c:forEach>
 
 <br>

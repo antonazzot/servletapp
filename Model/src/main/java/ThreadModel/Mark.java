@@ -1,19 +1,26 @@
 package ThreadModel;
 
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@ToString
+@EqualsAndHashCode
 public class Mark {
-    private int valuesOfMark;
+   private int id;
+   private int valuesOfMark;
 
-    public Mark(int valuesOfMark) {
-        if (valuesOfMark>0&&valuesOfMark<=100)
-        this.valuesOfMark = valuesOfMark;
-        else System.out.println("Mark must be in 0 from 100 deapasone");
+    public Mark withId(Integer id) {
+        setId(id);
+        return this;
+    }
+    public Mark withValue(Integer value) {
+        if (value > 100 ) value = 100;
+        if (value < 0) value = 0;
+        setValuesOfMark(value);
+        return this;
     }
 
-    public int getValuesOfMark() {
-        return valuesOfMark;
-    }
 
-    public void setValuesOfMark(int valuesOfMark) {
-        this.valuesOfMark = valuesOfMark;
-    }
 }

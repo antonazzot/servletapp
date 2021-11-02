@@ -7,24 +7,25 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <h1> ADD NEW Group </h1>
+
 <body>
-  <form id="data" method = "post" action="GroupCreaterServlet">
+  <form id="data"  action="GroupCreaterServlet">
    <p>Выберите темы для группы</p>
-      <c:forEach var = "set" items="${set}">
-          <c:out value = "${set.value}" />
-          <input type="checkbox" name="th" value="${set.value}"> <br>
+      <c:forEach var = "th" items="${mapITe}">
+          <c:out value = "${th.value.theamName}" />
+          <input type="checkbox" name="th" value="${th.key}"> <br>
        </c:forEach>
 
     <p>Выберите студентов для группы</p>
-    <c:forEach var = "entry" items="${map}">
-       <c:out value = "${entry.key.name}" />
-       <input type="checkbox" name="user" value="${entry.key.id}"> </p>
+    <c:forEach var = "entry" items="${mapIS}">
+       <c:out value = "${entry.value.name}" />
+       <input type="checkbox" name="user" value="${entry.key}"> </p>
     </c:forEach>
 
     <p>Выберите тренера для группы</p>
-            <c:forEach var = "entry1" items="${map1}">
-            <c:out value = "${entry1.key.name}" />
-            <input type="radio" name="trainer" value="${entry1.key.id}"> </p>
+            <c:forEach var = "entry1" items="${mapITr}">
+            <c:out value = "${entry1.value.name}" />
+            <input type="radio" name="trainer" value="${entry1.key}"> </p>
              </c:forEach>
 
 

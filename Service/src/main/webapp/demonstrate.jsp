@@ -12,8 +12,14 @@
 <br> <br/>
 
  <c:forEach var = "entry" items="${map}">
-       <c:out value = "${entry.key.name}" />
-       <c:out value = "${entry.value}" /><p>
+<div>
+   <p> ID:    <c:out value = "${entry.key}" /> </p>
+   <p> Name:      <c:out value = "${entry.value.name}" /> </p>
+   <p> Login:      <c:out value = "${entry.value.login}" /> </p>
+   <p> Password:     <c:out value = "${entry.value.password}" /> </p>
+    <p> Age:     <c:out value = "${entry.value.age}" /> </p>
+</div>
+<hr>
   </c:forEach>
 
 <br>

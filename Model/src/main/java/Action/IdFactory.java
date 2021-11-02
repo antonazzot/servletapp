@@ -1,4 +1,7 @@
 package Action;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
 This class factory individual id for every
 essence in database
@@ -6,9 +9,9 @@ essence in database
 public final class IdFactory {
     private IdFactory() {
     }
-    private static int generalID = 0;
-    public static int idBuilder() {
-        generalID++;
-        return generalID;
+    private static volatile int generalID = 0;
+    public static synchronized int  idBuilder() {
+        AtomicInteger id =  new AtomicInteger(generalID++);
+        return id.get();
     }
 }

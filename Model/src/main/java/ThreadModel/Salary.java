@@ -1,19 +1,20 @@
 package ThreadModel;
 
-import java.math.BigDecimal;
+import lombok.*;
 
+import java.math.BigDecimal;
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@ToString
+@EqualsAndHashCode
 public class Salary {
    private BigDecimal bigDecimalSalary;
 
-    public Salary(BigDecimal bigDecimalSalary) {
-        this.bigDecimalSalary = bigDecimalSalary;
+    public Salary withValue(Integer value) {
+        if (value < 0) value = 0;
+        setBigDecimalSalary(new BigDecimal(value));
+        return this;
     }
 
-    public BigDecimal getBigDecimalSalary() {
-        return bigDecimalSalary;
-    }
-
-    public void setBigDecimalSalary(BigDecimal bigDecimalSalary) {
-        this.bigDecimalSalary = bigDecimalSalary;
-    }
 }

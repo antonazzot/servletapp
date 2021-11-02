@@ -1,7 +1,9 @@
 package Servlets;
 
-import DataBase.DataBaseInf;
-import Users.*;
+import Repository.RepositoryFactory;
+import Users.Administrator;
+import Users.Role;
+import Users.UserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Properties;
+
 /**
  It's start servlet
  witch create user with Admin role by context inf,
@@ -25,15 +29,34 @@ public class StartPage extends HttpServlet {
     @Override
     protected void doGet (HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        {
+           {
             ServletContext servletContext = getServletContext();
             String adminLogin = servletContext.getInitParameter("AdminLogin");
             String adminPassword = servletContext.getInitParameter("AdminPassword");
             HttpSession session = req.getSession();
-            if (!DataBaseInf.adminHashMap.containsValue(DataBaseInf.adminHashMap.get(1))) {
-                Administrator administrator = new Administrator("Anton", adminLogin, adminPassword, 30);
-            }
-            log.info("Admin = {}", "Pass ={}", adminLogin, adminPassword);
+               Properties properties = new Properties();
+               properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
+
+             {
+               Administrator administrator = (Administrator) new Administrator()
+                       .withRole(Role.ADMINISTRATOR)
+                       .withName("Anton")
+                       .withLogin(adminLogin)
+                       .withPassword(adminPassword)
+                       .withAge(34);
+
+               log.info("Types of using memory ={}", properties.getProperty("repository.type"));
+
+               if (RepositoryFactory.getRepository().allUser().values().stream()
+                     .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
+                             u.getPassword().equals(administrator.getPassword()) &&
+                             u.getName().equals(administrator.getName()) &&
+                             u.getAge()==administrator.getAge())
+                )
+                RepositoryFactory.getRepository().saveUser(administrator);
+                 log.info("Admin = {}", administrator.getInf());
+             }
+
 
             if (session.getAttribute("user")!=null)  {
             UserImpl user = (UserImpl) session.getAttribute("user");

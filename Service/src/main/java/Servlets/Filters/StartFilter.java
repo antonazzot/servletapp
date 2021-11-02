@@ -1,19 +1,20 @@
 package Servlets.Filters;
 
-import DataBase.DataBaseInf;
-import Repository.DAO.DaoImp;
+import Repository.RepositoryFactory;
 import Users.UserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Properties;
 
 @WebFilter("/checkUser")
 public class StartFilter extends AbstractFilter {
@@ -25,6 +26,10 @@ public class StartFilter extends AbstractFilter {
         if (request.getSession(false)==null || request.getSession(false).isNew()) {
             response.sendRedirect("/web/hello");
         }
+        Properties properties = new Properties();
+        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
+
+
         UserImpl user;
         int id = 0;
         String login = null;
@@ -46,6 +51,7 @@ public class StartFilter extends AbstractFilter {
             user = checkUser(id, password);
 
         HttpSession session = request.getSession();
+        session.setAttribute("repostype", properties.getProperty("repository.type"));
         if (user != null) {
         session.setAttribute("user", user);
         log.info("SessionWithUserCreate = {}", user);
@@ -55,36 +61,31 @@ public class StartFilter extends AbstractFilter {
     }
 
     private UserImpl checkUser(int id, String password) {
-        DaoImp daoImp = new DaoImp();
-        UserImpl user;
-        user = itRightCondition(daoImp.getUsersMapById(id), id, password);
-        return user;
+        return itRightCondition( id, password);
     }
 
     private UserImpl checkUser(String login, String password) {
         return itRightCondition(login, password);
     }
 
-    private UserImpl itRightCondition(Map<Integer, UserImpl> map, int id, String password) {
-        if (map.get(id).getPassword().equalsIgnoreCase(password))
-            return map.get(id);
-        return null;
+    private UserImpl itRightCondition(int id, String password) {
+        UserImpl user;
+        user =
+                RepositoryFactory.getRepository().allUser().values().stream()
+                        .filter(u -> u.getId() == id && u.getPassword().equals(password))
+                        .findFirst().orElse(null);
+
+        return  user;
     }
 
     private UserImpl itRightCondition(String login, String password) {
         UserImpl user;
-        Map<Integer, UserImpl> allUser = new HashMap<>();
-        allUser.putAll(DataBaseInf.adminHashMap);
-        allUser.putAll(DataBaseInf.studentHashMap);
-        allUser.putAll(DataBaseInf.trainerHashMap);
-        for (Map.Entry<Integer, UserImpl> entry : allUser.entrySet()) {
-            if (entry.getValue().getLogin().equalsIgnoreCase(login) &&
-                    entry.getValue().getPassword().equals(password)) {
-                user = entry.getValue();
-                return user;
-            }
-        }
-        return null;
+        user =
+        RepositoryFactory.getRepository().allUser().values().stream()
+                .filter(u -> u.getLogin().equals(login) && u.getPassword().equals(password))
+                .findFirst().orElse(null);
+         return  user;
+
     }
 
 }

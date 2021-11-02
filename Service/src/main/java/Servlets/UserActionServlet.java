@@ -1,20 +1,16 @@
 package Servlets;
 
-import Users.Administrator;
-import Users.Student;
-import Users.Trainer;
-import Users.UserImpl;
+import Repository.RepositoryFactory;
+import Users.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  This servlet  creates some user depending on the selected role
@@ -28,6 +24,7 @@ public class UserActionServlet extends HttpServlet {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
+
         int age =0;
         try {age = Integer.parseInt(req.getParameter("age"));
                     } catch (IllegalArgumentException e) {
@@ -42,14 +39,37 @@ public class UserActionServlet extends HttpServlet {
     private void checkRole(String role, String name, String login, String pass, int age) {
         UserImpl user;
         if (role.equalsIgnoreCase("administrator")) {
-            user = new Administrator(name, login, pass, age);
+            user =  new Administrator()
+                    .withRole(Role.ADMINISTRATOR)
+                   .withName(name)
+                   .withLogin(login)
+                   .withPassword(pass)
+                   .withAge(age);
+
+
+            RepositoryFactory.getRepository().saveUser(user);
+
             log.info("Administrator  add = {}", user);
         } else if (role.equalsIgnoreCase("trainer")) {
-            user = new Trainer(name, login, pass, age, new ArrayList());
-            log.info("Trainer  add = {}", user);
+            Trainer trainer = (Trainer) new Trainer()
+                    .withRole(Role.TRAINER)
+                    .withName(name)
+                    .withLogin(login)
+                    .withPassword(pass)
+                    .withAge(age);
+
+            int trainerId =  RepositoryFactory.getRepository().saveUser(trainer);
+            log.info("returning value TrainerId ={}", trainerId);
         } else {
-            user = new Student(name, login, pass, age, new HashMap());
-            log.info("Student add = {}", user);
+            Student student = (Student) new Student()
+                    .withRole(Role.STUDENT)
+                    .withName(name)
+                    .withLogin(login)
+                    .withPassword(pass)
+                    .withAge(age);
+           int studentId = RepositoryFactory.getRepository().saveUser(student);
+
+            log.info("Student add = {}", student);
         }
     }
 }

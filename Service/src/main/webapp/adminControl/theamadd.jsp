@@ -10,19 +10,13 @@
 </head>
 <body>
 
-<h1> ADD NEW USER </h1>
+<h1> ADD NEW THEAM </h1>
 
-<form id="data" method = "post" action="UserActionServlet" >
-
-    <input type="hidden" name="role" value="${role}"/>
+<form id="data" method = "post" action="theamAdd" >
 
     <br>
-    Enter User NAME: <input  name="name", type="text"> <br>
-    Enter User Login: <input  name="login", type="text"> <br>
-    Enter User Password: <input  name="password", type="text"> <br>
-    Enter User age: <input  name="age", type="text"> <br>
-
-    <br>
+    Enter THEAM NAME: <input  name="theam", type="text"> <br>
+      <br>
     <br>
     <input type="submit" form="data" />
 <br>

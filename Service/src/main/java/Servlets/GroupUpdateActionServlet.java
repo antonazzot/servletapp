@@ -1,11 +1,6 @@
 package Servlets;
 
-import DataBase.DataBaseInf;
-import Repository.DAO.DaoImp;
-import ThreadModel.Group;
-import ThreadModel.Theams;
-import Users.Student;
-import Users.Trainer;
+import Repository.ThreadModelRep.ThreadRepositoryFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+
 /**
  Servlet make change in the group by data
  took from JSP
@@ -25,56 +22,51 @@ public class GroupUpdateActionServlet extends HttpServlet {
     static final Logger log = LoggerFactory.getLogger(UserActionServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Group group = DataBaseInf.groupHashMap.get(Integer.parseInt(req.getParameter("id")));
-        String[] studentInGroupForDeleted = req.getParameterValues("grstid");
-        String[] studentForAdd = req.getParameterValues("astid");
-        String[] theamsInGroupForDelete = req.getParameterValues("astid");
-        String[] theamForAdd = req.getParameterValues("frth");
-        int trainerInGroupForDelete=0;
-        int trainerForAdd = 0;
-        try { if (req.getParameter("grtr")!=null || req.getParameter("frtr")!=null) {
+        int [] entytiIdforact = null;
+        String act = req.getParameter("act");
+        int groupId = Integer.parseInt(req.getParameter("id"));
+        switch (act) {
+            case "studentdelete":
+                entytiIdforact = checkAndConverterParamToInt(req.getParameterValues("grstid"));
+                break;
+            case "studentadd":
+                entytiIdforact = checkAndConverterParamToInt(req.getParameterValues("astid"));
+                break;
+            case "theamdelete":
+                entytiIdforact = checkAndConverterParamToInt(req.getParameterValues("grth"));
+                break;
+            case "theamadd":
+                entytiIdforact = checkAndConverterParamToInt(req.getParameterValues("frth"));
+                break;
+            case "trainer":
+                int newTrainerId = req.getParameter("frtr").equals("") ? 0 : Integer.parseInt(req.getParameter("frtr"));
+                entytiIdforact  = new int [1];
+                entytiIdforact [0] = newTrainerId;
+                break;
+        }
+        log.info("In sservlet updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
+        ThreadRepositoryFactory.getRepository().updateGroup(groupId, act, entytiIdforact );
+        req.setAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
+        req.getRequestDispatcher("adminControl/changeGroup.jsp").forward(req, resp);
 
-        trainerInGroupForDelete = Integer.parseInt(req.getParameter("grtr"));
-        trainerForAdd = Integer.parseInt(req.getParameter("frtr"));}
+    }
 
-        DaoImp daoImp = new DaoImp();
-            if (studentInGroupForDeleted.length!=0) {
-                for (String s : studentInGroupForDeleted) {
-                    if (!s.equals(""))
-                        group.getStudentMap().remove(Integer.parseInt(s));
-                }
-            }
-            if (studentForAdd.length!=0) {
-                for (String s : studentForAdd) {
-                    if (!s.equals("")) {
-                        Student student = (Student) daoImp.getUser(Integer.parseInt(s));
-                        group.getStudentMap().put(student.getId(), student);
+    private int[] checkAndConverterParamToInt(String[] entity) {
+        int [] result = null;
+        if (entity!=null) {
+           result = new int[entity.length];
+            for (int i = 0; i < entity.length; i++) {
+                if (entity[i] != null &&!entity[i].equals("")) {
+                    try {
+                        result [i] = Integer.parseInt(entity[i]);
+                    }
+                    catch (IllegalArgumentException e) {
+                        log.info("EROR = {}", e.getMessage());
                     }
                 }
             }
-            if (theamsInGroupForDelete.length!=0) {
-                for (String s : theamsInGroupForDelete) {
-                    if (!s.equals(""))
-                        group.getTheamsSet().remove(Theams.valueOf(s.toUpperCase()));
-                }
-            }
-            if (theamForAdd.length!=0) {
-                for (String s : theamForAdd) {
-                    if (!s.equals(""))
-                        group.getTheamsSet().add(Theams.valueOf(s.toUpperCase()));
-                }
-            }
-        if (trainerInGroupForDelete == 0 ) {
-            group.setTrainer(null);
         }
-        Trainer trainer = (Trainer) daoImp.getUser(trainerForAdd);
-        group.setTrainer(trainer);}
-        catch (IllegalArgumentException e) {
-            req.getRequestDispatcher("exeception.jsp").forward(req, resp);
-        }
-
-        log.info("Group wass update = {}", group, group.getId(), group.getTrainer(), group.getStudentMap());
-        req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
+        return result;
     }
 }
 

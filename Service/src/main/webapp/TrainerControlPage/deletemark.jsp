@@ -10,23 +10,17 @@
 
 <h1> Trainer control List </h1>
 
- <p>Name: ${student} </p>
+ <p>Name: ${student.name} </p>
+ <p>Theam: ${th.theamName}  </p>
 
-  <p>ВВедите новое значение для изменения оценки</p>
-  <p>либо выберите оценку для удаления</p>
- <form id="data" method = "post" action="changeandcreatemark">
+  <p>Выберите оценку для удаления</p>
+ <form id="data"  action="changeandcreatemark">
 <input type="hidden" name="student" value="${student.id}"/>
 <input type="hidden" name="act" value="delete"/>
+<input type="hidden" name="th" value="${th.id}"/>
     <c:forEach var = "entry" items="${map}">
-    <c:out value = "${entry.key}" /> <br>
-
-<input type="hidden" name="th" value="${entry.key}"/>
-
-     <c:forEach var = "list" items="${entry.value}">
-     <c:out value = "${list.valuesOfMark}" />
-      <input type="checkbox"  name="mark"  value="${list.valuesOfMark}"> <br>
-
-       </c:forEach>
+        <c:out value = "${entry.value.valuesOfMark}" />
+        <input type="checkbox"  name="marks"  value="${entry.key}"> <br>
      </c:forEach>
 
      <p><input type="submit" form="data" value="Отправить"></p>

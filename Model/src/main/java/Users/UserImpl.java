@@ -1,9 +1,11 @@
 package Users;
 
-import Action.IdFactory;
-
-import java.util.Objects;
-
+import lombok.*;
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@EqualsAndHashCode
+@ToString
 public class UserImpl implements User {
     private int id;
     private Role role;
@@ -12,90 +14,34 @@ public class UserImpl implements User {
     private String password;
     private int age;
 
-    public UserImpl(Role role, String name, String login, String password, int age) {
-        this.id = IdFactory.idBuilder();
-        this.role = role;
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        this.age = age;
+    public UserImpl withId (Integer id) {
+        setId(id);
+        return this;
     }
-
-    public int getId() {
-        return id;
+    public UserImpl withRole (Role role) {
+        setRole(role);
+        return this;
     }
-
-    public void setId(int id) {
-        this.id = id;
+    public UserImpl withName (String name) {
+        setName(name);
+        return this;
     }
-
-    public Role getRole() {
-        return role;
+    public UserImpl withLogin (String login) {
+        setLogin(login);
+        return this;
     }
-
-    public void setRole(Role role) {
-        this.role = role;
+    public UserImpl withPassword (String password) {
+        setPassword(password);
+        return this;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserImpl)) return false;
-        UserImpl user = (UserImpl) o;
-        return id == user.id && age == user.age && role == user.role && name.equals(user.name) && login.equals(user.login) && password.equals(user.password);
-    }
-
-    @Override
-    public String toString() {
-        return "UserImpl{" +
-                "id=" + id +
-                ", role=" + role +
-                ", name='" + name + '\'' +
-                ", login='" + login + '\'' +
-                ", age=" + age +
-                '}';
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, role, name, login, password, age);
+    public UserImpl withAge (Integer age) {
+        setAge(age);
+        return this;
     }
 
     @Override
     public String getInf() {
-        return "ID " +  getId() + " NAME: " + getName() +
+        return "ID " +  getId() + " NAME: " + getName() + "Login: " + getLogin() +
               " ROLE: " + getRole() + " AGE: " +  getAge() + " PASSWORD: " + getPassword();
     }
 }
