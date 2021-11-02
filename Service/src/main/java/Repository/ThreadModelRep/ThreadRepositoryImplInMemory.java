@@ -184,15 +184,13 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
     }
 
     @Override
-    public void deleteMarksById(int [] tempMarksId, int theamId) {
-        for (UserImpl user:
-             DataBaseInf.studentHashMap.values()) {
-            Student student = (Student) user;
-            for (int j : tempMarksId) {
-              List <Mark> tempMarks = student.getListOfMark().get(theamById(theamId));
-             Mark marksFordelete = tempMarks.stream().filter(mark -> mark.getId() == j).findAny().get();
-            student.getListOfMark().values().remove(marksFordelete);
-            }
+    public void deleteMarksById(int[] tempMarksId, int theamId, int studentid) {
+       Student student = (Student) DataBaseInf.studentHashMap.get(studentid);
+       Theams tempTheam = theamById(theamId);
+        for (int i = 0; i < tempMarksId.length; i++) {
+            int tempId = tempMarksId[i];
+            Mark markforDelete = student.getListOfMark().get(tempTheam).stream().filter(mark -> mark.getId() == tempId).findAny().get();
+            student.getListOfMark().get(tempTheam).remove(markforDelete);
         }
     }
 

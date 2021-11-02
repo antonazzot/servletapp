@@ -498,7 +498,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
         }
     }
     @Override
-    public void deleteMarksById(int[] tempMarksId, int theamId) {
+    public void deleteMarksById(int[] tempMarksId, int theamId, int studentid) {
         try (Connection connection = datasourse.getConnection()){
             for (int j : tempMarksId) {
                 PreparedStatement ps = connection.prepareStatement(

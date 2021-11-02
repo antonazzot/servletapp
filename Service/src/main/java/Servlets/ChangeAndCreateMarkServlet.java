@@ -36,7 +36,7 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
             req.setAttribute("map", group.getStudentMap());
             req.getRequestDispatcher(answer).forward(req, resp);
         }
-        String answer = delete(marks, theam);
+        String answer = delete(marks, theam, studentId);
         req.setAttribute("set", group.getTheamsSet());
         req.setAttribute("map", group.getStudentMap());
         req.getRequestDispatcher(answer).forward(req, resp);
@@ -71,17 +71,18 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
         return "TrainerControlPage/trainerActList.jsp";
     }
 
-    private String delete(String [] marks , String theam) {
+    private String delete(String [] marks , String theam, String studentId) {
         int[] tempMarksId = new int[marks.length];
         try {
             int theamId = Integer.parseInt(theam);
+            int studentid = Integer.parseInt(studentId);
             for (int i = 0; i < marks.length; i++) {
                 if (!marks[i].equals("")) {
                     int markId = Integer.parseInt(marks[i]);
                     tempMarksId[i] = markId;
                 }
             }
-            ThreadRepositoryFactory.getRepository().deleteMarksById(tempMarksId, theamId);
+            ThreadRepositoryFactory.getRepository().deleteMarksById(tempMarksId, theamId, studentid);
 
         }
         catch (IllegalArgumentException e) {

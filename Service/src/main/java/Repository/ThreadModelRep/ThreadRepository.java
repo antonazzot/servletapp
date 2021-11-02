@@ -36,7 +36,7 @@ public interface ThreadRepository {
 
     void addMarkToStudent(int studentId, int theamID, int markValue);
 
-    void deleteMarksById(int[] tempMarksId, int theamId);
+    void deleteMarksById(int[] tempMarksId, int theamId, int studentid);
 
     void changeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId);
 
