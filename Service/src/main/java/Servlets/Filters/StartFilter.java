@@ -29,7 +29,6 @@ public class StartFilter extends AbstractFilter {
         Properties properties = new Properties();
         properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
 
-
         UserImpl user;
         int id = 0;
         String login = null;
@@ -74,7 +73,6 @@ public class StartFilter extends AbstractFilter {
                 RepositoryFactory.getRepository().allUser().values().stream()
                         .filter(u -> u.getId() == id && u.getPassword().equals(password))
                         .findFirst().orElse(null);
-
         return  user;
     }
 
@@ -85,7 +83,5 @@ public class StartFilter extends AbstractFilter {
                 .filter(u -> u.getLogin().equals(login) && u.getPassword().equals(password))
                 .findFirst().orElse(null);
          return  user;
-
     }
-
 }

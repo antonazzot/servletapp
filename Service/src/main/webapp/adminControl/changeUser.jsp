@@ -9,7 +9,7 @@
 <body>
 
 <h1> Change user </h1>
- <form id="data"  action="updateUser">
+ <form id="data" method = "post"  action="updateUser">
 
          <c:forEach var = "entry" items="${map}">
          <c:out value = "${entry.value.name}" />

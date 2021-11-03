@@ -15,7 +15,7 @@
 
   <p>ВВедите новое значение для изменения оценки</p>
 
-    <form id="data"  action="changeandcreatemark">
+    <form id="data" method = "post"  action="changeandcreatemark">
     <input type="hidden" name="student" value="${student.id}"/>
     <input type="hidden" name="act" value="change"/>
     <input type="hidden" name="th" value="${th.id}"/>

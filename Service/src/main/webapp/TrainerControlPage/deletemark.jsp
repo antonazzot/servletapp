@@ -14,7 +14,7 @@
  <p>Theam: ${th.theamName}  </p>
 
   <p>Выберите оценку для удаления</p>
- <form id="data"  action="changeandcreatemark">
+ <form id="data" method = "post"  action="changeandcreatemark">
 <input type="hidden" name="student" value="${student.id}"/>
 <input type="hidden" name="act" value="delete"/>
 <input type="hidden" name="th" value="${th.id}"/>

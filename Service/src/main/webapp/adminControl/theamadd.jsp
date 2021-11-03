@@ -13,7 +13,6 @@
 <h1> ADD NEW THEAM </h1>
 
 <form id="data" method = "post" action="theamAdd" >
-
     <br>
     Enter THEAM NAME: <input  name="theam", type="text"> <br>
       <br>

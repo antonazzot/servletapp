@@ -89,13 +89,9 @@ public class UserRepositoryImplPostgres implements UserRepository {
                                 .withLogin(rs.getString("login"))
                                 .withPassword(rs.getString("password"))
                                 .withName(rs.getString("name"))
-                                .withAge(rs.getInt("age"))
-
-
-                );}
+                                .withAge(rs.getInt("age")));
+                }
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -122,12 +118,9 @@ public class UserRepositoryImplPostgres implements UserRepository {
                                 .withName(rs.getString("name"))
                                 .withAge(rs.getInt("age"))
                                 .withRole(checkRole(rs.getInt("role_id")))
-
                 );
                 }
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -156,8 +149,6 @@ public class UserRepositoryImplPostgres implements UserRepository {
 
                 );}
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -192,7 +183,6 @@ public class UserRepositoryImplPostgres implements UserRepository {
         try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = connection.prepareStatement("INSERT INTO users (name, login, password, age, role_id) " +
                     "Values (?, ?, ?, ?, ?) returning id");
-
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getPassword());
@@ -254,7 +244,6 @@ public class UserRepositoryImplPostgres implements UserRepository {
                     ps2.close();
                 } break;
             }
-
         } catch (SQLException e) {
             log.info("SQL EROR ={}", e.getMessage());
             e.printStackTrace();
@@ -318,7 +307,6 @@ public class UserRepositoryImplPostgres implements UserRepository {
                 UserImpl user = getUserById(rs.getInt("student_id"));
                 result.add(user);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -385,7 +373,4 @@ public class UserRepositoryImplPostgres implements UserRepository {
         }
 
     }
-
-
-
 }

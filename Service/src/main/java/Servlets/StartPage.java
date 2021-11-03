@@ -34,9 +34,8 @@ public class StartPage extends HttpServlet {
             String adminLogin = servletContext.getInitParameter("AdminLogin");
             String adminPassword = servletContext.getInitParameter("AdminPassword");
             HttpSession session = req.getSession();
-               Properties properties = new Properties();
-               properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
-
+            Properties properties = new Properties();
+            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
              {
                Administrator administrator = (Administrator) new Administrator()
                        .withRole(Role.ADMINISTRATOR)
@@ -44,7 +43,6 @@ public class StartPage extends HttpServlet {
                        .withLogin(adminLogin)
                        .withPassword(adminPassword)
                        .withAge(34);
-
                log.info("Types of using memory ={}", properties.getProperty("repository.type"));
 
                if (RepositoryFactory.getRepository().allUser().values().stream()

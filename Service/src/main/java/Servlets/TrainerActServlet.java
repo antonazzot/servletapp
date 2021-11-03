@@ -50,9 +50,10 @@ public class TrainerActServlet extends HttpServlet {
             Map<Integer, UserImpl> studentHashMap = group.getStudentMap();
             Set<Theams> theams = group.getTheamsSet();
             log.info("Act = {}", "Student ={}", "Theam = {}", "Mark = {}", act, student, theam, mark );
+            String answer = doAdd(userID, theam, mark);
             req.setAttribute("set", theams);
             req.setAttribute("map", studentHashMap);
-            req.getRequestDispatcher(doAdd(userID, theam, mark)).forward(req, resp);
+            req.getRequestDispatcher(answer).forward(req, resp);
         } else if (act.equalsIgnoreCase("watch")) {
             req.setAttribute("student", student);
             req.setAttribute("map", getTheamsListHashMap(userID, tempth));
@@ -71,7 +72,7 @@ public class TrainerActServlet extends HttpServlet {
     }
 
     private HashMap<Theams, List<Mark>> getTheamsListHashMap(int userID, Theams tempth) {
-        Student student = (Student) RepositoryFactory.getRepository().getUserById(userID);
+        UserImpl student =  RepositoryFactory.getRepository().getUserById(userID);
         HashMap<Theams, List<Mark>> result = new HashMap<>();
         result.put(tempth, ThreadRepositoryFactory.getRepository().getMarkListbyTheam(tempth, student.getId()));
         return  result;

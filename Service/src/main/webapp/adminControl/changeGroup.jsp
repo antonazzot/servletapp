@@ -9,13 +9,11 @@
 <body>
 
 <h1> Change user </h1>
- <form id="data"  action="updateGroup">
-
+ <form id="data" method = "post"  action="updateGroup">
          <c:forEach var = "entry" items="${map}">
          <c:out value = "${entry.value.name}" />
          <input type="radio" name="groupid" value="${entry.key}" > <br>
           </c:forEach>
-
      <p><input type="submit" form="data" value="Отправить"></p>
   </form>
 <br>

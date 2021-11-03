@@ -10,9 +10,8 @@
 
 <body>
 
-
    <p>Внесите данные для изменения</p>
-    <form id="data"  action="updateTheam">
+    <form id="data" method = "post"  action="updateTheam">
     <p>Темы группы, выберите тему для внесения изменений  </p>
       <c:forEach var = "entry" items="${map}">
              <c:out value = "${entry.value.theamName}" />

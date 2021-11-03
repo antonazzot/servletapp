@@ -21,7 +21,7 @@ import java.util.Arrays;
 public class GroupUpdateActionServlet extends HttpServlet {
     static final Logger log = LoggerFactory.getLogger(UserActionServlet.class);
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int [] entytiIdforact = null;
         String act = req.getParameter("act");
         int groupId = Integer.parseInt(req.getParameter("id"));

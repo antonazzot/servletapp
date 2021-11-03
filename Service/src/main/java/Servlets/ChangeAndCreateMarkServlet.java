@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class ChangeAndCreateMarkServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(ChangeAndCreateMarkServlet.class);
     @Override
-    protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String studentId = req.getParameter("student");
         String theam = req.getParameter("th");
         String [] marks = req.getParameterValues("marks");

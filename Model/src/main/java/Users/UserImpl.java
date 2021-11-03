@@ -7,6 +7,7 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class UserImpl implements User {
+
     private int id;
     private Role role;
     private String name;

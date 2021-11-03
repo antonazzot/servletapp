@@ -13,7 +13,7 @@ public class TheamAddServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       String theamName =  req.getParameter("theam");
-        ThreadRepositoryFactory.getRepository().addTheam(theamName);
+      ThreadRepositoryFactory.getRepository().addTheam(theamName);
       req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
     }
 }

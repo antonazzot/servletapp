@@ -23,7 +23,6 @@ public class StudentFilter extends AbstractFilter {
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("/web/hello");
         } else {
-
             UserImpl user = (UserImpl) session.getAttribute("user");
             if (user == null || (!Role.STUDENT.equals(user.getRole())))
                 response.sendRedirect("/web/hello");
