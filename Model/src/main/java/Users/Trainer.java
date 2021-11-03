@@ -18,33 +18,34 @@ public class Trainer extends UserImpl {
         setName(name);
         return this;
     }
+
     public Trainer withLogin (String login) {
         setLogin(login);
         return this;
     }
+
     public Trainer withPassword (String password) {
         setPassword(password);
         return this;
     }
+
     public Trainer withAge (Integer age) {
         setAge(age);
         return this;
     }
+
     public Trainer addSalary (Salary salary) {
         getSalarylist().add(salary);
         return this;
     }
+
     public Trainer withSalary (List <Salary> salarylist) {
         setSalarylist(salarylist);
         return this;
     }
+
     @Override
     public String getInf() {
-        long l = 0;
-        if (this.salarylist.size() != 0) {
-            l = this.salarylist.stream().map(salary ->
-                    salary.getBigDecimalSalary()).count() / (long) this.salarylist.size();
-        }
         return super.getInf() + "  " + salarylist.toString();
     }
 }

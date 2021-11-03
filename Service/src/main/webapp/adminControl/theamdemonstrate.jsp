@@ -12,8 +12,6 @@
        <c:out value = "${entry.key}" /> <br>
        Название темы:
        <c:out value = "${entry.value.theamName}" /> </p>
-
-
            <hr />
   </c:forEach>
 

@@ -135,7 +135,6 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
     @Override
     public HashMap<Integer, Theams> freeTheams() {
         HashMap <Integer, Theams> result;
-
         if (DataBaseInf.groupHashMap.values().isEmpty()) {
             return (HashMap<Integer, Theams>) DataBaseInf.theamsHashMap;
         }
@@ -143,10 +142,9 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
             for (Group group:
                  DataBaseInf.groupHashMap.values()) {
                 busyTheams.addAll(group.getTheamsSet());
-                          }
+            }
             log.info("after first for ");
             result = extractTheam(busyTheams);
-
         return result;
     }
 
@@ -203,7 +201,6 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
         log.info("Old mark id and value = {}" , tempMark.getId() + " value: " + tempMark.getValuesOfMark());
         tempMark.setValuesOfMark(entry.getValue());
         log.info("New mark id and value = {}" , tempMark.getId() + " value: " + tempMark.getValuesOfMark());
-
     }
     }
 
@@ -216,7 +213,6 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
                     group.getStudentMap().remove(item);
                 }
             }
-
                 break;
             case "studentadd": {
                 for (int value : entytiIdforact) {
@@ -243,7 +239,6 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
             case "trainer": {
                 group.withTrainer(DataBaseInf.trainerHashMap.get(entytiIdforact[0]));
             }
-
         }
     }
 

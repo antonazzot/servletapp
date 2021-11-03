@@ -39,7 +39,6 @@ public class ActionChangeServlet extends HttpServlet {
                 .withPassword(pass)
                 .withAge(age);
 
-
         RepositoryFactory.getRepository().updateUser(user);
         log.info("UserUpdate = {}", id+"  "+role+"  "+name+"  "+login+"  "+pass+"  "+age);
         req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);

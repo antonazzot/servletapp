@@ -17,9 +17,8 @@ import java.io.IOException;
  **/
 @WebServlet("/updateGroup")
 public class UpdateGroup extends HttpServlet {
-
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("groupid"));
         Group group = ThreadRepositoryFactory.getRepository().allGroup().get(id);
         req.setAttribute("id", id);

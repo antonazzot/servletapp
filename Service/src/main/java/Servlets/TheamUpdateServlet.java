@@ -11,7 +11,7 @@ import java.io.IOException;
 @WebServlet ("/updateTheam")
 public class TheamUpdateServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        int theamId = Integer.parseInt(req.getParameter("thid"));
        String theamName = req.getParameter("thname");
         ThreadRepositoryFactory.getRepository().updateTheam(theamId, theamName);

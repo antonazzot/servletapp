@@ -25,8 +25,7 @@ import java.util.stream.Collectors;
 public class GroupCreaterServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(GroupCreaterServlet.class);
     @Override
-    protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        String [] thIdStr = req.getParameterValues("th");
        ArrayList <Integer> thId = (ArrayList<Integer>) Arrays.stream(thIdStr)
                .map(Integer::parseInt)
@@ -41,7 +40,6 @@ public class GroupCreaterServlet extends HttpServlet {
             ThreadRepositoryFactory.getRepository().addGroup(studentList, thId, trainerID);
         req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);}
         catch (IllegalArgumentException e) {
-
             req.getRequestDispatcher("exeception.jsp").forward(req, resp);
         }
     }

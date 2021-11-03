@@ -17,7 +17,7 @@ import java.io.IOException;
 @WebServlet("/updateUser")
 public class ChangeUser extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         UserImpl user = RepositoryFactory.getRepository().getUserById(id);
         req.setAttribute("id", user.getId());

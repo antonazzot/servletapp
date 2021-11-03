@@ -154,6 +154,4 @@ public class UserRepositoryImplInMemory implements UserRepository {
         Group group = DataBaseInf.groupHashMap.get(groupId);
         return new ArrayList<>(group.getStudentMap().values());
      }
-
-
 }

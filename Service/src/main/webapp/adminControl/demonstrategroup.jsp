@@ -23,7 +23,6 @@
                           <c:forEach var = "student" items="${map1.value}">
                                   <c:out value = "${student.name}" /> <br>
                           </c:forEach>
-
           </c:forEach> <br> <hr />
   </c:forEach>
 

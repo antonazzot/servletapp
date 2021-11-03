@@ -2,9 +2,9 @@ package DataBase;
 import ThreadModel.*;
 import Users.*;
 import java.util.*;
-/*
+/**
 A class that imitation  database
-*/
+**/
 
 public final class DataBaseInf {
     private DataBaseInf() {
