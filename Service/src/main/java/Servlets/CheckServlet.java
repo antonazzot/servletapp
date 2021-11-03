@@ -1,12 +1,9 @@
 package Servlets;
 
-import DataBase.DataBaseInf;
 import Repository.ThreadModelRep.ThreadRepositoryFactory;
-import Repository.ThreadModelRep.ThreadRepositoryImpl;
 import ThreadModel.Group;
 import ThreadModel.Theams;
 import Users.Role;
-import Users.Student;
 import Users.UserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
