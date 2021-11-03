@@ -1,0 +1,93 @@
+create table users (
+id serial not null primary key,
+name varchar (50) not null,
+login varchar (50),
+password varchar (50),
+age int,
+role_id int references role (id)
+);
+
+create table role (
+id serial not null primary key,
+role_name varchar (50) not null
+);
+
+create table theam (
+id serial not null primary key,
+theam_name varchar,
+mark_id int references mark (id)
+);
+
+create table mark (
+id serial not null primary key,
+mark_value int,
+student_id int references users(id)
+);
+
+create table salary (
+id serial not null primary key,
+salary_value int,
+trainer_id int references users(id)
+);
+
+create table "group" (
+name varchar (50) not null,
+user_id int references users (id),
+theam_id int references theam (id) 
+);
+
+alter table theam drop column mark_id;
+
+alter table mark add column theam_id int;
+
+alter table mark add constraint mark_theam_id_fkey foreign key (theam_id) references theam (id);
+
+ALTER TABLE users 
+ADD CONSTRAINT users_role_id_fkey 
+FOREIGN KEY (role_id) 
+REFERENCES "role"(id);
+
+
+ALTER TABLE "group" 
+ADD CONSTRAINT group_trainer_id_fkey 
+FOREIGN KEY (trainer_id) 
+references users(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE mark 
+ADD CONSTRAINT mark_theam_fk 
+FOREIGN KEY (theam_id) 
+REFERENCES theam(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE mark 
+ADD CONSTRAINT mark_userid_fk 
+FOREIGN KEY (student_id) 
+REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE salary 
+ADD CONSTRAINT salary_trainer_id_fkey 
+FOREIGN KEY (trainer_id) 
+REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE student_group 
+ADD CONSTRAINT student_group_group_id_fkey 
+FOREIGN KEY (group_id) 
+REFERENCES "group"(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE student_group 
+ADD CONSTRAINT student_group_student_id_fkey 
+FOREIGN KEY (student_id) 
+REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER table theam_group 
+ADD CONSTRAINT theam_group_group_id_fkey 
+FOREIGN KEY (group_id) 
+REFERENCES "group"(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE theam_group 
+ADD CONSTRAINT theam_group_theam_id_fkey 
+FOREIGN KEY (theam_id) 
+REFERENCES theam(id) ON DELETE CASCADE ON UPDATE CASCADE;
