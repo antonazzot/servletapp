@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/WEBDB</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">29297929</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
+        <property name="show_sql">true</property>
+        <property name="hbm2ddl.auto">none</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="connection.pool_size">20</property>
+        <property name="hibernate.dbcp.initialSize">5</property>
+        <property name="hibernate.dbcp.maxTotal">20</property>
+        <property name="hibernate.dbcp.maxIdle">10</property>
+        <property name="hibernate.dbcp.minIdle">5</property>
+        <property name="hibernate.dbcp.maxWaitMillis">-1</property>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <!-- mapping files -->
+        <mapping class="by.task.servlets.Model.Users.Administrator"/>
+        <mapping class="servlets.Model.Users.Trainer"/>
+        <mapping class="by.servlets.Model.Users.Student"/>
+
+
+
+
+
+    
+    </session-factory>
+
+</hibernate-configuration>
