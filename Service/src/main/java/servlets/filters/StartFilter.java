@@ -1,9 +1,9 @@
 package servlets.filters;
 
-import repository.RepositoryFactory;
-import users.UserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import repository.RepositoryFactory;
+import users.UserImpl;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -19,11 +19,12 @@ import java.util.Properties;
 @WebFilter("/checkUser")
 public class StartFilter extends AbstractFilter {
     private static final Logger log = LoggerFactory.getLogger(StartFilter.class);
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if (request.getSession(false)==null || request.getSession(false).isNew()) {
+        if (request.getSession(false) == null || request.getSession(false).isNew()) {
             response.sendRedirect("/web/hello");
         }
         Properties properties = new Properties();
@@ -52,15 +53,15 @@ public class StartFilter extends AbstractFilter {
         HttpSession session = request.getSession();
         session.setAttribute("repostype", properties.getProperty("repository.type"));
         if (user != null) {
-        session.setAttribute("user", user);
-        log.info("SessionWithUserCreate = {}", user);
-        request.getRequestDispatcher("/checkUser").forward(request, response);}
-        else request.getRequestDispatcher("exeception.jsp").forward(request,response);
+            session.setAttribute("user", user);
+            log.info("SessionWithUserCreate = {}", user);
+            request.getRequestDispatcher("/checkUser").forward(request, response);
+        } else request.getRequestDispatcher("exeception.jsp").forward(request, response);
         filterChain.doFilter(request, response);
     }
 
     private UserImpl checkUser(int id, String password) {
-        return itRightCondition( id, password);
+        return itRightCondition(id, password);
     }
 
     private UserImpl checkUser(String login, String password) {
@@ -68,20 +69,16 @@ public class StartFilter extends AbstractFilter {
     }
 
     private UserImpl itRightCondition(int id, String password) {
-        UserImpl user;
-        user =
-                RepositoryFactory.getRepository().allUser().values().stream()
-                        .filter(u -> u.getId() == id && u.getPassword().equals(password))
-                        .findFirst().orElse(null);
-        return  user;
+
+        return RepositoryFactory.getRepository().allUser().values().stream()
+                .filter(u -> u.getId() == id && u.getPassword().equals(password))
+                .findFirst().orElse(null);
     }
 
     private UserImpl itRightCondition(String login, String password) {
-        UserImpl user;
-        user =
-        RepositoryFactory.getRepository().allUser().values().stream()
+        return RepositoryFactory.getRepository().allUser().values().stream()
                 .filter(u -> u.getLogin().equals(login) && u.getPassword().equals(password))
                 .findFirst().orElse(null);
-         return  user;
+
     }
 }

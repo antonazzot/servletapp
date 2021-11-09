@@ -20,11 +20,11 @@ public class AdminFunctionPostgres {
 
     public static HashMap<Integer, UserImpl> allAdmin() {
         HashMap<Integer, UserImpl> administrators = new HashMap<>();
-        try (Connection connection = datasourse.getConnection()){
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps =  connection.prepareStatement("select * from users where role_id=" + RoleIDParametrCheker.userGetRoleForDB(Role.ADMINISTRATOR));
+                ps = connection.prepareStatement("select * from users where role_id=" + RoleIDParametrCheker.userGetRoleForDB(Role.ADMINISTRATOR));
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     if (!rs.wasNull() || !rs.getString("login").equals("")) {
@@ -40,18 +40,18 @@ public class AdminFunctionPostgres {
                                             .withAge(rs.getInt("age"))
                                             .withRole(RoleIDParametrCheker.checkRole(rs.getInt("role_id")))
 
-                            );}
+                            );
+                    }
                 }
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("AllAdmin exception = {}", e.getMessage());
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(ps);
                 PostgresSQLUtils.closeQuietly(rs);
             }
         } catch (SQLException e) {
+            log.info("AllAdmin connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
         return administrators;

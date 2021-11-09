@@ -11,17 +11,17 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 public class RepositoryDatasourse implements DataSource {
-    private static RepositoryDatasourse instance;
+    private static volatile RepositoryDatasourse instance;
     private final String DRIVER;
     private final String URL;
     private final String NAME;
     private final String PASSWWORD;
 
     private RepositoryDatasourse(String driver, String url, String passwword, String name) {
-        this.DRIVER=driver;
-        this.NAME=name;
-        this.PASSWWORD=passwword;
-        this.URL=url;
+        this.DRIVER = driver;
+        this.NAME = name;
+        this.PASSWWORD = passwword;
+        this.URL = url;
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
@@ -53,7 +53,7 @@ public class RepositoryDatasourse implements DataSource {
 
     @Override
     public Connection getConnection() throws SQLException {
-       return DriverManager.getConnection(this.URL,this.NAME, this.PASSWWORD);
+        return DriverManager.getConnection(this.URL, this.NAME, this.PASSWWORD);
     }
 
     @Override

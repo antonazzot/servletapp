@@ -22,9 +22,8 @@
     <input type="submit" value="Go to Main Admin!">
 </form>
 <br>
-<form  action="logout">
-    <input type="submit" value="LogOut!">
-</form>
+<br>
+ <jsp:include page="logout.jsp" />
 
 
 </body>

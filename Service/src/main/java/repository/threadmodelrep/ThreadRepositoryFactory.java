@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ThreadRepositoryFactory {
-    private static  final RepositoryTypes TYPES;
+    private static final RepositoryTypes TYPES;
 
-    static  {
+    static {
         Properties properties = new Properties();
         try {
             properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
@@ -22,10 +22,12 @@ public class ThreadRepositoryFactory {
 
     }
 
-    public static ThreadRepository getRepository () {
+    public static ThreadRepository getRepository() {
         switch (TYPES) {
-            case MEMORY:  return  ThreadRepositoryImplInMemory.getInstance();
-            case POSTGRES: return ThreadRepositoryImpl.getInstance();
+            case MEMORY:
+                return ThreadRepositoryImplInMemory.getInstance();
+            case POSTGRES:
+                return ThreadRepositoryImpl.getInstance();
 
         }
         return ThreadRepositoryImplInMemory.getInstance();

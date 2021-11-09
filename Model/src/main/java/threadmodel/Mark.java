@@ -2,14 +2,21 @@ package threadmodel;
 
 import lombok.*;
 
+import javax.persistence.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
 @EqualsAndHashCode
+@Entity
+@Table(name = "mark")
 public class Mark {
-   private int id;
-   private int valuesOfMark;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name = "mark_value")
+    private int valuesOfMark;
 
     public Mark withId(Integer id) {
         setId(id);
@@ -17,8 +24,6 @@ public class Mark {
     }
 
     public Mark withValue(Integer value) {
-        if (value > 100 ) value = 100;
-        if (value < 0) value = 0;
         setValuesOfMark(value);
         return this;
     }

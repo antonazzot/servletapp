@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- This servlet  provides all  necessary information to JSP
- for further changes in created group
+ * This servlet  provides all  necessary information to JSP
+ * for further changes in created group
  **/
 @WebServlet("/updateGroup")
 public class UpdateGroup extends HttpServlet {

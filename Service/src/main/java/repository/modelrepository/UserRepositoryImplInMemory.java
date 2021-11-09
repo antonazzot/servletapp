@@ -14,28 +14,29 @@ import java.util.Optional;
 @Slf4j
 public class UserRepositoryImplInMemory implements UserRepository {
     private static UserRepositoryImplInMemory instance;
+
     private UserRepositoryImplInMemory() {
     }
 
     public static UserRepositoryImplInMemory getInstance() {
-          if (instance == null) {
-              synchronized (UserRepositoryImplInMemory.class) {
-                  if (instance == null) {
-                      instance = new UserRepositoryImplInMemory();
-                  }
-              }
+        if (instance == null) {
+            synchronized (UserRepositoryImplInMemory.class) {
+                if (instance == null) {
+                    instance = new UserRepositoryImplInMemory();
+                }
+            }
         }
         return instance;
     }
 
     @Override
     public HashMap<Integer, UserImpl> allUser() {
-     return UsersFunctionMemory.getallUser();
+        return UsersFunctionMemory.getallUser();
     }
 
     @Override
     public HashMap<Integer, UserImpl> allTrainer() {
-      return TrainerFunctionMemory.getallTrainer();
+        return TrainerFunctionMemory.getallTrainer();
     }
 
     @Override
@@ -55,17 +56,17 @@ public class UserRepositoryImplInMemory implements UserRepository {
 
     @Override
     public int saveUser(UserImpl user) {
-      return UsersFunctionMemory.saveUser(user);
+        return UsersFunctionMemory.saveUser(user);
     }
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-      return UsersFunctionMemory.doremoveUser(id,entity);
+        return UsersFunctionMemory.doremoveUser(id, entity);
     }
 
     @Override
     public UserImpl updateUser(UserImpl user) {
-      return   UsersFunctionMemory.doupdateUser(user);
+        return UsersFunctionMemory.doupdateUser(user);
     }
 
     @Override
@@ -75,6 +76,6 @@ public class UserRepositoryImplInMemory implements UserRepository {
 
     @Override
     public ArrayList<UserImpl> studentFromGroup(Integer groupId) {
-      return StudentFunctionMemory.studentFromGroup(groupId);
-     }
+        return StudentFunctionMemory.studentFromGroup(groupId);
+    }
 }

@@ -1,12 +1,12 @@
 package servlets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
 import threadmodel.Theams;
 import users.Role;
 import users.UserImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,10 +18,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
+
 /**
- Servlet providing  authorizes the user and redirects to a specific page
- //In first startfilter do authentication by id and login, and authorization,
-but I decided to divide it into different blocks
+ * Servlet providing  authorizes the user and redirects to a specific page
+ * //In first startfilter do authentication by id and login, and authorization,
+ * but I decided to divide it into different blocks
  **/
 
 @WebServlet(value = "/checkUser")
@@ -50,14 +51,13 @@ public class CheckServlet extends HttpServlet {
             if (ThreadRepositoryFactory.getRepository().allGroup()
                     .values()
                     .stream()
-                    .anyMatch(g -> g.getTrainer().getId() == user.getId()))
-            {
-            Group group = ThreadRepositoryFactory.getRepository().allGroup()
-                    .values()
-                    .stream()
-                    .filter(g -> g.getTrainer().getId() == user.getId())
-                    .findAny()
-                    .get();
+                    .anyMatch(g -> g.getTrainer().getId() == user.getId())) {
+                Group group = ThreadRepositoryFactory.getRepository().allGroup()
+                        .values()
+                        .stream()
+                        .filter(g -> g.getTrainer().getId() == user.getId())
+                        .findAny()
+                        .get();
 
                 Map<Integer, UserImpl> studentHashMap = group.getStudentMap();
                 Set<Theams> theams = group.getTheamsSet();
@@ -65,9 +65,9 @@ public class CheckServlet extends HttpServlet {
                 req.setAttribute("set", theams);
                 req.setAttribute("map", studentHashMap);
                 req.getRequestDispatcher("TrainerControlPage/trainerActList.jsp").forward(req, resp);
+            } else {
+                req.getRequestDispatcher("TrainerControlPage/groupnotexist.jsp").forward(req, resp);
             }
-            else {
-                req.getRequestDispatcher("TrainerControlPage/groupnotexist.jsp").forward(req,resp);}
         }
 
     }

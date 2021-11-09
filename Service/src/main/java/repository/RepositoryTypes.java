@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum RepositoryTypes {
-    MEMORY ("memory"),
-    POSTGRES ("postgres"),
-    HIBERNATE ("hibernate");
+    MEMORY("memory"),
+    POSTGRES("postgres"),
+    HIBERNATE("hibernate");
 
     private static final Map<String, RepositoryTypes> value2Enum = initValue2Enum();
     private static final Map<RepositoryTypes, String> enum2Value = initEnum2Value();
 
-    private final String type;
+    public final String type;
 
     RepositoryTypes(String type) {
         this.type = type;
@@ -22,9 +22,10 @@ public enum RepositoryTypes {
     public String getType() {
         return type;
     }
-    private static Map<String,RepositoryTypes> initValue2Enum() {
+
+    private static Map<String, RepositoryTypes> initValue2Enum() {
         RepositoryTypes[] repositoryTypes = RepositoryTypes.values();
-        Map<String,RepositoryTypes> result = new HashMap<>(repositoryTypes.length);
+        Map<String, RepositoryTypes> result = new HashMap<>(repositoryTypes.length);
         for (RepositoryTypes value : repositoryTypes) {
             result.put(value.getType(), value);
 
@@ -32,8 +33,8 @@ public enum RepositoryTypes {
         return Collections.unmodifiableMap(result);
     }
 
-    private static Map<RepositoryTypes,String> initEnum2Value() {
-        Map<RepositoryTypes,String> result = new EnumMap<RepositoryTypes, String>(RepositoryTypes.class);
+    private static Map<RepositoryTypes, String> initEnum2Value() {
+        Map<RepositoryTypes, String> result = new EnumMap<RepositoryTypes, String>(RepositoryTypes.class);
         for (RepositoryTypes value : RepositoryTypes.values()) {
             result.put(value, value.getType());
 
@@ -45,7 +46,7 @@ public enum RepositoryTypes {
         return value2Enum.get(str);
     }
 
-    public static String getTypeByType (RepositoryTypes type) {
+    public static String getTypeByType(RepositoryTypes type) {
         return enum2Value.get(type);
     }
 

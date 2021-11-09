@@ -15,23 +15,22 @@ public class TrainerFunctionMemory {
     }
 
     public static HashMap<Integer, UserImpl> getfreeTrainer() {
-        HashMap <Integer, UserImpl> result =  new HashMap<>(DataBaseInf.getTrainerHashMap());
+        HashMap<Integer, UserImpl> result = new HashMap<>(DataBaseInf.getTrainerHashMap());
         if (DataBaseInf.getGroupHashMap().values().isEmpty()) {
             return (HashMap<Integer, UserImpl>) DataBaseInf.getTrainerHashMap();
-        }
-        else  {
+        } else {
 
             ArrayList<UserImpl> busyTrainers = (ArrayList<UserImpl>) DataBaseInf.getGroupHashMap().values().stream()
                     .map(Group::getTrainer).collect(Collectors.toList());
-            for (UserImpl trainer:
+            for (UserImpl trainer :
                     DataBaseInf.getTrainerHashMap().values()) {
-                for (UserImpl busyTrainer:
-                        busyTrainers ) {
+                for (UserImpl busyTrainer :
+                        busyTrainers) {
                     if (trainer.getId() == busyTrainer.getId())
                         result.remove(trainer.getId());
                 }
             }
         }
-        return  result;
+        return result;
     }
 }

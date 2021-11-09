@@ -54,7 +54,7 @@ public class GroupFunction {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
-            log.info("SQL exception ={}", e.getMessage());
+            log.info("Get All group connection SQL exception ={}", e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -82,6 +82,7 @@ public class GroupFunction {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
+            log.info("GetstudentFromGroup connection SQL exception ={}", e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -111,6 +112,7 @@ public class GroupFunction {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
+            log.info("DoaddGroup connection SQL exception ={}", e.getMessage());
             e.printStackTrace();
         }
 
@@ -140,6 +142,7 @@ public class GroupFunction {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
+            log.info("insertIntoTheamGroup connection SQL exception ={}", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -167,6 +170,7 @@ public class GroupFunction {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
+            log.info("DoaddGroup _ InsertintoSStudentGroup connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -198,6 +202,7 @@ public class GroupFunction {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
+            log.info("DoaddGroup _ InsertintoMarktable connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -240,7 +245,7 @@ public class GroupFunction {
             updateGroupStratagy.updateGroup(groupId, entytiIdforact, connection);
         }
         catch (SQLException e) {
-            log.info("EROR in SQL UPDATEGRoup = {} ", e.getMessage());
+            log.info("doupdateGroup connection exception = {}", e.getMessage());
         }
     }
 

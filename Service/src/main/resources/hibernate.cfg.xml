@@ -4,6 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
+
     <session-factory>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.url">jdbc:postgresql://localhost:5432/WEBDB</property>
@@ -21,15 +22,8 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
         <!-- mapping files -->
-        <mapping class="by.task.servlets.Model.Users.Administrator"/>
-        <mapping class="servlets.Model.Users.Trainer"/>
-        <mapping class="by.servlets.Model.Users.Student"/>
-
-
-
-
-
-    
+<!--        <mapping class="Model.threadmodel.Theams"/>-->
+            <mapping  resource="Theams.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>

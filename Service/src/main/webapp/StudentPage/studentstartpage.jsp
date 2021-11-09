@@ -16,9 +16,8 @@
 <a href="studentservlet" > Смотреть оценки </a>
 <br>
 <br>
-<form  action="logout">
-    <input type="submit" value="Go to LogIN page!">
-</form>
+<br>
+ <jsp:include page="logout.jsp" />
 
 
 </body>

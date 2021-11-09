@@ -62,6 +62,7 @@ public class SalaryFunction {
                 );
             }
         } catch (SQLException e) {
+            log.info("getTrainerSalary connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -87,7 +88,7 @@ public class SalaryFunction {
             }
 
         } catch (SQLException e) {
-            log.info("error ={}", e.getMessage());
+            log.info("getTrainerSalary connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
     }

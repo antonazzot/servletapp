@@ -21,8 +21,9 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
     private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImpl.class);
     private static ThreadRepositoryImplInMemory instance;
 
-    private ThreadRepositoryImplInMemory () {
+    private ThreadRepositoryImplInMemory() {
     }
+
     public static ThreadRepositoryImplInMemory getInstance() {
         if (instance == null) {
             synchronized (ThreadRepositoryImpl.class) {
@@ -33,6 +34,7 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
         }
         return instance;
     }
+
     @Override
     public HashMap<Integer, Group> allGroup() {
         return GroupFunction.getAllGroup();
@@ -45,22 +47,22 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
 
     @Override
     public HashMap<Trainer, List<Salary>> trainerSalary() {
-      return SalaryFunction.gettrainerSalary();
+        return SalaryFunction.gettrainerSalary();
     }
 
     @Override
     public HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMark(int StudentId) {
-      return  MarkFunction.getstudentTheamMark(StudentId);
+        return MarkFunction.getstudentTheamMark(StudentId);
     }
 
     @Override
     public List<Mark> getMarkListbyTheam(Theams theam, int studentId) {
-        return MarkFunction.dogetMarkListbyTheam(theam,studentId);
+        return MarkFunction.dogetMarkListbyTheam(theam, studentId);
     }
 
     @Override
     public HashMap<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId) {
-        return MarkFunction.dogetMarkIDListbyTheam(theam,studentId);
+        return MarkFunction.dogetMarkIDListbyTheam(theam, studentId);
     }
 
     @Override
@@ -80,7 +82,7 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
 
     @Override
     public void addTheam(String theam) {
-    TheamFunction.doaddTheam(theam);
+        TheamFunction.doaddTheam(theam);
     }
 
     @Override
@@ -95,31 +97,31 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
 
     @Override
     public void addSalaryToTrainer(int trainerId, int salaryValue) {
-       SalaryFunction.doaddSalaryToTrainer(trainerId, salaryValue);
+        SalaryFunction.doaddSalaryToTrainer(trainerId, salaryValue);
     }
 
     @Override
     public void addMarkToStudent(int studentId, int theamID, int markValue) {
-    MarkFunction.doaddMarkToStudent(studentId,theamID,markValue);
+        MarkFunction.doaddMarkToStudent(studentId, theamID, markValue);
     }
 
     @Override
     public void deleteMarksById(int[] tempMarksId, int theamId, int studentid) {
-     MarkFunction.dodeleteMarksById(tempMarksId, theamId, studentid);
+        MarkFunction.dodeleteMarksById(tempMarksId, theamId, studentid);
     }
 
     @Override
     public void changeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
-    MarkFunction.dochangeMark(markIdMarkValue,studentId,theamId);
+        MarkFunction.dochangeMark(markIdMarkValue, studentId, theamId);
     }
 
     @Override
-    public void updateGroup (int groupId, String act, int[] entytiIdforact) {
-    GroupFunction.doupdateGroup(groupId, act, entytiIdforact);
+    public void updateGroup(int groupId, String act, int[] entytiIdforact) {
+        GroupFunction.doupdateGroup(groupId, act, entytiIdforact);
     }
 
     @Override
-    public void updateTheam (int theamId, String theamName) {
-    TheamFunction.doupdateTheam(theamId, theamName);
+    public void updateTheam(int theamId, String theamName) {
+        TheamFunction.doupdateTheam(theamId, theamName);
     }
 }

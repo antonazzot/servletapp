@@ -1,7 +1,7 @@
 package repository;
 
-import repository.modelrepository.UserRepository;
 import repository.hibernaterepositiry.UserRepositoryImplHibernate;
+import repository.modelrepository.UserRepository;
 import repository.modelrepository.UserRepositoryImplInMemory;
 import repository.modelrepository.UserRepositoryImplPostgres;
 
@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class RepositoryFactory {
-    private static  final RepositoryTypes TYPES;
+    private static final RepositoryTypes TYPES;
 
-    static  {
+    static {
         Properties properties = new Properties();
         try {
             properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
@@ -25,11 +25,11 @@ public class RepositoryFactory {
 
     }
 
-    public static UserRepository getRepository () {
+    public static UserRepository getRepository() {
 
         switch (TYPES) {
             case MEMORY:
-                return  UserRepositoryImplInMemory.getInstance();
+                return UserRepositoryImplInMemory.getInstance();
 
             case POSTGRES:
                 return UserRepositoryImplPostgres.getInstance();

@@ -3,7 +3,10 @@ package servlets.filters;
 import users.Role;
 import users.UserImpl;
 
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +17,7 @@ import java.io.IOException;
 @WebFilter(urlPatterns = {"/watchServlet", "/GroupCreaterServlet",
         "/avarageSalary", "/calculateAvarageSalary",
         "/addSalaryForTrainer", "/addSalary", "/changeUserServlet", "/calculateAvarageSalary",
-         "/updateUser","/updateGroup" ,"/UserActionServlet" })
+        "/updateUser", "/updateGroup", "/UserActionServlet"})
 public class UserFilter extends AbstractFilter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

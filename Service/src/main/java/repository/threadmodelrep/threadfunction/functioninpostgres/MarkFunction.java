@@ -45,9 +45,8 @@ public class MarkFunction {
                 PostgresSQLUtils.closeQuietly(rs);
                 PostgresSQLUtils.closeQuietly(ps);
             }
-
-
         } catch (SQLException e) {
+            log.info("getStudentTheamMark connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
         studentTheamMarkMap.put(RepositoryFactory.getRepository().allStudent().get(studentId), theamsListHashMap);
@@ -113,6 +112,7 @@ public class MarkFunction {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
+            log.info("dogetMarkIDListbyTheam connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
         return marks;
@@ -166,7 +166,7 @@ public class MarkFunction {
                 ps.setInt(1, markValue);
                 ps.setInt(2, studentId);
                 ps.setInt(3, theamID);
-                ps.executeQuery();
+                ps.executeUpdate();
             }
             catch (MySqlException e) {
                 log.info("insertMark exception = {}", e.getMessage());
@@ -191,7 +191,7 @@ public class MarkFunction {
                 ps.setInt(1, markValue);
                 ps.setInt(2, studentId);
                 ps.setInt(3, theamID);
-                ps.executeQuery();
+                ps.executeUpdate();
             }
             catch (MySqlException e) {
                 log.info("updateMark exception = {}", e.getMessage());
@@ -224,7 +224,7 @@ public class MarkFunction {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
-            log.info("error ={}", e.getMessage());
+            log.info("dodeleteMarksById connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -251,7 +251,7 @@ public class MarkFunction {
                 }
             }
         } catch (SQLException e) {
-            log.info("error ={}", e.getMessage());
+            log.info("dochangeMark connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
     }

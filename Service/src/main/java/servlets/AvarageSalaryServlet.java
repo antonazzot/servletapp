@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
 /**
- Servlet give information to jsp for  calculate avarage salary
+ * Servlet give information to jsp for  calculate avarage salary
  **/
 @WebServlet("/avarageSalary")
 public class AvarageSalaryServlet extends HttpServlet {
@@ -25,7 +26,7 @@ public class AvarageSalaryServlet extends HttpServlet {
     }
 
     private HashMap<Trainer, List<Salary>> salaryHashMap() {
-      return ThreadRepositoryImpl.getInstance().trainerSalary();
+        return ThreadRepositoryImpl.getInstance().trainerSalary();
     }
 
 }

@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
 /**
-    Servlet  provides  information to JSP
- for add salary to the trainer
+ * Servlet  provides  information to JSP
+ * for add salary to the trainer
  **/
 @WebServlet("/addSalary")
 public class TrainerAddSalaryServlet extends HttpServlet {
@@ -25,7 +26,7 @@ public class TrainerAddSalaryServlet extends HttpServlet {
     }
 
     private HashMap<Trainer, List<Salary>> salaryHashMap() {
-       return ThreadRepositoryFactory.getRepository().trainerSalary();
+        return ThreadRepositoryFactory.getRepository().trainerSalary();
     }
 }
 

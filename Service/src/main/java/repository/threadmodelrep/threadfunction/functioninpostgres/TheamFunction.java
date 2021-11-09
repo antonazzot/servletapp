@@ -44,6 +44,7 @@ public class TheamFunction {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
+            log.info("getallTheam connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -71,6 +72,7 @@ public class TheamFunction {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
+            log.info("getTheamByID connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
         return theams;
@@ -118,12 +120,13 @@ public class TheamFunction {
                     ps.executeUpdate();
                 }
                 catch (MySqlException e) {
-                    log.info("getTheamByID exception = {}", e.getMessage());
+                    log.info("doaddTheam exception = {}", e.getMessage());
                 }
                 finally {
                     PostgresSQLUtils.closeQuietly(ps);
                 }
             } catch (SQLException e) {
+                log.info("doaddTheam connection exception = {}", e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -176,7 +179,7 @@ public class TheamFunction {
                  PostgresSQLUtils.closeQuietly(ps);
              }
         } catch (SQLException e) {
-            log.info("error ={}", e.getMessage());
+            log.info("getBuzyTeam connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
         return busyTheam;
@@ -194,13 +197,13 @@ public class TheamFunction {
                 ps.executeUpdate();
             }
             catch (MySqlException e) {
-                log.info("getTheamByID exception = {}", e.getMessage());
+                log.info("doupdateTheam exception = {}", e.getMessage());
             }
             finally {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
-            log.info("error ={}", e.getMessage());
+            log.info("doupdateTheam connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
     }

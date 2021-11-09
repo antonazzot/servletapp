@@ -11,9 +11,8 @@
 <h1> Группа еще не создана, обратитесь к администратору </h1>
 
 <br>
-<form  action="logout">
-    <input type="submit" value="Go to LogIN page!">
-</form>
+<br>
+ <jsp:include page="logout.jsp" />
 
 
 </body>

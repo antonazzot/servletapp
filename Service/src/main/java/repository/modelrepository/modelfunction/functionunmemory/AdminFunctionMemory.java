@@ -6,7 +6,7 @@ import users.UserImpl;
 import java.util.HashMap;
 
 public class AdminFunctionMemory {
-    public static HashMap<Integer, UserImpl> getallAdmin () {
+    public static HashMap<Integer, UserImpl> getallAdmin() {
         return (HashMap<Integer, UserImpl>) DataBaseInf.getAdminHashMap();
     }
 }

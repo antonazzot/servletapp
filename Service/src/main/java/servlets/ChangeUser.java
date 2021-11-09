@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- Servlet  provides  information to JSP
- for change user data
+ * Servlet  provides  information to JSP
+ * for change user data
  **/
 @WebServlet("/updateUser")
 public class ChangeUser extends HttpServlet {

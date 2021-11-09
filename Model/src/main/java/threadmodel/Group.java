@@ -1,12 +1,13 @@
 package threadmodel;
 
+import lombok.*;
 import users.Student;
 import users.UserImpl;
-import lombok.*;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -16,13 +17,14 @@ public class Group {
     private int id;
     private String name;
     private UserImpl trainer;
-    Map<Integer, UserImpl> studentMap;
-    Set<Theams> theamsSet;
+    private Map<Integer, UserImpl> studentMap;
+    private Set<Theams> theamsSet;
 
     public Group withId(Integer id) {
         setId(id);
         return this;
     }
+
     public Group withName(String name) {
         setName(name);
         return this;
@@ -33,12 +35,12 @@ public class Group {
         return this;
     }
 
-    public Group withStudents (HashMap <Integer, UserImpl> students) {
+    public Group withStudents(HashMap<Integer, UserImpl> students) {
         setStudentMap(students);
         return this;
     }
 
-    public Group withTheam (Set <Theams> theams) {
+    public Group withTheam(Set<Theams> theams) {
         setTheamsSet(theams);
         return this;
     }

@@ -12,7 +12,7 @@ public class StudentFunctionMemory {
         return (HashMap<Integer, UserImpl>) DataBaseInf.getStudentHashMap();
     }
 
-    public static ArrayList<UserImpl> studentFromGroup (Integer groupId) {
+    public static ArrayList<UserImpl> studentFromGroup(Integer groupId) {
         Group group = DataBaseInf.getGroupHashMap().get(groupId);
         return new ArrayList<>(group.getStudentMap().values());
     }

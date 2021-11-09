@@ -3,15 +3,17 @@ package action;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
-This class factory individual id for every
-essence in database
-**/
+ * This class factory individual id for every
+ * essence in database
+ **/
 public final class IdFactory {
     private IdFactory() {
+        // to prevent entity creation
     }
-    private static volatile int generalID = 0;
-    public static synchronized int  idBuilder() {
-        AtomicInteger id =  new AtomicInteger(generalID++);
-        return id.get();
+
+    public static final AtomicInteger generalID = new AtomicInteger(0);
+
+    public static synchronized int idBuilder() {
+        return generalID.incrementAndGet();
     }
 }

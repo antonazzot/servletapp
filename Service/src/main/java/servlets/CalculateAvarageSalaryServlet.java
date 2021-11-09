@@ -15,17 +15,17 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- Servlet make calculate avarage salary
+ * Servlet make calculate avarage salary
  **/
 @WebServlet("/calculateAvarageSalary")
 public class CalculateAvarageSalaryServlet extends HttpServlet {
-        @Override
+    @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String trainerId = req.getParameter("trainer");
         String sal = req.getParameter("sal");
         Trainer trainer = null;
         long longavaragessalary = 0;
-            Writer writer = resp.getWriter();
+        Writer writer = resp.getWriter();
         if (trainerId != null) {
             int id = Integer.parseInt(trainerId);
             HashMap<Trainer, List<Salary>> trainerListHashMap = ThreadRepositoryFactory.getRepository().trainerSalary();

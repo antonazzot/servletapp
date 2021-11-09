@@ -9,10 +9,14 @@ public class RoleIDParametrCheker {
     private static final int ADMINISTRATOR_ROLE_ID = 1;
 
     public static Role checkRole(int role_id) {
-        switch (role_id){
-            case ADMINISTRATOR_ROLE_ID: return Role.ADMINISTRATOR;
-            case TRAINER_ROLE_ID: return Role.TRAINER;
-            case STUDENT_ROLE_ID: default: return Role.STUDENT;
+        switch (role_id) {
+            case ADMINISTRATOR_ROLE_ID:
+                return Role.ADMINISTRATOR;
+            case TRAINER_ROLE_ID:
+                return Role.TRAINER;
+            case STUDENT_ROLE_ID:
+            default:
+                return Role.STUDENT;
         }
 
     }
@@ -20,8 +24,7 @@ public class RoleIDParametrCheker {
     public static int userGetRoleForDB(Role role) {
         if (Role.ADMINISTRATOR.equals(role)) {
             return ADMINISTRATOR_ROLE_ID;
-        }
-        else if (Role.TRAINER.equals(role)) {
+        } else if (Role.TRAINER.equals(role)) {
             return TRAINER_ROLE_ID;
         }
         return STUDENT_ROLE_ID;

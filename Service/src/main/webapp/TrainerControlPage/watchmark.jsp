@@ -22,9 +22,8 @@
   </form>
 <br>
 <br>
-<form  action="logout">
-    <input type="submit" value="LogOut!">
-</form>
+<br>
+ <jsp:include page="logout.jsp" />
 
 
 </body>

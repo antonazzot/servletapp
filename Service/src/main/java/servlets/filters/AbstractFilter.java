@@ -11,6 +11,7 @@ public class AbstractFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {
     }
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -19,6 +20,7 @@ public class AbstractFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
         filterChain.doFilter(request, response);
     }
+
     @Override
     public void destroy() {
     }

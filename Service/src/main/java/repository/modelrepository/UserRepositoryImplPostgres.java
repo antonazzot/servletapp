@@ -10,12 +10,13 @@ import users.UserImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+
 @Slf4j
 public class UserRepositoryImplPostgres implements UserRepository {
 
     private static UserRepositoryImplPostgres instance;
 
-    private UserRepositoryImplPostgres () {
+    private UserRepositoryImplPostgres() {
     }
 
     public static UserRepositoryImplPostgres getInstance() {
@@ -30,23 +31,23 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public HashMap <Integer, UserImpl> allUser() {
-     return UsersFunctionPostgres.allUser();
+    public HashMap<Integer, UserImpl> allUser() {
+        return UsersFunctionPostgres.allUser();
     }
 
     @Override
     public HashMap<Integer, UserImpl> allTrainer() {
-      return TrainerFunctionPostgres.getallTrainer();
+        return TrainerFunctionPostgres.getallTrainer();
     }
 
     @Override
     public HashMap<Integer, UserImpl> allStudent() {
-       return StudentFunctionPostgres.allStudent();
+        return StudentFunctionPostgres.allStudent();
     }
 
     @Override
     public HashMap<Integer, UserImpl> allAdmin() {
-     return AdminFunctionPostgres.allAdmin();
+        return AdminFunctionPostgres.allAdmin();
     }
 
     @Override
@@ -55,13 +56,13 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public int  saveUser(UserImpl user) {
-       return UsersFunctionPostgres.saveUser(user);
+    public int saveUser(UserImpl user) {
+        return UsersFunctionPostgres.saveUser(user);
     }
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-    return UsersFunctionPostgres.removeUser(id, entity);
+        return UsersFunctionPostgres.removeUser(id, entity);
     }
 
     @Override
@@ -71,12 +72,12 @@ public class UserRepositoryImplPostgres implements UserRepository {
 
     @Override
     public HashMap<Integer, UserImpl> freeTrainer() {
-    return TrainerFunctionPostgres.freeTrainer();
+        return TrainerFunctionPostgres.freeTrainer();
     }
 
     @Override
-    public ArrayList <UserImpl> studentFromGroup(Integer groupId) {
-    return StudentFunctionPostgres.studentFromGroup(groupId);
+    public ArrayList<UserImpl> studentFromGroup(Integer groupId) {
+        return StudentFunctionPostgres.studentFromGroup(groupId);
     }
 
 }

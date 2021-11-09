@@ -1,5 +1,7 @@
 package repository.threadmodelrep;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import repository.threadmodelrep.threadfunction.functioninpostgres.GroupFunction;
 import repository.threadmodelrep.threadfunction.functioninpostgres.MarkFunction;
 import repository.threadmodelrep.threadfunction.functioninpostgres.SalaryFunction;
@@ -10,17 +12,18 @@ import threadmodel.Salary;
 import threadmodel.Theams;
 import users.Trainer;
 import users.UserImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 public class ThreadRepositoryImpl implements ThreadRepository {
 
     private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImpl.class);
-    private static ThreadRepositoryImpl instance;
+    private static volatile ThreadRepositoryImpl instance;
 
-    private ThreadRepositoryImpl () {
+    private ThreadRepositoryImpl() {
         //singlton
     }
 
@@ -47,17 +50,17 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
     @Override
     public HashMap<Trainer, List<Salary>> trainerSalary() {
-       return SalaryFunction.gettrainerSalary();
+        return SalaryFunction.gettrainerSalary();
     }
 
     @Override
-    public HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMark( int studentId) {
-       return MarkFunction.getstudentTheamMark(studentId);
+    public HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMark(int studentId) {
+        return MarkFunction.getstudentTheamMark(studentId);
     }
 
     @Override
     public List<Mark> getMarkListbyTheam(Theams theam, int studentId) {
-       return MarkFunction.dogetMarkListbyTheam(theam, studentId);
+        return MarkFunction.dogetMarkListbyTheam(theam, studentId);
     }
 
     @Override
@@ -72,7 +75,7 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
     @Override
     public Set<Theams> theamFromGroup(Integer groupId) {
-    return TheamFunction.gettheamFromGroup(groupId);
+        return TheamFunction.gettheamFromGroup(groupId);
     }
 
     @Override
@@ -82,32 +85,32 @@ public class ThreadRepositoryImpl implements ThreadRepository {
 
     @Override
     public void addTheam(String theam) {
-      TheamFunction.doaddTheam(theam);
+        TheamFunction.doaddTheam(theam);
     }
 
     @Override
     public void addGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
-    GroupFunction.doaddGroup(studentList, theamsIdList, trainerId);
+        GroupFunction.doaddGroup(studentList, theamsIdList, trainerId);
     }
 
     @Override
     public HashMap<Integer, Theams> freeTheams() {
-       return  TheamFunction.getfreeTheams();
+        return TheamFunction.getfreeTheams();
     }
 
     @Override
-    public void addSalaryToTrainer(int trainerId, int salaryValue ) {
-       SalaryFunction.doaddSalaryToTrainer(trainerId, salaryValue);
+    public void addSalaryToTrainer(int trainerId, int salaryValue) {
+        SalaryFunction.doaddSalaryToTrainer(trainerId, salaryValue);
     }
 
     @Override
     public void addMarkToStudent(int studentId, int theamID, int markValue) {
-           MarkFunction.doaddMarkToStudent(studentId, theamID, markValue);
+        MarkFunction.doaddMarkToStudent(studentId, theamID, markValue);
     }
 
     @Override
     public void deleteMarksById(int[] tempMarksId, int theamId, int studentid) {
-       MarkFunction.dodeleteMarksById(tempMarksId, theamId, studentid);
+        MarkFunction.dodeleteMarksById(tempMarksId, theamId, studentid);
     }
 
     @Override

@@ -14,17 +14,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 @Slf4j
 public class StudentFunctionPostgres {
     public static RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
     public static HashMap<Integer, UserImpl> allStudent() {
         HashMap<Integer, UserImpl> students = new HashMap<>();
-        try (Connection connection = datasourse.getConnection()){
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps =  connection.prepareStatement("select * from users where role_id="+RoleIDParametrCheker.userGetRoleForDB(Role.STUDENT));
+                ps = connection.prepareStatement("select * from users where role_id=" + RoleIDParametrCheker.userGetRoleForDB(Role.STUDENT));
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     if (!rs.wasNull() || !rs.getString("login").equals("")) {
@@ -43,24 +44,23 @@ public class StudentFunctionPostgres {
                             );
                     }
                 }
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("AllStudent exception = {}", e.getMessage());
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(ps);
                 PostgresSQLUtils.closeQuietly(rs);
             }
         } catch (SQLException e) {
+            log.info("AllStudent connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
         return students;
     }
 
     public static ArrayList<UserImpl> studentFromGroup(Integer groupId) {
-        ArrayList <UserImpl> result =  new ArrayList<>();
-        try (Connection connection = datasourse.getConnection()){
+        ArrayList<UserImpl> result = new ArrayList<>();
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
@@ -72,16 +72,15 @@ public class StudentFunctionPostgres {
                     UserImpl user = UsersFunctionPostgres.getUserById(rs.getInt("student_id"));
                     result.add(user);
                 }
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("studentFromGroup exception = {}", e.getMessage());
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(ps);
                 PostgresSQLUtils.closeQuietly(rs);
             }
         } catch (SQLException e) {
+            log.info("studentFromGroup connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
         return result;
