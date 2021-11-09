@@ -11,6 +11,5 @@
         <param-name>AdminPassword</param-name>
         <param-value>pass</param-value>
     </context-param>
-
 </web-app>
 
