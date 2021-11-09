@@ -19,7 +19,7 @@ import java.util.Set;
 
 public class ThreadRepositoryImplInMemory implements ThreadRepository {
     private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImpl.class);
-    private static ThreadRepositoryImplInMemory instance;
+    private static volatile ThreadRepositoryImplInMemory instance;
 
     private ThreadRepositoryImplInMemory() {
     }

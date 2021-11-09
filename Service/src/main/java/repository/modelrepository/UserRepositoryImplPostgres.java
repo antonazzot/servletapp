@@ -14,7 +14,7 @@ import java.util.Optional;
 @Slf4j
 public class UserRepositoryImplPostgres implements UserRepository {
 
-    private static UserRepositoryImplPostgres instance;
+    private static volatile UserRepositoryImplPostgres instance;
 
     private UserRepositoryImplPostgres() {
     }

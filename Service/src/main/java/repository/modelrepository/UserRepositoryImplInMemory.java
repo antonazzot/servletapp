@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Slf4j
 public class UserRepositoryImplInMemory implements UserRepository {
-    private static UserRepositoryImplInMemory instance;
+    private static volatile UserRepositoryImplInMemory instance;
 
     private UserRepositoryImplInMemory() {
     }
