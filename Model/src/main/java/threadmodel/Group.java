@@ -2,22 +2,43 @@ package threadmodel;
 
 import lombok.*;
 import users.Student;
+import users.Trainer;
 import users.UserImpl;
 
-import java.util.HashMap;
+import javax.persistence.*;
 import java.util.Map;
 import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString
-@EqualsAndHashCode
+@ToString ( exclude = {"theamsSet", "studentMap"})
+@EqualsAndHashCode ( exclude = {"theamsSet", "studentMap"})
+@Entity
+@Table (name = "gr_oup")
 public class Group {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private UserImpl trainer;
-    private Map<Integer, UserImpl> studentMap;
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn (name = "trainer_id", referencedColumnName = "id")
+    private Trainer trainer;
+    @ManyToMany
+    @JoinTable (
+            name = "student_group",
+            joinColumns = @JoinColumn (name = "group_id"),
+            inverseJoinColumns = @JoinColumn (name = "student_id")
+
+    )
+    @MapKey
+    private Map<Integer, Student> studentMap;
+    @OneToMany
+    @JoinTable (
+            name = "theam_group",
+            joinColumns = @JoinColumn (name = "group_id"),
+            inverseJoinColumns = @JoinColumn (name = "theam_id")
+    )
     private Set<Theams> theamsSet;
 
     public Group withId(Integer id) {
@@ -31,11 +52,11 @@ public class Group {
     }
 
     public Group withTrainer(UserImpl user) {
-        setTrainer(user);
+        setTrainer((Trainer) user);
         return this;
     }
 
-    public Group withStudents(HashMap<Integer, UserImpl> students) {
+    public Group withStudents(Map<Integer, Student> students) {
         setStudentMap(students);
         return this;
     }

@@ -1,24 +1,39 @@
 package users;
 
 import lombok.*;
+import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Theams;
 
-import javax.persistence.Entity;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import javax.naming.Name;
+import javax.persistence.*;
+import java.util.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 @Entity
+@Table(name = "users")
 public class Student extends UserImpl {
-
-    private HashMap<Theams, List<Mark>> listOfMark;
-
+    @ManyToMany
+    @JoinTable   (
+             name = "student_group",
+            joinColumns = @JoinColumn (name = "student_id"),
+            inverseJoinColumns = @JoinColumn (name = "group_id")
+    )
+    private Set <Group> groupSet;
+    @OneToMany
+    @JoinTable(
+            name = "student_mark",
+            joinColumns = @JoinColumn (name = "student_id"),
+            inverseJoinColumns = @JoinColumn (name = "mark_id")
+    )
+    @MapKey
+    private Map <Integer, Mark> markMap;
+    @Transient
+    private Map<Theams, List<Mark>> listOfMark;
 
     public Student withName(String name) {
         setName(name);

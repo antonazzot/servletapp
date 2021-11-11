@@ -20,7 +20,7 @@ public class MarkFunction {
         HashMap<UserImpl, HashMap<Theams, List<Mark>>> result = new HashMap<>();
         for (UserImpl student:
                 DataBaseInf.getStudentHashMap().values()) {
-            result.put((Student)student, ((Student) student).getListOfMark());
+            result.put((Student)student, (HashMap<Theams, List<Mark>>) ((Student) student).getListOfMark());
         }
         return result;
     }

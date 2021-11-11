@@ -68,7 +68,7 @@ public class MarkFunction {
                     int markId = rs.getInt("id");
                     if (!rs.wasNull() && tempMarkValue!=0)
                     {
-                        marks.add(new Mark(markId, tempMarkValue));
+                        marks.add(new Mark(markId, tempMarkValue, null, null));
                         log.info("Marks ={}", theam.getTheamName() + " " + tempMarkValue);}
                 }
             }
@@ -100,7 +100,7 @@ public class MarkFunction {
                 while (rs.next()) {
                     int markId = rs.getInt("id");
                     int tempMarkValue = rs.getInt("mark_value");
-                    marks.put(markId ,new Mark(markId, tempMarkValue));
+                    marks.put(markId ,new Mark(markId, tempMarkValue, null, null));
                     log.info("Marks ={}", theam.getTheamName() + " " + tempMarkValue);
                 }
             }

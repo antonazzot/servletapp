@@ -5,6 +5,7 @@ import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Salary;
 import threadmodel.Theams;
+import users.Student;
 import users.Trainer;
 import users.UserImpl;
 
@@ -29,7 +30,7 @@ public interface ThreadRepository {
 
     Set<Theams> theamFromGroup(Integer groupId);
 
-    HashMap<Integer, UserImpl> studentsFromGroup(int groupId);
+    HashMap<Integer, Student> studentsFromGroup(int groupId);
 
     void addTheam(String theam);
 

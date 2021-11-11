@@ -7,6 +7,7 @@ import repository.RepositoryDatasourse;
 import repository.RepositoryFactory;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.*;
 import threadmodel.Group;
+import users.Student;
 import users.UserImpl;
 
 import java.sql.Connection;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class GroupFunction {
@@ -28,7 +30,7 @@ public class GroupFunction {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps = connection.prepareStatement("select * from \"group\"");
+                ps = connection.prepareStatement("select * from \"gr_oup\"");
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     int groupId = rs.getInt("id");
@@ -60,8 +62,8 @@ public class GroupFunction {
         return result;
     }
 
-    public static HashMap<Integer, UserImpl> getstudentsFromGroup(int groupId) {
-        HashMap<Integer, UserImpl> result = new HashMap<>();
+    public static Map<Integer, Student> getstudentsFromGroup(int groupId) {
+        HashMap<Integer, Student> result = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -71,7 +73,7 @@ public class GroupFunction {
                 while (rs.next()) {
                     UserImpl student = RepositoryFactory.getRepository()
                             .getUserById(rs.getInt("student_id"));
-                    result.put(student.getId(), student);
+                    result.put(student.getId(), (Student) student);
                 }
             }
             catch (MySqlException e) {
@@ -93,7 +95,7 @@ public class GroupFunction {
             PreparedStatement ps = null;
             try {
                 ps = connection.prepareStatement(
-                        "INSERT INTO \"group\" (name, trainer_id)" +
+                        "INSERT INTO \"gr_oup\" (name, trainer_id)" +
                                 "Values (?,?)"
                 );
                 ps.setString(1, trainerId.toString()+"'s_Group");
@@ -214,7 +216,7 @@ public class GroupFunction {
             ResultSet rs = null;
             try {
                  ps = connection.prepareStatement(
-                        "select id from \"group\" where trainer_id = "+trainerId
+                        "select id from \"gr_oup\" where trainer_id = "+trainerId
                 );
                  rs = ps.executeQuery();
                 while (rs.next()) {

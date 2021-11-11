@@ -47,7 +47,7 @@ public class TrainerActServlet extends HttpServlet {
 
         if (act.equalsIgnoreCase("create")) {
             Group group = (Group) req.getSession().getAttribute("group");
-            Map<Integer, UserImpl> studentHashMap = group.getStudentMap();
+            Map<Integer, Student> studentHashMap = group.getStudentMap();
             Set<Theams> theams = group.getTheamsSet();
             log.info("Act = {}", "Student ={}", "Theam = {}", "Mark = {}", act, student, theam, mark);
             String answer = doAdd(userID, theam, mark);

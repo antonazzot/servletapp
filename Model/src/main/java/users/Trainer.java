@@ -4,6 +4,8 @@ import lombok.*;
 import threadmodel.Salary;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode(callSuper = true)
-@ToString
+@EqualsAndHashCode(callSuper = true, exclude = "salarylist")
+@ToString (callSuper = true, exclude = "salarylist")
 @Entity
+@Table(name = "users")
 public class Trainer extends UserImpl {
-
+    @OneToMany(mappedBy = "trainer")
     private List<Salary> salarylist = new ArrayList<>();
 
     public Trainer withName(String name) {

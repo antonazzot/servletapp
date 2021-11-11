@@ -1,6 +1,7 @@
 package threadmodel;
 
 import lombok.*;
+import users.Student;
 
 import javax.persistence.*;
 
@@ -17,6 +18,16 @@ public class Mark {
     private int id;
     @Column(name = "mark_value")
     private int valuesOfMark;
+    @ManyToOne
+    @JoinTable(
+            name = "student_mark",
+            joinColumns = @JoinColumn (name = "mark_id"),
+            inverseJoinColumns = @JoinColumn (name = "student_id")
+    )
+    private Student student;
+    @ManyToOne
+    @JoinColumn (name = "theam_id")
+    private Theams theams;
 
     public Mark withId(Integer id) {
         setId(id);

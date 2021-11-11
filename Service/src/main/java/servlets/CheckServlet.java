@@ -6,6 +6,7 @@ import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
 import threadmodel.Theams;
 import users.Role;
+import users.Student;
 import users.UserImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -59,7 +60,7 @@ public class CheckServlet extends HttpServlet {
                         .findAny()
                         .get();
 
-                Map<Integer, UserImpl> studentHashMap = group.getStudentMap();
+                Map<Integer, Student> studentHashMap = group.getStudentMap();
                 Set<Theams> theams = group.getTheamsSet();
                 session.setAttribute("group", group);
                 req.setAttribute("set", theams);

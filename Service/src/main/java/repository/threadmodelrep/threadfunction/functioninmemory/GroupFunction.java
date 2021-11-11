@@ -26,15 +26,15 @@ public class GroupFunction {
         return (HashMap<Integer, Group>) DataBaseInf.getGroupHashMap();
     }
 
-    public static HashMap<Integer, UserImpl> getstudentsFromGroup(int groupId) {
+    public static HashMap<Integer, Student> getstudentsFromGroup(int groupId) {
         Group group = DataBaseInf.getGroupHashMap().get(groupId);
-        return (HashMap<Integer, UserImpl>) group.getStudentMap();
+        return (HashMap<Integer, Student>) group.getStudentMap();
     }
 
     public static void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
         Group group = new Group();
         Set<Theams> theams =  new HashSet<>();
-        HashMap <Integer, UserImpl> students = new HashMap<>();
+        HashMap <Integer, Student> students = new HashMap<>();
         for (UserImpl user:
                 studentList) {
             Student student = (Student)user;

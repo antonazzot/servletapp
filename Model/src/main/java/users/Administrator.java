@@ -6,13 +6,15 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString (callSuper = true)
 @Entity
+@Table(name = "users")
 public class Administrator extends UserImpl {
 
     public Administrator withName(String name) {

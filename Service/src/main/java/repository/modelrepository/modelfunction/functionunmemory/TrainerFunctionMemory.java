@@ -2,10 +2,12 @@ package repository.modelrepository.modelfunction.functionunmemory;
 
 import database.DataBaseInf;
 import threadmodel.Group;
+import users.Trainer;
 import users.UserImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class TrainerFunctionMemory {
@@ -20,7 +22,7 @@ public class TrainerFunctionMemory {
             return (HashMap<Integer, UserImpl>) DataBaseInf.getTrainerHashMap();
         } else {
 
-            ArrayList<UserImpl> busyTrainers = (ArrayList<UserImpl>) DataBaseInf.getGroupHashMap().values().stream()
+            List<Trainer> busyTrainers =  DataBaseInf.getGroupHashMap().values().stream()
                     .map(Group::getTrainer).collect(Collectors.toList());
             for (UserImpl trainer :
                     DataBaseInf.getTrainerHashMap().values()) {

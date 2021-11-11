@@ -4,9 +4,9 @@ import users.Role;
 
 public class RoleIDParametrCheker {
 
-    private static final int STUDENT_ROLE_ID = 3;
-    private static final int TRAINER_ROLE_ID = 2;
-    private static final int ADMINISTRATOR_ROLE_ID = 1;
+    private static final int STUDENT_ROLE_ID = 2;
+    private static final int TRAINER_ROLE_ID = 1;
+    private static final int ADMINISTRATOR_ROLE_ID = 0;
 
     public static Role checkRole(int role_id) {
         switch (role_id) {

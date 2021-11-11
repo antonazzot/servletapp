@@ -10,6 +10,7 @@ import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Salary;
 import threadmodel.Theams;
+import users.Student;
 import users.Trainer;
 import users.UserImpl;
 
@@ -79,8 +80,8 @@ public class ThreadRepositoryImpl implements ThreadRepository {
     }
 
     @Override
-    public HashMap<Integer, UserImpl> studentsFromGroup(int groupId) {
-        return GroupFunction.getstudentsFromGroup(groupId);
+    public HashMap<Integer, Student> studentsFromGroup(int groupId) {
+        return (HashMap<Integer, Student>) GroupFunction.getstudentsFromGroup(groupId);
     }
 
     @Override
