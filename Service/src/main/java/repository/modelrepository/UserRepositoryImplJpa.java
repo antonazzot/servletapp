@@ -1,29 +1,37 @@
-package repository.hibernaterepositiry;
+package repository.modelrepository;
 
-import repository.modelrepository.UserRepository;
-import repository.modelrepository.UserRepositoryImplPostgres;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.AdminFunctionJpa;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.UserFunctionJpa;
+import users.Trainer;
 import users.UserImpl;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
-public class UserRepositoryImplHibernate implements UserRepository {
-    private static UserRepositoryImplHibernate instance;
-    public static Configuration cnf = new Configuration();
+public class UserRepositoryImplJpa implements UserRepository {
+    private static volatile UserRepositoryImplJpa instance;
+    public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
+    public static EntityManager em = sessionFactory.createEntityManager();
 
-    private UserRepositoryImplHibernate () {
+    private UserRepositoryImplJpa() {
     }
 
-    public static UserRepositoryImplHibernate getInstance() {
+    public static UserRepositoryImplJpa getInstance() {
 
         if (instance == null) {
             synchronized (UserRepositoryImplPostgres.class) {
                 if (instance == null) {
-                    instance = new UserRepositoryImplHibernate();
+                    instance = new UserRepositoryImplJpa();
                 }
             }
         }
@@ -32,27 +40,28 @@ public class UserRepositoryImplHibernate implements UserRepository {
 
     @Override
     public HashMap<Integer, UserImpl> allUser() {
-        return null;
+       return UserFunctionJpa.getAllUser();
+
     }
 
     @Override
     public HashMap<Integer, UserImpl> allTrainer() {
-        return null;
+       return TrainerFunctionJpa.getallTrainer();
     }
 
     @Override
     public HashMap<Integer, UserImpl> allStudent() {
-        return null;
+        return StudentFunctionJpa.getAllStudent();
     }
 
     @Override
     public HashMap<Integer, UserImpl> allAdmin() {
-        return null;
+        return AdminFunctionJpa.getAllAdmin();
     }
 
     @Override
     public UserImpl getUserById(Integer id) {
-        return null;
+        return UserFunctionJpa.getUserById(id);
     }
 
     @Override

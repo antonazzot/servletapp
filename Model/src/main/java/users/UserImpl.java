@@ -10,6 +10,12 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @ToString
 @MappedSuperclass
+//@NamedQueries(
+//        {
+//                @NamedQuery(name = "all", query = "select t from Trainer t where t.role = :role_id")
+//        }
+//)
+
 public class UserImpl implements User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

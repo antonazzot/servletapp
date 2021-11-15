@@ -3,9 +3,7 @@ package users;
 import lombok.*;
 import threadmodel.Salary;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +17,11 @@ import java.util.List;
 @ToString (callSuper = true, exclude = "salarylist")
 @Entity
 @Table(name = "users")
+//@NamedQueries(
+//        {
+//                @NamedQuery(name = "allTrainer", query = "select t from Trainer t where t.role = 1")
+//        }
+//)
 public class Trainer extends UserImpl {
     @OneToMany(mappedBy = "trainer")
     private List<Salary> salarylist = new ArrayList<>();

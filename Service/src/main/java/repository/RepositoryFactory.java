@@ -1,6 +1,6 @@
 package repository;
 
-import repository.hibernaterepositiry.UserRepositoryImplHibernate;
+import repository.modelrepository.UserRepositoryImplJpa;
 import repository.modelrepository.UserRepository;
 import repository.modelrepository.UserRepositoryImplInMemory;
 import repository.modelrepository.UserRepositoryImplPostgres;
@@ -34,8 +34,8 @@ public class RepositoryFactory {
             case POSTGRES:
                 return UserRepositoryImplPostgres.getInstance();
 
-            case HIBERNATE:
-                return UserRepositoryImplHibernate.getInstance();
+            case JPA:
+                return UserRepositoryImplJpa.getInstance();
 
             default:
                 throw new IllegalStateException("Unexpected value: " + TYPES);

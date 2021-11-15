@@ -8,8 +8,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString
-@EqualsAndHashCode
+@ToString (exclude = "student")
+@EqualsAndHashCode (exclude = "student")
 @Entity
 @Table(name = "mark")
 public class Mark {

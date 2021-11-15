@@ -1,4 +1,4 @@
-package repository.modelrepository.modelfunction.functionpostgress;
+package repository.modelrepository.modelfunction;
 
 import users.Role;
 
