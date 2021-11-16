@@ -6,6 +6,7 @@ import repository.RepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
 import threadmodel.Theams;
+import users.Student;
 import users.UserImpl;
 
 import javax.servlet.ServletException;
@@ -138,12 +139,12 @@ public class WatchServlet extends HttpServlet {
     /**
      * This method  given  data for demonstrate  information about group
      **/
-    private HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<UserImpl>>> groupStringHashMap() {
-        HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<UserImpl>>> hashMap = new HashMap<>();
+    private HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<Student>>> groupStringHashMap() {
+        HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<Student>>> hashMap = new HashMap<>();
         for (Map.Entry<Integer, Group> entry : ThreadRepositoryFactory.getRepository().allGroup().entrySet()) {
             Group group = entry.getValue();
             ArrayList<Theams> theams = new ArrayList<>(ThreadRepositoryFactory.getRepository().theamFromGroup(group.getId()));
-            ArrayList<UserImpl> students = RepositoryFactory.getRepository().studentFromGroup(group.getId());
+            ArrayList<Student> students = RepositoryFactory.getRepository().studentFromGroup(group.getId());
             hashMap.put(group, new HashMap<>(Map.of(theams, students)));
         }
         return hashMap;

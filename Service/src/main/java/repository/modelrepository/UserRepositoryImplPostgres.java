@@ -5,6 +5,7 @@ import repository.modelrepository.modelfunction.functionpostgress.AdminFunctionP
 import repository.modelrepository.modelfunction.functionpostgress.StudentFunctionPostgres;
 import repository.modelrepository.modelfunction.functionpostgress.TrainerFunctionPostgres;
 import repository.modelrepository.modelfunction.functionpostgress.UsersFunctionPostgres;
+import users.Student;
 import users.UserImpl;
 
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public ArrayList<UserImpl> studentFromGroup(Integer groupId) {
+    public ArrayList<Student> studentFromGroup(Integer groupId) {
         return StudentFunctionPostgres.studentFromGroup(groupId);
     }
 

@@ -2,6 +2,7 @@ package repository.modelrepository.modelfunction.functionunmemory;
 
 import database.DataBaseInf;
 import threadmodel.Group;
+import users.Student;
 import users.UserImpl;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class StudentFunctionMemory {
         return (HashMap<Integer, UserImpl>) DataBaseInf.getStudentHashMap();
     }
 
-    public static ArrayList<UserImpl> studentFromGroup(Integer groupId) {
+    public static ArrayList<Student> studentFromGroup(Integer groupId) {
         Group group = DataBaseInf.getGroupHashMap().get(groupId);
         return new ArrayList<>(group.getStudentMap().values());
     }

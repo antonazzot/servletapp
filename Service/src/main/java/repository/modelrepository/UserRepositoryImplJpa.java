@@ -4,15 +4,13 @@ import repository.modelrepository.modelfunction.functionjpaerepositiry.AdminFunc
 import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.UserFunctionJpa;
-import users.Trainer;
+import users.Student;
 import users.UserImpl;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -41,7 +39,6 @@ public class UserRepositoryImplJpa implements UserRepository {
     @Override
     public HashMap<Integer, UserImpl> allUser() {
        return UserFunctionJpa.getAllUser();
-
     }
 
     @Override
@@ -66,17 +63,17 @@ public class UserRepositoryImplJpa implements UserRepository {
 
     @Override
     public int saveUser(UserImpl user) {
-     return  0;
+     return UserFunctionJpa.doSaveUser (user);
     }
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-        return Optional.empty();
+        return UserFunctionJpa.doRemoveUser(id, entity);
     }
 
     @Override
     public UserImpl updateUser(UserImpl user) {
-        return null;
+        return UserFunctionJpa.doUpdateUser(user);
     }
 
     @Override
@@ -85,7 +82,7 @@ public class UserRepositoryImplJpa implements UserRepository {
     }
 
     @Override
-    public ArrayList<UserImpl> studentFromGroup(Integer groupId) {
-        return null;
+    public ArrayList<Student> studentFromGroup(Integer groupId) {
+        return StudentFunctionJpa.getStudentFromGroup(groupId);
     }
 }

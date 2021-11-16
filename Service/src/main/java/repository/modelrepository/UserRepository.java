@@ -1,5 +1,6 @@
 package repository.modelrepository;
 
+import users.Student;
 import users.UserImpl;
 
 import java.util.ArrayList;
@@ -25,6 +26,6 @@ public interface UserRepository {
 
     HashMap<Integer, UserImpl> freeTrainer();
 
-    ArrayList<UserImpl> studentFromGroup(Integer groupId);
+    ArrayList<Student> studentFromGroup(Integer groupId);
 
 }

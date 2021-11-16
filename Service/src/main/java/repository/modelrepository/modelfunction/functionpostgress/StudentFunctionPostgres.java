@@ -59,8 +59,8 @@ public class StudentFunctionPostgres {
         return students;
     }
 
-    public static ArrayList<UserImpl> studentFromGroup(Integer groupId) {
-        ArrayList<UserImpl> result = new ArrayList<>();
+    public static ArrayList<Student> studentFromGroup(Integer groupId) {
+        ArrayList<Student> result = new ArrayList<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -70,7 +70,7 @@ public class StudentFunctionPostgres {
                 ps.setInt(1, groupId);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    UserImpl user = UsersFunctionPostgres.getUserById(rs.getInt("student_id"));
+                    Student user = (Student) UsersFunctionPostgres.getUserById(rs.getInt("student_id"));
                     result.add(user);
                 }
             } catch (MySqlException e) {

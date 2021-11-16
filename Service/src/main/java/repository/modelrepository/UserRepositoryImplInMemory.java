@@ -5,6 +5,7 @@ import repository.modelrepository.modelfunction.functionunmemory.AdminFunctionMe
 import repository.modelrepository.modelfunction.functionunmemory.StudentFunctionMemory;
 import repository.modelrepository.modelfunction.functionunmemory.TrainerFunctionMemory;
 import repository.modelrepository.modelfunction.functionunmemory.UsersFunctionMemory;
+import users.Student;
 import users.UserImpl;
 
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class UserRepositoryImplInMemory implements UserRepository {
     }
 
     @Override
-    public ArrayList<UserImpl> studentFromGroup(Integer groupId) {
+    public ArrayList<Student> studentFromGroup(Integer groupId) {
         return StudentFunctionMemory.studentFromGroup(groupId);
     }
 }

@@ -2,6 +2,7 @@ package repository.modelrepository.modelfunction.functionjpaerepositiry;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import threadmodel.Group;
 import users.Administrator;
 import users.Role;
 import users.Student;
@@ -10,6 +11,8 @@ import users.UserImpl;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class StudentFunctionJpa {
@@ -28,7 +31,13 @@ public class StudentFunctionJpa {
         for (Student student : allst.getResultList()) {
             result.put(student.getId(), student);
         }
+        em.close();
 
         return result;
+    }
+
+    public static ArrayList<Student> getStudentFromGroup(Integer groupId) {
+        Group group = em.find(Group.class, groupId);
+        return (ArrayList<Student>) group.getStudentMap().values();
     }
 }
