@@ -1,14 +1,11 @@
 package repository.modelrepository.modelfunction.functionjpaerepositiry;
 
-import helperutils.MyExceptionUtils.MySqlException;
-import helperutils.closebaseconnection.PostgresSQLUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import repository.RepositoryDatasourse;
-import repository.modelrepository.modelfunction.RoleIDParametrCheker;
-import repository.modelrepository.modelfunction.functionpostgress.UsersFunctionPostgres;
-import repository.threadmodelrep.ThreadRepositoryImpl;
+import repository.threadmodelrep.ThreadRepositoryImplPostgres;
+import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
+import users.Administrator;
 import users.Role;
 import users.Trainer;
 import users.UserImpl;
@@ -16,10 +13,6 @@ import users.UserImpl;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,11 +22,11 @@ public class TrainerFunctionJpa {
 
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
-    public static EntityManager em = sessionFactory.createEntityManager();
+
 
     public static HashMap<Integer, UserImpl> getallTrainer() {
         HashMap <Integer, UserImpl> result = new HashMap<>();
-
+        EntityManager em = sessionFactory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         TypedQuery<Trainer> alltrainer = em.createQuery("select t from Trainer t where t.role = :role", Trainer.class);
@@ -41,14 +34,22 @@ public class TrainerFunctionJpa {
         for (Trainer trainer : alltrainer.getResultList()) {
             result.put(trainer.getId(), trainer);
         }
-
+        em.close();
         return result;
+
     }
 
     public static HashMap<Integer, UserImpl> freeTrainer() {
+        if (ThreadRepositoryImplPostgres.getInstance().allGroup().isEmpty())
+            return getallTrainer();
+        else {
+                List<UserImpl> busyTrainer = new ArrayList<>();
+                GroupFunctionJpa.getAllGroup().values()
+                        .forEach(group -> busyTrainer.add(group.getTrainer()));
 
-            return null;
+                return freeTrainerexecute((ArrayList<UserImpl>) busyTrainer);
 
+        }
     }
 
     private static HashMap<Integer, UserImpl> freeTrainerexecute(ArrayList<UserImpl> busyTrainer) {
@@ -61,5 +62,12 @@ public class TrainerFunctionJpa {
             }
         }
         return result;
+    }
+
+    public static Trainer doGetTrainerById(int id) {
+        EntityManager em = sessionFactory.createEntityManager();
+        TypedQuery <Trainer> query = em.createNamedQuery("trainerById", Trainer.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
 }

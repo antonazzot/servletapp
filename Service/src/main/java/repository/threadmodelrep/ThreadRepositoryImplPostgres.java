@@ -19,20 +19,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class ThreadRepositoryImpl implements ThreadRepository {
+public class ThreadRepositoryImplPostgres implements ThreadRepository {
 
-    private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImpl.class);
-    private static volatile ThreadRepositoryImpl instance;
+    private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImplPostgres.class);
+    private static volatile ThreadRepositoryImplPostgres instance;
 
-    private ThreadRepositoryImpl() {
+    private ThreadRepositoryImplPostgres() {
         //singlton
     }
 
-    public static ThreadRepositoryImpl getInstance() {
+    public static ThreadRepositoryImplPostgres getInstance() {
         if (instance == null) {
-            synchronized (ThreadRepositoryImpl.class) {
+            synchronized (ThreadRepositoryImplPostgres.class) {
                 if (instance == null) {
-                    instance = new ThreadRepositoryImpl();
+                    instance = new ThreadRepositoryImplPostgres();
                 }
             }
         }

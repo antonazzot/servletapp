@@ -24,7 +24,7 @@ import java.util.Optional;
 public class UserFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
-    public static EntityManager em = sessionFactory.createEntityManager();
+
 
     public static UserImpl getUserById (Integer id) {
        return getAllUser().get(id);
@@ -39,23 +39,24 @@ public class UserFunctionJpa {
     }
 
     public static int doSaveUser(UserImpl user) {
+        EntityManager em = sessionFactory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
         em.persist(user);
         transaction.commit();
-
+        em.close();
         return user.getId();
     }
 
     public static Optional<UserImpl> doRemoveUser(Integer id, String entity) {
+        EntityManager em = sessionFactory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         if (entity.equals("student")) {
             Student student = (Student) StudentFunctionJpa.getAllStudent().get(id);
             em.remove(student);
             transaction.commit();
-
             em.close();
 
         }
@@ -98,10 +99,12 @@ public class UserFunctionJpa {
                 .withName(user.getName())
                 .withAge(user.getAge())
                 .withRole(user.getRole());
+        EntityManager em = sessionFactory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.merge(userForChange);
         transaction.commit();
+        em.close();
         return userForChange;
     }
 }

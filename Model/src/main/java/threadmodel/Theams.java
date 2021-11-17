@@ -12,6 +12,11 @@ import java.util.Set;
 @EqualsAndHashCode
 @Entity
 @Table(name = "theam")
+@NamedQueries(
+        {
+                @NamedQuery(name = "getTheamById", query = "select t from Theams t where t.id = :id")
+        }
+)
 public class Theams {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

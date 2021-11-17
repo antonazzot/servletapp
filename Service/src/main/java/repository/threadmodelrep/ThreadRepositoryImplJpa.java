@@ -1,11 +1,11 @@
 package repository.threadmodelrep;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import repository.threadmodelrep.threadfunction.functioninmemory.GroupFunction;
-import repository.threadmodelrep.threadfunction.functioninmemory.MarkFunction;
-import repository.threadmodelrep.threadfunction.functioninmemory.SalaryFunction;
-import repository.threadmodelrep.threadfunction.functioninmemory.TheamFunction;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
+import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
+import repository.threadmodelrep.threadfunction.functionjpa.MarkFunctionJpa;
+import repository.threadmodelrep.threadfunction.functionjpa.SalaryFunctionJpa;
+import repository.threadmodelrep.threadfunction.functionjpa.TheamFunctionJpa;
 import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Salary;
@@ -18,111 +18,111 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class ThreadRepositoryImplInMemory implements ThreadRepository {
-    private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImplPostgres.class);
-    private static volatile ThreadRepositoryImplInMemory instance;
+public class ThreadRepositoryImplJpa implements ThreadRepository {
 
-    private ThreadRepositoryImplInMemory() {
+    private static volatile ThreadRepositoryImplJpa instance;
+
+    private ThreadRepositoryImplJpa () {
+        //singlton
     }
 
-    public static ThreadRepositoryImplInMemory getInstance() {
+    public static ThreadRepositoryImplJpa getInstance() {
         if (instance == null) {
-            synchronized (ThreadRepositoryImplPostgres.class) {
+            synchronized (ThreadRepositoryImplJpa.class) {
                 if (instance == null) {
-                    instance = new ThreadRepositoryImplInMemory();
+                    instance = new ThreadRepositoryImplJpa();
                 }
             }
         }
         return instance;
     }
-
     @Override
     public HashMap<Integer, Group> allGroup() {
-        return GroupFunction.getAllGroup();
+        return GroupFunctionJpa.getAllGroup();
     }
 
     @Override
     public HashMap<Integer, Theams> allTheams() {
-        return TheamFunction.getallTheams();
+        return TheamFunctionJpa.getallTheams();
     }
 
     @Override
     public HashMap<Trainer, List<Salary>> trainerSalary() {
-        return SalaryFunction.gettrainerSalary();
+        return SalaryFunctionJpa.gettrainerSalary();
     }
 
     @Override
     public HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMark(int StudentId) {
-        return MarkFunction.getstudentTheamMark(StudentId);
+        return MarkFunctionJpa.getstudentTheamMark(StudentId);
     }
 
     @Override
     public List<Mark> getMarkListbyTheam(Theams theam, int studentId) {
-        return MarkFunction.dogetMarkListbyTheam(theam, studentId);
+        return MarkFunctionJpa.dogetMarkListbyTheam(theam, studentId);
     }
 
     @Override
     public HashMap<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId) {
-        return MarkFunction.dogetMarkIDListbyTheam(theam, studentId);
+        return MarkFunctionJpa.dogetMarkIDListbyTheam(theam, studentId);
     }
 
     @Override
     public Theams theamById(Integer id) {
-        return TheamFunction.gettheamById(id);
+        return TheamFunctionJpa.gettheamById(id);
     }
 
     @Override
     public Set<Theams> theamFromGroup(Integer groupId) {
-        return TheamFunction.gettheamFromGroup(groupId);
+        return TheamFunctionJpa.gettheamFromGroup(groupId);
     }
 
     @Override
     public HashMap<Integer, Student> studentsFromGroup(int groupId) {
-        return GroupFunction.getstudentsFromGroup(groupId);
+        return (HashMap<Integer, Student>) GroupFunctionJpa.getstudentsFromGroup(groupId);
     }
 
     @Override
     public void addTheam(String theam) {
-        TheamFunction.doaddTheam(theam);
+        TheamFunctionJpa.doaddTheam(theam);
     }
 
     @Override
     public void addGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
-        GroupFunction.doaddGroup(studentList, theamsIdList, trainerId);
+    GroupFunctionJpa.doaddGroup(studentList, theamsIdList, trainerId);
     }
 
     @Override
     public HashMap<Integer, Theams> freeTheams() {
-        return TheamFunction.getfreeTheams();
+        return TheamFunctionJpa.getfreeTheams();
     }
 
     @Override
     public void addSalaryToTrainer(int trainerId, int salaryValue) {
-        SalaryFunction.doaddSalaryToTrainer(trainerId, salaryValue);
+        SalaryFunctionJpa.doaddSalaryToTrainer(trainerId, salaryValue);
     }
 
     @Override
     public void addMarkToStudent(int studentId, int theamID, int markValue) {
-        MarkFunction.doaddMarkToStudent(studentId, theamID, markValue);
+    MarkFunctionJpa.doaddMarkToStudent(studentId, theamID, markValue);
     }
 
     @Override
     public void deleteMarksById(int[] tempMarksId, int theamId, int studentid) {
-        MarkFunction.dodeleteMarksById(tempMarksId, theamId, studentid);
+        MarkFunctionJpa.dodeleteMarksById(tempMarksId, theamId, studentid);
     }
 
     @Override
     public void changeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
-        MarkFunction.dochangeMark(markIdMarkValue, studentId, theamId);
+    MarkFunctionJpa.dochangeMark(markIdMarkValue, studentId, theamId);
     }
 
     @Override
     public void updateGroup(int groupId, String act, int[] entytiIdforact) {
-        GroupFunction.doupdateGroup(groupId, act, entytiIdforact);
+
     }
 
     @Override
     public void updateTheam(int theamId, String theamName) {
-        TheamFunction.doupdateTheam(theamId, theamName);
+    TheamFunctionJpa.doupdateTheam(theamId, theamName);
     }
 }

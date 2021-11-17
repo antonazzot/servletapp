@@ -27,7 +27,9 @@ public class ThreadRepositoryFactory {
             case MEMORY:
                 return ThreadRepositoryImplInMemory.getInstance();
             case POSTGRES:
-                return ThreadRepositoryImpl.getInstance();
+                return ThreadRepositoryImplPostgres.getInstance();
+            case JPA:
+                return ThreadRepositoryImplJpa.getInstance();
 
         }
         return ThreadRepositoryImplInMemory.getInstance();

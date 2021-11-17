@@ -4,7 +4,9 @@ import repository.modelrepository.modelfunction.functionjpaerepositiry.AdminFunc
 import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.UserFunctionJpa;
+import users.Administrator;
 import users.Student;
+import users.Trainer;
 import users.UserImpl;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -84,5 +86,17 @@ public class UserRepositoryImplJpa implements UserRepository {
     @Override
     public ArrayList<Student> studentFromGroup(Integer groupId) {
         return StudentFunctionJpa.getStudentFromGroup(groupId);
+    }
+
+    public Trainer getTrainerById (int id) {
+     return TrainerFunctionJpa.doGetTrainerById (id);
+    }
+
+    public Administrator getAdministratorById (int id) {
+        return AdminFunctionJpa.doGetAdministratorById (id);
+    }
+
+    public Student getStudentById (int id) {
+        return StudentFunctionJpa.doGetStudentById (id);
     }
 }

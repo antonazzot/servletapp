@@ -12,6 +12,11 @@ import javax.persistence.*;
 @EqualsAndHashCode (exclude = "student")
 @Entity
 @Table(name = "mark")
+@NamedQueries(
+        {
+                @NamedQuery(name = "getMarkById", query = "select m from Mark m where m.id = :id")
+        }
+)
 public class Mark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +41,16 @@ public class Mark {
 
     public Mark withValue(Integer value) {
         setValuesOfMark(value);
+        return this;
+    }
+
+    public Mark withStudent (Student student) {
+        setStudent(student);
+        return this;
+    }
+
+    public Mark withTheam (Theams theam) {
+        setTheams(theam);
         return this;
     }
 

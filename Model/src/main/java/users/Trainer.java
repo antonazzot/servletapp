@@ -17,11 +17,11 @@ import java.util.List;
 @ToString (callSuper = true, exclude = "salarylist")
 @Entity
 @Table(name = "users")
-//@NamedQueries(
-//        {
-//                @NamedQuery(name = "allTrainer", query = "select t from Trainer t where t.role = 1")
-//        }
-//)
+@NamedQueries(
+        {
+                @NamedQuery(name = "trainerById", query = "select t from Trainer t where t.id = id")
+        }
+)
 public class Trainer extends UserImpl {
     @OneToMany(mappedBy = "trainer")
     private List<Salary> salarylist = new ArrayList<>();

@@ -16,6 +16,11 @@ import java.util.*;
 @ToString(callSuper = true)
 @Entity
 @Table(name = "users")
+@NamedQueries(
+        {
+                @NamedQuery(name = "studenById", query = "select s from Student s where s.id = :id")
+        }
+)
 public class Student extends UserImpl {
     @ManyToMany
     @JoinTable   (

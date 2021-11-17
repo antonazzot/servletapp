@@ -1,123 +1,64 @@
-package repository.threadmodelrep.threadfunction.functioninpostgres;
+package repository.threadmodelrep.threadfunction.functionjpa;
 
 import helperutils.MyExceptionUtils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import repository.RepositoryDatasourse;
 import repository.RepositoryFactory;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.*;
 import threadmodel.Group;
+import threadmodel.Theams;
 import users.Student;
 import users.UserImpl;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
-public class GroupFunction {
+public class GroupFunctionJpa {
+    public static Configuration cnf = new Configuration().configure();
+    public static SessionFactory sessionFactory = cnf.buildSessionFactory();
+    public static EntityManager em = sessionFactory.createEntityManager();
 
   private static final RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
     public static HashMap<Integer, Group> getAllGroup () {
         HashMap<Integer, Group> result = new HashMap<>();
-        try (Connection connection = datasourse.getConnection()) {
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            try {
-                ps = connection.prepareStatement("select * from \"gr_oup\"");
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int groupId = rs.getInt("id");
-                    UserImpl user =   RepositoryFactory.getRepository()
-                            .getUserById(rs.getInt("trainer_id"));
-                    result.put(groupId,
-                            new Group()
-                                    .withId(groupId)
-                                    .withName(rs.getString("name"))
-                                    .withTrainer(user)
-                                    .withStudents(
-                                            getstudentsFromGroup(groupId)
-                                    )
-                                    .withTheam(TheamFunction.gettheamFromGroup(groupId))
-                    );
-                }
-            }
-             catch (MySqlException e ) {
-               log.info("Get All group exception = {}", e.getMessage());
-             }
-            finally {
-                PostgresSQLUtils.closeQuietly(rs);
-                PostgresSQLUtils.closeQuietly(ps);
-            }
-        } catch (SQLException e) {
-            log.info("Get All group connection SQL exception ={}", e.getMessage());
-            e.printStackTrace();
+        TypedQuery <Group> groupTypedQuery = em.createQuery("from Group", Group.class);
+        for (Group group : groupTypedQuery.getResultList()) {
+            result.put(group.getId(), group);
         }
         return result;
     }
 
     public static Map<Integer, Student> getstudentsFromGroup(int groupId) {
-        HashMap<Integer, Student> result = new HashMap<>();
-        try (Connection connection = datasourse.getConnection()) {
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            try {
-               ps = connection.prepareStatement("select * from student_group where group_id = " + groupId );
-               rs = ps.executeQuery();
-                while (rs.next()) {
-                    UserImpl student = RepositoryFactory.getRepository()
-                            .getUserById(rs.getInt("student_id"));
-                    result.put(student.getId(), (Student) student);
-                }
-            }
-            catch (MySqlException e) {
-               log.info("GetstudentFromGroup exception = {}", e.getMessage());
-            }
-            finally {
-                PostgresSQLUtils.closeQuietly(rs);
-                PostgresSQLUtils.closeQuietly(ps);
-            }
-        } catch (SQLException e) {
-            log.info("GetstudentFromGroup connection SQL exception ={}", e.getMessage());
-            e.printStackTrace();
-        }
-        return result;
+        return getAllGroup().get(groupId).getStudentMap();
     }
 
     public static void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
-        try (Connection connection = datasourse.getConnection()) {
-            PreparedStatement ps = null;
-            try {
-                ps = connection.prepareStatement(
-                        "INSERT INTO \"gr_oup\" (name, trainer_id)" +
-                                "Values (?,?)"
-                );
-                ps.setString(1, trainerId.toString()+"'s_Group");
-                ps.setInt(2, trainerId);
-                ps.executeUpdate();
-                int groupId = getGroupId(trainerId);
-                insertIntoStudentGroup(groupId, studentList);
-                insertIntoTheamGroup(groupId, theamsIdList);
-                insertIntoMarkTable(studentList,theamsIdList);
-            }
-            catch (MySqlException e) {
-                log.info("DoaddGroup exception = {}", e.getMessage());
-                e.printStackTrace();
-            }
-            finally {
-                PostgresSQLUtils.closeQuietly(ps);
-            }
-        } catch (SQLException e) {
-            log.info("DoaddGroup connection SQL exception ={}", e.getMessage());
-            e.printStackTrace();
-        }
-
+        Set <Theams> theams = null;
+        theamsIdList.forEach(id -> theams.add(TheamFunctionJpa.gettheamById(id)));
+        HashMap <Integer, Student> studentHashMap = null;
+        studentList.stream().map(user -> (Student)user)
+                .forEach(student -> studentHashMap.put(student.getId(), student));
+        Group group = new Group()
+                .withTrainer(TrainerFunctionJpa.getallTrainer().get(trainerId))
+                .withName("Groups_" +trainerId)
+                .withTheam(theams)
+                .withStudents(studentHashMap);
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.persist(group);
+        em.close();
     }
 
     private static void insertIntoTheamGroup(int groupId, List<Integer> theamsIdList) {
@@ -252,13 +193,19 @@ public class GroupFunction {
     }
 
     private static UpdateGroupStratagy updateStratagyInject(String act) throws SQLException {
-      Map <String, UpdateGroupStratagy> stratagyMap = new HashMap<>(Map.of(
-              "studentdelete", new UpdateGroupStratagyStudentDelete(),
-              "studentadd", new UpdateGroupStratagyStudentAdd(),
-              "theamdelete", new UpdateGroupStratagyImplTheamDelete(),
-              "theamadd",new UpdateGroupStratagyImplTheamAdd(),
-              "trainer", new  UpdateGroupStratagyImplTrainerChange() ));
-       return stratagyMap.get(act);
+        switch (act) {
+            case "studentdelete":
+               return new UpdateGroupStratagyStudentDelete();
+            case "studentadd":
+                return new UpdateGroupStratagyStudentAdd();
+            case "theamdelete":
+                return new UpdateGroupStratagyImplTheamDelete();
+            case "theamadd":
+                return new UpdateGroupStratagyImplTheamAdd();
+            case "trainer":
+                return new  UpdateGroupStratagyImplTrainerChange();
+        }
+        return null;
     }
 
 

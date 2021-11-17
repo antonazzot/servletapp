@@ -5,7 +5,7 @@ import helperutils.closebaseconnection.PostgresSQLUtils;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
-import repository.threadmodelrep.ThreadRepositoryImpl;
+import repository.threadmodelrep.ThreadRepositoryImplPostgres;
 import users.Role;
 import users.Trainer;
 import users.UserImpl;
@@ -61,7 +61,7 @@ public class TrainerFunctionPostgres {
     }
 
     public static HashMap<Integer, UserImpl> freeTrainer() {
-        if (ThreadRepositoryImpl.getInstance().allGroup().isEmpty())
+        if (ThreadRepositoryImplPostgres.getInstance().allGroup().isEmpty())
             return getallTrainer();
         else {
             try (Connection connection = datasourse.getConnection()) {
