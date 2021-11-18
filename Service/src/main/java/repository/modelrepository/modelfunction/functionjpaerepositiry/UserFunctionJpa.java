@@ -5,6 +5,8 @@ import helperutils.closebaseconnection.PostgresSQLUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
+import repository.threadmodelrep.threadfunction.functionjpa.TheamFunctionJpa;
 import threadmodel.Group;
 import users.Administrator;
 import users.Student;
@@ -42,7 +44,6 @@ public class UserFunctionJpa {
         EntityManager em = sessionFactory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-
         em.persist(user);
         transaction.commit();
         em.close();
@@ -54,38 +55,44 @@ public class UserFunctionJpa {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         if (entity.equals("student")) {
-            Student student = (Student) StudentFunctionJpa.getAllStudent().get(id);
+            Student student = StudentFunctionJpa.doGetStudentById(id);
             em.remove(student);
             transaction.commit();
             em.close();
-
         }
-//        else  if
-//        (entity.equals("trainer"))
-//        {
-//            Trainer trainer = (Trainer) TrainerFunctionJpa.getallTrainer().get(id);
-//            em.remove(trainer);
-//            transaction.commit();
-//        }
-//        else  if
-//        (entity.equals("administrator"))
-//        {
-//            Administrator administrator = (Administrator) getUserById(id);
-//            em.remove(administrator);
-//            transaction.commit();
-//        }
-//       else
-//                switch (entity) {
-//
-//                    case "group": {
-//                        return  null;
-//                    }
-//
-//                    case "theam": {
-//                        return  null;
-//                    }
-//
-//                }
+        else  if
+        (entity.equals("trainer"))
+        {
+            Trainer trainer =  TrainerFunctionJpa.doGetTrainerById(id);
+            em.remove(trainer);
+            transaction.commit();
+            em.close();
+        }
+        else  if
+        (entity.equals("administrator"))
+        {
+            Administrator administrator = AdminFunctionJpa.doGetAdministratorById(id);
+            em.remove(administrator);
+            transaction.commit();
+            em.close();
+        }
+       else
+                switch (entity) {
+
+                    case "group": {
+                        em.remove(GroupFunctionJpa.getGroupById(id));
+                        transaction.commit();
+                        em.close();
+
+                    }
+
+                    case "theam": {
+                        em.remove(TheamFunctionJpa.gettheamById(id));
+                        transaction.commit();
+                        em.close();
+                    }
+
+                }
 
 
         return Optional.empty();

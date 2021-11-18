@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import repository.RepositoryDatasourse;
 import repository.RepositoryFactory;
 import repository.modelrepository.UserRepositoryImplJpa;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
 import threadmodel.Mark;
 import threadmodel.Theams;
 import users.Student;
@@ -32,7 +33,7 @@ public class MarkFunctionJpa {
         HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMarkMap = new HashMap<>();
         HashMap <Theams, List <Mark>> theamsListHashMap = new HashMap<>();
 
-        Student userById = UserRepositoryImplJpa.getInstance().getStudentById(studentId);
+        Student userById = StudentFunctionJpa.doGetStudentById(studentId);
         Set <Theams> theams = new HashSet<>();
         for (Mark mark : userById.getMarkMap().values()) {
             theams.add(mark.getTheams());

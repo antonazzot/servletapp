@@ -39,13 +39,16 @@ public class SalaryFunctionJpa {
     }
 
     public static void doaddSalaryToTrainer(int trainerId, int salaryValue ) {
-       Trainer trainer = (Trainer) TrainerFunctionJpa.getallTrainer().get(trainerId);
-       trainer.addSalary(new Salary()
-               .withValue(salaryValue));
+       Trainer trainer =  TrainerFunctionJpa.doGetTrainerById(trainerId);
+       Salary salary = new Salary()
+               .withValue(salaryValue);
+       trainer.addSalary(salary);
         EntityManager em = sessionFactory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
+//        em.persist(salary);
         em.merge(trainer);
+        transaction.commit();
         em.close();
     }
 }

@@ -80,7 +80,7 @@ public class UserRepositoryImplJpa implements UserRepository {
 
     @Override
     public HashMap<Integer, UserImpl> freeTrainer() {
-        return null;
+      return TrainerFunctionJpa.freeTrainer();
     }
 
     @Override

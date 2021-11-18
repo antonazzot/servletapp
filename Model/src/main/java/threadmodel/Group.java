@@ -16,12 +16,13 @@ import java.util.Set;
 @EqualsAndHashCode ( exclude = {"theamsSet", "studentMap"})
 @Entity
 @Table (name = "gr_oup")
+
 public class Group {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn (name = "trainer_id", referencedColumnName = "id")
     private Trainer trainer;
     @ManyToMany

@@ -112,8 +112,11 @@ public class TheamFunctionJpa {
 
     private static Theams getTheamById (int id) {
         EntityManager em = sessionFactory.createEntityManager();
-        TypedQuery <Theams> query = em.createNamedQuery("getTheamById", Theams.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+        Theams theams = em.find(Theams.class, id);
+        em.close();
+        return theams;
+//        TypedQuery <Theams> query = em.createNamedQuery("getTheamById", Theams.class);
+//        query.setParameter("id", id);
+//        return query.getSingleResult();
     }
 }

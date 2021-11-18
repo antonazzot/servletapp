@@ -14,6 +14,7 @@ import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 public class StudentFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
@@ -30,13 +31,8 @@ public class StudentFunctionJpa {
 
         TypedQuery<Student> allst = em.createQuery("select s from Student s where s.role = :role", Student.class);
         allst.setParameter("role", Role.STUDENT);
-
-        for (Student student : allst.getResultList()) {
-            result.put(student.getId(), student);
-        };
+        allst.getResultList().forEach(student -> result.put(student.getId(), student));
         em.close();
-
-
         return result;
     }
 
@@ -44,13 +40,21 @@ public class StudentFunctionJpa {
         EntityManager em = sessionFactory.createEntityManager();
         Group group = em.find(Group.class, groupId);
         em.close();
-        return (ArrayList<Student>) group.getStudentMap().values();
+        ArrayList <Student> students =new ArrayList<>();
+        group.getStudentMap().values().forEach(student -> students.add(student));
+        return students;
     }
 
     public static Student doGetStudentById(int id) {
         EntityManager em = sessionFactory.createEntityManager();
-        TypedQuery <Student> query = em.createNamedQuery("studenById", Student.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+//        TypedQuery <Student> query = em.createNamedQuery("studenById", Student.class);
+//        query.setParameter("id", id);
+//        return query.getSingleResult();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        Student student = em.find(Student.class, id);
+        em.close();
+        return student;
+
     }
 }

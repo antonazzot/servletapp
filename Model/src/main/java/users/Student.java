@@ -24,7 +24,7 @@ import java.util.*;
 public class Student extends UserImpl {
     @ManyToMany
     @JoinTable   (
-             name = "student_group",
+            name = "student_group",
             joinColumns = @JoinColumn (name = "student_id"),
             inverseJoinColumns = @JoinColumn (name = "group_id")
     )
@@ -34,9 +34,10 @@ public class Student extends UserImpl {
             name = "student_mark",
             joinColumns = @JoinColumn (name = "student_id"),
             inverseJoinColumns = @JoinColumn (name = "mark_id")
+
     )
     @MapKey
-    private Map <Integer, Mark> markMap;
+    private Map <Integer, Mark> markMap = new HashMap<>();
     @Transient
     private Map<Theams, List<Mark>> listOfMark;
 

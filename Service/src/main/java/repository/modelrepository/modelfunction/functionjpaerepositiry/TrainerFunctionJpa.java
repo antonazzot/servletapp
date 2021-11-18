@@ -31,9 +31,7 @@ public class TrainerFunctionJpa {
         transaction.begin();
         TypedQuery<Trainer> alltrainer = em.createQuery("select t from Trainer t where t.role = :role", Trainer.class);
         alltrainer.setParameter("role", Role.TRAINER);
-        for (Trainer trainer : alltrainer.getResultList()) {
-            result.put(trainer.getId(), trainer);
-        }
+        alltrainer.getResultList().forEach(trainer -> result.put(trainer.getId(), trainer));
         em.close();
         return result;
 
@@ -46,7 +44,6 @@ public class TrainerFunctionJpa {
                 List<UserImpl> busyTrainer = new ArrayList<>();
                 GroupFunctionJpa.getAllGroup().values()
                         .forEach(group -> busyTrainer.add(group.getTrainer()));
-
                 return freeTrainerexecute((ArrayList<UserImpl>) busyTrainer);
 
         }

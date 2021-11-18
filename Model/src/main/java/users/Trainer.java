@@ -19,11 +19,11 @@ import java.util.List;
 @Table(name = "users")
 @NamedQueries(
         {
-                @NamedQuery(name = "trainerById", query = "select t from Trainer t where t.id = id")
+                @NamedQuery(name = "trainerById", query = "select t from Trainer t where t.id = :id")
         }
 )
 public class Trainer extends UserImpl {
-    @OneToMany(mappedBy = "trainer")
+    @OneToMany(mappedBy = "trainer", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Salary> salarylist = new ArrayList<>();
 
     public Trainer withName(String name) {
