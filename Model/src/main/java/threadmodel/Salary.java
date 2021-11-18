@@ -28,4 +28,9 @@ public class Salary {
         return this;
     }
 
+    public Salary withTrainer (Trainer trainer) {
+        setTrainer(trainer);
+        return this;
+    }
+
 }

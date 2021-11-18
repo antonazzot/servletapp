@@ -16,16 +16,15 @@ import java.util.Set;
 @EqualsAndHashCode ( exclude = {"theamsSet", "studentMap"})
 @Entity
 @Table (name = "gr_oup")
-
 public class Group {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "trainer_id", referencedColumnName = "id")
     private Trainer trainer;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable (
             name = "student_group",
             joinColumns = @JoinColumn (name = "group_id"),
@@ -34,7 +33,7 @@ public class Group {
     )
     @MapKey
     private Map<Integer, Student> studentMap;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable (
             name = "theam_group",
             joinColumns = @JoinColumn (name = "group_id"),

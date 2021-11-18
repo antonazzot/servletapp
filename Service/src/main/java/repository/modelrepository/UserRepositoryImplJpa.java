@@ -19,9 +19,6 @@ import java.util.Optional;
 
 public class UserRepositoryImplJpa implements UserRepository {
     private static volatile UserRepositoryImplJpa instance;
-    public static Configuration cnf = new Configuration().configure();
-    public static SessionFactory sessionFactory = cnf.buildSessionFactory();
-    public static EntityManager em = sessionFactory.createEntityManager();
 
     private UserRepositoryImplJpa() {
     }

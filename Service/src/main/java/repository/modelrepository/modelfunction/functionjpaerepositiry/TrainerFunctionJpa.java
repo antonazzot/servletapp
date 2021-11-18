@@ -1,5 +1,6 @@
 package repository.modelrepository.modelfunction.functionjpaerepositiry;
 
+import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -19,22 +20,26 @@ import java.util.List;
 
 @Slf4j
 public class TrainerFunctionJpa {
-
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
 
-
     public static HashMap<Integer, UserImpl> getallTrainer() {
         HashMap <Integer, UserImpl> result = new HashMap<>();
-        EntityManager em = sessionFactory.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        TypedQuery<Trainer> alltrainer = em.createQuery("select t from Trainer t where t.role = :role", Trainer.class);
-        alltrainer.setParameter("role", Role.TRAINER);
-        alltrainer.getResultList().forEach(trainer -> result.put(trainer.getId(), trainer));
-        em.close();
+        EntityManager em = null;
+        try {
+            em = sessionFactory.createEntityManager();
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            TypedQuery<Trainer> alltrainer = em.createQuery("select t from Trainer t where t.role = :role", Trainer.class);
+            alltrainer.setParameter("role", Role.TRAINER);
+            alltrainer.getResultList().forEach(trainer -> result.put(trainer.getId(), trainer));
+        }
+        catch (Exception e) {
+            JpaUtils.rollBackQuietly(em, e);
+        } finally {
+            JpaUtils.closeQuietly(em);
+        }
         return result;
-
     }
 
     public static HashMap<Integer, UserImpl> freeTrainer() {
@@ -45,7 +50,6 @@ public class TrainerFunctionJpa {
                 GroupFunctionJpa.getAllGroup().values()
                         .forEach(group -> busyTrainer.add(group.getTrainer()));
                 return freeTrainerexecute((ArrayList<UserImpl>) busyTrainer);
-
         }
     }
 
@@ -62,9 +66,18 @@ public class TrainerFunctionJpa {
     }
 
     public static Trainer doGetTrainerById(int id) {
-        EntityManager em = sessionFactory.createEntityManager();
-        TypedQuery <Trainer> query = em.createNamedQuery("trainerById", Trainer.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+        EntityManager em = null;
+        try {
+            em = sessionFactory.createEntityManager();
+            TypedQuery <Trainer> query = em.createNamedQuery("trainerById", Trainer.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        }
+        catch (Exception e) {
+            JpaUtils.rollBackQuietly(em, e);
+        } finally {
+            JpaUtils.closeQuietly(em);
+        }
+        return null;
     }
 }

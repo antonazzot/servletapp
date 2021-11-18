@@ -22,14 +22,14 @@ import java.util.*;
         }
 )
 public class Student extends UserImpl {
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable   (
             name = "student_group",
             joinColumns = @JoinColumn (name = "student_id"),
             inverseJoinColumns = @JoinColumn (name = "group_id")
     )
     private Set <Group> groupSet;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "student_mark",
             joinColumns = @JoinColumn (name = "student_id"),

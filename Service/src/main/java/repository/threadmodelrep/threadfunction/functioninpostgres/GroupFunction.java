@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
 import repository.RepositoryFactory;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.*;
+import repository.threadmodelrep.threadfunction.updategroupstratagy.postgressupdatestratage.*;
 import threadmodel.Group;
 import users.Student;
 import users.UserImpl;
@@ -240,24 +241,24 @@ public class GroupFunction {
 
       public static void doupdateGroup (int groupId, String act, int[] entytiIdforact) {
         log.info("In repository updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
-        UpdateGroupStratagy updateGroupStratagy;
+        UpdateGroupStratagyPostgress updateGroupStratagyPostgress;
         try (Connection connection = datasourse.getConnection()) {
-          updateGroupStratagy = updateStratagyInject(act);
-            assert updateGroupStratagy != null;
-            updateGroupStratagy.updateGroup(groupId, entytiIdforact, connection);
+          updateGroupStratagyPostgress = updateStratagyInject(act);
+            assert updateGroupStratagyPostgress != null;
+            updateGroupStratagyPostgress.updateGroup(groupId, entytiIdforact, connection);
         }
         catch (SQLException e) {
             log.info("doupdateGroup connection exception = {}", e.getMessage());
         }
     }
 
-    private static UpdateGroupStratagy updateStratagyInject(String act) throws SQLException {
-      Map <String, UpdateGroupStratagy> stratagyMap = new HashMap<>(Map.of(
+    private static UpdateGroupStratagyPostgress updateStratagyInject(String act) throws SQLException {
+      Map <String, UpdateGroupStratagyPostgress> stratagyMap = new HashMap<>(Map.of(
               "studentdelete", new UpdateGroupStratagyStudentDelete(),
-              "studentadd", new UpdateGroupStratagyStudentAdd(),
-              "theamdelete", new UpdateGroupStratagyImplTheamDelete(),
-              "theamadd",new UpdateGroupStratagyImplTheamAdd(),
-              "trainer", new  UpdateGroupStratagyImplTrainerChange() ));
+              "studentadd", new UpdateGroupStratagyPostgressStudentAdd(),
+              "theamdelete", new UpdateGroupStratagyPostgressImplTheamDelete(),
+              "theamadd",new UpdateGroupStratagyPostgressImplTheamAdd(),
+              "trainer", new UpdateGroupStratagyPostgressImplTrainerChange() ));
        return stratagyMap.get(act);
     }
 

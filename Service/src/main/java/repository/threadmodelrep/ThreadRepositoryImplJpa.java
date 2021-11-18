@@ -118,7 +118,7 @@ public class ThreadRepositoryImplJpa implements ThreadRepository {
 
     @Override
     public void updateGroup(int groupId, String act, int[] entytiIdforact) {
-
+        GroupFunctionJpa.doupdateGroup(groupId, act, entytiIdforact);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package repository.threadmodelrep.threadfunction.functionjpa;
 
 import helperutils.MyExceptionUtils.MySqlException;
+import helperutils.closebaseconnection.JpaUtils;
 import helperutils.closebaseconnection.PostgresSQLUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
@@ -31,29 +32,38 @@ public class MarkFunctionJpa {
 
     public static HashMap<UserImpl, HashMap<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
         HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMarkMap = new HashMap<>();
-        HashMap <Theams, List <Mark>> theamsListHashMap = new HashMap<>();
+        Student student = StudentFunctionJpa.doGetStudentById(studentId);
+        Set<Theams> theams = getTheamsSet(student);
+        HashMap<Theams, List<Mark>> theamsListHashMap = getTheamsListHashMap(studentId, theams);
+        studentTheamMarkMap.put(student, theamsListHashMap);
+        return  studentTheamMarkMap;
+    }
 
-        Student userById = StudentFunctionJpa.doGetStudentById(studentId);
-        Set <Theams> theams = new HashSet<>();
-        for (Mark mark : userById.getMarkMap().values()) {
-            theams.add(mark.getTheams());
-        };
+    private static HashMap<Theams, List<Mark>> getTheamsListHashMap(int studentId, Set<Theams> theams) {
+        HashMap <Theams, List <Mark>> theamsListHashMap = new HashMap<>();
         for (Theams theam : theams) {
             theamsListHashMap.put(theam, dogetMarkListbyTheam(theam, studentId));
         }
-        studentTheamMarkMap.put(userById, theamsListHashMap);
-        return  studentTheamMarkMap;
+        return theamsListHashMap;
     }
+
+    private static Set<Theams> getTheamsSet(Student student) {
+        Set <Theams> theams = new HashSet<>();
+        for (Mark mark : student.getMarkMap().values()) {
+            theams.add(mark.getTheams());
+        }
+        return theams;
+    }
+
     public static List<Mark> dogetMarkListbyTheam(Theams theam, int studentId) {
         List <Mark> marks = new ArrayList<>();
         log.info("In getMarkListMethd getTheam method = {}",theam.getTheamName()+studentId);
-        Student userById = UserRepositoryImplJpa.getInstance().getStudentById(studentId);
-        for (Mark mark : userById.getMarkMap().values()) {
+        Student student = UserRepositoryImplJpa.getInstance().getStudentById(studentId);
+        for (Mark mark : student.getMarkMap().values()) {
             if (mark.getTheams().equals(theam)) {
                 marks.add(mark);
             }
         }
-
         return marks;
     }
 
@@ -69,87 +79,58 @@ public class MarkFunctionJpa {
                .withValue(markValue)
                .withStudent(student)
                .withTheam(TheamFunctionJpa.gettheamById(theamID));
-        EntityManager em = sessionFactory.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(mark);
-        transaction.commit();
-        em.close();
-    }
-
-    private static void insertMark(int studentId, int theamID, int markValue)  {
-        log.info("in insert section = {} ", studentId+ " "+theamID+" " + markValue);
-        try (Connection connection = datasourse.getConnection()){
-            PreparedStatement ps = null;
-            try {
-                ps = connection.prepareStatement(
-                        "insert into mark (mark_value, student_id, theam_id) values (?, ?, ?)");
-                ps.setInt(1, markValue);
-                ps.setInt(2, studentId);
-                ps.setInt(3, theamID);
-                ps.executeUpdate();
-            }
-            catch (MySqlException e) {
-                log.info("insertMark exception = {}", e.getMessage());
-            }
-            finally {
-                PostgresSQLUtils.closeQuietly(ps);
-            }
-        } catch (SQLException e) {
-            log.info("error = {}", e.getMessage());
-            e.printStackTrace();
+        EntityManager em = null;
+        try {
+            em = sessionFactory.createEntityManager();
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            em.persist(mark);
+            transaction.commit();
         }
-    }
-
-    private static void updateMark(int studentId, int theamID, int markValue) {
-        log.info("in update section = {}", studentId+ " "+theamID+" " + markValue);
-        try (Connection connection = datasourse.getConnection()){
-            PreparedStatement ps = null;
-            try {
-                ps = connection.prepareStatement(
-                        "update mark set mark_value = ? where student_id = ? and theam_id = ?");
-
-                ps.setInt(1, markValue);
-                ps.setInt(2, studentId);
-                ps.setInt(3, theamID);
-                ps.executeUpdate();
-            }
-            catch (MySqlException e) {
-                log.info("updateMark exception = {}", e.getMessage());
-            }
-            finally {
-                PostgresSQLUtils.closeQuietly(ps);
-            }
-
-        } catch (SQLException e) {
-            log.info("error ={}", e.getMessage());
-            e.printStackTrace();
+        catch (Exception e) {
+            JpaUtils.rollBackQuietly(em, e);
+        } finally {
+            JpaUtils.closeQuietly(em);
         }
     }
 
     public static void dodeleteMarksById(int[] tempMarksId, int theamId, int studentid) {
+        EntityManager em = null;
         for (int i : tempMarksId) {
-            EntityManager em = sessionFactory.createEntityManager();
-            EntityTransaction transaction = em.getTransaction();
-            transaction.begin();
-            em.remove(getMarkById(tempMarksId[i]));
-            transaction.commit();
-            em.close();
+            try {
+                em = sessionFactory.createEntityManager();
+                EntityTransaction transaction = em.getTransaction();
+                transaction.begin();
+                em.remove(getMarkById(i));
+                transaction.commit();
+            }
+            catch (Exception e) {
+                JpaUtils.rollBackQuietly(em, e);
+            } finally {
+                JpaUtils.closeQuietly(em);
+            }
         }
     }
 
     public static void dochangeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
         for (Map.Entry <Integer, Integer> entry: markIdMarkValue.entrySet()) {
+            EntityManager em = null;
             int tempId = entry.getKey();
             int tempMarkValue = entry.getValue();
-           Mark mark = getMarkById(tempId);
-           mark.withValue(tempMarkValue);
-            EntityManager em = sessionFactory.createEntityManager();
-            EntityTransaction transaction = em.getTransaction();
-            transaction.begin();
-            em.merge(mark);
-            transaction.commit();
-            em.close();
+            Mark mark = getMarkById(tempId);
+            mark.withValue(tempMarkValue);
+            try {
+                em = sessionFactory.createEntityManager();
+                EntityTransaction transaction = em.getTransaction();
+                transaction.begin();
+                em.merge(mark);
+                transaction.commit();
+            }
+            catch (Exception e) {
+                JpaUtils.rollBackQuietly(em, e);
+            } finally {
+                JpaUtils.closeQuietly(em);
+            }
         }
     }
 

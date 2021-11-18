@@ -1,30 +1,32 @@
-package repository.threadmodelrep.threadfunction.updategroupstratagy;
+package repository.threadmodelrep.threadfunction.updategroupstratagy.postgressupdatestratage;
 
 import helperutils.MyExceptionUtils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
 import lombok.extern.slf4j.Slf4j;
+import repository.threadmodelrep.threadfunction.updategroupstratagy.UpdateGroupStratagyPostgress;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 @Slf4j
-public class UpdateGroupStratagyImplTrainerChange implements UpdateGroupStratagy {
+public class UpdateGroupStratagyStudentDelete implements UpdateGroupStratagyPostgress {
     @Override
     public void updateGroup(int groupId, int[] entytiIdforact, Connection connection) throws SQLException {
         PreparedStatement ps = null;
+        for (int item : entytiIdforact) {
             try {
                 ps = connection.prepareStatement
-                        ("update \"group\" set trainer_id = ? where id = ? ");
-                ps.setInt(1, entytiIdforact[0]);
+                        ("delete from student_group where student_id = ? and group_id =?");
+                ps.setInt(1, item);
                 ps.setInt(2, groupId);
                 ps.executeUpdate();
             }
-            catch (MySqlException e) {
-                log.info("UpdateGroup trainer change exception = {}" , e.getMessage());
-            }
+           catch (MySqlException e) {
+             log.info("UpdateGroup delete student exception = {}" , e.getMessage());
+           }
             finally {
                 PostgresSQLUtils.closeQuietly(ps);
             }
-
+        }
     }
 }

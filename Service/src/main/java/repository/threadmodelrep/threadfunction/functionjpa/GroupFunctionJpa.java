@@ -1,10 +1,14 @@
 package repository.threadmodelrep.threadfunction.functionjpa;
 
+import helperutils.MyExceptionUtils.MyJpaException;
+import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.*;
+import repository.threadmodelrep.threadfunction.updategroupstratagy.jpaupdatestratage.*;
+import repository.threadmodelrep.threadfunction.updategroupstratagy.postgressupdatestratage.*;
 import threadmodel.Group;
 import threadmodel.Theams;
 import users.Student;
@@ -13,6 +17,7 @@ import users.UserImpl;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -24,9 +29,17 @@ public class GroupFunctionJpa {
 
     public static HashMap<Integer, Group> getAllGroup () {
         HashMap<Integer, Group> result = new HashMap<>();
-        EntityManager em = sessionFactory.createEntityManager();
-        TypedQuery <Group> groupTypedQuery = em.createQuery("from Group", Group.class);
-        groupTypedQuery.getResultList().forEach(group -> result.put(group.getId(), group));
+        EntityManager em = null;
+        try {
+            em = sessionFactory.createEntityManager();
+            TypedQuery <Group> groupTypedQuery = em.createQuery("from Group", Group.class);
+            groupTypedQuery.getResultList().forEach(group -> result.put(group.getId(), group));
+        }
+        catch (Exception e) {
+            JpaUtils.rollBackQuietly(em, e);
+        } finally {
+            JpaUtils.closeQuietly(em);
+        }
         return result;
     }
 
@@ -35,7 +48,6 @@ public class GroupFunctionJpa {
     }
 
     public static void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
-
         Set <Theams> theams = new HashSet<>();
         theamsIdList.forEach(id -> theams.add(TheamFunctionJpa.gettheamById(id)));
         HashMap <Integer, Student> studentHashMap = new HashMap<>();
@@ -47,167 +59,61 @@ public class GroupFunctionJpa {
                 .withTheam(theams)
                 .withStudents(studentHashMap);
         log.info("Group add = {}", "Group " + group.getId() + "Theam: " + theams.toString() + "Student: " + studentHashMap.values().toString() );
-        EntityManager em = sessionFactory.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(group);
-        transaction.commit();
-        em.close();
-    }
-//
-//    private static void insertIntoTheamGroup(int groupId, List<Integer> theamsIdList) {
-//        try (Connection connection = datasourse.getConnection()) {
-//            PreparedStatement ps = null;
-//            try {
-//                for (Integer i:
-//                        theamsIdList) {
-//                     ps = connection.prepareStatement(
-//                            "INSERT INTO theam_group (group_id, theam_id) " +
-//                                    "Values (?,?)"
-//                    );
-//                    ps.setInt(1, groupId);
-//                    ps.setInt(2, i);
-//                    ps.executeUpdate();
-//                    ps.close();
-//                }
-//            }
-//            catch (MySqlException e) {
-//                log.info("DoaddGroup _ InsertintoTheamGroup exception = {}", e.getMessage());
-//                e.printStackTrace();
-//            }
-//            finally {
-//                PostgresSQLUtils.closeQuietly(ps);
-//            }
-//        } catch (SQLException e) {
-//            log.info("insertIntoTheamGroup connection SQL exception ={}", e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private static void insertIntoStudentGroup(int groupId, List<UserImpl> studentList) {
-//        try (Connection connection = datasourse.getConnection()) {
-//            PreparedStatement ps = null;
-//            try {
-//                for (UserImpl student:
-//                        studentList) {
-//                     ps = connection.prepareStatement(
-//                            "INSERT INTO student_group (group_id, student_id) " +
-//                                    "Values (?,?)"
-//                    );
-//                    ps.setInt(1, groupId);
-//                    ps.setInt(2, student.getId());
-//                    ps.executeUpdate();
-//                }
-//            }
-//            catch (MySqlException e) {
-//                log.info("DoaddGroup _ InsertintoSStudentGroup exception = {}", e.getMessage());
-//                e.printStackTrace();
-//            }
-//            finally {
-//                PostgresSQLUtils.closeQuietly(ps);
-//            }
-//        } catch (SQLException e) {
-//            log.info("DoaddGroup _ InsertintoSStudentGroup connection exception = {}", e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private static void insertIntoMarkTable(List<UserImpl> studentList, List<Integer> theamsIdList) {
-//        try (Connection connection = datasourse.getConnection()) {
-//            PreparedStatement ps = null;
-//            try {
-//                for (Integer i:
-//                        theamsIdList) {
-//                    for (UserImpl student :
-//                            studentList) {
-//                        ps = connection.prepareStatement(
-//                                "INSERT INTO mark (student_id, theam_id) " +
-//                                        "Values (?,?)"
-//                        );
-//                        ps.setInt(1, student.getId());
-//                        ps.setInt(2, i);
-//                        ps.executeUpdate();
-//                        ps.close();
-//                    }
-//                }
-//            }
-//            catch (MySqlException e) {
-//                log.info("DoaddGroup _ InsertintoMarktable exception = {}", e.getMessage());
-//                e.printStackTrace();
-//            }
-//            finally {
-//                PostgresSQLUtils.closeQuietly(ps);
-//            }
-//        } catch (SQLException e) {
-//            log.info("DoaddGroup _ InsertintoMarktable connection exception = {}", e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private static int getGroupId(int trainerId) {
-//        int  groupId = 0;
-//        try (Connection connection = datasourse.getConnection()){
-//            PreparedStatement ps = null;
-//            ResultSet rs = null;
-//            try {
-//                 ps = connection.prepareStatement(
-//                        "select id from \"gr_oup\" where trainer_id = "+trainerId
-//                );
-//                 rs = ps.executeQuery();
-//                while (rs.next()) {
-//                    groupId = rs.getInt("id");
-//                }
-//                return groupId;
-//            }
-//            catch (MySqlException e) {
-//                log.info("GetGroupID exception = {}", e.getMessage());
-//                e.printStackTrace();
-//            }
-//            finally {
-//                PostgresSQLUtils.closeQuietly(ps);
-//                PostgresSQLUtils.closeQuietly(rs);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return  groupId;
-//    }
-//
-//      public static void doupdateGroup (int groupId, String act, int[] entytiIdforact) {
-////        log.info("In repository updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
-////        UpdateGroupStratagy updateGroupStratagy;
-////        try (Connection connection = datasourse.getConnection()) {
-////          updateGroupStratagy = updateStratagyInject(act);
-////            assert updateGroupStratagy != null;
-////            updateGroupStratagy.updateGroup(groupId, entytiIdforact, connection);
-////        }
-////        catch (SQLException e) {
-////            log.info("doupdateGroup connection exception = {}", e.getMessage());
-////        }
-//    }
-
-    private static UpdateGroupStratagy updateStratagyInject(String act) throws SQLException {
-        switch (act) {
-            case "studentdelete":
-               return new UpdateGroupStratagyStudentDelete();
-            case "studentadd":
-                return new UpdateGroupStratagyStudentAdd();
-            case "theamdelete":
-                return new UpdateGroupStratagyImplTheamDelete();
-            case "theamadd":
-                return new UpdateGroupStratagyImplTheamAdd();
-            case "trainer":
-                return new  UpdateGroupStratagyImplTrainerChange();
+        EntityManager em = null;
+        try {
+            em = sessionFactory.createEntityManager();
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            em.persist(group);
+            transaction.commit();
         }
-        return null;
+        catch (Exception e) {
+            JpaUtils.rollBackQuietly(em, e);
+        } finally {
+            JpaUtils.closeQuietly(em);
+        }
+    }
+
+      public static void doupdateGroup (int groupId, String act, int[] entytiIdforact) {
+        log.info("In repository updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
+        UpdateStratageJpa updateGroupStratagyJpa;
+        EntityManager em = null;
+        Group group = GroupFunctionJpa.getGroupById(groupId);
+          try  {
+              em = sessionFactory.createEntityManager();
+              updateGroupStratagyJpa = updateStratagyInject(act);
+              assert updateGroupStratagyJpa != null;
+              updateGroupStratagyJpa.updateGroup(group, entytiIdforact, em);
+          }
+          catch (MyJpaException e) {
+              log.info("doupdateGroup  exception = {}", e.getMessage());
+          }
+    }
+
+    private static UpdateStratageJpa updateStratagyInject(String act) throws MyJpaException {
+        Map <String, UpdateStratageJpa> stratagyMap = new HashMap<>(Map.of(
+                "studentdelete", new UpdateGroupStratagyJpaStudentDelete(),
+                "studentadd", new UpdateGroupStratagyJpaStudentAdd(),
+                "theamdelete", new UpdateGroupStratagyImplJpaTheamDelete(),
+                "theamadd",new UpdateGroupStratagyImplJpaTheamAdd(),
+                "trainer", new UpdateGroupStratagyImplJpaTrainerChange()));
+        return stratagyMap.get(act);
     }
 
     public static Group getGroupById (int id) {
-        EntityManager em = sessionFactory.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        Group group = em.find(Group.class, id);
-       em.close();
+        EntityManager em = null;
+        Group group = null;
+        try {
+            em = sessionFactory.createEntityManager();
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            group = em.find(Group.class, id);
+        }
+        catch (Exception e) {
+            JpaUtils.rollBackQuietly(em, e);
+        } finally {
+            JpaUtils.closeQuietly(em);
+        }
         return group;
     }
 

@@ -1,14 +1,15 @@
-package repository.threadmodelrep.threadfunction.updategroupstratagy;
+package repository.threadmodelrep.threadfunction.updategroupstratagy.postgressupdatestratage;
 
 import helperutils.MyExceptionUtils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
 import lombok.extern.slf4j.Slf4j;
+import repository.threadmodelrep.threadfunction.updategroupstratagy.UpdateGroupStratagyPostgress;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 @Slf4j
-public class UpdateGroupStratagyImplTheamAdd implements UpdateGroupStratagy {
+public class UpdateGroupStratagyPostgressImplTheamAdd implements UpdateGroupStratagyPostgress {
     @Override
     public void updateGroup(int groupId, int[] entytiIdforact, Connection connection) throws SQLException {
         PreparedStatement ps = null;
