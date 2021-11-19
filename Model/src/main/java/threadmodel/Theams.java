@@ -23,7 +23,7 @@ public class Theams {
     private int id;
     @Column(name = "theam_name")
     private String theamName;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinTable (
             name = "theam_group",
             joinColumns = @JoinColumn (name = "theam_id"),

@@ -5,7 +5,6 @@ import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Theams;
 
-import javax.naming.Name;
 import javax.persistence.*;
 import java.util.*;
 
@@ -22,14 +21,14 @@ import java.util.*;
         }
 )
 public class Student extends UserImpl {
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable   (
             name = "student_group",
             joinColumns = @JoinColumn (name = "student_id"),
             inverseJoinColumns = @JoinColumn (name = "group_id")
     )
     private Set <Group> groupSet;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinTable(
             name = "student_mark",
             joinColumns = @JoinColumn (name = "student_id"),

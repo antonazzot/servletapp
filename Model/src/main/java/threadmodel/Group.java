@@ -21,10 +21,10 @@ public class Group {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn (name = "trainer_id", referencedColumnName = "id")
     private Trainer trainer;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable (
             name = "student_group",
             joinColumns = @JoinColumn (name = "group_id"),
@@ -32,7 +32,7 @@ public class Group {
     )
     @MapKey
     private Map<Integer, Student> studentMap;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinTable (
             name = "theam_group",
             joinColumns = @JoinColumn (name = "group_id"),

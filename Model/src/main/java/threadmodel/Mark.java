@@ -23,14 +23,14 @@ public class Mark {
     private int id;
     @Column(name = "mark_value")
     private int valuesOfMark;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinTable(
             name = "student_mark",
             joinColumns = @JoinColumn (name = "mark_id"),
             inverseJoinColumns = @JoinColumn (name = "student_id")
     )
     private Student student;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn (name = "theam_id")
     private Theams theams;
 
