@@ -12,6 +12,7 @@ import repository.threadmodelrep.threadfunction.updategroupstratagy.postgressupd
 import threadmodel.Group;
 import threadmodel.Theams;
 import users.Student;
+import users.Trainer;
 import users.UserImpl;
 
 import javax.persistence.EntityManager;
@@ -53,12 +54,13 @@ public class GroupFunctionJpa {
         HashMap <Integer, Student> studentHashMap = new HashMap<>();
         studentList.stream().map(user -> (Student)user)
                 .forEach(student -> studentHashMap.put(student.getId(), student));
+        Trainer trainer = TrainerFunctionJpa.doGetTrainerById(trainerId);
         Group group = new Group()
-                .withTrainer(TrainerFunctionJpa.doGetTrainerById(trainerId))
+                .withTrainer(trainer)
                 .withName("Groups_" +trainerId)
                 .withTheam(theams)
                 .withStudents(studentHashMap);
-        log.info("Group add = {}", "Group " + group.getId() + "Theam: " + theams.toString() + "Student: " + studentHashMap.values().toString() );
+        log.info("Group add = {}", "Group " + group.getId() + "Theam: " + theams.toString() + "Student: " + studentHashMap.values().toString() + "trainer:" + trainer );
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();

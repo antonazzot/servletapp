@@ -7,11 +7,14 @@ repository\threadmodelrep\threadfunction\updategroupstratagy\UpdateStratageJpa.c
 servlets\StartPage.class
 servlets\LogOutServlet.class
 repository\modelrepository\modelfunction\functionpostgress\TrainerFunctionPostgres.class
+repository\modelrepository\modelfunction\deleteentitystratage\DeleteTrainerImp.class
 servlets\ActionChangeServlet.class
 repository\modelrepository\modelfunction\functionunmemory\AdminFunctionMemory.class
 repository\modelrepository\modelfunction\RoleIDParametrCheker.class
 servlets\StudentServlet.class
+repository\modelrepository\modelfunction\deleteentitystratage\DeleteGroupImp.class
 servlets\AvarageSalaryServlet.class
+repository\modelrepository\modelfunction\deleteentitystratage\DeleteStudentImp.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTheamDelete.class
 repository\threadmodelrep\threadfunction\functioninmemory\TheamFunction.class
 repository\modelrepository\modelfunction\functionjpaerepositiry\TrainerFunctionJpa.class
@@ -28,6 +31,7 @@ repository\threadmodelrep\threadfunction\updategroupstratagy\UpdateGroupStratagy
 repository\modelrepository\modelfunction\functionjpaerepositiry\AdminFunctionJpa.class
 helperutils\MyExceptionUtils\MySqlException.class
 servlets\TrainerAddSalaryServlet.class
+repository\modelrepository\modelfunction\deleteentitystratage\DeleteTheamImp.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTheamDelete.class
 repository\modelrepository\modelfunction\functionpostgress\StudentFunctionPostgres.class
 repository\threadmodelrep\threadfunction\functioninpostgres\GroupFunction.class
@@ -56,6 +60,7 @@ servlets\TheamAddServlet.class
 servlets\CheckServlet.class
 servlets\UpdateGroup.class
 repository\modelrepository\modelfunction\functionunmemory\UsersFunctionMemory.class
+repository\modelrepository\modelfunction\deleteentitystratage\DeleteStratage.class
 repository\modelrepository\UserRepositoryImplJpa.class
 repository\threadmodelrep\ThreadRepositoryFactory$1.class
 servlets\ChangeUser.class
@@ -69,6 +74,7 @@ servlets\UserActionServlet.class
 repository\threadmodelrep\threadfunction\functioninpostgres\MarkFunction.class
 repository\threadmodelrep\threadfunction\functioninmemory\SalaryFunction.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTrainerChange.class
+repository\modelrepository\modelfunction\deleteentitystratage\DeleteAdminImp.class
 repository\RepositoryFactory.class
 servlets\SalaryAdderServlet.class
 repository\modelrepository\modelfunction\functionpostgress\UsersFunctionPostgres.class

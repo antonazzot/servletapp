@@ -4,16 +4,14 @@ import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
-import repository.threadmodelrep.threadfunction.functionjpa.TheamFunctionJpa;
-import users.Administrator;
-import users.Student;
-import users.Trainer;
+import repository.modelrepository.modelfunction.deleteentitystratage.*;
 import users.UserImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 @Slf4j
 public class UserFunctionJpa {
@@ -51,47 +49,21 @@ public class UserFunctionJpa {
     }
 
     public static Optional<UserImpl> doRemoveUser(Integer id, String entity) {
-        EntityManager em = null;
-        try {
-            em = sessionFactory.createEntityManager();
-            EntityTransaction transaction = em.getTransaction();
-            transaction.begin();
-            switch (entity) {
-                case "student":
-                    Student student = StudentFunctionJpa.doGetStudentById(id);
-                    em.remove(student);
-                    transaction.commit();
-                    return Optional.ofNullable(student);
-                case "trainer":
-                    Trainer trainer = TrainerFunctionJpa.doGetTrainerById(id);
-                    em.remove(trainer);
-                    transaction.commit();
-                    return Optional.ofNullable(trainer);
-                case "administrator":
-                    Administrator administrator = AdminFunctionJpa.doGetAdministratorById(id);
-                    em.remove(administrator);
-                    transaction.commit();
-                    return Optional.ofNullable(administrator);
-                default:
-                    switch (entity) {
-                        case "group": {
-                            em.remove(GroupFunctionJpa.getGroupById(id));
-                            transaction.commit();
-                        }
-                        case "theam": {
-                            em.remove(TheamFunctionJpa.gettheamById(id));
-                            transaction.commit();
-                        }
-                    }
-                    break;
-            }
-        }
-        catch (Exception e) {
-            JpaUtils.rollBackQuietly(em, e);
-        } finally {
-            JpaUtils.closeQuietly(em);
-        }
-        return Optional.empty();
+            EntityManager em = sessionFactory.createEntityManager();
+            DeleteStratage deleteStratage = changeStratageForDelete(entity);
+            deleteStratage.doDeleteEntity(id, em);
+            return Optional.empty();
+    }
+
+    private static DeleteStratage changeStratageForDelete(String entity) {
+        Map<String, DeleteStratage> stratageMap = Collections.unmodifiableMap(Map.of(
+                "student", new DeleteStudentImp(),
+                "trainer", new DeleteTrainerImp(),
+                "administrator", new DeleteAdminImp(),
+                "group",new DeleteGroupImp(),
+                "theam", new DeleteTheamImp()
+        ));
+        return stratageMap.get(entity);
     }
 
     public static UserImpl doUpdateUser(UserImpl user) {

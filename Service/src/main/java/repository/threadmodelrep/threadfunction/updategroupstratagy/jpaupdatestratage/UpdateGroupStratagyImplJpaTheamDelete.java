@@ -9,6 +9,7 @@ import threadmodel.Theams;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.Set;
 
 @Slf4j
 public class UpdateGroupStratagyImplJpaTheamDelete implements UpdateStratageJpa {

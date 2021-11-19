@@ -7,6 +7,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TrainerAddSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\GroupFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\CheckServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\DeleteStudentImp.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninpostgres\GroupFunction.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyJpaStudentDelete.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\RepositoryDatasourse.java
@@ -20,6 +21,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\S
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionunmemory\TrainerFunctionMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\LogOutServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\StartPage.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\DeleteTheamImp.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninpostgres\SalaryFunction.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\AdminFunctionPostgres.java
@@ -36,16 +38,19 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TrainerActServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\closebaseconnection\PostgresSQLUtils.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TheamUpdateServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\DeleteTrainerImp.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\SalaryFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\UserFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\StudentFunctionPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\StartM\Start.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\AvarageSalaryServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\DeleteGroupImp.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionunmemory\StudentFunctionMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\CalculateAvarageSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionunmemory\UsersFunctionMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\ChangeAndCreateMarkServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\WatchServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\DeleteStratage.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserRepositoryImplJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionjpaerepositiry\TrainerFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\TrainerFilter.java
@@ -62,6 +67,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\TrainerFunctionPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninmemory\SalaryFunction.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TheamAddServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\DeleteAdminImp.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\StudentServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTheamAdd.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplInMemory.java

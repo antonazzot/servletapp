@@ -29,7 +29,6 @@ public class Group {
             name = "student_group",
             joinColumns = @JoinColumn (name = "group_id"),
             inverseJoinColumns = @JoinColumn (name = "student_id")
-
     )
     @MapKey
     private Map<Integer, Student> studentMap;

@@ -10,6 +10,7 @@ import threadmodel.Theams;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.Set;
 
 @Slf4j
 public class UpdateGroupStratagyImplJpaTheamAdd implements UpdateStratageJpa {
@@ -21,8 +22,8 @@ public class UpdateGroupStratagyImplJpaTheamAdd implements UpdateStratageJpa {
             transaction.begin();
             log.info("UpdateAddTheam = {}", group.getTheamsSet().toString());
             for (int id : entytiIdforact) {
-              theams = TheamFunctionJpa.gettheamById(id);
-              group.addTheam(theams);
+                theams = TheamFunctionJpa.gettheamById(id);
+                group.addTheam(theams);
             }
             log.info("UpdateAddTheam after add = {}", group.getTheamsSet().toString());
             em.merge(group);
