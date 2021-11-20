@@ -69,7 +69,7 @@ public class TrainerFunctionPostgres {
                 List<UserImpl> busyTrainer = new ArrayList<>();
                 try {
                     ps = connection.prepareStatement("select *" +
-                            "from \"group\"");
+                            "from \"gro_up\"");
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         busyTrainer.add(UsersFunctionPostgres.getUserById(rs.getInt("trainer_id")));
@@ -100,5 +100,38 @@ public class TrainerFunctionPostgres {
             }
         }
         return result;
+    }
+
+    public static Trainer getTrainerById(Integer id) {
+       Trainer trainer = new Trainer();
+        try (Connection connection = datasourse.getConnection()) {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            try {
+                ps = connection.prepareStatement("SELECT * FROM users where id= ? and role_id = ?");
+                ps.setInt(1, id);
+                ps.setInt(2, RoleIDParametrCheker.userGetRoleForDB(Role.TRAINER));
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    trainer = (Trainer) trainer
+                            .withId(rs.getInt("id"))
+                            .withLogin(rs.getString("login"))
+                            .withPassword(rs.getString("password"))
+                            .withName(rs.getString("name"))
+                            .withAge(rs.getInt("age"))
+                            .withRole(RoleIDParametrCheker.checkRole(rs.getInt("role_id")));
+                }
+            } catch (MySqlException e) {
+                log.info("GetUserByID exception = {}", e.getMessage());
+                e.printStackTrace();
+            } finally {
+                PostgresSQLUtils.closeQuietly(ps);
+                PostgresSQLUtils.closeQuietly(rs);
+            }
+        } catch (SQLException e) {
+            log.info("GetUserByID connection exception = {}", e.getMessage());
+            e.printStackTrace();
+        }
+        return trainer;
     }
 }

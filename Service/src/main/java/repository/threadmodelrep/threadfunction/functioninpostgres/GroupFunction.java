@@ -5,10 +5,13 @@ import helperutils.closebaseconnection.PostgresSQLUtils;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
 import repository.RepositoryFactory;
+import repository.modelrepository.modelfunction.functionpostgress.StudentFunctionPostgres;
+import repository.modelrepository.modelfunction.functionpostgress.TrainerFunctionPostgres;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.*;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.postgressupdatestratage.*;
 import threadmodel.Group;
 import users.Student;
+import users.Trainer;
 import users.UserImpl;
 
 import java.sql.Connection;
@@ -35,13 +38,13 @@ public class GroupFunction {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     int groupId = rs.getInt("id");
-                    UserImpl user =   RepositoryFactory.getRepository()
-                            .getUserById(rs.getInt("trainer_id"));
+                    Trainer trainer =   TrainerFunctionPostgres
+                            .getTrainerById(rs.getInt("trainer_id"));
                     result.put(groupId,
                             new Group()
                                     .withId(groupId)
                                     .withName(rs.getString("name"))
-                                    .withTrainer(user)
+                                    .withTrainer(trainer)
                                     .withStudents(
                                             getstudentsFromGroup(groupId)
                                     )
@@ -72,9 +75,9 @@ public class GroupFunction {
                ps = connection.prepareStatement("select * from student_group where group_id = " + groupId );
                rs = ps.executeQuery();
                 while (rs.next()) {
-                    UserImpl student = RepositoryFactory.getRepository()
-                            .getUserById(rs.getInt("student_id"));
-                    result.put(student.getId(), (Student) student);
+                    Student student = StudentFunctionPostgres
+                            .getStudentById(rs.getInt("student_id"));
+                    result.put(student.getId(),  student);
                 }
             }
             catch (MySqlException e) {
@@ -94,24 +97,29 @@ public class GroupFunction {
     public static void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
+            ResultSet rs = null;
+            int groupId =0;
             try {
                 ps = connection.prepareStatement(
                         "INSERT INTO \"gr_oup\" (name, trainer_id)" +
-                                "Values (?,?)"
+                                "Values (?,?) returning id"
                 );
                 ps.setString(1, trainerId.toString()+"'s_Group");
                 ps.setInt(2, trainerId);
-                ps.executeUpdate();
-                int groupId = getGroupId(trainerId);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    groupId = rs.getInt("id");
+                }
                 insertIntoStudentGroup(groupId, studentList);
                 insertIntoTheamGroup(groupId, theamsIdList);
-                insertIntoMarkTable(studentList,theamsIdList);
+//                insertIntoMarkTable(studentList,theamsIdList);
             }
             catch (MySqlException e) {
                 log.info("DoaddGroup exception = {}", e.getMessage());
                 e.printStackTrace();
             }
             finally {
+                PostgresSQLUtils.closeQuietly(rs);
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
@@ -193,7 +201,6 @@ public class GroupFunction {
                         ps.setInt(1, student.getId());
                         ps.setInt(2, i);
                         ps.executeUpdate();
-                        ps.close();
                     }
                 }
             }
@@ -208,35 +215,6 @@ public class GroupFunction {
             log.info("DoaddGroup _ InsertintoMarktable connection exception = {}", e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    private static int getGroupId(int trainerId) {
-        int  groupId = 0;
-        try (Connection connection = datasourse.getConnection()){
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            try {
-                 ps = connection.prepareStatement(
-                        "select id from \"gr_oup\" where trainer_id = "+trainerId
-                );
-                 rs = ps.executeQuery();
-                while (rs.next()) {
-                    groupId = rs.getInt("id");
-                }
-                return groupId;
-            }
-            catch (MySqlException e) {
-                log.info("GetGroupID exception = {}", e.getMessage());
-                e.printStackTrace();
-            }
-            finally {
-                PostgresSQLUtils.closeQuietly(ps);
-                PostgresSQLUtils.closeQuietly(rs);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return  groupId;
     }
 
       public static void doupdateGroup (int groupId, String act, int[] entytiIdforact) {

@@ -1,5 +1,6 @@
 package helperutils.closebaseconnection;
 
+import helperutils.MyExceptionUtils.MyJpaException;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.EntityManager;
@@ -11,18 +12,25 @@ public class JpaUtils {
 
     public static void rollBackQuietly(EntityManager em, Exception e) {
         log.error(e.getMessage(), e);
-        if (em != null) {
-            em.getTransaction().rollback();
-        }
+      try {
+          if (em != null) {
+              em.getTransaction().rollback();
+          }
+          throw new MyJpaException("Null entityM");
+      }
+     catch (Exception ex) {
+        log.error("Close Eror exception = {}", ex.getMessage());
+    }
     }
 
     public static void closeQuietly(EntityManager em) {
-        if (em != null) {
-            try {
-                em.close();
+
+            try {if (em != null) {
+                em.close();}
+                throw new MyJpaException("Null entityM");
             } catch (Exception ex) {
                 log.error("Close Eror exception = {}", ex.getMessage());
             }
-        }
+
     }
 }

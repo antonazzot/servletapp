@@ -21,6 +21,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\S
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionunmemory\TrainerFunctionMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\LogOutServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\StartPage.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\WatchServletCreateStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\DeleteTheamImp.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninpostgres\SalaryFunction.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplJpa.java
@@ -59,6 +60,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\MyExce
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionjpaerepositiry\StudentFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\StartFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\SalaryAdderServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\WatchServletChangeStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyStudentDelete.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryFactory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\ActionChangeServlet.java
@@ -71,6 +73,9 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\StudentServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTheamAdd.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplInMemory.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\WatchServletStratagy.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\WatchServletWatchStratagyImpl.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\WatchServletDeleteStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\RepositoryFactory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserRepositoryImplInMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\UpdateGroup.java
