@@ -1,5 +1,6 @@
 package servlets;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import repository.RepositoryFactory;
@@ -19,15 +20,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * This servlet witch based on "hard-code"
- * providing users with role Administrator
- * choice made some action with user
- * and entity page
- **/
+@Slf4j
 @WebServlet(value = "/watchServlet")
 public class WatchServlet extends HttpServlet {
-    private static final Logger log = LoggerFactory.getLogger(WatchServlet.class);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
