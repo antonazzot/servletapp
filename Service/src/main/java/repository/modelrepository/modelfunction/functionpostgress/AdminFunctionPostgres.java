@@ -7,6 +7,7 @@ import repository.RepositoryDatasourse;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import users.Administrator;
 import users.Role;
+import users.Trainer;
 import users.UserImpl;
 
 import java.sql.Connection;
@@ -56,6 +57,38 @@ public class AdminFunctionPostgres {
             e.printStackTrace();
         }
         return administrators;
+    }
+    public static Administrator getAdminById(Integer id) {
+        Administrator administrator = new Administrator();
+        try (Connection connection = datasourse.getConnection()) {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            try {
+                ps = connection.prepareStatement("SELECT * FROM users where id= ? and role_id = ?");
+                ps.setInt(1, id);
+                ps.setInt(2, RoleIDParametrCheker.userGetRoleForDB(Role.ADMINISTRATOR));
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    administrator = (Administrator) administrator
+                            .withId(rs.getInt("id"))
+                            .withLogin(rs.getString("login"))
+                            .withPassword(rs.getString("password"))
+                            .withName(rs.getString("name"))
+                            .withAge(rs.getInt("age"))
+                            .withRole(RoleIDParametrCheker.checkRole(rs.getInt("role_id")));
+                }
+            } catch (MySqlException e) {
+                log.info("GetUserByID exception = {}", e.getMessage());
+                e.printStackTrace();
+            } finally {
+                PostgresSQLUtils.closeQuietly(ps);
+                PostgresSQLUtils.closeQuietly(rs);
+            }
+        } catch (SQLException e) {
+            log.info("GetUserByID connection exception = {}", e.getMessage());
+            e.printStackTrace();
+        }
+        return administrator;
     }
 
 }

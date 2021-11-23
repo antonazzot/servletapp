@@ -10,23 +10,27 @@ public class JpaUtils {
     private JpaUtils() {
     }
 
-    public static void rollBackQuietly(EntityManager em, Exception e) throws MyJpaException {
+    public static void rollBackQuietly(EntityManager em, Exception e) {
         log.error(e.getMessage(), e);
-        if (em != null) {
-            em.getTransaction().rollback();
-        }
-
-            throw new MyJpaException("Null entityM");
+      try {
+          if (em != null) {
+              em.getTransaction().rollback();
+          }
+          throw new MyJpaException("Null entityM");
+      }
+     catch (Exception ex) {
+        log.error("Close Eror exception = {}", ex.getMessage());
+    }
     }
 
-    public static void closeQuietly(EntityManager em) throws MyJpaException {
-        if (em != null) {
-            try {
-                em.close();
+    public static void closeQuietly(EntityManager em) {
+
+            try {if (em != null) {
+                em.close();}
+                throw new MyJpaException("Null entityM");
             } catch (Exception ex) {
                 log.error("Close Eror exception = {}", ex.getMessage());
             }
-        }
-        throw new MyJpaException("Null entityM");
+
     }
 }

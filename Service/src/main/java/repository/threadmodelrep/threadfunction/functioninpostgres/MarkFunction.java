@@ -118,54 +118,87 @@ public class MarkFunction {
         return marks;
     }
     public static void doaddMarkToStudent(int studentId, int theamID, int markValue) {
-        try (Connection connection = datasourse.getConnection()){
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            try {
-                ps = connection.prepareStatement(
-                        "select * from mark where student_id = ? and theam_id = ?");
-                ps.setInt(1, studentId);
-                ps.setInt(2, theamID);
-                rs = ps.executeQuery();
-                log.info("After ps before while ={}", studentId+ " "+theamID+" " + markValue);
-                while (rs.next()) {
-                    int tempMarkValue = rs.getInt("mark_value");
-                    if (rs.wasNull() || tempMarkValue==0 )
-                    {
-                        log.info("in while 'if' section = {}", studentId+ " "+theamID+" " + markValue);
-                        updateMark(studentId, theamID, markValue);
-                    }
-                    else {
-                        log.info("in while 'else' section = {}", studentId+ " "+theamID+" " + markValue);
-                        insertMark( studentId,  theamID,  markValue);
-                    }
-                }
-                log.info("connection over");
-            }
-            catch (MySqlException e) {
-                log.info("addMarkToStudent exception = {}", e.getMessage());
-            }
-            finally {
-                PostgresSQLUtils.closeQuietly(rs);
-                PostgresSQLUtils.closeQuietly(ps);
-            }
-
-        } catch (SQLException e) {
-            log.info("error = {}", e.getMessage());
-            e.printStackTrace();
-        }
+        insertMark( studentId,  theamID,  markValue);
+//        try (Connection connection = datasourse.getConnection()){
+//            PreparedStatement ps = null;
+//            ResultSet rs = null;
+//            try {
+//                ps = connection.prepareStatement(
+//                        "select * from mark where student_id = ? and theam_id = ?");
+//                ps.setInt(1, studentId);
+//                ps.setInt(2, theamID);
+//                rs = ps.executeQuery();
+//                log.info("After ps before while ={}", studentId+ " "+theamID+" " + markValue);
+//                while (rs.next()) {
+//
+//                    int tempMarkValue = rs.getInt("mark_value");
+//                    if (rs.wasNull() || tempMarkValue==0 )
+//                    {
+//                        log.info("in while 'if' section = {}", studentId+ " "+theamID+" " + markValue);
+//                        updateMark(studentId, theamID, markValue);
+//                    }
+//                    else {
+//                        log.info("in while 'else' section = {}", studentId+ " "+theamID+" " + markValue);
+//                        insertMark( studentId,  theamID,  markValue);
+//                    }
+//                }
+//                insertMark( studentId,  theamID,  markValue);
+//                log.info("connection over");
+//            }
+//            catch (MySqlException e) {
+//                log.info("addMarkToStudent exception = {}", e.getMessage());
+//
+//            }
+//            finally {
+//                PostgresSQLUtils.closeQuietly(rs);
+//                PostgresSQLUtils.closeQuietly(ps);
+//            }
+//
+//        } catch (SQLException e) {
+//            log.info("error = {}", e.getMessage());
+//            e.printStackTrace();
+//        }
     }
 
     private static void insertMark(int studentId, int theamID, int markValue)  {
         log.info("in insert section = {} ", studentId+ " "+theamID+" " + markValue);
         try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = null;
+            ResultSet rs = null;
             try {
                 ps = connection.prepareStatement(
-                        "insert into mark (mark_value, student_id, theam_id) values (?, ?, ?)");
+                        "insert into mark (mark_value, student_id, theam_id) values (?, ?, ?) returning id");
                 ps.setInt(1, markValue);
                 ps.setInt(2, studentId);
                 ps.setInt(3, theamID);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    int markId= rs.getInt("id");
+                    insertInStudentMarkTable(studentId, markId);
+                }
+
+            }
+            catch (MySqlException e) {
+                log.info("insertMark exception = {}", e.getMessage());
+            }
+            finally {
+                PostgresSQLUtils.closeQuietly(rs);
+                PostgresSQLUtils.closeQuietly(ps);
+            }
+        } catch (SQLException e) {
+            log.info("error = {}", e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private static void insertInStudentMarkTable(int studentId, int markId) {
+        try (Connection connection = datasourse.getConnection()){
+            PreparedStatement ps = null;
+            try {
+                ps = connection.prepareStatement(
+                        "insert into student_mark (mark_id, student_id) values (?, ?) ");
+                ps.setInt(1, markId);
+                ps.setInt(2, studentId);
                 ps.executeUpdate();
             }
             catch (MySqlException e) {
@@ -176,32 +209,6 @@ public class MarkFunction {
             }
         } catch (SQLException e) {
             log.info("error = {}", e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private static void updateMark(int studentId, int theamID, int markValue) {
-        log.info("in update section = {}", studentId+ " "+theamID+" " + markValue);
-        try (Connection connection = datasourse.getConnection()){
-            PreparedStatement ps = null;
-            try {
-                ps = connection.prepareStatement(
-                        "update mark set mark_value = ? where student_id = ? and theam_id = ?");
-
-                ps.setInt(1, markValue);
-                ps.setInt(2, studentId);
-                ps.setInt(3, theamID);
-                ps.executeUpdate();
-            }
-            catch (MySqlException e) {
-                log.info("updateMark exception = {}", e.getMessage());
-            }
-            finally {
-                PostgresSQLUtils.closeQuietly(ps);
-            }
-
-        } catch (SQLException e) {
-            log.info("error ={}", e.getMessage());
             e.printStackTrace();
         }
     }
