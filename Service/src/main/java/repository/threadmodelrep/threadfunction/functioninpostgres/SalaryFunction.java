@@ -1,7 +1,7 @@
 package repository.threadmodelrep.threadfunction.functioninpostgres;
 
-import helperutils.MyExceptionUtils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
+import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
 import repository.RepositoryFactory;
@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 @Slf4j
 public class SalaryFunction {
     private static final RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
@@ -24,7 +25,7 @@ public class SalaryFunction {
         HashMap<Trainer, List<Salary>> result = new HashMap<>();
         ArrayList<Integer> trainersIDList = new ArrayList<>(RepositoryFactory.getRepository().allTrainer().keySet());
         try (Connection connection = datasourse.getConnection()) {
-            for (Integer trainerId:
+            for (Integer trainerId :
                     trainersIDList) {
                 UserImpl user = RepositoryFactory.getRepository().getUserById(trainerId);
                 Trainer trainer = (Trainer) new Trainer()
@@ -38,21 +39,18 @@ public class SalaryFunction {
                 ResultSet rs = null;
                 try {
                     ps = connection.prepareStatement(
-                            "select * from salary where trainer_id = "+trainerId);
+                            "select * from salary where trainer_id = " + trainerId);
                     rs = ps.executeQuery();
                     while (rs.next()) {
                         int salaryValue = rs.getInt("salary_value");
                         if (!rs.wasNull())
                             trainer
                                     .addSalary(new Salary()
-                                                    .withValue(salaryValue)
-                                    );
+                                            .withValue(salaryValue));
                     }
-                }
-                catch (MySqlException e) {
+                } catch (MySqlException e) {
                     log.info("getTrainerSalary exception = {}", e.getMessage());
-                }
-                finally {
+                } finally {
                     PostgresSQLUtils.closeQuietly(rs);
                     PostgresSQLUtils.closeQuietly(ps);
                 }
@@ -68,8 +66,8 @@ public class SalaryFunction {
         return result;
     }
 
-    public static void doaddSalaryToTrainer(int trainerId, int salaryValue ) {
-        try (Connection connection = datasourse.getConnection()){
+    public static void doaddSalaryToTrainer(int trainerId, int salaryValue) {
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
                 ps = connection.prepareStatement(
@@ -79,11 +77,9 @@ public class SalaryFunction {
                 ps.setInt(2, salaryValue);
                 ps.executeUpdate();
                 log.info("connection over");
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("getTrainerSalary exception = {}", e.getMessage());
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(ps);
             }
 

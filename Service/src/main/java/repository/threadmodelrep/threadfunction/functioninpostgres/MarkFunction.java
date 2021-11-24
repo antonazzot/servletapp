@@ -1,6 +1,6 @@
 package repository.threadmodelrep.threadfunction.functioninpostgres;
 
-import helperutils.MyExceptionUtils.MySqlException;
+import helperutils.myexceptionutils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
@@ -217,10 +217,10 @@ public class MarkFunction {
         try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = null;
             try {
-                for (int j : tempMarksId) {
+                for (int markId : tempMarksId) {
                     ps = connection.prepareStatement(
                             "delete from mark where id = ? ");
-                    ps.setInt(1, j);
+                    ps.setInt(1, markId);
                     ps.executeQuery();
                 }
             }

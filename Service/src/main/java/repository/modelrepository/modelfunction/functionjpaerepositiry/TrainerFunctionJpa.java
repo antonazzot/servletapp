@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import repository.threadmodelrep.ThreadRepositoryImplPostgres;
 import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
-import users.Administrator;
 import users.Role;
 import users.Trainer;
 import users.UserImpl;
@@ -69,6 +68,7 @@ public class TrainerFunctionJpa {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
+            // I know, that I can do it by JPA find, but it was build this way for learning jpql too.
             TypedQuery <Trainer> query = em.createNamedQuery("trainerById", Trainer.class);
             query.setParameter("id", id);
             return query.getSingleResult();

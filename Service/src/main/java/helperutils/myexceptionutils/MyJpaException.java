@@ -1,4 +1,4 @@
-package helperutils.MyExceptionUtils;
+package helperutils.myexceptionutils;
 
 public class MyJpaException extends Exception {
     public MyJpaException() {

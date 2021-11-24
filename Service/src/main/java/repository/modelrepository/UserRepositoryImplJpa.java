@@ -8,11 +8,7 @@ import users.Administrator;
 import users.Student;
 import users.Trainer;
 import users.UserImpl;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
-
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;

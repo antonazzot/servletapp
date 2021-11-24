@@ -33,7 +33,6 @@ public class Student extends UserImpl {
             name = "student_mark",
             joinColumns = @JoinColumn (name = "student_id"),
             inverseJoinColumns = @JoinColumn (name = "mark_id")
-
     )
     @MapKey
     private Map <Integer, Mark> markMap = new HashMap<>();

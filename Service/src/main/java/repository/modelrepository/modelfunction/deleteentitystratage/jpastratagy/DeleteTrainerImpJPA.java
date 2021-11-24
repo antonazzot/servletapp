@@ -1,15 +1,13 @@
-package repository.modelrepository.modelfunction.deleteentitystratage;
+package repository.modelrepository.modelfunction.deleteentitystratage.jpastratagy;
 
 import helperutils.closebaseconnection.JpaUtils;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
-import users.Student;
 import users.Trainer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-public class DeleteTrainerImp implements DeleteStratage {
+public class DeleteTrainerImpJPA implements DeleteStratageJPA {
     @Override
     public void doDeleteEntity(int id, EntityManager em) {
         Trainer trainer = TrainerFunctionJpa.doGetTrainerById(id);
@@ -18,8 +16,7 @@ public class DeleteTrainerImp implements DeleteStratage {
             transaction.begin();
             em.remove(trainer);
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);

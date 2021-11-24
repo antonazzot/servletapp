@@ -1,10 +1,14 @@
 package repository.modelrepository.modelfunction.functionpostgress;
 
-import helperutils.MyExceptionUtils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
+import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
+import repository.modelrepository.modelfunction.deleteentitystratage.postgresqlstratagy.DeleteEntityPSQL;
+import repository.modelrepository.modelfunction.deleteentitystratage.postgresqlstratagy.DeleteGroupPSQLImpl;
+import repository.modelrepository.modelfunction.deleteentitystratage.postgresqlstratagy.DeleteTheamPSQLImpl;
+import repository.modelrepository.modelfunction.deleteentitystratage.postgresqlstratagy.DeleteUserPSQLImpl;
 import users.Role;
 import users.UserImpl;
 
@@ -13,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -150,45 +155,34 @@ public class UsersFunctionPostgres {
 
     public static Optional<UserImpl> removeUser(Integer id, String entity) {
         // cascade delete for entity
+        DeleteEntityPSQL deleteEntityPSQL = changeStratagyForDeleteEntity(entity);
         if (entity.equals("student") || entity.equals("trainer") || entity.equals("administrator")) {
             entity = "user";
         }
         log.info("In remove method ={}", "ID: " + id + " Entity: " + entity);
         try (Connection connection = datasourse.getConnection()) {
-            PreparedStatement ps = null;
             try {
-                switch (entity) {
-                    case "user": {
-                        ps = connection.prepareStatement("DELETE FROM users where id = ?");
-                        ps.setInt(1, id);
-                        ps.executeUpdate();
-                    }
-                    break;
-                    case "group": {
-                        ps = connection.prepareStatement("DELETE FROM \"group\" where id = ?");
-                        ps.setInt(1, id);
-                        ps.executeUpdate();
-                    }
-                    break;
-                    case "theam": {
-                        ps = connection.prepareStatement("DELETE FROM theam where id = ?");
-                        ps.setInt(1, id);
-                        ps.executeUpdate();
-                    }
-                    break;
-                }
-            } catch (MySqlException e) {
-                log.info("removeUser exception = {}", e.getMessage());
+                deleteEntityPSQL.removeEntity(id, connection);
+            } catch (SQLException e) {
                 e.printStackTrace();
-            } finally {
-                PostgresSQLUtils.closeQuietly(ps);
+                log.info("removeUser exception = {}", e.getMessage());
             }
-
-        } catch (SQLException e) {
-            log.info("SQL EROR ={}", e.getMessage());
-            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    private static DeleteEntityPSQL changeStratagyForDeleteEntity(String entity) {
+        if (entity.equals("student") || entity.equals("trainer") || entity.equals("administrator")) {
+            entity = "user";
+        }
+        Map<String, DeleteEntityPSQL> entityPSQLMap = Map.of(
+                "user", new DeleteUserPSQLImpl(),
+                "group", new DeleteGroupPSQLImpl(),
+                "theam", new DeleteTheamPSQLImpl()
+        );
+        return entityPSQLMap.get(entity);
     }
 
     private static void addTrainerToSalaryTable(int trainerId) {

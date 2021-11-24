@@ -1,6 +1,6 @@
 package repository.threadmodelrep.threadfunction.updategroupstratagy;
 
-import helperutils.MyExceptionUtils.MyJpaException;
+import helperutils.myexceptionutils.MyJpaException;
 import threadmodel.Group;
 
 import javax.persistence.EntityManager;

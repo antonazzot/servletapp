@@ -1,13 +1,11 @@
 package repository.threadmodelrep.threadfunction.updategroupstratagy.jpaupdatestratage;
 
-import helperutils.MyExceptionUtils.MyJpaException;
+import helperutils.myexceptionutils.MyJpaException;
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.UpdateStratageJpa;
 import threadmodel.Group;
-import threadmodel.Theams;
 import users.Student;
 
 import javax.persistence.EntityManager;

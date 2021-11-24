@@ -1,4 +1,4 @@
-package helperutils.MyExceptionUtils;
+package helperutils.myexceptionutils;
 
 import java.sql.SQLException;
 

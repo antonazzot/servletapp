@@ -1,6 +1,6 @@
 package repository.threadmodelrep.threadfunction.updategroupstratagy.jpaupdatestratage;
 
-import helperutils.MyExceptionUtils.MyJpaException;
+import helperutils.myexceptionutils.MyJpaException;
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.UpdateStratageJpa;

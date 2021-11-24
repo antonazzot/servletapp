@@ -1,13 +1,12 @@
 package repository.threadmodelrep.threadfunction.functioninpostgres;
 
-import helperutils.MyExceptionUtils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
+import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
-import repository.RepositoryFactory;
 import repository.modelrepository.modelfunction.functionpostgress.StudentFunctionPostgres;
 import repository.modelrepository.modelfunction.functionpostgress.TrainerFunctionPostgres;
-import repository.threadmodelrep.threadfunction.updategroupstratagy.*;
+import repository.threadmodelrep.threadfunction.updategroupstratagy.UpdateGroupStratagyPostgress;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.postgressupdatestratage.*;
 import threadmodel.Group;
 import users.Student;
@@ -26,9 +25,9 @@ import java.util.Map;
 @Slf4j
 public class GroupFunction {
 
-  private static final RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
+    private static final RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
-    public static HashMap<Integer, Group> getAllGroup () {
+    public static HashMap<Integer, Group> getAllGroup() {
         HashMap<Integer, Group> result = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
@@ -38,24 +37,19 @@ public class GroupFunction {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     int groupId = rs.getInt("id");
-                    Trainer trainer =   TrainerFunctionPostgres
+                    Trainer trainer = TrainerFunctionPostgres
                             .getTrainerById(rs.getInt("trainer_id"));
                     result.put(groupId,
                             new Group()
                                     .withId(groupId)
                                     .withName(rs.getString("name"))
                                     .withTrainer(trainer)
-                                    .withStudents(
-                                            getstudentsFromGroup(groupId)
-                                    )
-                                    .withTheam(TheamFunction.gettheamFromGroup(groupId))
-                    );
+                                    .withStudents(getstudentsFromGroup(groupId))
+                                    .withTheam(TheamFunction.gettheamFromGroup(groupId)));
                 }
-            }
-             catch (MySqlException e ) {
-               log.info("Get All group exception = {}", e.getMessage());
-             }
-            finally {
+            } catch (MySqlException e) {
+                log.info("Get All group exception = {}", e.getMessage());
+            } finally {
                 PostgresSQLUtils.closeQuietly(rs);
                 PostgresSQLUtils.closeQuietly(ps);
             }
@@ -72,18 +66,16 @@ public class GroupFunction {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-               ps = connection.prepareStatement("select * from student_group where group_id = " + groupId );
-               rs = ps.executeQuery();
+                ps = connection.prepareStatement("select * from student_group where group_id = " + groupId);
+                rs = ps.executeQuery();
                 while (rs.next()) {
                     Student student = StudentFunctionPostgres
                             .getStudentById(rs.getInt("student_id"));
-                    result.put(student.getId(),  student);
+                    result.put(student.getId(), student);
                 }
-            }
-            catch (MySqlException e) {
-               log.info("GetstudentFromGroup exception = {}", e.getMessage());
-            }
-            finally {
+            } catch (MySqlException e) {
+                log.info("GetstudentFromGroup exception = {}", e.getMessage());
+            } finally {
                 PostgresSQLUtils.closeQuietly(rs);
                 PostgresSQLUtils.closeQuietly(ps);
             }
@@ -98,13 +90,13 @@ public class GroupFunction {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
-            int groupId =0;
+            int groupId = 0;
             try {
                 ps = connection.prepareStatement(
                         "INSERT INTO \"gr_oup\" (name, trainer_id)" +
                                 "Values (?,?) returning id"
                 );
-                ps.setString(1, trainerId.toString()+"'s_Group");
+                ps.setString(1, trainerId.toString() + "'s_Group");
                 ps.setInt(2, trainerId);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -113,12 +105,10 @@ public class GroupFunction {
                 insertIntoStudentGroup(groupId, studentList);
                 insertIntoTheamGroup(groupId, theamsIdList);
 //                insertIntoMarkTable(studentList,theamsIdList);
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("DoaddGroup exception = {}", e.getMessage());
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(rs);
                 PostgresSQLUtils.closeQuietly(ps);
             }
@@ -126,16 +116,15 @@ public class GroupFunction {
             log.info("DoaddGroup connection SQL exception ={}", e.getMessage());
             e.printStackTrace();
         }
-
     }
 
     private static void insertIntoTheamGroup(int groupId, List<Integer> theamsIdList) {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
-                for (Integer i:
+                for (Integer i :
                         theamsIdList) {
-                     ps = connection.prepareStatement(
+                    ps = connection.prepareStatement(
                             "INSERT INTO theam_group (group_id, theam_id) " +
                                     "Values (?,?)"
                     );
@@ -144,12 +133,10 @@ public class GroupFunction {
                     ps.executeUpdate();
                     ps.close();
                 }
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("DoaddGroup _ InsertintoTheamGroup exception = {}", e.getMessage());
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
@@ -162,9 +149,9 @@ public class GroupFunction {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
-                for (UserImpl student:
+                for (UserImpl student :
                         studentList) {
-                     ps = connection.prepareStatement(
+                    ps = connection.prepareStatement(
                             "INSERT INTO student_group (group_id, student_id) " +
                                     "Values (?,?)"
                     );
@@ -172,12 +159,10 @@ public class GroupFunction {
                     ps.setInt(2, student.getId());
                     ps.executeUpdate();
                 }
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("DoaddGroup _ InsertintoSStudentGroup exception = {}", e.getMessage());
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
@@ -190,7 +175,7 @@ public class GroupFunction {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
-                for (Integer i:
+                for (Integer i :
                         theamsIdList) {
                     for (UserImpl student :
                             studentList) {
@@ -203,12 +188,10 @@ public class GroupFunction {
                         ps.executeUpdate();
                     }
                 }
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("DoaddGroup _ InsertintoMarktable exception = {}", e.getMessage());
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
@@ -217,27 +200,26 @@ public class GroupFunction {
         }
     }
 
-      public static void doupdateGroup (int groupId, String act, int[] entytiIdforact) {
+    public static void doupdateGroup(int groupId, String act, int[] entytiIdforact) {
         log.info("In repository updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
         UpdateGroupStratagyPostgress updateGroupStratagyPostgress;
         try (Connection connection = datasourse.getConnection()) {
-          updateGroupStratagyPostgress = updateStratagyInject(act);
+            updateGroupStratagyPostgress = updateStratagyInject(act);
             assert updateGroupStratagyPostgress != null;
             updateGroupStratagyPostgress.updateGroup(groupId, entytiIdforact, connection);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             log.info("doupdateGroup connection exception = {}", e.getMessage());
         }
     }
 
     private static UpdateGroupStratagyPostgress updateStratagyInject(String act) throws SQLException {
-      Map <String, UpdateGroupStratagyPostgress> stratagyMap = new HashMap<>(Map.of(
-              "studentdelete", new UpdateGroupStratagyStudentDelete(),
-              "studentadd", new UpdateGroupStratagyPostgressStudentAdd(),
-              "theamdelete", new UpdateGroupStratagyPostgressImplTheamDelete(),
-              "theamadd",new UpdateGroupStratagyPostgressImplTheamAdd(),
-              "trainer", new UpdateGroupStratagyPostgressImplTrainerChange() ));
-       return stratagyMap.get(act);
+        Map<String, UpdateGroupStratagyPostgress> stratagyMap = Map.of(
+                "studentdelete", new UpdateGroupStratagyStudentDelete(),
+                "studentadd", new UpdateGroupStratagyPostgressStudentAdd(),
+                "theamdelete", new UpdateGroupStratagyPostgressImplTheamDelete(),
+                "theamadd", new UpdateGroupStratagyPostgressImplTheamAdd(),
+                "trainer", new UpdateGroupStratagyPostgressImplTrainerChange());
+        return stratagyMap.get(act);
     }
 
 

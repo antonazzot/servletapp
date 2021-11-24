@@ -1,13 +1,12 @@
 package repository.modelrepository.modelfunction.functionpostgress;
 
-import helperutils.MyExceptionUtils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
+import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import users.Role;
 import users.Student;
-import users.Trainer;
 import users.UserImpl;
 
 import java.sql.Connection;
@@ -71,7 +70,7 @@ public class StudentFunctionPostgres {
                 ps.setInt(1, groupId);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Student student =  StudentFunctionPostgres.getStudentById(rs.getInt("student_id"));
+                    Student student = StudentFunctionPostgres.getStudentById(rs.getInt("student_id"));
                     result.add(student);
                 }
             } catch (MySqlException e) {

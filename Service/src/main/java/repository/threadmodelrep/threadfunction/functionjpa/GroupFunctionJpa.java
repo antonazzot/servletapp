@@ -1,6 +1,6 @@
 package repository.threadmodelrep.threadfunction.functionjpa;
 
-import helperutils.MyExceptionUtils.MyJpaException;
+import helperutils.myexceptionutils.MyJpaException;
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
@@ -8,7 +8,6 @@ import org.hibernate.cfg.Configuration;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.*;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.jpaupdatestratage.*;
-import repository.threadmodelrep.threadfunction.updategroupstratagy.postgressupdatestratage.*;
 import threadmodel.Group;
 import threadmodel.Theams;
 import users.Student;
@@ -18,15 +17,12 @@ import users.UserImpl;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.*;
 
 @Slf4j
 public class GroupFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
-
 
     public static HashMap<Integer, Group> getAllGroup () {
         HashMap<Integer, Group> result = new HashMap<>();
@@ -78,13 +74,11 @@ public class GroupFunctionJpa {
 
       public static void doupdateGroup (int groupId, String act, int[] entytiIdforact) {
         log.info("In repository updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
-        UpdateStratageJpa updateGroupStratagyJpa;
         EntityManager em = null;
         Group group = GroupFunctionJpa.getGroupById(groupId);
           try  {
               em = sessionFactory.createEntityManager();
-              updateGroupStratagyJpa = updateStratagyInject(act);
-              assert updateGroupStratagyJpa != null;
+              UpdateStratageJpa updateGroupStratagyJpa = updateStratagyInject(act);
               updateGroupStratagyJpa.updateGroup(group, entytiIdforact, em);
           }
           catch (MyJpaException e) {
@@ -93,12 +87,12 @@ public class GroupFunctionJpa {
     }
 
     private static UpdateStratageJpa updateStratagyInject(String act) throws MyJpaException {
-        Map <String, UpdateStratageJpa> stratagyMap = new HashMap<>(Map.of(
+        Map <String, UpdateStratageJpa> stratagyMap = Map.of(
                 "studentdelete", new UpdateGroupStratagyJpaStudentDelete(),
                 "studentadd", new UpdateGroupStratagyJpaStudentAdd(),
                 "theamdelete", new UpdateGroupStratagyImplJpaTheamDelete(),
                 "theamadd",new UpdateGroupStratagyImplJpaTheamAdd(),
-                "trainer", new UpdateGroupStratagyImplJpaTrainerChange()));
+                "trainer", new UpdateGroupStratagyImplJpaTrainerChange());
         return stratagyMap.get(act);
     }
 

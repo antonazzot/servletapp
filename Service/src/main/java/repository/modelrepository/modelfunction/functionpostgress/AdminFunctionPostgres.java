@@ -1,13 +1,12 @@
 package repository.modelrepository.modelfunction.functionpostgress;
 
-import helperutils.MyExceptionUtils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
+import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import users.Administrator;
 import users.Role;
-import users.Trainer;
 import users.UserImpl;
 
 import java.sql.Connection;
@@ -58,6 +57,7 @@ public class AdminFunctionPostgres {
         }
         return administrators;
     }
+
     public static Administrator getAdminById(Integer id) {
         Administrator administrator = new Administrator();
         try (Connection connection = datasourse.getConnection()) {

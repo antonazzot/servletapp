@@ -1,6 +1,6 @@
 package helperutils.closebaseconnection;
 
-import helperutils.MyExceptionUtils.MySqlException;
+import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.ResultSet;
@@ -16,8 +16,9 @@ public class PostgresSQLUtils {
     public static void closeQuietly(Statement statement) {
         try {
             if (statement != null) {
-                statement.close();}
-            throw new MySqlException("Null statement");
+                statement.close();
+            } else
+                throw new MySqlException("Null statement");
         } catch (SQLException e) {
             log.info("Statement close exception= {}", e.getMessage());
             e.printStackTrace();
@@ -27,8 +28,9 @@ public class PostgresSQLUtils {
     public static void closeQuietly(ResultSet resultSet) {
         try {
             if (resultSet != null) {
-                resultSet.close();}
-            throw new MySqlException("Null ResultSet");
+                resultSet.close();
+            } else
+                throw new MySqlException("Null ResultSet");
         } catch (SQLException e) {
             log.info("ResultSet close exception= {}", e.getMessage());
             e.printStackTrace();

@@ -1,7 +1,7 @@
 package repository.modelrepository.modelfunction.functionpostgress;
 
-import helperutils.MyExceptionUtils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
+import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
@@ -103,7 +103,7 @@ public class TrainerFunctionPostgres {
     }
 
     public static Trainer getTrainerById(Integer id) {
-       Trainer trainer = new Trainer();
+        Trainer trainer = new Trainer();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;

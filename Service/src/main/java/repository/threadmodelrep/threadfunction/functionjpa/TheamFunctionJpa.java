@@ -24,10 +24,9 @@ public class TheamFunctionJpa {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
-            TypedQuery <Theams> query = em.createQuery("from Theams", Theams.class);
+            TypedQuery<Theams> query = em.createQuery("from Theams", Theams.class);
             query.getResultList().forEach(theams -> result.put(theams.getId(), theams));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);
@@ -42,8 +41,7 @@ public class TheamFunctionJpa {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
             return em.find(Theams.class, id);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);
@@ -51,17 +49,17 @@ public class TheamFunctionJpa {
         return null;
 
     }
-    public static Set<Theams> gettheamFromGroup(Integer groupId)  {
-       return GroupFunctionJpa.getGroupById(groupId).getTheamsSet();
+
+    public static Set<Theams> gettheamFromGroup(Integer groupId) {
+        return GroupFunctionJpa.getGroupById(groupId).getTheamsSet();
     }
 
     public static void doaddTheam(String theam) {
         if (!getallTheams().values().stream().map(Theams::getTheamName)
                 .collect(Collectors.toList()).contains(theam) &&
                 getallTheams().values().stream().map(Theams::getTheamName)
-                        .noneMatch(theamName -> theamName.equals(theam)))
-        {
-            EntityManager em =  null;
+                        .noneMatch(theamName -> theamName.equals(theam))) {
+            EntityManager em = null;
             try {
                 em = sessionFactory.createEntityManager();
                 EntityTransaction transaction = em.getTransaction();
@@ -69,8 +67,7 @@ public class TheamFunctionJpa {
                 Theams theams = new Theams().withValue(theam);
                 em.persist(theams);
                 transaction.commit();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 JpaUtils.rollBackQuietly(em, e);
             } finally {
                 JpaUtils.closeQuietly(em);
@@ -79,19 +76,18 @@ public class TheamFunctionJpa {
     }
 
     public static HashMap<Integer, Theams> getfreeTheams() {
-        HashMap <Integer,Theams> busyTheam = getBuzyTeam();
-        HashMap <Integer,Theams> freeTh = new HashMap<>(getallTheams());
-        log.info("free Start {}" , busyTheam.values());
-        if (GroupFunctionJpa.getAllGroup().isEmpty())
-        {
-            return getallTheams();}
-        else {
-            log.info("in for {}" , busyTheam.values());
-            for (Theams allTh:
+        HashMap<Integer, Theams> busyTheam = getBuzyTeam();
+        HashMap<Integer, Theams> freeTh = new HashMap<>(getallTheams());
+        log.info("free Start {}", busyTheam.values());
+        if (GroupFunctionJpa.getAllGroup().isEmpty()) {
+            return getallTheams();
+        } else {
+            log.info("in for {}", busyTheam.values());
+            for (Theams allTh :
                     getallTheams().values()) {
-                for (Theams bTh:
+                for (Theams bTh :
                         busyTheam.values()) {
-                    if (allTh.getId() == bTh.getId() ) {
+                    if (allTh.getId() == bTh.getId()) {
                         freeTh.remove(allTh.getId());
                     }
                 }
@@ -99,9 +95,10 @@ public class TheamFunctionJpa {
             return freeTh;
         }
     }
+
     private static HashMap<Integer, Theams> getBuzyTeam() {
-        HashMap<Integer, Theams>  busyTheam = new HashMap<>();
-        Set <Theams> theamsSet = new HashSet<>();
+        HashMap<Integer, Theams> busyTheam = new HashMap<>();
+        Set<Theams> theamsSet = new HashSet<>();
         GroupFunctionJpa.getAllGroup().values()
                 .forEach(group -> theamsSet.addAll(group.getTheamsSet()));
         for (Theams theams : theamsSet) {
@@ -115,26 +112,24 @@ public class TheamFunctionJpa {
         theams.withValue(theamName);
         EntityManager em = null;
         try {
-            em  = sessionFactory.createEntityManager();
+            em = sessionFactory.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
             em.merge(theams);
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);
         }
     }
 
-    private static Theams getTheamById (int id) {
+    private static Theams getTheamById(int id) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
             return em.find(Theams.class, id);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);

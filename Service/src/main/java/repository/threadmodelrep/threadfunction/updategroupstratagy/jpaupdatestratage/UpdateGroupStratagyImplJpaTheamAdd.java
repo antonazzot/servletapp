@@ -1,6 +1,6 @@
 package repository.threadmodelrep.threadfunction.updategroupstratagy.jpaupdatestratage;
 
-import helperutils.MyExceptionUtils.MyJpaException;
+import helperutils.myexceptionutils.MyJpaException;
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import repository.threadmodelrep.threadfunction.functionjpa.TheamFunctionJpa;
@@ -10,7 +10,6 @@ import threadmodel.Theams;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import java.util.Set;
 
 @Slf4j
 public class UpdateGroupStratagyImplJpaTheamAdd implements UpdateStratageJpa {

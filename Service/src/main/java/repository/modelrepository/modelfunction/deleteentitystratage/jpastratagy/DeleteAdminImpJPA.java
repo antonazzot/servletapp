@@ -1,15 +1,13 @@
-package repository.modelrepository.modelfunction.deleteentitystratage;
+package repository.modelrepository.modelfunction.deleteentitystratage.jpastratagy;
 
 import helperutils.closebaseconnection.JpaUtils;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.AdminFunctionJpa;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
 import users.Administrator;
-import users.Student;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-public class DeleteAdminImp implements DeleteStratage {
+public class DeleteAdminImpJPA implements DeleteStratageJPA {
     @Override
     public void doDeleteEntity(int id, EntityManager em) {
         Administrator administrator = AdminFunctionJpa.doGetAdministratorById(id);
@@ -18,8 +16,7 @@ public class DeleteAdminImp implements DeleteStratage {
             transaction.begin();
             em.remove(administrator);
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);

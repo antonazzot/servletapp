@@ -1,6 +1,6 @@
 package repository.threadmodelrep.threadfunction.updategroupstratagy.postgressupdatestratage;
 
-import helperutils.MyExceptionUtils.MySqlException;
+import helperutils.myexceptionutils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
 import lombok.extern.slf4j.Slf4j;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.UpdateGroupStratagyPostgress;

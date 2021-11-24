@@ -21,10 +21,12 @@ public class TheamFunction {
     public static Theams gettheamById(Integer id) {
         return DataBaseInf.getTheamsHashMap().get(id);
     }
-    public static Set<Theams> gettheamFromGroup(Integer groupId)  {
+
+    public static Set<Theams> gettheamFromGroup(Integer groupId) {
         Group group = DataBaseInf.getGroupHashMap().get(groupId);
         return group.getTheamsSet();
     }
+
     public static void doaddTheam(String theam) {
         Theams theams = new Theams()
                 .withId(IdFactory.idBuilder())
@@ -33,12 +35,12 @@ public class TheamFunction {
     }
 
     public static HashMap<Integer, Theams> getfreeTheams() {
-        HashMap <Integer, Theams> result;
+        HashMap<Integer, Theams> result;
         if (DataBaseInf.getGroupHashMap().values().isEmpty()) {
             return (HashMap<Integer, Theams>) DataBaseInf.getTheamsHashMap();
         }
         ArrayList<Theams> busyTheams = new ArrayList<>();
-        for (Group group:
+        for (Group group :
                 DataBaseInf.getGroupHashMap().values()) {
             busyTheams.addAll(group.getTheamsSet());
         }
@@ -48,12 +50,12 @@ public class TheamFunction {
     }
 
     private static HashMap<Integer, Theams> extractTheam(ArrayList<Theams> busyTheams) {
-        HashMap <Integer, Theams> result =  new HashMap<>(DataBaseInf.getTheamsHashMap());
+        HashMap<Integer, Theams> result = new HashMap<>(DataBaseInf.getTheamsHashMap());
         log.info("In extract");
-        for (Theams theams:
+        for (Theams theams :
                 DataBaseInf.getTheamsHashMap().values()) {
             log.info("Busy theamLog1 = {}", theams.getTheamName());
-            for (Theams busyTheam:
+            for (Theams busyTheam :
                     busyTheams) {
                 log.info("Busy theamLog2 = {}", busyTheam.getTheamName());
                 if (theams.getId() == busyTheam.getId())
@@ -63,7 +65,7 @@ public class TheamFunction {
         return result;
     }
 
-    public static void doupdateTheam (int theamId, String theamName) {
+    public static void doupdateTheam(int theamId, String theamName) {
         DataBaseInf.getTheamsHashMap().get(theamId).withValue(theamName);
     }
 }
