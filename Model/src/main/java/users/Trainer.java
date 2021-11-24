@@ -23,7 +23,7 @@ import java.util.List;
         }
 )
 public class Trainer extends UserImpl {
-    @OneToMany(mappedBy = "trainer", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)
     private List<Salary> salarylist = new ArrayList<>();
 
     public Trainer withName(String name) {

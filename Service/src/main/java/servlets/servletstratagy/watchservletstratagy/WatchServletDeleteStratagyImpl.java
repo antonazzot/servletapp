@@ -1,4 +1,4 @@
-package servlets.servletstratagy;
+package servlets.servletstratagy.watchservletstratagy;
 
 import repository.RepositoryFactory;
 

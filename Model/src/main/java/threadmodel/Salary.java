@@ -19,7 +19,7 @@ public class Salary {
     private int id;
     @Column (name = "salary_value")
     private BigDecimal bigDecimalSalary;
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn (name = "trainer_id")
     private Trainer trainer;
 

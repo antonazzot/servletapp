@@ -23,7 +23,7 @@ public class Mark {
     private int id;
     @Column(name = "mark_value")
     private int valuesOfMark;
-    @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne
     @JoinTable(
             name = "student_mark",
             joinColumns = @JoinColumn (name = "mark_id"),

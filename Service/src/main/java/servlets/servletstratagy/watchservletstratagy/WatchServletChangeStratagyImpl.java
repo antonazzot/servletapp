@@ -1,4 +1,4 @@
-package servlets.servletstratagy;
+package servlets.servletstratagy.watchservletstratagy;
 
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryFactory;

@@ -1,7 +1,7 @@
 package servlets;
 
 import lombok.extern.slf4j.Slf4j;
-import servlets.servletstratagy.*;
+import servlets.servletstratagy.watchservletstratagy.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

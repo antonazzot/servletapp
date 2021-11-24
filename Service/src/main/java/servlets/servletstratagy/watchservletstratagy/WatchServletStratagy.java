@@ -1,4 +1,4 @@
-package servlets.servletstratagy;
+package servlets.servletstratagy.watchservletstratagy;
 
 import javax.servlet.http.HttpServletRequest;
 

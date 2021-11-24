@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import repository.RepositoryFactory;
 import users.Administrator;
 import users.Role;
-import users.UserImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -37,6 +36,7 @@ public class StartPage extends HttpServlet {
             HttpSession session = req.getSession();
             Properties properties = new Properties();
             properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
+
             {
                 Administrator administrator = (Administrator) new Administrator()
                         .withRole(Role.ADMINISTRATOR)
@@ -45,7 +45,6 @@ public class StartPage extends HttpServlet {
                         .withPassword(adminPassword)
                         .withAge(34);
                 log.info("Types of using memory ={}", properties.getProperty("repository.type"));
-
                 if (RepositoryFactory.getRepository().allUser().values().stream()
                         .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
                                 u.getPassword().equals(administrator.getPassword()) &&
@@ -56,9 +55,7 @@ public class StartPage extends HttpServlet {
                 log.info("Admin = {}", administrator.getInf());
             }
 
-
             if (session.getAttribute("user") != null) {
-                UserImpl user = (UserImpl) session.getAttribute("user");
                 req.getRequestDispatcher("/checkUser").forward(req, resp);
             } else {
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("hello.jsp");
