@@ -7,6 +7,8 @@ import users.UserImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 public class WatchServletChangeStratagyImpl implements WatchServletStratagy {
     @Override
@@ -29,8 +31,8 @@ public class WatchServletChangeStratagyImpl implements WatchServletStratagy {
     /**
      * This method given data for future users change
      **/
-    private HashMap<Integer, UserImpl> mapToChange(String user) {
-        HashMap<Integer, UserImpl> result = new HashMap<>();
+    private Map<Integer, UserImpl> mapToChange(String user) {
+        Map<Integer, UserImpl> result = new HashMap<>();
         switch (user) {
             case "student":
                 result = RepositoryFactory.getRepository().allStudent();

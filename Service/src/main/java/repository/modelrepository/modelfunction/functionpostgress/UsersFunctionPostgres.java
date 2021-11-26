@@ -24,8 +24,8 @@ import java.util.Optional;
 public class UsersFunctionPostgres {
     public static RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
-    public static HashMap<Integer, UserImpl> allUser() {
-        HashMap<Integer, UserImpl> users = new HashMap<>();
+    public static Map<Integer, UserImpl> allUser() {
+        Map<Integer, UserImpl> users = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;

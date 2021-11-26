@@ -13,14 +13,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class SalaryFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
 
-    public static HashMap<Trainer, List<Salary>> gettrainerSalary() {
-        HashMap<Trainer, List<Salary>> result = new HashMap<>();
+    public static Map<Trainer, List<Salary>> gettrainerSalary() {
+        Map<Trainer, List<Salary>> result = new HashMap<>();
         UserRepositoryImplJpa.getInstance().allTrainer().values()
                 .stream().map(trainer -> (Trainer)trainer)
                 .forEach(trainer -> result.put(trainer, trainer.getSalarylist()));

@@ -9,12 +9,13 @@ import users.UserImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
 public class UsersFunctionMemory {
-    public static HashMap<Integer, UserImpl> getallUser() {
-        HashMap<Integer, UserImpl> allUsers = new HashMap<>();
+    public static Map<Integer, UserImpl> getallUser() {
+        Map<Integer, UserImpl> allUsers = new HashMap<>();
         allUsers.putAll(DataBaseInf.getTrainerHashMap());
         allUsers.putAll(DataBaseInf.getStudentHashMap());
         allUsers.putAll(DataBaseInf.getAdminHashMap());

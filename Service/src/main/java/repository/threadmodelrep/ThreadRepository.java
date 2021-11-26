@@ -11,32 +11,33 @@ import users.UserImpl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface ThreadRepository {
-    HashMap<Integer, Group> allGroup();
+    Map<Integer, Group> allGroup();
 
-    HashMap<Integer, Theams> allTheams();
+    Map<Integer, Theams> allTheams();
 
-    HashMap<Trainer, List<Salary>> trainerSalary();
+    Map<Trainer, List<Salary>> trainerSalary();
 
-    HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMark(int StudentId);
+    Map<UserImpl, Map<Theams, List<Mark>>> studentTheamMark(int StudentId);
 
     List<Mark> getMarkListbyTheam(Theams theam, int studentId);
 
-    HashMap<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId);
+    Map<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId);
 
     Theams theamById(Integer id);
 
     Set<Theams> theamFromGroup(Integer groupId);
 
-    HashMap<Integer, Student> studentsFromGroup(int groupId);
+    Map<Integer, Student> studentsFromGroup(int groupId);
 
     void addTheam(String theam);
 
     void addGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId);
 
-    HashMap<Integer, Theams> freeTheams();
+    Map<Integer, Theams> freeTheams();
 
     void addSalaryToTrainer(int trainerId, int salaryValue);
 

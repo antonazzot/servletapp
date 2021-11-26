@@ -5,17 +5,17 @@ import threadmodel.Group;
 import users.Student;
 import users.UserImpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StudentFunctionMemory {
-    public static HashMap<Integer, UserImpl> getallStudent() {
-        return (HashMap<Integer, UserImpl>) DataBaseInf.getStudentHashMap();
+    public static Map<Integer, UserImpl> getallStudent() {
+        return  DataBaseInf.getStudentHashMap();
     }
 
-    public static ArrayList<Student> studentFromGroup(Integer groupId) {
+    public static List<Student> studentFromGroup(Integer groupId) {
         Group group = DataBaseInf.getGroupHashMap().get(groupId);
-        return new ArrayList<>(group.getStudentMap().values());
+        return (List<Student>) group.getStudentMap().values();
     }
 
 }

@@ -14,13 +14,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 public class AdminFunctionPostgres {
     public static RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
-    public static HashMap<Integer, UserImpl> allAdmin() {
-        HashMap<Integer, UserImpl> administrators = new HashMap<>();
+    public static Map<Integer, UserImpl> allAdmin() {
+        Map<Integer, UserImpl> administrators = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;

@@ -7,18 +7,19 @@ import users.UserImpl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TrainerFunctionMemory {
 
-    public static HashMap<Integer, UserImpl> getallTrainer() {
-        return (HashMap<Integer, UserImpl>) DataBaseInf.getTrainerHashMap();
+    public static Map<Integer, UserImpl> getallTrainer() {
+        return  DataBaseInf.getTrainerHashMap();
     }
 
-    public static HashMap<Integer, UserImpl> getfreeTrainer() {
-        HashMap<Integer, UserImpl> result = new HashMap<>(DataBaseInf.getTrainerHashMap());
+    public static Map<Integer, UserImpl> getfreeTrainer() {
+        Map<Integer, UserImpl> result = new HashMap<>(DataBaseInf.getTrainerHashMap());
         if (DataBaseInf.getGroupHashMap().values().isEmpty()) {
-            return (HashMap<Integer, UserImpl>) DataBaseInf.getTrainerHashMap();
+            return DataBaseInf.getTrainerHashMap();
         } else {
 
             List<Trainer> busyTrainers = DataBaseInf.getGroupHashMap().values().stream()

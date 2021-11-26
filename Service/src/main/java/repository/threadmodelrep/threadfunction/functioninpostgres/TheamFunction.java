@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,8 +20,8 @@ import java.util.stream.Collectors;
 public class TheamFunction {
     private static final RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
-    public static HashMap<Integer, Theams> getallTheams() {
-        HashMap<Integer, Theams> result = new HashMap<>();
+    public static Map<Integer, Theams> getallTheams() {
+        Map<Integer, Theams> result = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -123,9 +124,9 @@ public class TheamFunction {
         }
     }
 
-    public static HashMap<Integer, Theams> getfreeTheams() {
-        HashMap<Integer, Theams> busyTheam = getBuzyTeam();
-        HashMap<Integer, Theams> freeTh = new HashMap<>(getallTheams());
+    public static Map<Integer, Theams> getfreeTheams() {
+        Map<Integer, Theams> busyTheam = getBuzyTeam();
+        Map<Integer, Theams> freeTh = new HashMap<>(getallTheams());
         log.info("free Start {}", busyTheam.values());
         if (GroupFunction.getAllGroup().isEmpty()) {
             return getallTheams();
@@ -144,8 +145,8 @@ public class TheamFunction {
         }
     }
 
-    private static HashMap<Integer, Theams> getBuzyTeam() {
-        HashMap<Integer, Theams> busyTheam = new HashMap<>();
+    private static Map<Integer, Theams> getBuzyTeam() {
+        Map<Integer, Theams> busyTheam = new HashMap<>();
         log.info("in buzy method");
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;

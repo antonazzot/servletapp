@@ -1,7 +1,5 @@
 package repository.threadmodelrep;
 
-import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
 import repository.threadmodelrep.threadfunction.functionjpa.MarkFunctionJpa;
 import repository.threadmodelrep.threadfunction.functionjpa.SalaryFunctionJpa;
@@ -16,6 +14,7 @@ import users.UserImpl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class ThreadRepositoryImplJpa implements ThreadRepository {
@@ -37,22 +36,22 @@ public class ThreadRepositoryImplJpa implements ThreadRepository {
         return instance;
     }
     @Override
-    public HashMap<Integer, Group> allGroup() {
+    public Map<Integer, Group> allGroup() {
         return GroupFunctionJpa.getAllGroup();
     }
 
     @Override
-    public HashMap<Integer, Theams> allTheams() {
+    public Map<Integer, Theams> allTheams() {
         return TheamFunctionJpa.getallTheams();
     }
 
     @Override
-    public HashMap<Trainer, List<Salary>> trainerSalary() {
+    public Map<Trainer, List<Salary>> trainerSalary() {
         return SalaryFunctionJpa.gettrainerSalary();
     }
 
     @Override
-    public HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMark(int StudentId) {
+    public Map<UserImpl, Map<Theams, List<Mark>>> studentTheamMark(int StudentId) {
         return MarkFunctionJpa.getstudentTheamMark(StudentId);
     }
 
@@ -62,7 +61,7 @@ public class ThreadRepositoryImplJpa implements ThreadRepository {
     }
 
     @Override
-    public HashMap<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId) {
+    public Map<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId) {
         return MarkFunctionJpa.dogetMarkIDListbyTheam(theam, studentId);
     }
 
@@ -77,8 +76,8 @@ public class ThreadRepositoryImplJpa implements ThreadRepository {
     }
 
     @Override
-    public HashMap<Integer, Student> studentsFromGroup(int groupId) {
-        return (HashMap<Integer, Student>) GroupFunctionJpa.getstudentsFromGroup(groupId);
+    public Map<Integer, Student> studentsFromGroup(int groupId) {
+        return GroupFunctionJpa.getstudentsFromGroup(groupId);
     }
 
     @Override
@@ -92,7 +91,7 @@ public class ThreadRepositoryImplJpa implements ThreadRepository {
     }
 
     @Override
-    public HashMap<Integer, Theams> freeTheams() {
+    public Map<Integer, Theams> freeTheams() {
         return TheamFunctionJpa.getfreeTheams();
     }
 

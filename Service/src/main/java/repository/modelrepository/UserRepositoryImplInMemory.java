@@ -8,8 +8,8 @@ import repository.modelrepository.modelfunction.functionunmemory.UsersFunctionMe
 import users.Student;
 import users.UserImpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -31,22 +31,22 @@ public class UserRepositoryImplInMemory implements UserRepository {
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allUser() {
+    public Map<Integer, UserImpl> allUser() {
         return UsersFunctionMemory.getallUser();
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allTrainer() {
+    public Map<Integer, UserImpl> allTrainer() {
         return TrainerFunctionMemory.getallTrainer();
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allStudent() {
+    public Map<Integer, UserImpl> allStudent() {
         return StudentFunctionMemory.getallStudent();
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allAdmin() {
+    public Map<Integer, UserImpl> allAdmin() {
         return AdminFunctionMemory.getallAdmin();
     }
 
@@ -71,12 +71,12 @@ public class UserRepositoryImplInMemory implements UserRepository {
     }
 
     @Override
-    public HashMap<Integer, UserImpl> freeTrainer() {
+    public Map<Integer, UserImpl> freeTrainer() {
         return TrainerFunctionMemory.getfreeTrainer();
     }
 
     @Override
-    public ArrayList<Student> studentFromGroup(Integer groupId) {
+    public List<Student> studentFromGroup(Integer groupId) {
         return StudentFunctionMemory.studentFromGroup(groupId);
     }
 }

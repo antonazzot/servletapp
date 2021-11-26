@@ -9,21 +9,18 @@ import threadmodel.Theams;
 import users.Student;
 import users.UserImpl;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 public class GroupFunction {
 
-    public static HashMap<Integer, Group> getAllGroup() {
-        return (HashMap<Integer, Group>) DataBaseInf.getGroupHashMap();
+    public static Map<Integer, Group> getAllGroup() {
+        return  DataBaseInf.getGroupHashMap();
     }
 
-    public static HashMap<Integer, Student> getstudentsFromGroup(int groupId) {
+    public static Map<Integer, Student> getstudentsFromGroup(int groupId) {
         Group group = DataBaseInf.getGroupHashMap().get(groupId);
-        return (HashMap<Integer, Student>) group.getStudentMap();
+        return  group.getStudentMap();
     }
 
     public static void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {

@@ -27,8 +27,8 @@ public class GroupFunction {
 
     private static final RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
-    public static HashMap<Integer, Group> getAllGroup() {
-        HashMap<Integer, Group> result = new HashMap<>();
+    public static Map<Integer, Group> getAllGroup() {
+        Map<Integer, Group> result = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -61,7 +61,7 @@ public class GroupFunction {
     }
 
     public static Map<Integer, Student> getstudentsFromGroup(int groupId) {
-        HashMap<Integer, Student> result = new HashMap<>();
+        Map<Integer, Student> result = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;

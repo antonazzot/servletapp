@@ -8,8 +8,8 @@ import repository.modelrepository.modelfunction.functionpostgress.UsersFunctionP
 import users.Student;
 import users.UserImpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -32,22 +32,22 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allUser() {
+    public Map<Integer, UserImpl> allUser() {
         return UsersFunctionPostgres.allUser();
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allTrainer() {
+    public Map<Integer, UserImpl> allTrainer() {
         return TrainerFunctionPostgres.getallTrainer();
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allStudent() {
+    public Map<Integer, UserImpl> allStudent() {
         return StudentFunctionPostgres.allStudent();
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allAdmin() {
+    public Map<Integer, UserImpl> allAdmin() {
         return AdminFunctionPostgres.allAdmin();
     }
 
@@ -72,12 +72,12 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public HashMap<Integer, UserImpl> freeTrainer() {
+    public Map<Integer, UserImpl> freeTrainer() {
         return TrainerFunctionPostgres.freeTrainer();
     }
 
     @Override
-    public ArrayList<Student> studentFromGroup(Integer groupId) {
+    public List<Student> studentFromGroup(Integer groupId) {
         return StudentFunctionPostgres.studentFromGroup(groupId);
     }
 

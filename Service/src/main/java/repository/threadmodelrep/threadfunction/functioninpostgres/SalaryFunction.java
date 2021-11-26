@@ -16,14 +16,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class SalaryFunction {
     private static final RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
-    public static HashMap<Trainer, List<Salary>> gettrainerSalary() {
-        HashMap<Trainer, List<Salary>> result = new HashMap<>();
-        ArrayList<Integer> trainersIDList = new ArrayList<>(RepositoryFactory.getRepository().allTrainer().keySet());
+    public static Map<Trainer, List<Salary>> gettrainerSalary() {
+        Map<Trainer, List<Salary>> result = new HashMap<>();
+        List<Integer> trainersIDList = new ArrayList<>(RepositoryFactory.getRepository().allTrainer().keySet());
         try (Connection connection = datasourse.getConnection()) {
             for (Integer trainerId :
                     trainersIDList) {

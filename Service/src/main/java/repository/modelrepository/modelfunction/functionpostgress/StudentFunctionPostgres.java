@@ -15,13 +15,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class StudentFunctionPostgres {
     public static RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
-    public static HashMap<Integer, UserImpl> allStudent() {
-        HashMap<Integer, UserImpl> students = new HashMap<>();
+    public static Map<Integer, UserImpl> allStudent() {
+        Map<Integer, UserImpl> students = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -59,8 +61,8 @@ public class StudentFunctionPostgres {
         return students;
     }
 
-    public static ArrayList<Student> studentFromGroup(Integer groupId) {
-        ArrayList<Student> result = new ArrayList<>();
+    public static List<Student> studentFromGroup(Integer groupId) {
+        List<Student> result = new ArrayList<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;

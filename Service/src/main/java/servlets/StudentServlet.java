@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Servlet
@@ -32,7 +33,7 @@ public class StudentServlet extends HttpServlet {
         HttpSession session = req.getSession();
         UserImpl user = (UserImpl) session.getAttribute("user");
         UserImpl student = RepositoryFactory.getRepository().getUserById(user.getId());
-        HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentIndInf = ThreadRepositoryFactory.getRepository().studentTheamMark(user.getId());
+        Map<UserImpl, Map<Theams, List<Mark>>> studentIndInf = ThreadRepositoryFactory.getRepository().studentTheamMark(user.getId());
         log.info("Student logIn= {}", student.getInf());
         req.setAttribute("student", student);
         req.setAttribute("mapmap", studentIndInf);

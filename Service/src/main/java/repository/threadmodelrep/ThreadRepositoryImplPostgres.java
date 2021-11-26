@@ -14,10 +14,7 @@ import users.Student;
 import users.Trainer;
 import users.UserImpl;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ThreadRepositoryImplPostgres implements ThreadRepository {
 
@@ -40,22 +37,22 @@ public class ThreadRepositoryImplPostgres implements ThreadRepository {
     }
 
     @Override
-    public HashMap<Integer, Group> allGroup() {
+    public Map<Integer, Group> allGroup() {
         return GroupFunction.getAllGroup();
     }
 
     @Override
-    public HashMap<Integer, Theams> allTheams() {
+    public Map<Integer, Theams> allTheams() {
         return TheamFunction.getallTheams();
     }
 
     @Override
-    public HashMap<Trainer, List<Salary>> trainerSalary() {
+    public Map<Trainer, List<Salary>> trainerSalary() {
         return SalaryFunction.gettrainerSalary();
     }
 
     @Override
-    public HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMark(int studentId) {
+    public Map<UserImpl, Map<Theams, List<Mark>>> studentTheamMark(int studentId) {
         return MarkFunction.getstudentTheamMark(studentId);
     }
 
@@ -65,7 +62,7 @@ public class ThreadRepositoryImplPostgres implements ThreadRepository {
     }
 
     @Override
-    public HashMap<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId) {
+    public Map<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId) {
         return MarkFunction.dogetMarkIDListbyTheam(theam, studentId);
     }
 
@@ -80,8 +77,8 @@ public class ThreadRepositoryImplPostgres implements ThreadRepository {
     }
 
     @Override
-    public HashMap<Integer, Student> studentsFromGroup(int groupId) {
-        return (HashMap<Integer, Student>) GroupFunction.getstudentsFromGroup(groupId);
+    public Map<Integer, Student> studentsFromGroup(int groupId) {
+        return  GroupFunction.getstudentsFromGroup(groupId);
     }
 
     @Override
@@ -95,7 +92,7 @@ public class ThreadRepositoryImplPostgres implements ThreadRepository {
     }
 
     @Override
-    public HashMap<Integer, Theams> freeTheams() {
+    public Map<Integer, Theams> freeTheams() {
         return TheamFunction.getfreeTheams();
     }
 

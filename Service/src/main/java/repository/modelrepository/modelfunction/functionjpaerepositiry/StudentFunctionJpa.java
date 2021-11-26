@@ -13,13 +13,15 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StudentFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
 
-    public static HashMap<Integer, UserImpl> getAllStudent() {
-        HashMap<Integer, UserImpl> result = new HashMap<>();
+    public static Map<Integer, UserImpl> getAllStudent() {
+        Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -36,12 +38,12 @@ public class StudentFunctionJpa {
         return result;
     }
 
-    public static ArrayList<Student> getStudentFromGroup(Integer groupId) {
+    public static List<Student> getStudentFromGroup(Integer groupId) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
             Group group = em.find(Group.class, groupId);
-            ArrayList<Student> students = new ArrayList<>();
+            List<Student> students = new ArrayList<>();
             group.getStudentMap().values().forEach(student -> students.add(student));
             return students;
         } catch (Exception e) {

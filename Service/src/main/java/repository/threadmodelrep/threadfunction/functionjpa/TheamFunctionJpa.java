@@ -11,6 +11,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,8 +20,8 @@ public class TheamFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
 
-    public static HashMap<Integer, Theams> getallTheams() {
-        HashMap<Integer, Theams> result = new HashMap<>();
+    public static Map<Integer, Theams> getallTheams() {
+        Map<Integer, Theams> result = new HashMap<>();
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -75,9 +76,9 @@ public class TheamFunctionJpa {
         }
     }
 
-    public static HashMap<Integer, Theams> getfreeTheams() {
-        HashMap<Integer, Theams> busyTheam = getBuzyTeam();
-        HashMap<Integer, Theams> freeTh = new HashMap<>(getallTheams());
+    public static Map<Integer, Theams> getfreeTheams() {
+        Map<Integer, Theams> busyTheam = getBuzyTeam();
+        Map<Integer, Theams> freeTh = new HashMap<>(getallTheams());
         log.info("free Start {}", busyTheam.values());
         if (GroupFunctionJpa.getAllGroup().isEmpty()) {
             return getallTheams();
@@ -96,8 +97,8 @@ public class TheamFunctionJpa {
         }
     }
 
-    private static HashMap<Integer, Theams> getBuzyTeam() {
-        HashMap<Integer, Theams> busyTheam = new HashMap<>();
+    private static Map<Integer, Theams> getBuzyTeam() {
+        Map<Integer, Theams> busyTheam = new HashMap<>();
         Set<Theams> theamsSet = new HashSet<>();
         GroupFunctionJpa.getAllGroup().values()
                 .forEach(group -> theamsSet.addAll(group.getTheamsSet()));

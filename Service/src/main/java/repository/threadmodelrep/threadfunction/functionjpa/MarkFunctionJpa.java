@@ -4,7 +4,6 @@ import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import repository.RepositoryDatasourse;
 import repository.modelrepository.UserRepositoryImplJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
 import threadmodel.Mark;
@@ -22,17 +21,17 @@ public class MarkFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
 
-    public static HashMap<UserImpl, HashMap<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
-        HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMarkMap = new HashMap<>();
+    public static Map<UserImpl, Map<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
+        Map<UserImpl, Map<Theams, List<Mark>>> studentTheamMarkMap = new HashMap<>();
         Student student = StudentFunctionJpa.doGetStudentById(studentId);
         Set<Theams> theams = getTheamsSet(student);
-        HashMap<Theams, List<Mark>> theamsListHashMap = getTheamsListHashMap(studentId, theams);
+        Map<Theams, List<Mark>> theamsListHashMap = getTheamsListHashMap(studentId, theams);
         studentTheamMarkMap.put(student, theamsListHashMap);
         return studentTheamMarkMap;
     }
 
-    private static HashMap<Theams, List<Mark>> getTheamsListHashMap(int studentId, Set<Theams> theams) {
-        HashMap<Theams, List<Mark>> theamsListHashMap = new HashMap<>();
+    private static Map<Theams, List<Mark>> getTheamsListHashMap(int studentId, Set<Theams> theams) {
+        Map<Theams, List<Mark>> theamsListHashMap = new HashMap<>();
         for (Theams theam : theams) {
             theamsListHashMap.put(theam, dogetMarkListbyTheam(theam, studentId));
         }
@@ -59,8 +58,8 @@ public class MarkFunctionJpa {
         return marks;
     }
 
-    public static HashMap<Integer, Mark> dogetMarkIDListbyTheam(Theams theam, int studentId) {
-        HashMap<Integer, Mark> marks = new HashMap<>();
+    public static Map<Integer, Mark> dogetMarkIDListbyTheam(Theams theam, int studentId) {
+        Map<Integer, Mark> marks = new HashMap<>();
         log.info("In getMarkListMethd getTheam method = {}", theam.getTheamName() + studentId);
         dogetMarkListbyTheam(theam, studentId).forEach(mark -> marks.put(mark.getId(), mark));
         return marks;

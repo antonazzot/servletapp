@@ -6,16 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import threadmodel.Group;
 import threadmodel.Theams;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 public class TheamFunction {
 
 
-    public static HashMap<Integer, Theams> getallTheams() {
-        return (HashMap<Integer, Theams>) DataBaseInf.getTheamsHashMap();
+    public static Map<Integer, Theams> getallTheams() {
+        return  DataBaseInf.getTheamsHashMap();
     }
 
     public static Theams gettheamById(Integer id) {
@@ -34,12 +32,12 @@ public class TheamFunction {
         DataBaseInf.getTheamsHashMap().put(theams.getId(), theams);
     }
 
-    public static HashMap<Integer, Theams> getfreeTheams() {
-        HashMap<Integer, Theams> result;
+    public static Map<Integer, Theams> getfreeTheams() {
+        Map<Integer, Theams> result;
         if (DataBaseInf.getGroupHashMap().values().isEmpty()) {
-            return (HashMap<Integer, Theams>) DataBaseInf.getTheamsHashMap();
+            return DataBaseInf.getTheamsHashMap();
         }
-        ArrayList<Theams> busyTheams = new ArrayList<>();
+        List<Theams> busyTheams = new ArrayList<>();
         for (Group group :
                 DataBaseInf.getGroupHashMap().values()) {
             busyTheams.addAll(group.getTheamsSet());
@@ -49,8 +47,8 @@ public class TheamFunction {
         return result;
     }
 
-    private static HashMap<Integer, Theams> extractTheam(ArrayList<Theams> busyTheams) {
-        HashMap<Integer, Theams> result = new HashMap<>(DataBaseInf.getTheamsHashMap());
+    private static Map<Integer, Theams> extractTheam(List<Theams> busyTheams) {
+        Map<Integer, Theams> result = new HashMap<>(DataBaseInf.getTheamsHashMap());
         log.info("In extract");
         for (Theams theams :
                 DataBaseInf.getTheamsHashMap().values()) {

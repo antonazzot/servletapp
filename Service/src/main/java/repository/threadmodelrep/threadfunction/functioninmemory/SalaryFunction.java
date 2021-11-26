@@ -8,12 +8,13 @@ import users.UserImpl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class SalaryFunction {
 
-    public static HashMap<Trainer, List<Salary>> gettrainerSalary() {
-        HashMap<Trainer, List<Salary>> result = new HashMap<>();
+    public static Map<Trainer, List<Salary>> gettrainerSalary() {
+        Map<Trainer, List<Salary>> result = new HashMap<>();
         for (UserImpl trainer :
                 DataBaseInf.getTrainerHashMap().values()) {
             result.put((Trainer) trainer, ((Trainer) trainer).getSalarylist());

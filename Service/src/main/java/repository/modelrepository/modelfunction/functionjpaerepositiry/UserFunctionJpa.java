@@ -9,7 +9,6 @@ import users.UserImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -24,8 +23,8 @@ public class UserFunctionJpa {
         return getAllUser().get(id);
     }
 
-    public static HashMap<Integer, UserImpl> getAllUser() {
-        HashMap<Integer, UserImpl> result = new HashMap<>();
+    public static Map<Integer, UserImpl> getAllUser() {
+        Map<Integer, UserImpl> result = new HashMap<>();
         result.putAll(TrainerFunctionJpa.getallTrainer());
         result.putAll(StudentFunctionJpa.getAllStudent());
         result.putAll(AdminFunctionJpa.getAllAdmin());
@@ -56,13 +55,13 @@ public class UserFunctionJpa {
     }
 
     private static DeleteStratageJPA changeStratageForDelete(String entity) {
-        Map<String, DeleteStratageJPA> stratageMap = Collections.unmodifiableMap(Map.of(
+        Map<String, DeleteStratageJPA> stratageMap = Map.of(
                 "student", new DeleteStudentImpJPA(),
                 "trainer", new DeleteTrainerImpJPA(),
                 "administrator", new DeleteAdminImpJPA(),
                 "group", new DeleteGroupImpJPA(),
                 "theam", new DeleteTheamImpJPA()
-        ));
+        );
         return stratageMap.get(entity);
     }
 

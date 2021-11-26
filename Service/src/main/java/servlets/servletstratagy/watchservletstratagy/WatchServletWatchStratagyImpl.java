@@ -11,6 +11,7 @@ import users.UserImpl;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -33,12 +34,12 @@ public class WatchServletWatchStratagyImpl implements WatchServletStratagy {
     /**
      * This method  given  data for demonstrate  information about group
      **/
-    private HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<Student>>> groupStringHashMap() {
-        HashMap<Group, HashMap<ArrayList<Theams>, ArrayList<Student>>> hashMap = new HashMap<>();
+    private Map<Group, Map<List<Theams>, List<Student>>> groupStringHashMap() {
+        HashMap<Group, Map<List<Theams>, List<Student>>> hashMap = new HashMap<>();
         for (Map.Entry<Integer, Group> entry : ThreadRepositoryFactory.getRepository().allGroup().entrySet()) {
             Group group = entry.getValue();
-            ArrayList<Theams> theams = new ArrayList<>(ThreadRepositoryFactory.getRepository().theamFromGroup(group.getId()));
-            ArrayList<Student> students = RepositoryFactory.getRepository().studentFromGroup(group.getId());
+            List<Theams> theams = new ArrayList<>(ThreadRepositoryFactory.getRepository().theamFromGroup(group.getId()));
+            List<Student> students = RepositoryFactory.getRepository().studentFromGroup(group.getId());
             hashMap.put(group, new HashMap<>(Map.of(theams, students)));
         }
         return hashMap;
@@ -47,8 +48,8 @@ public class WatchServletWatchStratagyImpl implements WatchServletStratagy {
      * This method providing represent of information about
      * user with @mapWithInf() method
      **/
-    private HashMap<Integer, UserImpl> forDemonstratePage(String user) {
-        HashMap<Integer, UserImpl> result = new HashMap<>();
+    private Map<Integer, UserImpl> forDemonstratePage(String user) {
+        Map<Integer, UserImpl> result = new HashMap<>();
         switch (user) {
             case "student":
                 result = RepositoryFactory.getRepository().allStudent();

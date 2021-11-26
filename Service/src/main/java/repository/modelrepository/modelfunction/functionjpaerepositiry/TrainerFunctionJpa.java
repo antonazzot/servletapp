@@ -16,14 +16,15 @@ import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class TrainerFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
 
-    public static HashMap<Integer, UserImpl> getallTrainer() {
-        HashMap <Integer, UserImpl> result = new HashMap<>();
+    public static Map<Integer, UserImpl> getallTrainer() {
+        Map <Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -41,19 +42,19 @@ public class TrainerFunctionJpa {
         return result;
     }
 
-    public static HashMap<Integer, UserImpl> freeTrainer() {
+    public static Map<Integer, UserImpl> freeTrainer() {
         if (ThreadRepositoryImplPostgres.getInstance().allGroup().isEmpty())
             return getallTrainer();
         else {
                 List<UserImpl> busyTrainer = new ArrayList<>();
                 GroupFunctionJpa.getAllGroup().values()
                         .forEach(group -> busyTrainer.add(group.getTrainer()));
-                return freeTrainerexecute((ArrayList<UserImpl>) busyTrainer);
+                return freeTrainerexecute(busyTrainer);
         }
     }
 
-    private static HashMap<Integer, UserImpl> freeTrainerexecute(ArrayList<UserImpl> busyTrainer) {
-        HashMap<Integer, UserImpl> result = new HashMap<>(getallTrainer());
+    private static Map<Integer, UserImpl> freeTrainerexecute(List<UserImpl> busyTrainer) {
+        Map<Integer, UserImpl> result = new HashMap<>(getallTrainer());
         for (UserImpl alltrainer :
                 getallTrainer().values()) {
             for (UserImpl busyTr : busyTrainer) {

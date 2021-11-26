@@ -12,14 +12,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 public class AdminFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
 
-    public static HashMap<Integer, UserImpl> getAllAdmin() {
-        HashMap<Integer, UserImpl> result = new HashMap<>();
+    public static Map<Integer, UserImpl> getAllAdmin() {
+        Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();

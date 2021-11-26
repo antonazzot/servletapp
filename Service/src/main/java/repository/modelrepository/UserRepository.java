@@ -3,18 +3,18 @@ package repository.modelrepository;
 import users.Student;
 import users.UserImpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface UserRepository {
-    HashMap<Integer, UserImpl> allUser();
+    Map<Integer, UserImpl> allUser();
 
-    HashMap<Integer, UserImpl> allTrainer();
+    Map<Integer, UserImpl> allTrainer();
 
-    HashMap<Integer, UserImpl> allStudent();
+    Map<Integer, UserImpl> allStudent();
 
-    HashMap<Integer, UserImpl> allAdmin();
+    Map<Integer, UserImpl> allAdmin();
 
     UserImpl getUserById(Integer id);
 
@@ -24,8 +24,8 @@ public interface UserRepository {
 
     UserImpl updateUser(UserImpl user);
 
-    HashMap<Integer, UserImpl> freeTrainer();
+    Map<Integer, UserImpl> freeTrainer();
 
-    ArrayList<Student> studentFromGroup(Integer groupId);
+    List<Student> studentFromGroup(Integer groupId);
 
 }

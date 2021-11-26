@@ -16,11 +16,11 @@ import java.util.Map;
 @Slf4j
 public class MarkFunction {
 
-    public static HashMap<UserImpl, HashMap<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
-        HashMap<UserImpl, HashMap<Theams, List<Mark>>> result = new HashMap<>();
+    public static Map<UserImpl, Map<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
+        Map<UserImpl, Map<Theams, List<Mark>>> result = new HashMap<>();
         for (UserImpl student :
                 DataBaseInf.getStudentHashMap().values()) {
-            result.put(student, (HashMap<Theams, List<Mark>>) ((Student) student).getListOfMark());
+            result.put(student, ((Student) student).getListOfMark());
         }
         return result;
     }
@@ -30,8 +30,8 @@ public class MarkFunction {
         return student.getListOfMark().get(theam);
     }
 
-    public static HashMap<Integer, Mark> dogetMarkIDListbyTheam(Theams theam, int studentId) {
-        HashMap<Integer, Mark> result = new HashMap<>();
+    public static Map<Integer, Mark> dogetMarkIDListbyTheam(Theams theam, int studentId) {
+        Map<Integer, Mark> result = new HashMap<>();
         for (Mark mark :
                 dogetMarkListbyTheam(theam, studentId)) {
             result.put(mark.getId(), mark);

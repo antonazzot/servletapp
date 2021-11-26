@@ -24,8 +24,8 @@ public class GroupFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
 
-    public static HashMap<Integer, Group> getAllGroup () {
-        HashMap<Integer, Group> result = new HashMap<>();
+    public static Map<Integer, Group> getAllGroup () {
+        Map<Integer, Group> result = new HashMap<>();
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -47,7 +47,7 @@ public class GroupFunctionJpa {
     public static void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
         Set <Theams> theams = new HashSet<>();
         theamsIdList.forEach(id -> theams.add(TheamFunctionJpa.gettheamById(id)));
-        HashMap <Integer, Student> studentHashMap = new HashMap<>();
+        Map <Integer, Student> studentHashMap = new HashMap<>();
         studentList.stream().map(user -> (Student)user)
                 .forEach(student -> studentHashMap.put(student.getId(), student));
         Trainer trainer = TrainerFunctionJpa.doGetTrainerById(trainerId);

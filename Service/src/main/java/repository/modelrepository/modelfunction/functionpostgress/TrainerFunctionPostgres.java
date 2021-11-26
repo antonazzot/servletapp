@@ -17,14 +17,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class TrainerFunctionPostgres {
 
     public static RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
-    public static HashMap<Integer, UserImpl> getallTrainer() {
-        HashMap<Integer, UserImpl> trainers = new HashMap<>();
+    public static Map<Integer, UserImpl> getallTrainer() {
+        Map<Integer, UserImpl> trainers = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -60,7 +61,7 @@ public class TrainerFunctionPostgres {
         return trainers;
     }
 
-    public static HashMap<Integer, UserImpl> freeTrainer() {
+    public static Map<Integer, UserImpl> freeTrainer() {
         if (ThreadRepositoryImplPostgres.getInstance().allGroup().isEmpty())
             return getallTrainer();
         else {
@@ -80,7 +81,7 @@ public class TrainerFunctionPostgres {
                 } finally {
                     PostgresSQLUtils.closeQuietly(ps);
                 }
-                return freeTrainerexecute((ArrayList<UserImpl>) busyTrainer);
+                return freeTrainerexecute(busyTrainer);
 
             } catch (SQLException e) {
                 log.info("FreeTrainer connection exception = {}", e.getMessage());
@@ -90,8 +91,8 @@ public class TrainerFunctionPostgres {
         }
     }
 
-    private static HashMap<Integer, UserImpl> freeTrainerexecute(ArrayList<UserImpl> busyTrainer) {
-        HashMap<Integer, UserImpl> result = new HashMap<>(getallTrainer());
+    private static Map<Integer, UserImpl> freeTrainerexecute(List<UserImpl> busyTrainer) {
+        Map<Integer, UserImpl> result = new HashMap<>(getallTrainer());
         for (UserImpl alltrainer :
                 getallTrainer().values()) {
             for (UserImpl busyTr : busyTrainer) {

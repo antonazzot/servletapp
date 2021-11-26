@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Servlet make calculate avarage salary
@@ -28,7 +28,7 @@ public class CalculateAvarageSalaryServlet extends HttpServlet {
         Writer writer = resp.getWriter();
         if (trainerId != null) {
             int id = Integer.parseInt(trainerId);
-            HashMap<Trainer, List<Salary>> trainerListHashMap = ThreadRepositoryFactory.getRepository().trainerSalary();
+            Map<Trainer, List<Salary>> trainerListHashMap = ThreadRepositoryFactory.getRepository().trainerSalary();
             trainer = trainerListHashMap.keySet().stream().filter(t -> t.getId() == id).findAny().get();
             try {
                 int avarageValue = Integer.parseInt(sal);

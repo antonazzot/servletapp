@@ -19,9 +19,9 @@ import java.util.*;
 public class MarkFunction {
     private static final RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
-    public static HashMap<UserImpl, HashMap<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
-        HashMap<UserImpl, HashMap<Theams, List<Mark>>> studentTheamMarkMap = new HashMap<>();
-        HashMap <Theams, List <Mark>> theamsListHashMap = new HashMap<>();
+    public static Map<UserImpl, Map<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
+        Map<UserImpl, Map<Theams, List<Mark>>> studentTheamMarkMap = new HashMap<>();
+        Map <Theams, List <Mark>> theamsListHashMap = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -86,8 +86,8 @@ public class MarkFunction {
         return marks;
     }
 
-    public static HashMap<Integer, Mark> dogetMarkIDListbyTheam(Theams theam, int studentId) {
-        HashMap<Integer, Mark> marks = new HashMap<>();
+    public static Map<Integer, Mark> dogetMarkIDListbyTheam(Theams theam, int studentId) {
+        Map<Integer, Mark> marks = new HashMap<>();
         log.info("In getMarkListMethd getTheam method = {}",theam.getTheamName()+studentId);
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;

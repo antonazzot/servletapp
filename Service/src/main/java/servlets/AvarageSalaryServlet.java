@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Servlet give information to jsp for  calculate avarage salary
@@ -25,7 +25,7 @@ public class AvarageSalaryServlet extends HttpServlet {
         req.getRequestDispatcher("adminControl/avaragesalary.jsp").forward(req, resp);
     }
 
-    private HashMap<Trainer, List<Salary>> salaryHashMap() {
+    private Map<Trainer, List<Salary>> salaryHashMap() {
         return ThreadRepositoryImplPostgres.getInstance().trainerSalary();
     }
 
