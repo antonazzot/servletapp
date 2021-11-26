@@ -12,31 +12,31 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString ( exclude = {"theamsSet", "studentMap"})
-@EqualsAndHashCode ( exclude = {"theamsSet", "studentMap"})
+@ToString(exclude = {"theamsSet", "studentMap"})
+@EqualsAndHashCode(exclude = {"theamsSet", "studentMap"})
 @Entity
-@Table (name = "gr_oup")
+@Table(name = "gr_oup")
 public class Group {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     @OneToOne
-    @JoinColumn (name = "trainer_id", referencedColumnName = "id")
+    @JoinColumn(name = "trainer_id", referencedColumnName = "id")
     private Trainer trainer;
     @ManyToMany
-    @JoinTable (
+    @JoinTable(
             name = "student_group",
-            joinColumns = @JoinColumn (name = "group_id"),
-            inverseJoinColumns = @JoinColumn (name = "student_id")
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
     )
     @MapKey
     private Map<Integer, Student> studentMap;
     @OneToMany
-    @JoinTable (
+    @JoinTable(
             name = "theam_group",
-            joinColumns = @JoinColumn (name = "group_id"),
-            inverseJoinColumns = @JoinColumn (name = "theam_id")
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "theam_id")
     )
     private Set<Theams> theamsSet;
 
