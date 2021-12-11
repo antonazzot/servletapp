@@ -2,7 +2,10 @@ package servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import repository.RepositoryFactory;
+import repository.modelrepository.UserRepository;
 import users.Administrator;
 import users.Role;
 
@@ -36,7 +39,8 @@ public class StartPage extends HttpServlet {
             HttpSession session = req.getSession();
             Properties properties = new Properties();
             properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
-
+            ConfigurableApplicationContext ctx = new AnnotationConfigApplicationContext("repository");
+//            UserRepository bean = ctx.getBean("userRepository",UserRepository.class);
             {
                 Administrator administrator = (Administrator) new Administrator()
                         .withRole(Role.ADMINISTRATOR)
@@ -45,6 +49,7 @@ public class StartPage extends HttpServlet {
                         .withPassword(adminPassword)
                         .withAge(34);
                 log.info("Types of using memory ={}", properties.getProperty("repository.type"));
+               log.info("Repository ={}", RepositoryFactory.getRepository().getClass().getName());
                 if (RepositoryFactory.getRepository().allUser().values().stream()
                         .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
                                 u.getPassword().equals(administrator.getPassword()) &&

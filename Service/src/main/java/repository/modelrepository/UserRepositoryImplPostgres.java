@@ -1,35 +1,42 @@
 package repository.modelrepository;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import repository.modelrepository.modelfunction.functionpostgress.AdminFunctionPostgres;
 import repository.modelrepository.modelfunction.functionpostgress.StudentFunctionPostgres;
 import repository.modelrepository.modelfunction.functionpostgress.TrainerFunctionPostgres;
 import repository.modelrepository.modelfunction.functionpostgress.UsersFunctionPostgres;
+import users.Administrator;
 import users.Student;
+import users.Trainer;
 import users.UserImpl;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+@Repository("Postgres")
 @Slf4j
 public class UserRepositoryImplPostgres implements UserRepository {
 
-    private static volatile UserRepositoryImplPostgres instance;
 
-    private UserRepositoryImplPostgres() {
-    }
-
-    public static UserRepositoryImplPostgres getInstance() {
-        if (instance == null) {
-            synchronized (UserRepositoryImplPostgres.class) {
-                if (instance == null) {
-                    instance = new UserRepositoryImplPostgres();
-                }
-            }
-        }
-        return instance;
-    }
+//
+//    private static volatile UserRepositoryImplPostgres instance;
+//
+//    private UserRepositoryImplPostgres() {
+//    }
+//
+//    public static UserRepositoryImplPostgres getInstance() {
+//        if (instance == null) {
+//            synchronized (UserRepositoryImplPostgres.class) {
+//                if (instance == null) {
+//                    instance = new UserRepositoryImplPostgres();
+//                }
+//            }
+//        }
+//        return instance;
+//    }
 
     @Override
     public Map<Integer, UserImpl> allUser() {
@@ -57,7 +64,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public int saveUser(UserImpl user) {
+    public int saveUser(@Valid UserImpl user) {
         return UsersFunctionPostgres.saveUser(user);
     }
 
@@ -79,6 +86,21 @@ public class UserRepositoryImplPostgres implements UserRepository {
     @Override
     public List<Student> studentFromGroup(Integer groupId) {
         return StudentFunctionPostgres.studentFromGroup(groupId);
+    }
+
+    @Override
+    public Trainer getTrainerById(int id) {
+        return null;
+    }
+
+    @Override
+    public Administrator getAdministratorById(int id) {
+        return null;
+    }
+
+    @Override
+    public Student getStudentById(int id) {
+        return null;
     }
 
 }

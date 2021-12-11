@@ -1,6 +1,8 @@
 package repository.modelrepository;
 
+import users.Administrator;
 import users.Student;
+import users.Trainer;
 import users.UserImpl;
 
 import java.util.List;
@@ -27,5 +29,11 @@ public interface UserRepository {
     Map<Integer, UserImpl> freeTrainer();
 
     List<Student> studentFromGroup(Integer groupId);
+
+    Trainer getTrainerById (int id);
+
+    Administrator getAdministratorById (int id);
+
+    Student getStudentById (int id);
 
 }

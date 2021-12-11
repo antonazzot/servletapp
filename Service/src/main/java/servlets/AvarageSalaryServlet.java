@@ -1,5 +1,6 @@
 package servlets;
 
+import repository.threadmodelrep.ThreadRepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryImplPostgres;
 import threadmodel.Salary;
 import users.Trainer;
@@ -26,7 +27,7 @@ public class AvarageSalaryServlet extends HttpServlet {
     }
 
     private Map<Trainer, List<Salary>> salaryHashMap() {
-        return ThreadRepositoryImplPostgres.getInstance().trainerSalary();
+        return ThreadRepositoryFactory.getRepository().trainerSalary();
     }
 
 }

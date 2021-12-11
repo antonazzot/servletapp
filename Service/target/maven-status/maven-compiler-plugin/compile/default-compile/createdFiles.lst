@@ -75,7 +75,6 @@ servlets\GroupCreaterServlet.class
 repository\threadmodelrep\threadfunction\functioninpostgres\TheamFunction.class
 repository\modelrepository\modelfunction\functionpostgress\AdminFunctionPostgres.class
 servlets\filters\TrainerFilter.class
-repository\RepositoryFactory$1.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressStudentAdd.class
 servlets\servletstratagy\watchservletstratagy\WatchServletStratagy.class
 helperutils\closebaseconnection\PostgresSQLUtils.class
@@ -83,8 +82,8 @@ repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\Delete
 repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteStudentImpJPA.class
 servlets\filters\UserFilter.class
 servlets\TheamUpdateServlet.class
+StartM\Main.class
 servlets\TheamAddServlet.class
-repository\threadmodelrep\ThreadRepositoryFactory$1.class
 servlets\ChangeUser.class
 repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteGroupImpJPA.class
 servlets\GroupUpdateActionServlet.class

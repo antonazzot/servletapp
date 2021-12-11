@@ -5,6 +5,7 @@ import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
+import repository.threadmodelrep.ThreadRepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryImplPostgres;
 import users.Role;
 import users.Trainer;
@@ -62,7 +63,7 @@ public class TrainerFunctionPostgres {
     }
 
     public static Map<Integer, UserImpl> freeTrainer() {
-        if (ThreadRepositoryImplPostgres.getInstance().allGroup().isEmpty())
+        if (ThreadRepositoryFactory.getRepository().allGroup().isEmpty())
             return getallTrainer();
         else {
             try (Connection connection = datasourse.getConnection()) {

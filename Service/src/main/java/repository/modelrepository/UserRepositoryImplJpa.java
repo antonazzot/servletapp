@@ -1,5 +1,8 @@
 package repository.modelrepository;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.AdminFunctionJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
@@ -12,24 +15,24 @@ import users.UserImpl;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+@Repository("Jpa")
 public class UserRepositoryImplJpa implements UserRepository {
     private static volatile UserRepositoryImplJpa instance;
-
-    private UserRepositoryImplJpa() {
-    }
-
-    public static UserRepositoryImplJpa getInstance() {
-
-        if (instance == null) {
-            synchronized (UserRepositoryImplPostgres.class) {
-                if (instance == null) {
-                    instance = new UserRepositoryImplJpa();
-                }
-            }
-        }
-        return instance;
-    }
+//
+//    private UserRepositoryImplJpa() {
+//    }
+//
+//    public static UserRepositoryImplJpa getInstance() {
+//
+//        if (instance == null) {
+//            synchronized (UserRepositoryImplPostgres.class) {
+//                if (instance == null) {
+//                    instance = new UserRepositoryImplJpa();
+//                }
+//            }
+//        }
+//        return instance;
+//    }
 
     @Override
     public Map<Integer, UserImpl> allUser() {
@@ -80,15 +83,15 @@ public class UserRepositoryImplJpa implements UserRepository {
     public List<Student> studentFromGroup(Integer groupId) {
         return StudentFunctionJpa.getStudentFromGroup(groupId);
     }
-
+    @Override
     public Trainer getTrainerById (int id) {
      return TrainerFunctionJpa.doGetTrainerById (id);
     }
-
+    @Override
     public Administrator getAdministratorById (int id) {
         return AdminFunctionJpa.doGetAdministratorById (id);
     }
-
+    @Override
     public Student getStudentById (int id) {
         return StudentFunctionJpa.doGetStudentById (id);
     }

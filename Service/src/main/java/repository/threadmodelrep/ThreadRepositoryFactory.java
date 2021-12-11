@@ -1,38 +1,35 @@
 package repository.threadmodelrep;
 
-import repository.RepositoryTypes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.util.Properties;
+import javax.annotation.PostConstruct;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Configuration
+@PropertySource("app.properties")
 public class ThreadRepositoryFactory {
-    private static final RepositoryTypes TYPES;
 
-    static {
-        Properties properties = new Properties();
-        try {
-            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        TYPES = RepositoryTypes.getTypeByStr(properties.getProperty("repository.type"));
-    }
+    @Value("${repository.type}")
+    String threadRepositoryName;
 
-    private ThreadRepositoryFactory() {
-
+    private static ThreadRepository threadRepository;
+    @Autowired
+    Map<String, ThreadRepository> repositoryMap;
+    @PostConstruct
+    private void start () {
+     String name = repositoryMap.keySet().stream()
+              .filter(s -> s.contains(threadRepositoryName)).collect(Collectors.joining());
+      ThreadRepositoryFactory.threadRepository=repositoryMap.get(name);
     }
 
     public static ThreadRepository getRepository() {
-        switch (TYPES) {
-            case MEMORY:
-                return ThreadRepositoryImplInMemory.getInstance();
-            case POSTGRES:
-                return ThreadRepositoryImplPostgres.getInstance();
-            case JPA:
-                return ThreadRepositoryImplJpa.getInstance();
-
-        }
-        return ThreadRepositoryImplInMemory.getInstance();
+        return threadRepository;
     }
 }
 

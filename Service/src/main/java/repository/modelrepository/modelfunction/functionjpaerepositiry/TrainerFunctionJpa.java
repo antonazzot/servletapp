@@ -4,6 +4,7 @@ import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import repository.threadmodelrep.ThreadRepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryImplPostgres;
 import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
 import users.Role;
@@ -43,7 +44,7 @@ public class TrainerFunctionJpa {
     }
 
     public static Map<Integer, UserImpl> freeTrainer() {
-        if (ThreadRepositoryImplPostgres.getInstance().allGroup().isEmpty())
+        if (ThreadRepositoryFactory.getRepository().allGroup().isEmpty())
             return getallTrainer();
         else {
                 List<UserImpl> busyTrainer = new ArrayList<>();

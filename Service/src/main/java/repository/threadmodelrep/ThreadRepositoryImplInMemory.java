@@ -2,6 +2,7 @@ package repository.threadmodelrep;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import repository.threadmodelrep.threadfunction.functioninmemory.GroupFunction;
 import repository.threadmodelrep.threadfunction.functioninmemory.MarkFunction;
 import repository.threadmodelrep.threadfunction.functioninmemory.SalaryFunction;
@@ -18,23 +19,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+@Repository
 public class ThreadRepositoryImplInMemory implements ThreadRepository {
     private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImplPostgres.class);
-    private static volatile ThreadRepositoryImplInMemory instance;
+
 
     private ThreadRepositoryImplInMemory() {
-    }
-
-    public static ThreadRepositoryImplInMemory getInstance() {
-        if (instance == null) {
-            synchronized (ThreadRepositoryImplPostgres.class) {
-                if (instance == null) {
-                    instance = new ThreadRepositoryImplInMemory();
-                }
-            }
-        }
-        return instance;
     }
 
     @Override

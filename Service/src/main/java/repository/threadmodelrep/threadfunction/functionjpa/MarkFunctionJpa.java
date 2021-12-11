@@ -4,6 +4,7 @@ import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import repository.RepositoryFactory;
 import repository.modelrepository.UserRepositoryImplJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
 import threadmodel.Mark;
@@ -49,7 +50,7 @@ public class MarkFunctionJpa {
     public static List<Mark> dogetMarkListbyTheam(Theams theam, int studentId) {
         List<Mark> marks = new ArrayList<>();
         log.info("In getMarkListMethd getTheam method = {}", theam.getTheamName() + studentId);
-        Student student = UserRepositoryImplJpa.getInstance().getStudentById(studentId);
+        Student student = RepositoryFactory.getRepository().getStudentById(studentId);
         for (Mark mark : student.getMarkMap().values()) {
             if (mark.getTheams().equals(theam)) {
                 marks.add(mark);
@@ -66,7 +67,7 @@ public class MarkFunctionJpa {
     }
 
     public static void doaddMarkToStudent(int studentId, int theamID, int markValue) {
-        Student student = UserRepositoryImplJpa.getInstance().getStudentById(studentId);
+        Student student = RepositoryFactory.getRepository().getStudentById(studentId);
         Mark mark = new Mark()
                 .withValue(markValue)
                 .withStudent(student)

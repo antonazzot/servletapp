@@ -4,6 +4,7 @@ import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import repository.RepositoryFactory;
 import repository.modelrepository.UserRepositoryImplJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import threadmodel.Salary;
@@ -22,7 +23,7 @@ public class SalaryFunctionJpa {
 
     public static Map<Trainer, List<Salary>> gettrainerSalary() {
         Map<Trainer, List<Salary>> result = new HashMap<>();
-        UserRepositoryImplJpa.getInstance().allTrainer().values()
+        RepositoryFactory.getRepository().allTrainer().values()
                 .stream().map(trainer -> (Trainer)trainer)
                 .forEach(trainer -> result.put(trainer, trainer.getSalarylist()));
         return result;

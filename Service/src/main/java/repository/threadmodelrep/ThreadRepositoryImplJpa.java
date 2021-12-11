@@ -1,5 +1,6 @@
 package repository.threadmodelrep;
 
+import org.springframework.stereotype.Repository;
 import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
 import repository.threadmodelrep.threadfunction.functionjpa.MarkFunctionJpa;
 import repository.threadmodelrep.threadfunction.functionjpa.SalaryFunctionJpa;
@@ -16,25 +17,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+@Repository
 public class ThreadRepositoryImplJpa implements ThreadRepository {
-
-    private static volatile ThreadRepositoryImplJpa instance;
 
     private ThreadRepositoryImplJpa () {
         //singlton
     }
 
-    public static ThreadRepositoryImplJpa getInstance() {
-        if (instance == null) {
-            synchronized (ThreadRepositoryImplJpa.class) {
-                if (instance == null) {
-                    instance = new ThreadRepositoryImplJpa();
-                }
-            }
-        }
-        return instance;
-    }
     @Override
     public Map<Integer, Group> allGroup() {
         return GroupFunctionJpa.getAllGroup();

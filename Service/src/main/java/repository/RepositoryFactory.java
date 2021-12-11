@@ -1,45 +1,35 @@
 package repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import repository.modelrepository.UserRepositoryImplJpa;
 import repository.modelrepository.UserRepository;
 import repository.modelrepository.UserRepositoryImplInMemory;
 import repository.modelrepository.UserRepositoryImplPostgres;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Properties;
-
+@Configuration
+@PropertySource({"app.properties"})
 public class RepositoryFactory {
-    private static final RepositoryTypes TYPES;
+    @Value("${repository.type}")
+    private  String repositoryName;
 
-    static {
-        Properties properties = new Properties();
-        try {
-            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        TYPES = RepositoryTypes.getTypeByStr(properties.getProperty("repository.type"));
-    }
+    private static UserRepository repository;
 
-    private RepositoryFactory() {
-
+    @Autowired
+    private  Map<String, UserRepository> repositoryMap;
+    @PostConstruct
+    public  void initMap () {
+      RepositoryFactory.repository = repositoryMap.get(repositoryName);
     }
 
     public static UserRepository getRepository() {
-
-        switch (TYPES) {
-            case MEMORY:
-                return UserRepositoryImplInMemory.getInstance();
-
-            case POSTGRES:
-                return UserRepositoryImplPostgres.getInstance();
-
-            case JPA:
-                return UserRepositoryImplJpa.getInstance();
-
-            default:
-                throw new IllegalStateException("Unexpected value: " + TYPES);
-        }
-
+        return repository;
     }
 }

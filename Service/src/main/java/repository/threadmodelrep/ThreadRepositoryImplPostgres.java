@@ -2,6 +2,7 @@ package repository.threadmodelrep;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import repository.threadmodelrep.threadfunction.functioninpostgres.GroupFunction;
 import repository.threadmodelrep.threadfunction.functioninpostgres.MarkFunction;
 import repository.threadmodelrep.threadfunction.functioninpostgres.SalaryFunction;
@@ -15,25 +16,13 @@ import users.Trainer;
 import users.UserImpl;
 
 import java.util.*;
-
+@Repository
 public class ThreadRepositoryImplPostgres implements ThreadRepository {
 
     private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImplPostgres.class);
-    private static volatile ThreadRepositoryImplPostgres instance;
 
     private ThreadRepositoryImplPostgres() {
         //singlton
-    }
-
-    public static ThreadRepositoryImplPostgres getInstance() {
-        if (instance == null) {
-            synchronized (ThreadRepositoryImplPostgres.class) {
-                if (instance == null) {
-                    instance = new ThreadRepositoryImplPostgres();
-                }
-            }
-        }
-        return instance;
     }
 
     @Override
@@ -118,7 +107,6 @@ public class ThreadRepositoryImplPostgres implements ThreadRepository {
 
     @Override
     public void updateGroup(int groupId, String act, int[] entytiIdforact) {
-        log.info("In repository updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
         GroupFunction.doupdateGroup(groupId, act, entytiIdforact);
     }
 
