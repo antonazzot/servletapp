@@ -5,10 +5,13 @@
 <head>
     <title>Group create Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="static/css/style.css" rel="stylesheet">
 </head>
-<h1> ADD NEW Group </h1>
 
 <body>
+<section class="theamscreatelistcontainer">
+<div class="theamscreatelist">
+<h1> ADD NEW Group </h1>
   <form id="data" method = "post"  action="GroupCreaterServlet">
    <p>Выберите темы для группы</p>
       <c:forEach var = "th" items="${mapITe}">
@@ -31,6 +34,8 @@
 
    <p><input type="submit" value="Отправить"></p>
   </form>
+   </div>
+  </section>
   <form  action="hello">
       <input type="submit" value="Go to Main Admin!">
   </form>

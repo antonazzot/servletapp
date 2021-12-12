@@ -7,11 +7,14 @@
 <head>
     <meta charset="UTF-8">
     <title>LogOut Page</title>
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
 <br>
+<div class="out">
 <form  action="logout">
     <input type="submit" value="LogOut">
 </form>
+<div>
 </body>
 </html>

@@ -2,11 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<head>
     <meta charset="UTF-8">
     <title>Demonstrate group  page</title>
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<section class="demonstrategroupcontainer">
+<div class="demonstrategroup">
  <c:forEach var = "entry" items="${map}">
        <p> Название группы: </p>
        <c:out value = "${entry.key.name}" />
@@ -27,11 +30,14 @@
   </c:forEach>
 
 <br>
+ </div>
+ </section>
   <form  action="hello">
       <input type="submit" value="Go to Main Page!">
   </form>
 <br>
 <br>
  <jsp:include page="logout.jsp" />
+
 </body>
 </html>

@@ -5,9 +5,11 @@
 <head>
     <title>Test Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
-<br>
+<section class="avaragesalarycontainer">
+<div class="avaragesalary">
 <h1> Add salary list </h1>
 
 <form id="data" action="calculateAvarageSalary">
@@ -24,6 +26,8 @@
     <p><input type="text" name="sal" ></p>
      <p><input type="submit" form="data" value="Отправить"></p>
 </form>
+ </div>
+ </section>
 
 <br>
   <form  action= "hello">
@@ -32,5 +36,6 @@
 <br>
 <br>
  <jsp:include page="logout.jsp" />
+
 </body>
 </html>

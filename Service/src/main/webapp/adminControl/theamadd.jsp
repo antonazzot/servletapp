@@ -7,9 +7,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Add page</title>
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<section class="theamaddcontainer">
+<div class="theamadd">
 <h1> ADD NEW THEAM </h1>
 
 <form id="data" method = "post" action="theamAdd" >
@@ -18,6 +20,9 @@
       <br>
     <br>
     <input type="submit" form="data" />
+      </form>
+     </div>
+     </section>
 <br>
   <form  action="hello">
       <input type="submit" value="Go to Main Admin!">
@@ -25,5 +30,6 @@
     <br>
 <br>
  <jsp:include page="logout.jsp" />
+
 </body>
 </html>
