@@ -1,7 +1,5 @@
 package repository.threadmodelrep;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import repository.threadmodelrep.threadfunction.functioninmemory.GroupFunction;
 import repository.threadmodelrep.threadfunction.functioninmemory.MarkFunction;
@@ -21,8 +19,6 @@ import java.util.Map;
 import java.util.Set;
 @Repository
 public class ThreadRepositoryImplInMemory implements ThreadRepository {
-    private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImplPostgres.class);
-
 
     private ThreadRepositoryImplInMemory() {
     }

@@ -2,6 +2,7 @@ package users;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -36,6 +37,7 @@ public class UserImpl implements User {
     @Column(name = "password")
     private String password;
     @Column(name = "age")
+    @PositiveOrZero(message = "it must be positive or zero")
     private int age;
 
     public UserImpl withId(Integer id) {

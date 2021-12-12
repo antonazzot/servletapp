@@ -18,21 +18,6 @@ import java.util.Optional;
 @Repository("Memory")
 @Slf4j
 public class UserRepositoryImplInMemory implements UserRepository {
-//    private static volatile UserRepositoryImplInMemory instance;
-//
-//    private UserRepositoryImplInMemory() {
-//    }
-//
-//    public static UserRepositoryImplInMemory getInstance() {
-//        if (instance == null) {
-//            synchronized (UserRepositoryImplInMemory.class) {
-//                if (instance == null) {
-//                    instance = new UserRepositoryImplInMemory();
-//                }
-//            }
-//        }
-//        return instance;
-//    }
 
     @Override
     public Map<Integer, UserImpl> allUser() {

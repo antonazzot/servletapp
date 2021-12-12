@@ -18,7 +18,6 @@ public class UserFunctionJpa {
     public static Configuration cnf = new Configuration().configure();
     public static SessionFactory sessionFactory = cnf.buildSessionFactory();
 
-
     public static UserImpl getUserById(Integer id) {
         return getAllUser().get(id);
     }

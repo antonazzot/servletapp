@@ -17,22 +17,6 @@ import java.util.Map;
 import java.util.Optional;
 @Repository("Jpa")
 public class UserRepositoryImplJpa implements UserRepository {
-    private static volatile UserRepositoryImplJpa instance;
-//
-//    private UserRepositoryImplJpa() {
-//    }
-//
-//    public static UserRepositoryImplJpa getInstance() {
-//
-//        if (instance == null) {
-//            synchronized (UserRepositoryImplPostgres.class) {
-//                if (instance == null) {
-//                    instance = new UserRepositoryImplJpa();
-//                }
-//            }
-//        }
-//        return instance;
-//    }
 
     @Override
     public Map<Integer, UserImpl> allUser() {

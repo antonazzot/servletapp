@@ -1,5 +1,6 @@
 package repository.modelrepository;
 
+import jakarta.validation.Valid;
 import users.Administrator;
 import users.Student;
 import users.Trainer;
@@ -20,11 +21,11 @@ public interface UserRepository {
 
     UserImpl getUserById(Integer id);
 
-    int saveUser(UserImpl user);
+    int saveUser(@Valid UserImpl user);
 
     Optional<UserImpl> removeUser(Integer id, String entity);
 
-    UserImpl updateUser(UserImpl user);
+    UserImpl updateUser(@Valid UserImpl user);
 
     Map<Integer, UserImpl> freeTrainer();
 

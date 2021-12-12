@@ -19,8 +19,6 @@ import java.util.*;
 @Repository
 public class ThreadRepositoryImplPostgres implements ThreadRepository {
 
-    private static final Logger log = LoggerFactory.getLogger(ThreadRepositoryImplPostgres.class);
-
     private ThreadRepositoryImplPostgres() {
         //singlton
     }

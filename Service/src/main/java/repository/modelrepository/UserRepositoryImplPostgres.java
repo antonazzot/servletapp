@@ -20,24 +20,6 @@ import java.util.Optional;
 @Slf4j
 public class UserRepositoryImplPostgres implements UserRepository {
 
-
-//
-//    private static volatile UserRepositoryImplPostgres instance;
-//
-//    private UserRepositoryImplPostgres() {
-//    }
-//
-//    public static UserRepositoryImplPostgres getInstance() {
-//        if (instance == null) {
-//            synchronized (UserRepositoryImplPostgres.class) {
-//                if (instance == null) {
-//                    instance = new UserRepositoryImplPostgres();
-//                }
-//            }
-//        }
-//        return instance;
-//    }
-
     @Override
     public Map<Integer, UserImpl> allUser() {
         return UsersFunctionPostgres.allUser();
