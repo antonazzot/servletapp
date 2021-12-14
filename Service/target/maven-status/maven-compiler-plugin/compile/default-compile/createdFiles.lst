@@ -7,6 +7,7 @@ repository\threadmodelrep\threadfunction\updategroupstratagy\UpdateStratageJpa.c
 servlets\StartPage.class
 servlets\LogOutServlet.class
 servlets\ActionChangeServlet.class
+controller\MyController.class
 repository\modelrepository\modelfunction\RoleIDParametrCheker.class
 servlets\StudentServlet.class
 helperutils\myexceptionutils\MyJpaException.class

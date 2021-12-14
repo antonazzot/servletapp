@@ -19,6 +19,7 @@ public class WatchServlet extends HttpServlet {
         String entity = req.getParameter("user");
         WatchServletStratagy servletStratagy = changeStratagy(act);
         req.getRequestDispatcher(servletStratagy.watchEntity(entity, req)).forward(req, resp);
+
     }
 
     private WatchServletStratagy changeStratagy(String act) {
