@@ -82,6 +82,7 @@ helperutils\closebaseconnection\PostgresSQLUtils.class
 repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteStratageJPA.class
 repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteStudentImpJPA.class
 servlets\filters\UserFilter.class
+springmvcconfig\MySpringMVCDispatcherServletInit.class
 servlets\TheamUpdateServlet.class
 StartM\Main.class
 servlets\TheamAddServlet.class
@@ -89,6 +90,7 @@ servlets\ChangeUser.class
 repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteGroupImpJPA.class
 servlets\GroupUpdateActionServlet.class
 repository\RepositoryTypes.class
+springmvcconfig\SpringConfig.class
 repository\threadmodelrep\threadfunction\functioninmemory\SalaryFunction.class
 repository\RepositoryFactory.class
 repository\RepositoryDatasourse.class

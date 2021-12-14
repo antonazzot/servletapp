@@ -15,6 +15,6 @@ public class MySpringMVCDispatcherServletInit extends AbstractAnnotationConfigDi
 
     @Override
     protected String[] getServletMappings() {
-        return new String[] {"/mvc"};
+        return new String[] {"/"};
     }
 }

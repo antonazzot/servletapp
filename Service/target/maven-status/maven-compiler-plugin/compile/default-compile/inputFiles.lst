@@ -36,6 +36,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\A
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\UsersFunctionPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\UpdateStratageJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\GroupUpdateActionServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\springmvcconfig\SpringConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteStudentImpJPA.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressStudentAdd.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionunmemory\AdminFunctionMemory.java
@@ -64,6 +65,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexce
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionjpaerepositiry\StudentFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\StartFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\SalaryAdderServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\springmvcconfig\MySpringMVCDispatcherServletInit.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\postgresqlstratagy\DeleteTheamPSQLImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\postgresqlstratagy\DeleteEntityPSQL.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyStudentDelete.java
