@@ -4,8 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import repository.RepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
@@ -25,20 +24,22 @@ import java.util.Set;
 
 @Slf4j
 @Controller
+@RequestMapping("/mvc")
 public class MyController {
 
-    @GetMapping("/mvc/start")
+    @GetMapping("/start")
     public String start () {
         return "mvc_start";
     }
-    @PostMapping("/mvc/hello")
-    public String hello (HttpServletRequest req) {
+
+    @GetMapping("/hello")
+    public String hello () {
         {
             Administrator administrator = (Administrator) new Administrator()
                     .withRole(Role.ADMINISTRATOR)
                     .withName("Anton")
                     .withLogin("Admin ")
-                    .withPassword("passs")
+                    .withPassword("pass")
                     .withAge(34);
 
             if (RepositoryFactory.getRepository().allUser().values().stream()
@@ -50,23 +51,23 @@ public class MyController {
                 RepositoryFactory.getRepository().saveUser(administrator);
             log.info("Admin = {}", administrator.getInf());
         }
-        HttpSession session = req.getSession();
-        if (session.getAttribute("user") != null) {
-            return "/mvc/checkUser";
-        } else {
-            return "hello";
-        }
+//        HttpSession session = req.getSession();
+//        if (session.getAttribute("user") != null) {
+//            return "/mvc/checkUser";
+//        } else {
+//            return "hello";
+//        }
+        return "mvc_hello";
     }
 
-    @GetMapping("/mvc/checkUser")
-    public String checkUser (HttpServletRequest req) {
-        UserImpl user = (UserImpl) req.getSession().getAttribute("user");
-        HttpSession session = req.getSession();
+    @GetMapping("/checkUser")
+    public String checkUser (@SessionAttribute(name = "user", required = false) UserImpl user) {
+
         //authorization block
         if (Role.ADMINISTRATOR.equals(user.getRole())) {
             return "adminwiews/adminmain";
         } else
-            return "hello";
+            return "mvc_hello";
 //            if (Role.STUDENT.equals(user.getRole())) {
 //            logger.info("UserRole ={}", user.getRole());
 //            req.getRequestDispatcher("StudentPage/studentstartpage.jsp").forward(req, resp);

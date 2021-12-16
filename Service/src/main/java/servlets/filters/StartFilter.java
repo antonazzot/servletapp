@@ -55,7 +55,7 @@ public class StartFilter extends AbstractFilter {
         if (user != null) {
             session.setAttribute("user", user);
             log.info("SessionWithUserCreate = {}", user);
-            request.getRequestDispatcher("/checkUser").forward(request, response);
+            request.getRequestDispatcher("web/mvc/checkUser").forward(request, response);
         } else request.getRequestDispatcher("exeception.jsp").forward(request, response);
         filterChain.doFilter(request, response);
     }
