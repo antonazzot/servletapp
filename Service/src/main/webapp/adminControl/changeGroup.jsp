@@ -5,9 +5,11 @@
 <head>
     <title>Change group</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<section class="container">
+<div class="login">
 <h1> Change user </h1>
  <form id="data" method = "post"  action="updateGroup">
          <c:forEach var = "entry" items="${map}">
@@ -17,14 +19,16 @@
      <p><input type="submit" form="data" value="Отправить"></p>
   </form>
 <br>
+   </div>
+  </section>
 <br>
 <form  action="hello">
     <input type="submit" value="Go to Main Admin!">
 </form>
+
 <br>
-<form  action="logout">
-    <input type="submit" value="LogOut!">
-</form>
+<br>
+ <jsp:include page="logout.jsp" />
 
 
 </body>

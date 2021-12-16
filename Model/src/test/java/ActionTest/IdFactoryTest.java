@@ -1,6 +1,6 @@
 package ActionTest;
 
-import Action.IdFactory;
+import action.IdFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

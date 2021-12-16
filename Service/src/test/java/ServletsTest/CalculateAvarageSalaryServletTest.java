@@ -1,19 +1,9 @@
 package ServletsTest;
 
-import DataBase.DataBaseInf;
-import Servlets.CalculateAvarageSalaryServlet;
-import ThreadModel.Salary;
 import org.junit.Test;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class CalculateAvarageSalaryServletTest {
     final String path = "avaragesalarywatch.jsp";

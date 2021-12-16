@@ -7,9 +7,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Add page</title>
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<section class="container">
+<div class="login">
 <h1> ADD NEW THEAM </h1>
 
 <form id="data" method = "post" action="theamAdd" >
@@ -23,8 +25,9 @@
       <input type="submit" value="Go to Main Admin!">
   </form>
     <br>
-<form  action="logout">
-    <input type="submit" value="Go to LogIN page!">
-</form>
+       </div>
+      </section>
+<br>
+ <jsp:include page="logout.jsp" />
 </body>
 </html>

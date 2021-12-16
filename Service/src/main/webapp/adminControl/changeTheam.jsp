@@ -5,11 +5,14 @@
 <head>
     <title>Group create Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
-<h1> Update theam </h1>
+
 
 <body>
-
+<section class="container">
+<div class="login">
+<h1> Update theam </h1>
    <p>Внесите данные для изменения</p>
     <form id="data" method = "post"  action="updateTheam">
     <p>Темы группы, выберите тему для внесения изменений  </p>
@@ -22,15 +25,15 @@
       <input type="submit" form="data" value="Изменить тему">
       <hr>
     </form>
-
+     </div>
+    </section>
   <form  action="hello">
       <input type="submit" value="Go to Main Admin!">
   </form>
-<br>
 
-<form  action="logout">
-    <input type="submit" value="LogOut!">
-</form>
+<br>
+<br>
+ <jsp:include page="logout.jsp" />
 
 </body>
 </html>

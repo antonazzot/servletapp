@@ -5,8 +5,11 @@
 <head>
     <title>Test Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
+<section class="container">
+<div class="login">
 <h1> Trainer control List </h1>
  <p>Name: ${student.name} </p>
   <p>Оценки Студента:</p>
@@ -22,9 +25,10 @@
   </form>
 <br>
 <br>
-<form  action="logout">
-    <input type="submit" value="LogOut!">
-</form>
+   </div>
+  </section>
+<br>
+ <jsp:include page="logout.jsp" />
 
 
 </body>

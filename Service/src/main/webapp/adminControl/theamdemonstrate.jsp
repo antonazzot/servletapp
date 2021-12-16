@@ -4,9 +4,11 @@
 <html>
     <meta charset="UTF-8">
     <title>Demonstrate theam  page</title>
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<section class="container">
+<div class="login">
  <c:forEach var = "entry" items="${map}">
      <p> Id темы:
        <c:out value = "${entry.key}" /> <br>
@@ -19,9 +21,10 @@
   <form  action="hello">
       <input type="submit" value="Go to Main Page!">
   </form>
+     </div>
+    </section>
 <br>
-<form  action="logout">
-    <input type="submit" value="LogOut">
-</form>
+<br>
+ <jsp:include page="logout.jsp" />
 </body>
 </html>
