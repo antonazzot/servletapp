@@ -3,6 +3,7 @@ package controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import repository.RepositoryFactory;
@@ -24,43 +25,25 @@ import java.util.Set;
 
 @Slf4j
 @Controller
+
 @RequestMapping("/mvc")
 public class MyController {
 
     @GetMapping("/start")
     public String start () {
+
+        log.info("Repository->>>>>>>>>{}", RepositoryFactory.getRepository());
+
         return "mvc_start";
     }
 
     @GetMapping("/hello")
     public String hello () {
-        {
-            Administrator administrator = (Administrator) new Administrator()
-                    .withRole(Role.ADMINISTRATOR)
-                    .withName("Anton")
-                    .withLogin("Admin ")
-                    .withPassword("pass")
-                    .withAge(34);
 
-            if (RepositoryFactory.getRepository().allUser().values().stream()
-                    .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
-                            u.getPassword().equals(administrator.getPassword()) &&
-                            u.getName().equals(administrator.getName()) &&
-                            u.getAge() == administrator.getAge())
-            )
-                RepositoryFactory.getRepository().saveUser(administrator);
-            log.info("Admin = {}", administrator.getInf());
-        }
-//        HttpSession session = req.getSession();
-//        if (session.getAttribute("user") != null) {
-//            return "/mvc/checkUser";
-//        } else {
-//            return "hello";
-//        }
         return "mvc_hello";
     }
 
-    @GetMapping("/checkUser")
+    @GetMapping ("/checkUser")
     public String checkUser (@SessionAttribute(name = "user", required = false) UserImpl user) {
 
         //authorization block
