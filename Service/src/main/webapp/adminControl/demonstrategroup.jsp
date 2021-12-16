@@ -4,9 +4,11 @@
 <html>
     <meta charset="UTF-8">
     <title>Demonstrate group  page</title>
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<section class="container">
+<div class="login">
  <c:forEach var = "entry" items="${map}">
        <p> Название группы: </p>
        <c:out value = "${entry.key.name}" />
@@ -25,11 +27,13 @@
                           </c:forEach>
           </c:forEach> <br> <hr />
   </c:forEach>
-
+     </div>
+    </section>
 <br>
   <form  action="hello">
       <input type="submit" value="Go to Main Page!">
   </form>
+
 <br>
 <br>
  <jsp:include page="logout.jsp" />

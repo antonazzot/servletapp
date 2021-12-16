@@ -5,10 +5,14 @@
 <head>
     <title>Group create Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
-<h1> Update Group </h1>
+
 
 <body>
+<section class="container">
+<div class="login">
+<h1> Update Group </h1>
    <p>Внесите данные для изменения</p>
 <form id="data" method = "post" action="updateActionGroup">
     <p>Студенты группы, выберите студента для удаления из группы </p>
@@ -71,11 +75,12 @@
         <hr>
 </form>
         <br>
+   </div>
+  </section>
 
   <form  action="hello">
       <input type="submit" value="Go to Main Admin!">
   </form>
-<br>
 
 <br>
  <jsp:include page="logout.jsp" />

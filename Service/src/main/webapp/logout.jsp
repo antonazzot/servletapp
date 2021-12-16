@@ -6,12 +6,15 @@
 
 <head>
     <meta charset="UTF-8">
+    <link href="static/css/style.css" rel="stylesheet">
     <title>LogOut Page</title>
 </head>
 <body>
 <br>
+
 <form  action="logout">
     <input type="submit" value="LogOut">
 </form>
+
 </body>
 </html>

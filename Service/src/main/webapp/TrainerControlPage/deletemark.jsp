@@ -5,9 +5,11 @@
 <head>
     <title>Test Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<section class="container">
+<div class="login">
 <h1> Trainer control List </h1>
 
  <p>Name: ${student.name} </p>
@@ -30,6 +32,8 @@
     <input type="submit" value="Go to Main Page">
 </form>
 <br>
+   </div>
+  </section>
 <br>
 <br>
  <jsp:include page="logout.jsp" />

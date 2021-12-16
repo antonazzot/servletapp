@@ -7,9 +7,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Add page</title>
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<section class="container">
+<div class="login">
 <h1> ADD NEW USER </h1>
 
 <form id="data" method = "post" action="UserActionServlet" >
@@ -26,10 +28,14 @@
     <br>
     <input type="submit" form="data" />
 <br>
+      </div>
+          </section>
+
   <form  action="hello">
       <input type="submit" value="Go to Main Admin!">
   </form>
     <br>
+
 <br>
  <jsp:include page="logout.jsp" />
 </body>

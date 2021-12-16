@@ -4,6 +4,7 @@ import helperutils.closebaseconnection.PostgresSQLUtils;
 import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
+import repository.RepositoryFactory;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryImplPostgres;
@@ -71,10 +72,10 @@ public class TrainerFunctionPostgres {
                 List<UserImpl> busyTrainer = new ArrayList<>();
                 try {
                     ps = connection.prepareStatement("select *" +
-                            "from \"gro_up\"");
+                            "from gr_oup");
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
-                        busyTrainer.add(UsersFunctionPostgres.getUserById(rs.getInt("trainer_id")));
+                        busyTrainer.add(getTrainerById(rs.getInt("trainer_id")));
                     }
                 } catch (MySqlException e) {
                     log.info("FreeTrainer exception = {}", e.getMessage());

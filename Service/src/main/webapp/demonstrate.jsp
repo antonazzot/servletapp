@@ -6,11 +6,13 @@
 
 <head>
     <meta charset="UTF-8">
+    <link href="static/css/style.css" rel="stylesheet">
     <title>Demo page</title>
 </head>
 <body>
 <br> <br/>
-
+<section class="container">
+<div class="login">
  <c:forEach var = "entry" items="${map}">
 <div>
    <p> ID:    <c:out value = "${entry.key}" /> </p>
@@ -27,6 +29,8 @@
       <input type="submit" value="Go to Main Page!">
   </form>
 <br>
+   </div>
+  </section>
  <jsp:include page="logout.jsp" />
 </body>
 </html>
