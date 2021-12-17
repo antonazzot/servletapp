@@ -2,6 +2,7 @@ package servlets.filters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import repository.RepositoryFactory;
 import users.UserImpl;
 
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Properties;
 
-@WebFilter("/checkUser")
+@WebFilter(urlPatterns = {"/checkUser", "/mvc/check"})
 public class StartFilter extends AbstractFilter {
     private static final Logger log = LoggerFactory.getLogger(StartFilter.class);
 
@@ -24,9 +25,10 @@ public class StartFilter extends AbstractFilter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if (request.getSession(false) == null || request.getSession(false).isNew()) {
-            response.sendRedirect("/web/hello");
-        }
+        log.info("in filter={}", ">>>>>>>>>>>>>>");
+//        if (request.getSession(false) == null || request.getSession(false).isNew()) {
+//            response.sendRedirect("/web/hello");
+//        }
         Properties properties = new Properties();
         properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
 
@@ -45,6 +47,7 @@ public class StartFilter extends AbstractFilter {
         String password = request.getParameter("password");
         if (doesItLogin) {
             //Authentication by login
+
             user = checkUser(login, password);
         } else
             //Authentication by id
@@ -55,7 +58,8 @@ public class StartFilter extends AbstractFilter {
         if (user != null) {
             session.setAttribute("user", user);
             log.info("SessionWithUserCreate = {}", user);
-            request.getRequestDispatcher("web/mvc/checkUser").forward(request, response);
+
+//            request.getRequestDispatcher("redirect:web/mvc/check").forward(request, response);
         } else request.getRequestDispatcher("exeception.jsp").forward(request, response);
         filterChain.doFilter(request, response);
     }

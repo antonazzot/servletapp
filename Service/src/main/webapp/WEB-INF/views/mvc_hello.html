@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <title>Login Page</title>
-      <link href="static/css/style.css" rel="stylesheet" >
+<!--      <link href="static/css/style.css" rel="stylesheet" >-->
 </head>
 
 <body>
 <section class="container">
   <div class="login">
     <h1>Login to Web App</h1>
-    <form id="data" method = "get"  action="/checkUser">
+    <form id="data" method = "post"  action="/web/mvc/check">
       <p><input type="text" name="id" value="" placeholder="Username or Email"></p>
       <p><input type="password" name="password" value="" placeholder="Password"></p>
       <p class="remember_me">
@@ -21,7 +20,7 @@
           Remember me on this computer
         </label>
       </p>
-      <p class="submit"><input type="submit" name="commit" value="Login"></p>
+      <input type="submit" value="Let's start!">
     </form>
   </div>
 

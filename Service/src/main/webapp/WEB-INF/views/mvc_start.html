@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<p>MVS TEG</p>
+<p th:text="${user}"></p>
+<a href="/web/mvc/hello">Visit hello</a>
 </body>
 </html>

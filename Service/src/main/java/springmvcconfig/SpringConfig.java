@@ -13,11 +13,12 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import repository.RepositoryFactory;
+import repository.threadmodelrep.ThreadRepositoryFactory;
 
-@ComponentScan("controller")
+@ComponentScan({"controller", "repository"})
 @Configuration
 @EnableWebMvc
-@Import(RepositoryFactory.class)
+@Import({RepositoryFactory.class, ThreadRepositoryFactory.class})
 public class SpringConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 

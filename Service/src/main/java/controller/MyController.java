@@ -1,38 +1,29 @@
 package controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import repository.RepositoryFactory;
-import repository.threadmodelrep.ThreadRepositoryFactory;
-import threadmodel.Group;
-import threadmodel.Theams;
-import users.Administrator;
-import users.Role;
-import users.Student;
-import users.UserImpl;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
 
 @Slf4j
 @Controller
-
 @RequestMapping("/mvc")
+
 public class MyController {
 
     @GetMapping("/start")
-    public String start () {
-
+    public String start (Model model) {
+        model.addAttribute("user", RepositoryFactory.getRepository().allUser().values().stream().findFirst());
         log.info("Repository->>>>>>>>>{}", RepositoryFactory.getRepository());
+
 
         return "mvc_start";
     }
@@ -43,14 +34,13 @@ public class MyController {
         return "mvc_hello";
     }
 
-    @GetMapping ("/checkUser")
-    public String checkUser (@SessionAttribute(name = "user", required = false) UserImpl user) {
+    @PostMapping ("/check")
+    public String checkUser (@RequestParam("id") String id, @RequestParam ("password") String password, HttpSession session ) {
 
-        //authorization block
-        if (Role.ADMINISTRATOR.equals(user.getRole())) {
+        log.info("model>>>>>>={}", id+password);
+        if (session!=null ) {
+        log.info("user={}", session.getAttribute("user").toString());}
             return "adminwiews/adminmain";
-        } else
-            return "mvc_hello";
 //            if (Role.STUDENT.equals(user.getRole())) {
 //            logger.info("UserRole ={}", user.getRole());
 //            req.getRequestDispatcher("StudentPage/studentstartpage.jsp").forward(req, resp);
