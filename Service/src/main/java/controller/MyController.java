@@ -1,11 +1,9 @@
 package controller;
 
+import controller.serviseforcontroller.ChangeAdminActStratagy;
 import controller.serviseforcontroller.StartService;
-import controller.serviseforcontroller.actadminstratagy.MVCAdminActCreateStratagyImpl;
 import controller.serviseforcontroller.actadminstratagy.MVCAdminActStratagy;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +15,6 @@ import users.Role;
 import users.Student;
 import users.UserImpl;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.Set;
@@ -51,16 +48,19 @@ public class MyController {
         return "mvc_hello";
     }
     @PostMapping("/adminact")
-    public String adminAct (@RequestParam("entity") String entity, @RequestParam("act") String act, Model model) {
-        MVCAdminActStratagy stratagy = new MVCAdminActCreateStratagyImpl();
-       String str = stratagy.watchEntity(entity, model);
-        log.info("Model attribute ={}", model.getAttribute("role")+model.getAttribute("userImpl").toString());
-        log.info("Model str ={}", str);
-        return str;
+    public String adminAct (@RequestParam("entity") String entity, @RequestParam("act") String act,
+                            Model model, @RequestParam(required = false) String id) {
+        MVCAdminActStratagy strategy = ChangeAdminActStratagy.getStratagy(act);
+        return strategy.watchEntity(entity, model, id);
     }
     @PostMapping("/saveuser")
     public String saveUser (@ModelAttribute("createduser") UserImpl user) {
        RepositoryFactory.getRepository().saveUser(user);
+       return "adminviews/adminmain";
+    }
+    @PostMapping("/addgroup")
+    public String addgroup (@RequestBody Integer [] theamId, @RequestBody Integer [] studentId, @RequestParam("tr") String trId) {
+
        return "adminviews/adminmain";
     }
 

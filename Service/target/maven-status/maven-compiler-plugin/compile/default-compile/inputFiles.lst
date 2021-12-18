@@ -33,6 +33,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\T
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\StartFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\springmvcconfig\MySpringMVCDispatcherServletInit.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\postgresqlstratagy\DeleteTheamPSQLImpl.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\ChangeAdminActStratagy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\postgresqlstratagy\DeleteEntityPSQL.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyStudentDelete.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTrainerChange.java

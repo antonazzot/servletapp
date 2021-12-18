@@ -17,21 +17,22 @@ import java.util.Map;
 @Slf4j
 public class MVCAdminActWatchStratagyImpl implements MVCAdminActStratagy {
     @Override
-    public String watchEntity(String entity, Model model) {
+    public String watchEntity(String entity, Model model, String deleteId) {
+        if (!entity.equals("group") && !entity.equals("theam")) {
+            model.addAttribute("map", forDemonstratePage(entity));
+            return "demonstrate";
+        } else if (!entity.equals("theam")) {
+            log.info("Watch group ={}", entity);
+            model.addAttribute("map", groupStringHashMap());
+            return "adminviews/demonstrategroup";
+        } else {
+            model.addAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
+            return "adminviews/theamdemonstrate";
+        }
 
-//        if (!entity.equals("group") && !entity.equals("theam")) {
-//            model.setAttribute("map", forDemonstratePage(entity));
-//            return "demonstrate.jsp";
-//        } else if (!entity.equals("theam")) {
-//            log.info("Watch group ={}", entity);
-//            model.setAttribute("map", groupStringHashMap());
-//            return "adminControl/demonstrategroup.jsp";
-//        } else {
-//            model.setAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
-//            return "adminControl/theamdemonstrate.jsp";
-//        }
-        return null;
-    }
+        }
+
+
     /**
      * This method  given  data for demonstrate  information about group
      **/
@@ -49,9 +50,9 @@ public class MVCAdminActWatchStratagyImpl implements MVCAdminActStratagy {
      * This method providing represent of information about
      * user with @mapWithInf() method
      **/
-    private Map<Integer, UserImpl> forDemonstratePage(String user) {
+    private Map<Integer, UserImpl> forDemonstratePage (String entity) {
         Map<Integer, UserImpl> result = new HashMap<>();
-        switch (user) {
+        switch (entity) {
             case "student":
                 result = RepositoryFactory.getRepository().allStudent();
                 break;

@@ -29,6 +29,7 @@ repository\threadmodelrep\threadfunction\functioninpostgres\GroupFunction.class
 helperutils\myexceptionutils\MySqlException.class
 servlets\TrainerActServlet.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyJpaStudentAdd.class
+controller\serviseforcontroller\ChangeAdminActStratagy.class
 repository\modelrepository\modelfunction\deleteentitystratage\postgresqlstratagy\DeleteTheamPSQLImpl.class
 servlets\filters\StudentFilter.class
 repository\threadmodelrep\threadfunction\functionjpa\MarkFunctionJpa.class

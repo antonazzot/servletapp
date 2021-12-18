@@ -3,7 +3,6 @@ package controller.serviseforcontroller.actadminstratagy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import repository.RepositoryFactory;
-import repository.threadmodelrep.ThreadRepositoryFactory;
 import users.UserImpl;
 
 import java.util.HashMap;
@@ -12,7 +11,7 @@ import java.util.Map;
 @Slf4j
 public class MVCAdminActChangeStratagyImpl implements MVCAdminActStratagy {
     @Override
-    public String watchEntity(String entity, Model model) {
+    public String watchEntity(String entity, Model model, String deleteId) {
 //
 //        if (!entity.equals("group") && !entity.equals("theam")) {
 //            log.info("Change entity ={}", entity);
