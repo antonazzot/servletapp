@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <link href="static/css/style.css" rel="stylesheet">
+    link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
 </head>
 
 <body>

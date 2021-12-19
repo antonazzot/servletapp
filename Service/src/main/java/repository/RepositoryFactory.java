@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 @Configuration
-@PropertySource({"app.properties"})
+@PropertySource({"classpath:app.properties"})
 public class RepositoryFactory {
     @Value("${repository.type}")
     private  String repositoryName;
