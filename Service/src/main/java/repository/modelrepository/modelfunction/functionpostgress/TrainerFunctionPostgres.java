@@ -71,7 +71,7 @@ public class TrainerFunctionPostgres {
                 List<UserImpl> busyTrainer = new ArrayList<>();
                 try {
                     ps = connection.prepareStatement("select *" +
-                            "from \"gro_up\"");
+                            "from gr_oup");
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         busyTrainer.add(UsersFunctionPostgres.getUserById(rs.getInt("trainer_id")));

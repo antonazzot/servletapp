@@ -15,12 +15,13 @@
 
     <form th:method="POST" th:action="@{/mvc/saveuser}" th:object="${userImpl}" >
       <div>
-          <input type="hidden" th:hidden="${role}" id="role" th:field="*{role}">
+<!--          <input type="hidden" th:hidden="${role}" id="role" th:field="*{role}">-->
 
           Enter User NAME: <input  id="name" type="text" th:field="*{name}"> <br>
           Enter User Login: <input  id="login" type="text" th:field="*{login}"> <br>
           Enter User Password: <input  id="password" type="text" th:field="*{password}"> <br>
           Enter User age: <input  id="age" type="text" th:field="*{age}"> <br>
+          User role: <input type="hidden"  th:field="*{role}"> role </input>
       </div>
 
         <input type="submit" value="Add Person" />

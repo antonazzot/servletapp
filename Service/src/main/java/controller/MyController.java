@@ -54,14 +54,28 @@ public class MyController {
         return strategy.watchEntity(entity, model, id);
     }
     @PostMapping("/saveuser")
-    public String saveUser (@ModelAttribute("createduser") UserImpl user) {
+    public String saveUser (@RequestParam("role") String role, @ModelAttribute("createduser") UserImpl user) {
+        log.info("USER for SAVE INF ={}", "Role" + user.getRole() + "More about" + user.getInf());
        RepositoryFactory.getRepository().saveUser(user);
        return "adminviews/adminmain";
     }
     @PostMapping("/addgroup")
-    public String addgroup (@RequestBody Integer [] theamId, @RequestBody Integer [] studentId, @RequestParam("tr") String trId) {
-
+    public String addgroup (@RequestParam("theamID") Integer [] theamId, @RequestParam ("stId") Integer [] studentId, @RequestParam("tr") String trId) {
+    log.info("TheamID={}", theamId.toString()+trId);
        return "adminviews/adminmain";
+    }
+    @GetMapping ("/addsalary")
+    public String addSalary (Model model) {
+        model.addAttribute("salmap", ThreadRepositoryFactory.getRepository().trainerSalary());
+        log.info("Trainer={}", model.getAttribute("salmap").toString());
+        return "adminviews/addsalary";
+    }
+    @GetMapping ("/addSalaryForTrainer")
+    public  String addSalaryTrainer (
+            @RequestParam ("trainerId") String trainerId, @RequestParam("sal") String salValue
+    ) {
+        ThreadRepositoryFactory.getRepository().addSalaryToTrainer(Integer.parseInt(trainerId), Integer.parseInt(salValue));
+        return "adminviews/addsalary";
     }
 
     private String authorizationStratagy(HttpSession session, Model model) {

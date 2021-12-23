@@ -5,53 +5,88 @@
     <title>Title</title>
 </head>
 <body>
+        <h1> Page for Group add </h1>
+        <form id="data" method = "POST"  action="/web/mvc/addgroup">
 
-<section class="theamscreatelistcontainer">
-    <div class="theamscreatelist">
-
-        <h1> ADD NEW Group </h1>
-        <form id="data" th:method = "POST"  th:action="/web/mvc/addgroup">
             <p>Выберите темы для группы</p>
             <table>
+                <thead>
+                <tr>
+                    <td>
+                        Theam name
+                    </td>
+                    <td>
+                        Change
+                    </td>
+                </tr>
+                </thead>
                 <tbody>
                 <tr th:each="theamap : ${mapITe}">
-                    <td >
-                        <input type="checkbox" name="${theammap.value.theamName}" value=${theamap.key}"/>
+                    <td  th:text="${theamap.value.theamName}">name
+                    </td>
+                    <td th:text="${theamap.value.theamName}">
+                        <input type="checkbox"  th:id="${{theamID}}" th:value="${{theamap.key}}"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <br>
-            <p>Выберите студентов для группы</p>
-            <table>
-                <tbody>
-                <tr th:each="stmap : ${mapIS}">
-                    <td>
-                        <input th:text="${stmap.value.name}" id="${stmap.value.name}" value=${stmap.key}"/>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <p>Выберите тренера для группы</p>
-            <table>
-                <tbody>
-                <tr th:each="trmap : ${mapITr}">
-                    <td>
-                        <input type="radio" name="${trmap.value.name}" value=${trmap.key}"/>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+
+<!--            <p>Выберите студентов для группы</p>-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <td>-->
+<!--                        student name-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        Change-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <br>-->
+<!--                <tbody>-->
+<!--                <tr th:each="stmap : ${mapIS}">-->
+<!--                    <td th:text="${stmap.value.name}">-->
+<!--                        Name-->
+<!--                    </td>-->
+<!--                    <td th:text="${stmap.key}">-->
+<!--                        <input type="checkbox"  id="stId" value="${stmap.key}">  value </input>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--            <p>Выберите тренера для группы</p>-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <td>-->
+<!--                        Trainer name-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        Change-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr th:each="trmap : ${mapITr}">-->
+<!--                    <td th:text="${trmap.value.name}">-->
+<!--                        name-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <input type="radio" id="tr" value="${trmap.key}"/>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
 
             <p><input type="submit" value="Отправить"></p>
         </form>
-    </div>
-</section>
+
 <form  action="hello">
     <input type="submit" value="Go to Main Admin!">
 </form>
 <br>
-<br>
+
 <jsp:include page="logout.jsp" />
 
 </body>

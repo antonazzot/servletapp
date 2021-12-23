@@ -29,4 +29,15 @@ public class RoleIDParametrCheker {
         }
         return STUDENT_ROLE_ID;
     }
+
+    public static Role userGetRoleForString (String str) {
+        if (str.equalsIgnoreCase("administrator")) {
+            return Role.ADMINISTRATOR;
+        }
+        else
+            if (str.equalsIgnoreCase("trainer")) {
+            return Role.TRAINER;
+        }
+            else  return Role.STUDENT;
+    }
 }

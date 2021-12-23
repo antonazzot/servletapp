@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section class="addsalarycontainer">
+    <div class="useradd">
+        <br>
+        <h1> Add salary list!!! </h1>
+
+        <form id="data" method = "get" action="/web/mvc/addSalaryForTrainer">
+            <table>
+                <tbody>
+                <tr th:each="entity : ${salmap}">
+                    <td th:text="${{entity.key.name}}">
+
+                    </td>
+
+                    <td>
+                        <table>
+                            <tbody>
+                            <tr th:each="salary : ${entity.value}">
+                                <td th:text="${salary.bigDecimalSalary}">
+                                    salaryvalue
+                                </td>
+                            </tbody>
+                        </table>
+                    </td>
+
+                    <td>
+                        <input type="checkbox" id="trainerId" name="trainerId" th:value="${entity.key.id}"/>
+                    </td>
+
+                </tr>
+
+                </tbody>
+            </table>
+
+            <br>
+            <p><h1> Выбирите тренера и введите значение зарплаты для добавления </h1>
+            <p><input type="text" name="sal" ></p>
+            <p><input type="submit" form="data" value="Отправить"></p>
+        </form>
+    </div>
+    <section>
+        <br>
+        <form  action="hello">
+            <input type="submit" value="Go to Main Admin!">
+        </form>
+        <br>
+        <br>
+        <jsp:include page="logout.jsp" />
+
+</body>
+</html>
