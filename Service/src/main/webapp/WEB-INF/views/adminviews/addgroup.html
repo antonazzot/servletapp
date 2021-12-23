@@ -6,7 +6,7 @@
 </head>
 <body>
         <h1> Page for Group add </h1>
-        <form id="data" method = "POST"  action="/web/mvc/addgroup">
+        <form id="data" method = "get"  action="/web/mvc/addgroup">
 
             <p>Выберите темы для группы</p>
             <table>
@@ -24,60 +24,62 @@
                 <tr th:each="theamap : ${mapITe}">
                     <td  th:text="${theamap.value.theamName}">name
                     </td>
-                    <td th:text="${theamap.value.theamName}">
-                        <input type="checkbox"  th:id="${{theamID}}" th:value="${{theamap.key}}"/>
+                    <td >
+                        <input type="checkbox"  name="theamID" th:value="${theamap.key}"/>
                     </td>
+
                 </tr>
                 </tbody>
             </table>
 
-<!--            <p>Выберите студентов для группы</p>-->
-<!--            <table>-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                    <td>-->
-<!--                        student name-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        Change-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <br>-->
-<!--                <tbody>-->
-<!--                <tr th:each="stmap : ${mapIS}">-->
-<!--                    <td th:text="${stmap.value.name}">-->
-<!--                        Name-->
-<!--                    </td>-->
-<!--                    <td th:text="${stmap.key}">-->
-<!--                        <input type="checkbox"  id="stId" value="${stmap.key}">  value </input>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--            </table>-->
-<!--            <p>Выберите тренера для группы</p>-->
-<!--            <table>-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                    <td>-->
-<!--                        Trainer name-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        Change-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody>-->
-<!--                <tr th:each="trmap : ${mapITr}">-->
-<!--                    <td th:text="${trmap.value.name}">-->
-<!--                        name-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <input type="radio" id="tr" value="${trmap.key}"/>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--            </table>-->
+            <p>Выберите студентов для группы</p>
+            <table>
+                <thead>
+                <tr>
+                    <td>
+                        student name
+                    </td>
+                    <td>
+                        Change
+                    </td>
+                </tr>
+                </thead>
+                <br>
+                <tbody>
+                <tr th:each="stmap : ${mapIS}">
+
+                    <td th:text="${stmap.value.name}">
+                        Name
+                    </td>
+                    <td >
+                        <input type="checkbox"  name="stId" th:value="${stmap.key}"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p>Выберите тренера для группы</p>
+            <table>
+                <thead>
+                <tr>
+                    <td>
+                        Trainer name
+                    </td>
+                    <td>
+                        Change
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="trmap : ${mapITr}">
+                    <td th:text="${trmap.value.name}">
+                        name
+                    </td>
+                    <td>
+                        <input type="radio" name="tr" th:value="${trmap.key}"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
             <p><input type="submit" value="Отправить"></p>
         </form>

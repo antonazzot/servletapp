@@ -59,6 +59,7 @@ servlets\SalaryAdderServlet.class
 repository\modelrepository\modelfunction\functionpostgress\UsersFunctionPostgres.class
 repository\threadmodelrep\threadfunction\functionjpa\SalaryFunctionJpa.class
 repository\threadmodelrep\ThreadRepository.class
+controller\serviseforcontroller\GroupAdderService.class
 helperutils\closebaseconnection\JpaUtils.class
 repository\modelrepository\modelfunction\functionunmemory\TrainerFunctionMemory.class
 repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteTheamImpJPA.class

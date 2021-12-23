@@ -5,32 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-<div >
-    <a th:each="entity : ${map}">
-        <a th:each="group : ${entity.key}">
-            <div th:text="${group.name}">
-                <table>
-                    <thead >
-                    <tr>
-                        <td>Student</td>
-                    </tr>
-                    </thead>
+<div th:object="${group}">
+<p th:text="*{group.name}">name</p>
+    <p th:text="*{group.id}">id</p>
+    <p th:text="*{group.trainer.name}">trainer name:</p>
 
-                    <tr th:each="students : ${entry.value.key}">
-                        <tr th:each="student : ${students}">
-                        <td th:text="${student.name}">Id</td>
-                        <td th:text="${student.login}">Name</td>
-                        <br>
-                     </tr>
-                    </tr>
-
-                </table>
-            </div>
-        </a>
-    </a>
 </div>
-
-
-
 </body>
 </html>

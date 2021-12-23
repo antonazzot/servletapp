@@ -1,6 +1,7 @@
 package controller;
 
 import controller.serviseforcontroller.ChangeAdminActStratagy;
+import controller.serviseforcontroller.GroupAdderService;
 import controller.serviseforcontroller.StartService;
 import controller.serviseforcontroller.actadminstratagy.MVCAdminActStratagy;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,7 @@ import users.Student;
 import users.UserImpl;
 
 import javax.servlet.http.HttpSession;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -59,9 +59,9 @@ public class MyController {
        RepositoryFactory.getRepository().saveUser(user);
        return "adminviews/adminmain";
     }
-    @PostMapping("/addgroup")
-    public String addgroup (@RequestParam("theamID") Integer [] theamId, @RequestParam ("stId") Integer [] studentId, @RequestParam("tr") String trId) {
-    log.info("TheamID={}", theamId.toString()+trId);
+    @GetMapping("/addgroup")
+    public String addgroup (@RequestParam("theamID") Integer [] theamId, @RequestParam ("stId") Integer [] studentId, @RequestParam("tr") Integer trId) {
+        ThreadRepositoryFactory.getRepository().addGroup(GroupAdderService.studentList(studentId), Arrays.asList(theamId), trId);
        return "adminviews/adminmain";
     }
     @GetMapping ("/addsalary")
@@ -76,6 +76,12 @@ public class MyController {
     ) {
         ThreadRepositoryFactory.getRepository().addSalaryToTrainer(Integer.parseInt(trainerId), Integer.parseInt(salValue));
         return "adminviews/addsalary";
+    }
+
+    @GetMapping("/groupforwatch")
+    public  String groupForWatch (@RequestParam("groupid") String groupid, Model model ) {
+        model.addAttribute("group", ThreadRepositoryFactory.getRepository().allGroup().get(Integer.parseInt(groupid)));
+        return "adminviews/demonstrategroup";
     }
 
     private String authorizationStratagy(HttpSession session, Model model) {
