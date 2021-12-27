@@ -12,6 +12,7 @@ controller\MyController.class
 repository\modelrepository\modelfunction\RoleIDParametrCheker.class
 servlets\StudentServlet.class
 helperutils\myexceptionutils\MyJpaException.class
+controller\MyTrainerController.class
 repository\threadmodelrep\threadfunction\functioninmemory\TheamFunction.class
 controller\serviseforcontroller\actadminstratagy\MVCAdminActChangeStratagyImpl.class
 repository\modelrepository\modelfunction\functionjpaerepositiry\TrainerFunctionJpa.class

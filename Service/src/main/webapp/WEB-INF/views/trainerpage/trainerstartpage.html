@@ -4,58 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link th:href="static/css/style.css" rel="stylesheet">
+<!--    <link th:href="static/css/style.css" rel="stylesheet">-->
 </head>
 
 <body>
 <br>
-<section class="admincontainer">
-
-    <form id="data" method="post" action="/web/mvc/trainer/">
+    <form id="data" method="get" action="/web/mvc/trainer/changestrategy" th:object="${group}">
         <div>
-            <h1> Trainer page </h1>
-            <select name="entity", form="data">
-                <option value="student">Student</option>
-                <option value="trainer">Trainer</option>
-                <option value="administrator">Administrator</option>
-                <option value="group">Group</option>
-                <option value="theam">Theam</option>
-            </select>
-            <br>
+        <table>
+            <thead>
+            <tr>
+                <td>Student id</td>
+                <td> Name </td>
+                <td>Change</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entity : *{studentMap}">
+                <td th:text="${entity.key}">id</td>
+                <td th:text="${entity.value.name}">name</td>
+                <td >
+                    <input type="radio" name="studentId" th:value="${entity.key}" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        <br>
 
-            <select name="act", form="data">
-                <option value="create">ADD </option>
-                <option value="delete">Delete </option>
-                <option value="change">Change </option>
-                <option value="watch">Watch </option>
-            </select>
+        <div>
+        <table>
+            <thead>
+            <tr>
+                <td>Theam id</td>
+                <td> Name
+                </td>
+                <td>
+                    Change
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entity1 : *{theamsSet}">
+                <td th:text="${entity1.id}">id</td>
+                <td th:text="${entity1.theamName}">name</td>
+                <td >
+                    <input type="radio" name="theamId" th:value="${entity1.id}" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
 
-            <br>
-            Enter User ID for delete: <input name ="id", type="number"> <br>
-            <br>
+        <br>
+        <select name="act", form="data">
+            <option value="create">ADD MARK</option>
+            <option value="delete">Delete MARK </option>
+            <option value="change">Change MARK</option>
+            <option value="watch">Watch  MARK</option>
+        </select>
+        <br>
 
-
-            <br>
-            <br>
+        <div>
+            Enter mark id for delete it
+            <input type="number" name="markId" text=""/>
+        </div>
 
             <input type="submit" form="data" value="  Do act   ">
-        </div>
-    </form>
-</section>
-<br>
-<section class="salaryaddontainer">
-    <div class="salary">
-        <form action="/web/mvc/addsalary">
-            <button type="submit"   > ADD SALARY </button>
-        </form>
 
-        <form action="avarageSalary">
-            <button type="submit"   > AVARAGE SALARY </button>
-        </form>
-    </div>
-    <br>
-</section>
-<br>
-<jsp:include page="logout.jsp" />
+    </form>
+
 </body>
 </html>

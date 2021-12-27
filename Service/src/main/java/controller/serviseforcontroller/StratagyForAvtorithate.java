@@ -38,8 +38,6 @@ public class StratagyForAvtorithate {
                 Set<Theams> theams = group.getTheamsSet();
                 model.addAttribute("group", group);
                 model.addAttribute("trainer", user);
-                model.addAttribute("set", theams);
-                model.addAttribute("map", studentHashMap);
                 return "trainerpage/trainerstartpage";
 
             } else {

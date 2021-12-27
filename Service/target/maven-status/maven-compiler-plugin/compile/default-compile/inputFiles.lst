@@ -41,6 +41,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\postgresqlstratagy\DeleteUserPSQLImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\TrainerFunctionPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninmemory\SalaryFunction.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\MyTrainerController.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\watchservletstratagy\WatchServletStratagy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\StudentServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\GroupAdderService.java
