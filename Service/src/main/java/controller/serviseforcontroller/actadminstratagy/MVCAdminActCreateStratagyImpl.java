@@ -6,6 +6,7 @@ import repository.RepositoryFactory;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
+import threadmodel.Theams;
 import users.UserImpl;
 
 @Slf4j
@@ -26,6 +27,7 @@ public class MVCAdminActCreateStratagyImpl implements MVCAdminActStratagy {
 //            model.addAttribute("group", new Group());
             return "adminviews/addgroup";
         } else {
+            model.addAttribute("theam", new Theams());
             return "adminviews/addtheam";
         }
     }

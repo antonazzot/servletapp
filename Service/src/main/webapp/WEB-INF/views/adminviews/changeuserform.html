@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="data" method="post" action="resultchangeuser">
+    <div  th:object="${userForChange}">
+        <input type="hidden" name="id" th:value="*{id}">
+    <input name="name" th:text="*{name}" th:placeholder="*{name}">
+    <input name="login" th:text="*{login}" th:placeholder="*{login}">
+    <input name="password" th:text="*{password}" th:placeholder="*{password}">
+    <input name="age" th:text="*{age}" th:placeholder="*{age}">
+    </div>
+    <input type="submit" value="Change">
+</form>
+</body>
+</html>

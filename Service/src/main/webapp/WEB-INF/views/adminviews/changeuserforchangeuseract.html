@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ page import="java.util.*" %>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Change user page</title>
+</head>
+<body>
+<br>
+<form id="data" method="get" action="/web/mvc/forchangeuser">
+    <table>
+        <thead>
+        <tr>
+            <td>User_Id</td>
+            <td>User_name</td>
+            <td>User_password</td>
+            <td>User_Login</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entity : ${map}">
+            <td th:text="${entity.key}">Id</td>
+            <td th:text="${entity.value.name}">Name</td>
+            <td th:text="${entity.value.password}">Password</td>
+            <td th:text="${entity.value.login}">Login</td>
+            <td><input type="radio" name="userid" th:value="${entity.key}"/></td>
+
+            <br>
+        </tr>
+        </tbody>
+
+    </table>
+    <input type="submit" form="data"> Change user <input>
+</form>
+<br>
+<form  action="hello">
+    <input type="submit" value="Go to Main Page!">
+</form>
+<br>
+<jsp:include page="logout.jsp" />
+</body>
+</html>

@@ -72,7 +72,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
 
     @Override
     public Trainer getTrainerById(int id) {
-        return null;
+        return TrainerFunctionPostgres.getTrainerById(id);
     }
 
     @Override

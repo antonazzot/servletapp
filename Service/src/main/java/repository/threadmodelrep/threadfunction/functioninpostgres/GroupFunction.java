@@ -93,7 +93,7 @@ public class GroupFunction {
             int groupId = 0;
             try {
                 ps = connection.prepareStatement(
-                        "INSERT INTO \"gr_oup\" (name, trainer_id)" +
+                        "INSERT INTO gr_oup (name, trainer_id)" +
                                 "Values (?,?) returning id"
                 );
                 ps.setString(1, trainerId.toString() + "'s_Group");

@@ -24,7 +24,7 @@
     <td th:text="${entity.key}">Id</td>
     <td th:text="${entity.value.name}">Name</td>
     <td th:text="${entity.value.trainer.name}">Login</td>
-    <td><input type="checkbox" name="groupid" th:value="${entity.key}"/></td>
+    <td><input type="radio" name="groupid" th:value="${entity.key}"/></td>
 
     <br>
   </tr>

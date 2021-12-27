@@ -26,6 +26,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\AvarageSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionunmemory\StudentFunctionMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionunmemory\UsersFunctionMemory.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\AvarageSalaryCalculate.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\WatchServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstratagy\MVCAdminActWatchStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\postgresqlstratagy\DeleteGroupPSQLImpl.java
@@ -70,11 +71,13 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\LogOutServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\StartPage.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninpostgres\SalaryFunction.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\FreeStudentExtract.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\AdminFunctionPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\UsersFunctionPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\StartService.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\ChangeUser.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\GroupUpdateActionServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteStudentImpJPA.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressStudentAdd.java
@@ -85,6 +88,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\Calculate
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\ChangeAndCreateMarkServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserRepositoryImplJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionjpaerepositiry\TrainerFunctionJpa.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\StratagyForAvtorithate.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserRepositoryImplPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\watchservletstratagy\WatchServletChangeStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexceptionutils\MyJpaException.java
@@ -102,3 +106,4 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\Reposit
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninmemory\MarkFunction.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninpostgres\MarkFunction.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\UserActionServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\ParserStringToInt.java

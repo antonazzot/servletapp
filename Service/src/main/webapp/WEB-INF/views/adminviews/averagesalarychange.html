@@ -6,29 +6,37 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Demo theam page</title>
+    <title>Average salary page</title>
 </head>
 <body>
 <br>
-
+<form name="data" method="get" action="/web/mvc/avarageCalc">
 <table>
     <thead>
     <tr>
-        <td> Theam Id</td>
-        <td> Theam Name</td>
-        <td>Login</td>
-
+        <td>Trainer</td>
+        <td>Change</td>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="entity : ${map}">
-        <td th:text="${entity.key}">Id</td>
-        <td th:text="${entity.value.theamName}">Name</td>
+    <tr th:each="entity : ${allTrainer}">
+        <td th:text="${entity.name}">Name</td>'
+        <td>
+            <input type="radio" name="trId" th:value="${entity.id}"/>
+        </td>
         <br>
     </tr>
     </tbody>
 
 </table>
+    <br>
+    <div>
+      Enter period for
+        <input type="number" name="period" >
+    </div>
+
+    <p><input type="submit"  value="Calculate salary"></p>
+</form>
 
 <br>
 <form  action="hello">

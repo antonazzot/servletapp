@@ -3,6 +3,7 @@ package controller.serviseforcontroller.actadminstratagy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import repository.RepositoryFactory;
+import repository.threadmodelrep.ThreadRepositoryFactory;
 import users.UserImpl;
 
 import java.util.HashMap;
@@ -12,21 +13,21 @@ import java.util.Map;
 public class MVCAdminActChangeStratagyImpl implements MVCAdminActStratagy {
     @Override
     public String watchEntity(String entity, Model model, String deleteId) {
-//
-//        if (!entity.equals("group") && !entity.equals("theam")) {
-//            log.info("Change entity ={}", entity);
-//            model.setAttribute("map", this.mapToChange(entity));
-//            return "adminControl/changeUser.jsp";
-//        } else if (entity.equals("theam")) {
-//            model.setAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
-//            return "adminControl/changeTheam.jsp";
-//        } else if (entity.equals("group")) {
-//            model.setAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
-//            return "adminControl/changeGroup.jsp";
-//        } else {
-//            return "exeception.jsp";
-//        }
-        return null;
+
+        if (!entity.equals("group") && !entity.equals("theam")) {
+            log.info("Change entity ={}", entity);
+            model.addAttribute("map", this.mapToChange(entity));
+            return "adminviews/changeuserforchangeuseract";
+        } else if (entity.equals("theam")) {
+            model.addAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
+            return "adminviews/changetheam";
+        } else if (entity.equals("group")) {
+            model.addAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
+            return "adminviews/groupChange";
+        } else {
+            return "exeception.jsp";
+        }
+
     }
     /**
      * This method given data for future users change

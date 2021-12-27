@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Change theam page</title>
+</head>
+<body>
+<br>
+<form id="data" method="get" action="/web/mvc/changetheam">
+
+    <table>
+        <thead>
+        <tr>
+            <td>Theam_Id</td>
+            <td>Theam_name</td>
+            <td> Change </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entity : ${map}">
+            <td th:text="${entity.key}">Id</td>
+            <td th:text="${entity.value.theamName}">Name</td>
+            <td >
+                <input type="radio" th:value="${entity.key}" name="theamid">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+       Enter new theam name <input type="text" name="newName" text="{}"/>
+    </div>
+        <input type="submit" form="data" value="Change theam"/>
+</form>
+<br>
+<form  action="hello">
+    <input type="submit" value="Go to Main Page!">
+</form>
+<br>
+<jsp:include page="logout.jsp" />
+</body>
+</html>

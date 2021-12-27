@@ -48,6 +48,7 @@ repository\modelrepository\modelfunction\functionunmemory\UsersFunctionMemory.cl
 repository\modelrepository\UserRepositoryImplJpa.class
 servlets\filters\AbstractFilter.class
 servlets\filters\StartFilter.class
+controller\serviseforcontroller\ParserStringToInt.class
 repository\modelrepository\UserRepositoryImplPostgres.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyStudentDelete.class
 controller\serviseforcontroller\actadminstratagy\MVCAdminActDeleteStratagyImpl.class
@@ -55,6 +56,7 @@ servlets\UserActionServlet.class
 controller\serviseforcontroller\actadminstratagy\MVCAdminActWatchStratagyImpl.class
 repository\threadmodelrep\threadfunction\functioninpostgres\MarkFunction.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTrainerChange.class
+controller\serviseforcontroller\FreeStudentExtract.class
 servlets\SalaryAdderServlet.class
 repository\modelrepository\modelfunction\functionpostgress\UsersFunctionPostgres.class
 repository\threadmodelrep\threadfunction\functionjpa\SalaryFunctionJpa.class
@@ -64,6 +66,8 @@ helperutils\closebaseconnection\JpaUtils.class
 repository\modelrepository\modelfunction\functionunmemory\TrainerFunctionMemory.class
 repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteTheamImpJPA.class
 servlets\servletstratagy\watchservletstratagy\WatchServletChangeStratagyImpl.class
+controller\serviseforcontroller\AvarageSalaryCalculate.class
+controller\serviseforcontroller\ChangeUser.class
 repository\modelrepository\modelfunction\functionunmemory\StudentFunctionMemory.class
 repository\modelrepository\modelfunction\functionpostgress\TrainerFunctionPostgres.class
 repository\modelrepository\modelfunction\deleteentitystratage\postgresqlstratagy\DeleteEntityPSQL.class
@@ -100,6 +104,7 @@ controller\serviseforcontroller\actadminstratagy\MVCAdminActCreateStratagyImpl.c
 repository\RepositoryTypes.class
 springmvcconfig\SpringConfig.class
 repository\threadmodelrep\threadfunction\functioninmemory\SalaryFunction.class
+controller\serviseforcontroller\StratagyForAvtorithate.class
 repository\RepositoryFactory.class
 repository\RepositoryDatasourse.class
 repository\threadmodelrep\threadfunction\functioninmemory\GroupFunction.class

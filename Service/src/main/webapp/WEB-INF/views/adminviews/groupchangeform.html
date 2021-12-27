@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="data" method="get" action="resultchangegroup">
+    <div  th:object="${groupForChange}">
+        Change student for delete from group
+        <input type="hidden" name="id" th:value="*{id}">
+        <input type="hidden" name="act" value="studentdelete">
+        <table>
+            <thead>
+            <tr>
+                <td>Student id</td>
+                <td>Student name</td>
+                <td>Change</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entity : *{studentMap}">
+                <td th:text="${entity.key}">Id</td>
+                <td th:text="${entity.value.name}">name</td>
+                <td>
+                    <input type="checkbox" name="entytiIdforact" th:value="${entity.key}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" value="Change">
+</form>
+<br>
+
+<form name="data" method="get" action="resultchangegroup">
+    <div  th:object="${groupForChange}">
+        Change theam for delete from group
+        <input type="hidden" name="id" th:value="*{id}">
+        <input type="hidden" name="act" value="theamdelete">
+        <table>
+            <thead>
+            <tr>
+                <td>Theam id</td>
+                <td>Theam name</td>
+                <td>Change</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entity : *{theamsSet}">
+                <td th:text="${entity.id}">Id</td>
+                <td th:text="${entity.theamName}">name</td>
+                <td>
+                    <input type="checkbox" name="entytiIdforact" th:value="${entity.id}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" value="Change">
+</form>
+
+<form name="data" method="get" action="resultchangegroup">
+    <div  th:object="${groupForChange}">
+        Change sstudent for add in group
+        <input type="hidden" name="id" th:value="*{id}">
+        <input type="hidden" name="act" value="studentadd">
+        <table>
+            <thead>
+            <tr>
+                <td>Student id</td>
+                <td>Student name</td>
+                <td>Change</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entity : ${freestudent}">
+                <td th:text="${entity.id}">Id</td>
+                <td th:text="${entity.name}">name</td>
+                <td>
+                    <input type="checkbox" name="entytiIdforact" th:value="${entity.id}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" value="Change">
+</form>
+
+<form name="data" method="get" action="resultchangegroup">
+    <div  th:object="${groupForChange}">
+        Change theam for add in group
+        <input type="hidden" name="id" th:value="*{id}">
+        <input type="hidden" name="act" value="theamadd">
+        <table>
+            <thead>
+            <tr>
+                <td>Theam id</td>
+                <td>Theam name</td>
+                <td>Change</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entity : ${freetheam}">
+                <td th:text="${entity.key}">Id</td>
+                <td th:text="${entity.value.theamName}">name</td>
+                <td>
+                    <input type="checkbox" name="entytiIdforact" th:value="${entity.key}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" value="Change">
+</form>
+
+<form name="data" method="get" action="resultchangegroup">
+    <div  th:object="${groupForChange}">
+        Change trainer for change it in group
+        <input type="hidden" name="id" th:value="*{id}">
+        <input type="hidden" name="act" value="trainer">
+        <table>
+            <thead>
+            <tr>
+                <td>Trainer id</td>
+                <td>Trainer name</td>
+                <td>Change</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entity : ${freetrainer}">
+                <td th:text="${entity.key}">Id</td>
+                <td th:text="${entity.value.name}">name</td>
+                <td>
+                    <input type="checkbox" name="entytiIdforact" th:value="${entity.key}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" value="Change">
+</form>
+
+</body>
+</html>

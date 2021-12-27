@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ page import="java.util.*" %>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Average salary result page</title>
+</head>
+<body>
+<div>
+  Trainer <p th:text="${trainer}"> Trainer name</p>
+  for period <p th:text="${period}">Period</p>
+  have average salary <p th:text="${avaragesalary}">Avarage salary result</p>
+</div>
+<br>
+<form  action="hello">
+  <input type="submit" value="Go to Main Page!">
+</form>
+<br>
+<jsp:include page="logout.jsp" />
+</body>
+</html>

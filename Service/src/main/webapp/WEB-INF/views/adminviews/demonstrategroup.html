@@ -6,9 +6,37 @@
 </head>
 <body>
 <div th:object="${group}">
-<p th:text="*{group.name}">name</p>
-    <p th:text="*{group.id}">id</p>
-    <p th:text="*{group.trainer.name}">trainer name:</p>
+<p th:text="*{name}">name</p>
+    <p th:text="*{id}">id</p>
+    <p th:text="*{trainer.name}">trainer name:</p>
+
+    <table>
+        <thead>
+        <tr>
+            <td> Group Student</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entity : *{studentMap}">
+            <td th:text="${entity.value.name}">Id</td>
+            <br>
+        </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+        <tr>
+            <td> Group Theam</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entity2 : *{theamsSet}">
+            <td th:text="${entity2.name}">Id</td>
+            <br>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 </body>
