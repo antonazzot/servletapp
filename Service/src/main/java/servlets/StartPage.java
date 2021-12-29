@@ -39,7 +39,7 @@ public class StartPage extends HttpServlet {
             HttpSession session = req.getSession();
             Properties properties = new Properties();
             properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
-            ConfigurableApplicationContext ctx = new AnnotationConfigApplicationContext("repository");
+//            ConfigurableApplicationContext ctx = new AnnotationConfigApplicationContext("repository");
 //            UserRepository bean = ctx.getBean("userRepository",UserRepository.class);
             {
                 Administrator administrator = (Administrator) new Administrator()

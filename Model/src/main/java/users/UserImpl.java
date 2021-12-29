@@ -1,5 +1,7 @@
 package users;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -7,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +17,8 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @ToString
 @MappedSuperclass
+
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 //@NamedQueries(
 //        {
 //                @NamedQuery(name = "all", query = "select t from Trainer t where t.role = :role_id")

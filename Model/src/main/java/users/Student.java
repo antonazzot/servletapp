@@ -1,11 +1,14 @@
 package users;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Theams;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @AllArgsConstructor
@@ -15,12 +18,13 @@ import java.util.*;
 @ToString(callSuper = true)
 @Entity
 @Table(name = "users")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @NamedQueries(
         {
                 @NamedQuery(name = "studenById", query = "select s from Student s where s.id = :id")
         }
 )
-public class Student extends UserImpl {
+public class Student extends UserImpl  {
     @ManyToMany
     @JoinTable   (
             name = "student_group",
