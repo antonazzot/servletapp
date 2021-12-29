@@ -23,7 +23,7 @@ public class MyController {
     @GetMapping(path = "/students", produces = MediaType.APPLICATION_JSON_VALUE )
     @ResponseBody
     public Map<Integer, UserImpl> students () {
-        log.info("in rest {}", "-------->rest");
+        log.info("in res1t {}", "-------->rest");
         return  RepositoryFactory.getRepository().allStudent();
     }
 
