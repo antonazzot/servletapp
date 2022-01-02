@@ -1,8 +1,10 @@
 package repository.modelrepository.modelfunction.functionjpaerepositiry;
 
 import helperutils.closebaseconnection.JpaUtils;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import threadmodel.Group;
 import users.Role;
 import users.Student;
@@ -15,15 +17,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@RequiredArgsConstructor
 public class StudentFunctionJpa {
-    public static Configuration cnf = new Configuration().configure();
-    public static SessionFactory sessionFactory = cnf.buildSessionFactory();
+    @Autowired
+    public static Configuration configuration;
+    @Autowired
+    public static  SessionFactory sessionFactory;
 
     public static Map<Integer, UserImpl> getAllStudent() {
         Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
+
             em = sessionFactory.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();

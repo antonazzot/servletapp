@@ -1,9 +1,11 @@
 package repository.modelrepository.modelfunction.functionjpaerepositiry;
 
 import helperutils.closebaseconnection.JpaUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import users.Administrator;
 import users.Role;
 import users.UserImpl;
@@ -13,12 +15,13 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.Map;
-
+@RequiredArgsConstructor
 @Slf4j
 public class AdminFunctionJpa {
-    public static Configuration cnf = new Configuration().configure();
-    public static SessionFactory sessionFactory = cnf.buildSessionFactory();
-
+    @Autowired
+    static Configuration configuration;
+    @Autowired
+    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
     public static Map<Integer, UserImpl> getAllAdmin() {
         Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;

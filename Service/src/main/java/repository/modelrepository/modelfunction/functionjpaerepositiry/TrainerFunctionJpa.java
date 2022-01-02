@@ -1,9 +1,11 @@
 package repository.modelrepository.modelfunction.functionjpaerepositiry;
 
 import helperutils.closebaseconnection.JpaUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryImplPostgres;
 import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
@@ -20,9 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
+@RequiredArgsConstructor
 public class TrainerFunctionJpa {
-    public static Configuration cnf = new Configuration().configure();
-    public static SessionFactory sessionFactory = cnf.buildSessionFactory();
+    @Autowired
+    static Configuration configuration;
+    @Autowired
+    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
 
     public static Map<Integer, UserImpl> getallTrainer() {
         Map <Integer, UserImpl> result = new HashMap<>();

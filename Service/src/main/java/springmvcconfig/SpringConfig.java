@@ -1,6 +1,7 @@
 package springmvcconfig;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +34,16 @@ public class SpringConfig implements WebMvcConfigurer {
         resolver.setSuffix(".jsp");
         return resolver;
     }
+//    @Bean
+//    public org.hibernate.cfg.Configuration configuration () {
+//        org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration().configure();
+//        return configuration;
+//    }
+//
+//    @Bean
+//    public SessionFactory sessionFactory () {
+//        return configuration().buildSessionFactory();
+//    }
 //    @Bean
 //    public SpringResourceTemplateResolver templateResolver() {
 //        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();

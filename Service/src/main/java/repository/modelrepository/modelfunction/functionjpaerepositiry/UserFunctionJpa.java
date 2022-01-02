@@ -1,9 +1,11 @@
 package repository.modelrepository.modelfunction.functionjpaerepositiry;
 
 import helperutils.closebaseconnection.JpaUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import repository.modelrepository.modelfunction.deleteentitystratage.jpastratagy.*;
 import users.UserImpl;
 
@@ -14,9 +16,12 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
+@RequiredArgsConstructor
 public class UserFunctionJpa {
-    public static Configuration cnf = new Configuration().configure();
-    public static SessionFactory sessionFactory = cnf.buildSessionFactory();
+    @Autowired
+    public  static Configuration configuration;
+    @Autowired
+    public static SessionFactory sessionFactory;
 
     public static UserImpl getUserById(Integer id) {
         return getAllUser().get(id);
