@@ -18,10 +18,13 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class UserFunctionJpa {
-    @Autowired
-    public  static Configuration configuration;
-    @Autowired
-    public static SessionFactory sessionFactory;
+//    @Autowired
+//    public  static Configuration configuration;
+//    @Autowired
+//    public static SessionFactory sessionFactory;
+
+    public static  Configuration conf = new Configuration().configure();
+    public static SessionFactory sessionFactory = conf.buildSessionFactory();
 
     public static UserImpl getUserById(Integer id) {
         return getAllUser().get(id);

@@ -1,7 +1,6 @@
 
-
-        package controller;
-        import lombok.extern.slf4j.Slf4j;
+package controller;
+import lombok.extern.slf4j.Slf4j;
         import org.springframework.http.MediaType;
         import org.springframework.http.ResponseEntity;
         import org.springframework.web.bind.annotation.*;
@@ -9,10 +8,10 @@
         import repository.threadmodelrep.ThreadRepositoryFactory;
         import threadmodel.Group;
         import users.Student;
-        import users.UserImpl;
+import users.Trainer;
+import users.UserImpl;
 
         import java.util.Map;
-
         @Slf4j
 @RestController
 @RequestMapping(path = "/mvc")
@@ -34,9 +33,13 @@ public class MyController {
         return ThreadRepositoryFactory.getRepository().allGroup();
     }
 
-    @GetMapping(path = "/trainer/{id}" )
-    public ResponseEntity<UserImpl> getTrainerById (@PathVariable int id) {
-       return ResponseEntity.ok(RepositoryFactory.getRepository().getTrainerById(id));
+    @GetMapping(path = "/trainer/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
+    @ResponseBody
+    public Trainer getTrainerById (@PathVariable int id) {
+        log.info("!!!!!!!!!!!!!Trainer id={}", id);
+        Trainer trainerById = RepositoryFactory.getRepository().getTrainerById(id);
+        log.info("!!!!!!!!!!!!Trainer = {}", trainerById.getInf());
+        return trainerById;
     }
 
     @PostMapping

@@ -3,11 +3,11 @@ package springmvcconfig;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -18,14 +18,25 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import repository.RepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 
-@ComponentScan({"controller", "repository"})
+import javax.sql.DataSource;
+
+@ComponentScan({"controller", "repository", "aspect"})
 @Configuration
 @EnableWebMvc
 @RequiredArgsConstructor
+@EnableAspectJAutoProxy
+@PropertySource("classpath:app.properties")
 @Import({RepositoryFactory.class, ThreadRepositoryFactory.class})
 public class SpringConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
-
+    @Value("${postgres.driver}")
+    private final String DRIVER;
+    @Value("${postgres.name}")
+    private final String NAME;
+    @Value("${postgres.url}")
+    private final String URL;
+    @Value("${postgres.password}")
+    private final String PASSWORD;
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver (){
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -33,6 +44,21 @@ public class SpringConfig implements WebMvcConfigurer {
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
         return resolver;
+    }
+    @Bean
+    public DataSource dataSource () {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(DRIVER);
+        dataSource.setUrl(URL);
+        dataSource.setUsername(NAME);
+        dataSource.setPassword(PASSWORD);
+
+        return  dataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate (@Autowired DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
     }
 //    @Bean
 //    public org.hibernate.cfg.Configuration configuration () {
