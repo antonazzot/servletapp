@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-<link href="static/css/style.css" rel="stylesheet">
+<link href="static/css/bootstrap.css" rel="stylesheet"/>
 </head>
 
 <body>

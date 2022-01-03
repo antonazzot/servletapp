@@ -13,6 +13,8 @@ import repository.modelrepository.UserRepositoryImplJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.UserFunctionJpa;
 import repository.threadmodelrep.ThreadRepository;
 import repository.threadmodelrep.ThreadRepositoryFactory;
+import users.Administrator;
+import users.Role;
 import users.Student;
 import users.UserImpl;
 
@@ -23,11 +25,27 @@ public class Main {
        ApplicationContext ctx = new AnnotationConfigApplicationContext ("repository");
 //
 ////        UserRepository userRepository = ctx.getBean(UserRepository.class);
-        UserRepository repository = RepositoryFactory.getRepository();
-        System.out.println("---------------->>>>>>>>"+repository);
-        repository.allStudent().values().stream().map(s->s.getInf()+"***************").forEach(System.out::println);
+//        UserRepository repository = RepositoryFactory.getRepository();
+//        System.out.println("---------------->>>>>>>>"+repository);
+//        repository.allStudent().values().stream().map(s->s.getInf()+"***************").forEach(System.out::println);
 
 //         UserFunctionJpa.getAllUser().values().stream().map(s->s.getInf()).forEach(System.out::println);
 
+        Administrator administrator = (Administrator) new Administrator()
+                .withRole(Role.ADMINISTRATOR)
+                .withName("Anton")
+                .withLogin("Admin")
+                .withPassword("pass")
+                .withAge(34);
+        if (RepositoryFactory.getRepository().allUser().values().stream()
+                .filter(user -> user.getLogin()!=null
+                        &&  user.getName()!=null
+                        &&  user.getPassword()!=null)
+                .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
+                        u.getPassword().equals(administrator.getPassword()) &&
+                        u.getName().equals(administrator.getName()) &&
+                        u.getAge() == administrator.getAge())
+        )
+            System.out.println("++++++++++++");
     }
 }
