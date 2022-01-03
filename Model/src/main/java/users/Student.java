@@ -1,14 +1,11 @@
 package users;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Theams;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.*;
 
 @AllArgsConstructor

@@ -1,6 +1,6 @@
 package repository.modelrepository;
 
-import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,7 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserRepositoryImplPostgres implements UserRepository {
 
-    private final JdbcTemplate jdbcTemplate;
+//    private final JdbcTemplate jdbcTemplate;
 
     @Override
     public Map<Integer, UserImpl> allUser() {
@@ -51,7 +51,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public int saveUser(@Valid UserImpl user) {
+    public int saveUser(UserImpl user) {
         return UsersFunctionPostgres.saveUser(user);
     }
 

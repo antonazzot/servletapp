@@ -1,5 +1,6 @@
 package repository;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -35,4 +36,16 @@ public class RepositoryFactory {
     public static UserRepository getRepository() {
         return repository;
     }
+
+    @Bean
+    public org.hibernate.cfg.Configuration configuration () {
+        org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration().configure();
+        return configuration;
+    }
+
+    @Bean
+    public SessionFactory sessionFactory () {
+        return configuration().buildSessionFactory();
+    }
+
 }

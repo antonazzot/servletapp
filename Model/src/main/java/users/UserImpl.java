@@ -1,15 +1,8 @@
 package users;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,8 +26,6 @@ public class UserImpl implements User {
     @Column(name = "role_id")
     @Enumerated (EnumType.ORDINAL)
     private Role role;
-    @NotEmpty(message = "It not be empty")
-    @Size(min = 2, max = 100, message = "It must be beetwen 2 to 100")
     @Column(name = "name")
     private String name;
     @Column(name = "login")
@@ -42,7 +33,6 @@ public class UserImpl implements User {
     @Column(name = "password")
     private String password;
     @Column(name = "age")
-    @PositiveOrZero(message = "it must be positive or zero")
     private int age;
 
     public UserImpl withId(Integer id) {

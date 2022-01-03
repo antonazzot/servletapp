@@ -24,10 +24,13 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 public class TrainerFunctionJpa {
-    @Autowired
-    static Configuration configuration;
-    @Autowired
-    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
+//    @Autowired
+//    static Configuration configuration;
+//    @Autowired
+//    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
+
+    public static  Configuration conf = new Configuration().configure();
+    public static SessionFactory sessionFactory = conf.buildSessionFactory();
 
     public static Map<Integer, UserImpl> getallTrainer() {
         Map <Integer, UserImpl> result = new HashMap<>();

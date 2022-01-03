@@ -29,14 +29,14 @@ import javax.sql.DataSource;
 @Import({RepositoryFactory.class, ThreadRepositoryFactory.class})
 public class SpringConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
-    @Value("${postgres.driver}")
-    private final String DRIVER;
-    @Value("${postgres.name}")
-    private final String NAME;
-    @Value("${postgres.url}")
-    private final String URL;
-    @Value("${postgres.password}")
-    private final String PASSWORD;
+//    @Value("${postgres.driver}")
+//    private final String DRIVER;
+//    @Value("${postgres.name}")
+//    private final String NAME;
+//    @Value("${postgres.url}")
+//    private final String URL;
+//    @Value("${postgres.password}")
+//    private final String PASSWORD;
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver (){
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -45,21 +45,21 @@ public class SpringConfig implements WebMvcConfigurer {
         resolver.setSuffix(".jsp");
         return resolver;
     }
-    @Bean
-    public DataSource dataSource () {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(DRIVER);
-        dataSource.setUrl(URL);
-        dataSource.setUsername(NAME);
-        dataSource.setPassword(PASSWORD);
+//    @Bean
+//    public DataSource dataSource () {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName(DRIVER);
+//        dataSource.setUrl(URL);
+//        dataSource.setUsername(NAME);
+//        dataSource.setPassword(PASSWORD);
+//
+//        return  dataSource;
+//    }
 
-        return  dataSource;
-    }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate (@Autowired DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
+//    @Bean
+//    public JdbcTemplate jdbcTemplate (@Autowired DataSource dataSource) {
+//        return new JdbcTemplate(dataSource);
+//    }
 //    @Bean
 //    public org.hibernate.cfg.Configuration configuration () {
 //        org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration().configure();

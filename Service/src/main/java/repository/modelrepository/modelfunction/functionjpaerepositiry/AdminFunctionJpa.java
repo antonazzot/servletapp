@@ -18,10 +18,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Slf4j
 public class AdminFunctionJpa {
-    @Autowired
-    static Configuration configuration;
-    @Autowired
-    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
+//    @Autowired
+//    static Configuration configuration;
+//    @Autowired
+//    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
+    public static  Configuration conf = new Configuration().configure();
+    public static SessionFactory sessionFactory = conf.buildSessionFactory();
     public static Map<Integer, UserImpl> getAllAdmin() {
         Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
