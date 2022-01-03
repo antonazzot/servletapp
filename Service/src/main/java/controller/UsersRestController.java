@@ -6,9 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import repository.RepositoryFactory;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
-import repository.threadmodelrep.ThreadRepositoryFactory;
-import threadmodel.Group;
-import threadmodel.Theams;
 import users.Role;
 import users.Student;
 import users.Trainer;
@@ -20,9 +17,9 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/mvc/rest")
+@RequestMapping(path = "/mvc/rest/user")
 
-public class MyController {
+public class UsersRestController {
 
     @GetMapping(path = "/users/{entity}", produces = MediaType.APPLICATION_JSON_VALUE )
     @ResponseBody
@@ -31,30 +28,14 @@ public class MyController {
         return  mapToChange(entity);
     }
 
-    @GetMapping(path = "/group", produces = MediaType.APPLICATION_JSON_VALUE )
-    @ResponseBody
-    public Map<Integer, Group> group () {
-        log.info("in rest {}", "-------->rest");
-        return ThreadRepositoryFactory.getRepository().allGroup();
-    }
-
-    @GetMapping(path = "/theams", produces = MediaType.APPLICATION_JSON_VALUE )
-    @ResponseBody
-    public Map<Integer, Theams> theams () {
-        log.info("in rest {}", "-------->rest");
-        return ThreadRepositoryFactory.getRepository().allTheams();
-    }
-
     @GetMapping(path = "/trainer/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
     @ResponseBody
-    public ResponseEntity <Trainer> getTrainerById (@PathVariable int id) {
-        log.info("!!!!!!!!!!!!!Trainer id={}", id);
-        Trainer trainerById = RepositoryFactory.getRepository().getTrainerById(id);
-        log.info("!!!!!!!!!!!!Trainer = {}", trainerById.getInf());
-        return ResponseEntity.ok(trainerById);
+    public ResponseEntity <UserImpl> getUserById (@PathVariable int id) {
+        return ResponseEntity.ok(RepositoryFactory.getRepository().getUserById(id));
     }
 
-    @PostMapping
+    @PostMapping (path = "create", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public ResponseEntity<UserImpl> createUser  (@RequestBody UserImpl user) {
         log.info("in rest {}", "-------->rest");
         log.info("in rest savwe {}", "user for save" + user.getInf());
@@ -67,22 +48,21 @@ public class MyController {
                 .withRole(Role.valueOf(user.getRole().name()))
                 .withAge(user.getAge());
         log.info("in rest savwe {}", "user for save" + userForSave.getInf());
-         RepositoryFactory.getRepository().saveUser(userForSave);
+        RepositoryFactory.getRepository().saveUser(userForSave);
         return ResponseEntity.ok(user);
     }
 
     @DeleteMapping(path = "delete", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Optional<UserImpl>> deleteUser (@RequestParam ("id") int id, @RequestParam ("entity") String entity) {
-       log.info("Delete param ={}", "id: " + id + " entity " + entity);
+        log.info("Delete param ={}", "id: " + id + " entity " + entity);
         Optional<UserImpl> user = RepositoryFactory.getRepository().removeUser(id, entity);
         return  ResponseEntity.ok(user);
     }
 
     @PatchMapping (path = "patch", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<UserImpl> update (@RequestBody UserImpl user) {
-
+    public ResponseEntity<UserImpl> updateUser (@RequestBody UserImpl user) {
         UserImpl userForUpdate = new UserImpl().withId(user.getId());
         log.info("Userfor update before ={}", user.getInf());
         userForUpdate.withRole(Role.valueOf(user.getRole().name()));

@@ -1,5 +1,6 @@
 package threadmodel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Theams {
             joinColumns = @JoinColumn (name = "theam_id"),
             inverseJoinColumns = @JoinColumn (name = "group_id")
     )
+    @JsonIgnore
     private Group group;
 
     public Theams withId(int id) {

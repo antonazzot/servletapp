@@ -1,5 +1,6 @@
 package users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import threadmodel.Salary;
 
@@ -24,6 +25,7 @@ import java.util.List;
 )
 public class Trainer extends UserImpl {
     @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Salary> salarylist = new ArrayList<>();
 
     public Trainer withName(String name) {
