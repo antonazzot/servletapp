@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Properties;
 
-@WebFilter("/checkUser")
+@WebFilter(urlPatterns = {"/checkUser", "/mvc/views/checkUser"})
 public class StartFilter extends AbstractFilter {
     private static final Logger log = LoggerFactory.getLogger(StartFilter.class);
 
@@ -55,7 +55,7 @@ public class StartFilter extends AbstractFilter {
         if (user != null) {
             session.setAttribute("user", user);
             log.info("SessionWithUserCreate = {}", user);
-            request.getRequestDispatcher("/checkUser").forward(request, response);
+            request.getRequestDispatcher("/mvc/views/checkUser").forward(request, response);
         } else request.getRequestDispatcher("exeception.jsp").forward(request, response);
         filterChain.doFilter(request, response);
     }

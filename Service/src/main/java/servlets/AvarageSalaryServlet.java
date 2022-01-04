@@ -23,7 +23,7 @@ public class AvarageSalaryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("map", salaryHashMap());
-        req.getRequestDispatcher("adminControl/avaragesalary.jsp").forward(req, resp);
+        req.getRequestDispatcher("adminControl/averagesalary.jsp").forward(req, resp);
     }
 
     private Map<Trainer, List<Salary>> salaryHashMap() {

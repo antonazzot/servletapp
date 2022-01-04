@@ -6,14 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <link href="static/css/bootstrap.css" rel="stylesheet"/>
+        <link href="/resources/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 
 <body>
   <section class="container">
     <div class="login">
       <h1>Login to Web App</h1>
-      <form id="data" method = "post"  action="checkUser">
+      <form id="data" method = "post"  action="/web/mvc/views/checkUser">
         <p><input type="text" name="id" value="" placeholder="Username or Email"></p>
         <p><input type="password" name="password" value="" placeholder="Password"></p>
         <p class="remember_me">

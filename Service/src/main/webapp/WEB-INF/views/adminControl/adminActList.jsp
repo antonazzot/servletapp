@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-<link href="static/css/bootstrap.css" rel="stylesheet"/>
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 
 <body>
@@ -13,8 +14,8 @@
 <section class="container">
 <div class="login">
 <h1> Admin page </h1>
-<form id="data" action="watchServlet">
-    <select name="user", form="data">
+<form id="data" method="post" action="/web/mvc/views/adminact">
+    <select name="entity", form="data">
         <option value="student">Student</option>
         <option value="trainer">Trainer</option>
         <option value="administrator">Administrator</option>
@@ -44,11 +45,11 @@
 <br>
 
 
-<form action="addSalary">
+<form action="/web/mvc/views/addsalary">
 <input type="submit" value="ADD SALARY">
 </form>
 
-<form action="avarageSalary">
+<form action="/web/mvc/views/avarageSalary">
 <input type="submit" value="AVERAGE SALARY">
 </form>
 

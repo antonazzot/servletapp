@@ -7,14 +7,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Add page</title>
-    <link href="static/css/style.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
 <section class="container">
 <div class="login">
 <h1> ADD NEW USER </h1>
 
-<form id="data" method = "post" action="UserActionServlet" >
+<form id="data" method = "post" action="/web/mvc/views/saveuser" >
 
     <input type="hidden" name="role" value="${role}"/>
 
