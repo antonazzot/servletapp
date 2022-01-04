@@ -19,7 +19,7 @@
     <p>Студенты группы, выберите студента для удаления из группы </p>
       <c:forEach var = "gs" items="${groupForChange.studentMap}">
              <c:out value = "${gs.value.name}" />
-             <input type="checkbox" name="grstid" value="${gs.key}" ><br>
+             <input type="checkbox" name="entytiIdforact" value="${gs.key}" ><br>
       </c:forEach>
       <input name="id" type="hidden"  value = ${id} /> <br>
       <input name="act" type="hidden"  value = "studentdelete" /> <br>
@@ -30,8 +30,8 @@
 <form id="data1" method = "post"  action="/web/mvc/views/resultchangegroup">
       <p>Выберите студента для добавления в группу </p>
            <c:forEach var = "as" items="${freestudent}">
-                      <c:out value = "${as.value.name}" />
-                      <input type="checkbox" name="astid" value="${as.key}" ><br>
+                      <c:out value = "${as.name}" />
+                      <input type="checkbox" name="entytiIdforact" value="${as.id}" ><br>
            </c:forEach>
            <input name="id" type="hidden"  value = ${id} /> <br>
            <input name="act" type="hidden"  value = "studentadd" /> <br>
@@ -45,7 +45,7 @@
         <p>Темы группы, выберите тему для удаления из группы </p>
              <c:forEach var = "gth" items="${groupForChange.theamsSet}">
                    <c:out value = "${gth.theamName}" />
-                   <input type="checkbox" name="grth" value="${gth.id}"> <br>
+                   <input type="checkbox" name="entytiIdforact" value="${gth.id}"> <br>
              </c:forEach>
              <input type="submit" form="data2" value="Удалить тему">
       <hr>
@@ -55,7 +55,7 @@
           <p>Все доступные темы, выберите тему для добавления в группу </p>
                <c:forEach var = "fth" items="${freetheam}">
                           <c:out value = "${fth.value.theamName}" />
-                          <input type="checkbox" name="frth" value="${fth.key}" > <br>
+                          <input type="checkbox" name="entytiIdforact" value="${fth.key}" > <br>
                 </c:forEach>
                 <input name="id" type="hidden"  value = ${id} />
                 <input name="act" type="hidden"  value = "theamadd" /> <br>
@@ -67,7 +67,7 @@
                  <p> выберите тренера для добавления тренера, либо замены существующего </p>
                  <c:forEach var = "ftr" items="${freetrainer}">
                  <c:out value = "${ftr.value.name}" />
-                 <input type="radio" name="frtr" value="${ftr.key}" >
+                 <input type="radio" name="entytiIdforact" value="${ftr.key}" >
            </c:forEach>
         <input name="id" type="hidden"  value = ${id} />
         <input name="act" type="hidden"  value = "trainer" /> <br>

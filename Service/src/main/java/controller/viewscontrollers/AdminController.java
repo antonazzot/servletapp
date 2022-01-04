@@ -36,10 +36,8 @@ public class AdminController {
     }
 
     @PostMapping("/checkUser")
-    public String checkUser(@RequestParam("id") String id, @RequestParam("password") String password,
-                            HttpSession session, Model model) {
-        log.info("Session??????>>>>>>={}","id: " + id + " pass: " + password + " Sesssion:  " + session + " user ");
-
+    public String checkUser(HttpSession session, Model model) {
+//        log.info("Session??????>>>>>>={}","id: " + id + " pass: " + password + " Sesssion:  " + session + " user ");
         if (session != null && session.getAttribute("user") != null) {
             return StratagyForAutorithate.authorizationStratagy(session, model);
         }
@@ -60,19 +58,22 @@ public class AdminController {
                             @RequestParam("password") String passsword,
                             @RequestParam(required = false, name = "age") int age
                             ) {
-        UserImpl user = new UserImpl().withRole(Role.valueOf(role))
+        UserImpl user = new UserImpl()
+                .withRole(Role.valueOf(role.toUpperCase()))
                 .withName(name)
                 .withLogin(login)
                 .withPassword(passsword)
                 .withAge(age);
         RepositoryFactory.getRepository().saveUser(user);
-        log.info("USER for SAVE INF ={}", "Role" + role + "More about" + user.getInf() );
+        log.info("USER for SAVE INF ={}", " Role: " + role + " More about: ->>> " + user.getInf() );
         return "adminControl/adminActList";
     }
 
     @PostMapping("/addgroup")
-    public String addgroup (@RequestParam("theamID") String [] theamId, @RequestParam ("stId") Integer [] studentId, @RequestParam("tr") Integer trId) {
-        ThreadRepositoryFactory.getRepository().addGroup(GroupAdderService.studentList(studentId),  ParserStringToInt.parseArrayStringToListInteger(theamId), trId);
+    public String addgroup (@RequestParam(required = false, name = "theamId") int [] theamId,
+                            @RequestParam (required = false, name = "stId") int [] studentId,
+                            @RequestParam("tr") Integer trId) {
+        ThreadRepositoryFactory.getRepository().addGroup(GroupAdderService.studentList(studentId),  ParserStringToInt.parseArraySIntegerToListInteger(theamId), trId);
         return "adminControl/adminActList";
     }
     @GetMapping ("/addsalary")
@@ -138,7 +139,7 @@ public class AdminController {
         ThreadRepositoryFactory.getRepository().updateTheam(id, name);
         return "adminControl/adminActList";
     }
-    @GetMapping ("/groupforchange")
+    @PostMapping ("/groupforchange")
     public String groupForChange ( @RequestParam("groupid") int id,
                                    Model model
     ) {
@@ -150,7 +151,7 @@ public class AdminController {
         model.addAttribute("freestudent", FreeStudentExtract.freeStudent(new ArrayList<>(group.getStudentMap().values())));
         return "adminControl/groupchangeform";
     }
-    @GetMapping ("/resultchangegroup")
+    @PostMapping ("/resultchangegroup")
     public String resultChangeGroup ( @RequestParam("id") int id,
                                       @RequestParam("act") String act,
                                       @RequestParam("entytiIdforact") String [] entytiIdforact

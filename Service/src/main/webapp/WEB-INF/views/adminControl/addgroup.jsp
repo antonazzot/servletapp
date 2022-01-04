@@ -35,9 +35,7 @@
 
    <p><input type="submit" value="Отправить"></p>
   </form>
-  <form  action="hello">
-      <input type="submit" value="Go to Main Admin!">
-  </form>
+<jsp:include page="mainpage.jsp" />
      </div>
     </section>
 <br>

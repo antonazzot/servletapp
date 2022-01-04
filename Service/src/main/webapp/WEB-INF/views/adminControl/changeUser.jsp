@@ -16,7 +16,7 @@
 
          <c:forEach var = "entry" items="${map}">
          <c:out value = "${entry.value.name}" />
-         <input type="radio" name="id" value="${entry.key}" > <br>
+         <input type="radio" name="userid" value="${entry.key}" > <br>
           </c:forEach>
 
      <p><input type="submit" form="data" value="Отправить"></p>

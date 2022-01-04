@@ -31,4 +31,16 @@ public class ParserStringToInt {
         }
         return result;
     }
+    public static List<Integer> parseArraySIntegerToListInteger (int [] integers) {
+        List <Integer> result = new ArrayList<>();
+        for (int i = 0; i < integers.length; i++) {
+            try {
+               result.add(integers[i]);
+            }
+            catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
 }
