@@ -20,7 +20,7 @@ public class WatchServletChangeStratagyImpl implements WatchServletStratagy {
             return "adminControl/changeUser.jsp";
         } else if (entity.equals("theam")) {
             req.setAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
-            return "adminControl/changeTheam.jsp";
+            return "adminControl/changetheam.jsp";
         } else if (entity.equals("group")) {
             req.setAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
             return "adminControl/changeGroup.jsp";

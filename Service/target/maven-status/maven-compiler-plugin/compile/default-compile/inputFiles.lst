@@ -20,6 +20,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TrainerActServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\closebaseconnection\PostgresSQLUtils.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TheamUpdateServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\GroupAdderService.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\UserFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\StudentFunctionPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\AvarageSalaryServlet.java
@@ -55,6 +56,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\StartM\Main.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteTheamImpJPA.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionjpaerepositiry\AdminFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserRepository.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\FreeStudentExtract.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TrainerAddSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\aspect\LogingAspect.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\GroupFunctionJpa.java
@@ -81,8 +83,10 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionunmemory\AdminFunctionMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\MyController.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\acttrainerstrategy\MVCAdminActCreateStratagyImpl.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\LogOutFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\SalaryFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\CalculateAvarageSalaryServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ParserStringToInt.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\ChangeAndCreateMarkServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ChangeAdminActStratagy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\restcontrollers\ThreadRestController.java
@@ -100,6 +104,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTheamAdd.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TheamAddServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\acttrainerstrategy\MVCAdminActDeleteStratagyImpl.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ChangeUser.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\RepositoryFactory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserRepositoryImplInMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\AvarageSalaryCalculate.java

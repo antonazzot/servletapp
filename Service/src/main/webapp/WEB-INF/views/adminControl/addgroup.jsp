@@ -4,8 +4,8 @@
 <html>
 <head>
     <title>Group create Page</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="static/css/style.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 
 
@@ -13,23 +13,23 @@
 <section class="container">
 <div class="login">
 <h1> ADD NEW Group </h1>
-  <form id="data" method = "post"  action="GroupCreaterServlet">
+  <form id="data" method = "post"  action="/web/mvc/views/addgroup">
    <p>Выберите темы для группы</p>
       <c:forEach var = "th" items="${mapITe}">
           <c:out value = "${th.value.theamName}" />
-          <input type="checkbox" name="th" value="${th.key}"> <br>
+          <input type="checkbox" name="teamId" value="${th.key}"> <br>
        </c:forEach>
 
     <p>Выберите студентов для группы</p>
     <c:forEach var = "entry" items="${mapIS}">
        <c:out value = "${entry.value.name}" />
-       <input type="checkbox" name="user" value="${entry.key}"> </p>
+       <input type="checkbox" name="stId" value="${entry.key}"> </p>
     </c:forEach>
 
     <p>Выберите тренера для группы</p>
             <c:forEach var = "entry1" items="${mapITr}">
             <c:out value = "${entry1.value.name}" />
-            <input type="radio" name="trainer" value="${entry1.key}"> </p>
+            <input type="radio" name="tr" value="${entry1.key}"> </p>
              </c:forEach>
 
 

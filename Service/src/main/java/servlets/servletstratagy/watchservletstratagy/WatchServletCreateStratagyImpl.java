@@ -19,7 +19,7 @@ public class WatchServletCreateStratagyImpl implements WatchServletStratagy {
             req.setAttribute("mapIS", RepositoryFactory.getRepository().allStudent());
             req.setAttribute("mapITr", RepositoryFactory.getRepository().freeTrainer());
             req.setAttribute("mapITe", ThreadRepositoryFactory.getRepository().freeTheams());
-            return "adminControl/theamscreatelist.jsp";
+            return "adminControl/addgroup.jsp";
         } else {
             return "adminControl/theamadd.jsp";
         }

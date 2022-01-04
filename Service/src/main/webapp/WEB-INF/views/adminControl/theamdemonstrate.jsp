@@ -4,7 +4,8 @@
 <html>
     <meta charset="UTF-8">
     <title>Demonstrate theam  page</title>
-    <link href="static/css/style.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
 <section class="container">
@@ -18,12 +19,10 @@
   </c:forEach>
 
 <br>
-  <form  action="hello">
-      <input type="submit" value="Go to Main Page!">
-  </form>
-     </div>
-    </section>
+ </div>
+  </section>
 <br>
+ <jsp:include page="mainpage.jsp" />
 <br>
  <jsp:include page="logout.jsp" />
 </body>

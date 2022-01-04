@@ -1,10 +1,9 @@
 package controller.viewscontrollers;
 
+import controller.serviseforcontroller.viewsservises.ChangeUser;
 import controller.serviseforcontroller.acttrainerstrategy.MVCAdminActStratagy;
-import controller.serviseforcontroller.viewsservises.AvarageSalaryCalculate;
-import controller.serviseforcontroller.viewsservises.ChangeAdminActStratagy;
-import controller.serviseforcontroller.viewsservises.StartService;
-import controller.serviseforcontroller.viewsservises.StratagyForAutorithate;
+import controller.serviseforcontroller.viewsservises.ParserStringToInt;
+import controller.serviseforcontroller.viewsservises.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import repository.RepositoryFactory;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import repository.threadmodelrep.ThreadRepositoryFactory;
+import threadmodel.Group;
+import users.Role;
 import users.Trainer;
 import users.UserImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @Controller
@@ -57,7 +60,7 @@ public class AdminController {
                             @RequestParam("password") String passsword,
                             @RequestParam(required = false, name = "age") int age
                             ) {
-        UserImpl user = new UserImpl().withRole(RoleIDParametrCheker.getRoleByString(role))
+        UserImpl user = new UserImpl().withRole(Role.valueOf(role))
                 .withName(name)
                 .withLogin(login)
                 .withPassword(passsword)
@@ -67,9 +70,9 @@ public class AdminController {
         return "adminControl/adminActList";
     }
 
-    @GetMapping("/addgroup")
-    public String addgroup (@RequestParam("theamID") Integer [] theamId, @RequestParam ("stId") Integer [] studentId, @RequestParam("tr") Integer trId) {
-//        ThreadRepositoryFactory.getRepository().addGroup(GroupAdderService.studentList(studentId), Arrays.asList(theamId), trId);
+    @PostMapping("/addgroup")
+    public String addgroup (@RequestParam("theamID") String [] theamId, @RequestParam ("stId") Integer [] studentId, @RequestParam("tr") Integer trId) {
+        ThreadRepositoryFactory.getRepository().addGroup(GroupAdderService.studentList(studentId),  ParserStringToInt.parseArrayStringToListInteger(theamId), trId);
         return "adminControl/adminActList";
     }
     @GetMapping ("/addsalary")
@@ -87,8 +90,8 @@ public class AdminController {
 
     @GetMapping("/groupforwatch")
     public  String groupForWatch (@RequestParam("groupid") String groupid, Model model ) {
-        model.addAttribute("group", ThreadRepositoryFactory.getRepository().allGroup().get(Integer.parseInt(groupid)));
-        return "adminviews/demonstrategroup";
+        model.addAttribute("map", ThreadRepositoryFactory.getRepository().allGroup().get(Integer.parseInt(groupid)));
+        return "adminControl/demonstrategroup";
     }
     @GetMapping("/avarageSalary")
     public  String avarageSalary (Model model) {
@@ -106,54 +109,57 @@ public class AdminController {
         return "adminControl/avaragesalarywatch";
     }
 
-//    @GetMapping("/forchangeuser")
-//    public  String forChangeUser (@RequestParam("userid")int userId, Model model) {
-//        model.addAttribute("userForChange", RepositoryFactory.getRepository().getUserById(userId));
-//        return "adminviews/changeuserform";
-//    }
+    @PostMapping("/updateUser")
+    public  String forChangeUser (@RequestParam("userid")int userId, Model model) {
+        model.addAttribute("userForChange", RepositoryFactory.getRepository().getUserById(userId));
+        return "adminControl/changeuserform";
+    }
+
+    @PostMapping("/savetheam")
+    public String saveTheam ( @RequestParam("theam") String theamName) {
+        ThreadRepositoryFactory.getRepository().addTheam(theamName);
+        return "adminControl/adminActList";
+    }
+    @PostMapping ("/resultchangeuser")
+    public String resultChangeUser ( @RequestParam("id") int id,
+                                     @RequestParam(required = false, name = "name" ) String name,
+                                     @RequestParam(required = false, name ="login") String login,
+                                     @RequestParam(required = false, name ="password") String password,
+                                     @RequestParam(required = false, name ="age") String age
+    ) {
+        RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(id, name,login,password,age));
+        return "adminControl/adminActList";
+    }
 //
-//    @PostMapping("/savetheam")
-//    public String saveTheam ( @ModelAttribute("theam") Theams theam) {
-//        log.info("Theam ={}", "Role" + theam.getTheamName());
-//        ThreadRepositoryFactory.getRepository().addTheam(theam.getTheamName());
-//        return "adminviews/adminmain";
-//    }
-//    @PostMapping ("/resultchangeuser")
-//    public String resultChangeUser ( @RequestParam("id") int id,
-//                                     @RequestParam(required = false, name = "name" ) String name,
-//                                     @RequestParam(required = false, name ="login") String login,
-//                                     @RequestParam(required = false, name ="password") String password,
-//                                     @RequestParam(required = false, name ="age") String age
-//    ) {
-//        RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(id, name,login,password,age));
-//        return "adminviews/adminmain";
-//    }
-//
-//    @GetMapping  ("/changetheam")
-//    public String changeTheam ( @RequestParam("theamid") int id,
-//                                @RequestParam(required = false, name = "newName" ) String name
-//    ) {
-//        ThreadRepositoryFactory.getRepository().updateTheam(id, name);
-//        return "adminviews/adminmain";
-//    }
-//    @GetMapping ("/groupforchange")
-//    public String groupForChange ( @RequestParam("groupid") int id,
-//                                   Model model
-//    ) {
-//        Group group = ThreadRepositoryFactory.getRepository().allGroup().get(id);
-//
-//        model.addAttribute("groupForChange",group);
-//        model.addAttribute("freetheam", ThreadRepositoryFactory.getRepository().freeTheams());
-//        model.addAttribute("freetrainer", RepositoryFactory.getRepository().freeTrainer());
-//        model.addAttribute("freestudent", FreeStudentExtract.freeStudent(new ArrayList<>(group.getStudentMap().values())));
-//        return "adminviews/groupchangeform";
-//    }
-//    @GetMapping ("/resultchangegroup")
-//    public String resultChangeGroup ( @RequestParam("id") int id,
-//                                      @RequestParam("act") String act,
-//                                      @RequestParam("entytiIdforact") String [] entytiIdforact
-//    ) {
-//        ThreadRepositoryFactory.getRepository().updateGroup(id, act, ParserStringToInt.parseArrayString(entytiIdforact) );
-//        return "adminviews/adminmain";
-//    }
+    @PostMapping  ("/changetheam")
+    public String changeTheam ( @RequestParam("theamid") int id,
+                                @RequestParam(required = false, name = "newName" ) String name
+    ) {
+        ThreadRepositoryFactory.getRepository().updateTheam(id, name);
+        return "adminControl/adminActList";
+    }
+    @GetMapping ("/groupforchange")
+    public String groupForChange ( @RequestParam("groupid") int id,
+                                   Model model
+    ) {
+        Group group = ThreadRepositoryFactory.getRepository().allGroup().get(id);
+
+        model.addAttribute("groupForChange",group);
+        model.addAttribute("freetheam", ThreadRepositoryFactory.getRepository().freeTheams());
+        model.addAttribute("freetrainer", RepositoryFactory.getRepository().freeTrainer());
+        model.addAttribute("freestudent", FreeStudentExtract.freeStudent(new ArrayList<>(group.getStudentMap().values())));
+        return "adminControl/groupchangeform";
+    }
+    @GetMapping ("/resultchangegroup")
+    public String resultChangeGroup ( @RequestParam("id") int id,
+                                      @RequestParam("act") String act,
+                                      @RequestParam("entytiIdforact") String [] entytiIdforact
+    ) {
+        ThreadRepositoryFactory.getRepository().updateGroup(id, act, ParserStringToInt.parseArrayString(entytiIdforact) );
+        return "adminviews/adminmain";
+    }
+    @GetMapping ("/logout")
+    public String logOut () {
+        return "start";
+    }
 }

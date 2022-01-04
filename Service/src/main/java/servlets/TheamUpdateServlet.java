@@ -17,6 +17,6 @@ public class TheamUpdateServlet extends HttpServlet {
         String theamName = req.getParameter("thname");
         ThreadRepositoryFactory.getRepository().updateTheam(theamId, theamName);
         req.setAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
-        req.getRequestDispatcher("adminControl/changeTheam.jsp").forward(req, resp);
+        req.getRequestDispatcher("adminControl/changetheam.jsp").forward(req, resp);
     }
 }

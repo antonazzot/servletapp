@@ -29,7 +29,7 @@ public class MVCAdminActCreateStratagyImpl implements MVCAdminActStratagy {
             return "adminControl/addgroup";
         } else {
             model.addAttribute("theam", new Theams());
-            return "adminviews/addtheam";
+            return "adminControl/theamadd";
         }
     }
 }

@@ -4,7 +4,8 @@
 <html>
     <meta charset="UTF-8">
     <title>Demonstrate group  page</title>
-    <link href="static/css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
 <section class="container">

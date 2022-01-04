@@ -25,10 +25,10 @@ public class MVCAdminActWatchStratagyImpl implements MVCAdminActStratagy {
         } else if (!entity.equals("theam")) {
             log.info("Watch group ={}", entity);
             model.addAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
-            return "adminviews/groupdemo";
+            return "adminControl/demonstrategroup";
         } else {
             model.addAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
-            return "adminviews/theamdemonstrate";
+            return "adminControl/theamdemonstrate";
         }
 
     }

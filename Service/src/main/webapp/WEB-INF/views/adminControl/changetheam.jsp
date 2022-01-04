@@ -5,7 +5,8 @@
 <head>
     <title>Group create Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="static/css/style.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 
 
@@ -14,13 +15,13 @@
 <div class="login">
 <h1> Update theam </h1>
    <p>Внесите данные для изменения</p>
-    <form id="data" method = "post"  action="updateTheam">
+    <form id="data" method = "post"  action="/web/mvc/views/changetheam">
     <p>Темы группы, выберите тему для внесения изменений  </p>
       <c:forEach var = "entry" items="${map}">
              <c:out value = "${entry.value.theamName}" />
-             <input type="radio" name="thid" value="${entry.key}" ><br>
+             <input type="radio" name="theamid" value="${entry.key}" ><br>
       </c:forEach>
-      <input  name="thname", type="text">
+      <input  name="newName", type="text">
 
       <input type="submit" form="data" value="Изменить тему">
       <hr>

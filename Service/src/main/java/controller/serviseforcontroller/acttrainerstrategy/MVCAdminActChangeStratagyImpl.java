@@ -16,13 +16,13 @@ public class MVCAdminActChangeStratagyImpl implements MVCAdminActStratagy {
         if (!entity.equals("group") && !entity.equals("theam")) {
             log.info("Change entity ={}", entity);
             model.addAttribute("map", this.mapToChange(entity));
-            return "adminviews/changeuserforchangeuseract";
+            return "adminControl/changeUser";
         } else if (entity.equals("theam")) {
             model.addAttribute("map", ThreadRepositoryFactory.getRepository().allTheams());
-            return "adminviews/changetheam";
+            return "adminControl/changetheam";
         } else if (entity.equals("group")) {
             model.addAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
-            return "adminviews/groupChange";
+            return "adminControl/changeGroup";
         } else {
             return "exeception.jsp";
         }

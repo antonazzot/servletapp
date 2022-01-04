@@ -28,7 +28,7 @@ public class ChangeUser extends HttpServlet {
         req.setAttribute("age", user.getAge());
 
         RepositoryFactory.getRepository().updateUser(user);
-        req.getRequestDispatcher("adminControl/actionchange.jsp").forward(req, resp);
+        req.getRequestDispatcher("adminControl/changeuserform.jsp").forward(req, resp);
     }
 }
 

@@ -32,11 +32,9 @@
       </div>
           </section>
 
-  <form  action="hello">
-      <input type="submit" value="Go to Main Admin!">
-  </form>
-    <br>
 
+<br>
+<jsp:include page="mainpage.jsp" />
 <br>
  <jsp:include page="logout.jsp" />
 </body>

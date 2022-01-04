@@ -27,6 +27,7 @@ public class RoleIDParametrCheker {
         } else if (role.equalsIgnoreCase("trainer")) {
             return Role.TRAINER;
         }
+        else
         return Role.STUDENT;
     }
 
