@@ -51,13 +51,16 @@ public class AdminController {
     }
 
     @GetMapping("/addgroup")
-    public String addgroup (@RequestParam(required = false, name = "theamId") String [] theamId,
+    public String addgroup (@RequestParam(required = false, name = "teamId") String [] theamId,
                             @RequestParam (required = false, name = "stId") String [] studentId,
                             @RequestParam("tr") Integer trId) {
 //        log.info("theamId= {}", theamId.toString() );
 //        log.info("stId= {}", studentId.toString() );
 //        log.info("trId= {}", trId );
-        ThreadRepositoryFactory.getRepository().addGroup(GroupAdderService.studentList(studentId),  ParserStringToInt.parseArrayStringToListInteger(theamId), trId);
+        ThreadRepositoryFactory.getRepository()
+                .addGroup(GroupAdderService.studentList(studentId),
+                        ParserStringToInt.parseArrayStringToListInteger(theamId),
+                        trId);
         return "adminControl/adminActList";
     }
     @GetMapping ("/addsalary")

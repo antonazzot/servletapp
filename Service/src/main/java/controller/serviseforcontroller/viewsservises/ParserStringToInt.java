@@ -20,16 +20,9 @@ public class ParserStringToInt {
         return result;
     }
     public static List<Integer> parseArrayStringToListInteger (String [] str) {
-        List <Integer> result = new ArrayList<>();
-        for (int i = 0; i < str.length; i++) {
-            try {
-               result.add(Integer.parseInt(str[i]));
-            }
-            catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            }
-        }
-        return result;
+        return   Arrays.stream(str)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
     public static List<Integer> parseArraySIntegerToListInteger (int [] integers) {
         List <Integer> result = new ArrayList<>();

@@ -47,6 +47,6 @@ public class InitController {
     @GetMapping ("/logout")
     public String logOut (SessionStatus sessionStatus) {
         sessionStatus.setComplete();
-        return "redirect:/hello";
+        return "redirect:/mvc/hello";
     }
 }
