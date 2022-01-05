@@ -13,8 +13,8 @@
 <body>
 
 <br>
-<form  action="web/mvc/logout">
-    <input type="submit" value="LogOut">
+<form  action="/web/mvc/hello">
+    <input type="submit" value="Main Page">
 </form>
 
 </body>

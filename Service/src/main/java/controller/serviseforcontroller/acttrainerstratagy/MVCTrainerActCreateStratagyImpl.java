@@ -13,6 +13,6 @@ public class MVCTrainerActCreateStratagyImpl implements MVCTrainerActStratagy{
                 ParserStringToInt.simpleParserStringToInt(thId),
                 ParserStringToInt.simpleParserStringToInt(mark)
         );
-        return "/mvc/trainer";
+        return "TrainerControlPage/trainerstartpage";
     }
 }

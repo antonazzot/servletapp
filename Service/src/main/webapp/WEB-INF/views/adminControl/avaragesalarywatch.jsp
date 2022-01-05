@@ -5,7 +5,8 @@
 <head>
     <title>Test Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="static/css/style.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
 <br>

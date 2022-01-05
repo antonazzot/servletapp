@@ -75,7 +75,7 @@ public class StratagyForAutorithate {
                 Map<Integer, Student> studentHashMap = group.getStudentMap();
                 Set<Theams> theams = group.getTheamsSet();
 
-                return "trainerpage/trainerstartpage";
+                return "TrainerControlPage/trainerstartpage";
 
             } else {
                 return "TrainerControlPage/groupnotexist";

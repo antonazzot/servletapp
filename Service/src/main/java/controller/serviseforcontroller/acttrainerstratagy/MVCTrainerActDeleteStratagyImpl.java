@@ -17,6 +17,6 @@ public class MVCTrainerActDeleteStratagyImpl implements MVCTrainerActStratagy{
         model.addAttribute("student", student);
         model.addAttribute("mapOfMark", ThreadRepositoryFactory.getRepository().getMarkIDListbyTheam(theams, student.getId()));
 
-        return "deletemark";
+        return "TrainerControlPage/deletemark";
     }
 }

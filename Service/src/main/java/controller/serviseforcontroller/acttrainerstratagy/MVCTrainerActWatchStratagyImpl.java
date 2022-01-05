@@ -21,7 +21,7 @@ public class MVCTrainerActWatchStratagyImpl implements MVCTrainerActStratagy{
         Theams theams = ThreadRepositoryFactory.getRepository().theamById(ParserStringToInt.simpleParserStringToInt(thId));
         model.addAttribute("student", student);
          model.addAttribute("mapWithTheamAndMark", getTheamsListHashMap(student, theams));
-        return "watchmark";
+        return "TrainerControlPage/watchmark";
     }
     private Map <Theams, List<Mark>> getTheamsListHashMap(Student student, Theams tempth) {
         Map<Theams, List<Mark>> result = new HashMap<>();
