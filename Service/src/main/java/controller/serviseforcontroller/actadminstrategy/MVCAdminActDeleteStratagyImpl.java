@@ -1,9 +1,8 @@
-package controller.serviseforcontroller.acttrainerstrategy;
+package controller.serviseforcontroller.actadminstrategy;
 
 
 import org.springframework.ui.Model;
 import repository.RepositoryFactory;
-import repository.threadmodelrep.ThreadRepositoryFactory;
 
 public class MVCAdminActDeleteStratagyImpl implements MVCAdminActStratagy {
     @Override

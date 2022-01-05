@@ -1,4 +1,4 @@
-package controller.serviseforcontroller.acttrainerstrategy;
+package controller.serviseforcontroller.actadminstrategy;
 
 import org.springframework.ui.Model;
 

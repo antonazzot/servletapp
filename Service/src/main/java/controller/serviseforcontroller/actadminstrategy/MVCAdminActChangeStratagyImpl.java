@@ -1,4 +1,4 @@
-package controller.serviseforcontroller.acttrainerstrategy;
+package controller.serviseforcontroller.actadminstrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import repository.RepositoryFactory;

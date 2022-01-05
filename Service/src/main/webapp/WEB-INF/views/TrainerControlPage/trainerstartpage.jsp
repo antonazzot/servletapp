@@ -5,23 +5,24 @@
 <head>
     <title>Test Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="static/css/style.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
 <section class="container">
 <div class="login">
 <h1> Trainer control List </h1>
-<form id="data" action="traineract">
+<form id="data" method="post" action="/web/mvc/trainer/traineract">
   <p>Выберите студента из группы</p>
-    <c:forEach var = "entry" items="${map}">
+    <c:forEach var = "entry" items="${groupT.studentMap}">
        <c:out value = "${entry.value.name}" />
-       <input type="radio" name="user" value="${entry.key}"> </p>
+       <input type="radio" name="studentId" value="${entry.key}"> </p>
     </c:forEach>
 
       <p>Выберите тему</p>
-       <c:forEach var = "set" items="${set}">
+       <c:forEach var = "set" items="${groupT.theamsSet}">
                <c:out value = "${set.theamName}" />
-               <input type="radio" name="th" value="${set.id}"> </p>
+               <input type="radio" name="thId" value="${set.id}"> </p>
        </c:forEach>
 
 

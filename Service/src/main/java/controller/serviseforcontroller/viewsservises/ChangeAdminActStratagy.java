@@ -1,7 +1,7 @@
 package controller.serviseforcontroller.viewsservises;
 
 
-import controller.serviseforcontroller.acttrainerstrategy.*;
+import controller.serviseforcontroller.actadminstrategy.*;
 
 import java.util.Map;
 

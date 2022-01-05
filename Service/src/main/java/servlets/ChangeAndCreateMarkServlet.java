@@ -68,7 +68,7 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
 
         }
         ThreadRepositoryFactory.getRepository().changeMark(markIdMarkValue, stId, thId);
-        return "TrainerControlPage/trainerActList.jsp";
+        return "TrainerControlPage/trainerstartpage.jsp";
     }
 
     private String delete(String[] marks, String theam, String studentId) {
@@ -89,6 +89,6 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
             return "exeception.jsp";
         }
 
-        return "TrainerControlPage/trainerActList.jsp";
+        return "TrainerControlPage/trainerstartpage.jsp";
     }
 }

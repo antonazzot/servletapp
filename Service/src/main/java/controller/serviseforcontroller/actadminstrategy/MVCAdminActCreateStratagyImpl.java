@@ -1,14 +1,11 @@
-package controller.serviseforcontroller.acttrainerstrategy;
+package controller.serviseforcontroller.actadminstrategy;
 
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import repository.RepositoryFactory;
-import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import repository.threadmodelrep.ThreadRepositoryFactory;
-import threadmodel.Group;
 import threadmodel.Theams;
-import users.UserImpl;
 
 @Slf4j
 public class MVCAdminActCreateStratagyImpl implements MVCAdminActStratagy {

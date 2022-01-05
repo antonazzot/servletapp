@@ -38,11 +38,10 @@ public class StratagyForAutorithate {
                         .findAny()
                         .get();
                 log.info("user Autorithate trainer ={}", "--->>>" + user.getInf());
-                Map<Integer, Student> studentHashMap = group.getStudentMap();
-                Set<Theams> theams = group.getTheamsSet();
-                model.addAttribute("group", group);
+
+                model.addAttribute("groupT", group);
                 model.addAttribute("trainer", user);
-                result = "trainerpage/trainerstartpage";
+                result = "TrainerControlPage/trainerstartpage";
 
             } else {
                 return "TrainerControlPage/groupnotexist";

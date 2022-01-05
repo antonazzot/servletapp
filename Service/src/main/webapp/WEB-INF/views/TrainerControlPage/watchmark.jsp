@@ -5,7 +5,8 @@
 <head>
     <title>Test Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="static/css/style.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
 <section class="container">
@@ -15,7 +16,7 @@
   <p>Оценки Студента:</p>
   <p></p>
  <form id="data" action="hello">
-         <c:forEach var = "entry" items="${map}">
+         <c:forEach var = "entry" items="${mapWithTheamAndMark}">
          <c:out value = "${entry.key.theamName}" /> <br>
           <c:forEach var = "list" items="${entry.value}">
            <c:out value = "${list.valuesOfMark}" /> <br>

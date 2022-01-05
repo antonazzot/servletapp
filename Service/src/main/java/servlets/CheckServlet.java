@@ -65,7 +65,7 @@ public class CheckServlet extends HttpServlet {
                 session.setAttribute("group", group);
                 req.setAttribute("set", theams);
                 req.setAttribute("map", studentHashMap);
-                req.getRequestDispatcher("TrainerControlPage/trainerActList.jsp").forward(req, resp);
+                req.getRequestDispatcher("TrainerControlPage/trainerstartpage.jsp").forward(req, resp);
             } else {
                 req.getRequestDispatcher("TrainerControlPage/groupnotexist.jsp").forward(req, resp);
             }

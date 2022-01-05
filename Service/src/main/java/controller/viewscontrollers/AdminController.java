@@ -1,7 +1,7 @@
 package controller.viewscontrollers;
 
 import controller.serviseforcontroller.viewsservises.ChangeUser;
-import controller.serviseforcontroller.acttrainerstrategy.MVCAdminActStratagy;
+import controller.serviseforcontroller.actadminstrategy.MVCAdminActStratagy;
 import controller.serviseforcontroller.viewsservises.ParserStringToInt;
 import controller.serviseforcontroller.viewsservises.*;
 import lombok.extern.slf4j.Slf4j;
@@ -9,19 +9,14 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import repository.RepositoryFactory;
-import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
-import users.Role;
 import users.Trainer;
 import users.UserImpl;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 @SessionAttributes("user")
 @Controller
 @Slf4j

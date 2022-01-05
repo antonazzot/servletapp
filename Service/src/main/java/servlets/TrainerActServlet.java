@@ -87,7 +87,7 @@ public class TrainerActServlet extends HttpServlet {
     private String doAdd(int userId, String theam, String mark) {
         int tempMark;
         int tempTheamID;
-        String result = "TrainerControlPage/trainerActList.jsp";
+        String result = "TrainerControlPage/trainerstartpage.jsp";
         try {
             tempMark = Integer.parseInt(mark);
             tempTheamID = Integer.parseInt(theam);
