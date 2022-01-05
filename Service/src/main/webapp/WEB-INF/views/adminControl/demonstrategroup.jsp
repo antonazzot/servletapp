@@ -12,28 +12,29 @@
 <div class="login">
  <c:forEach var = "entry" items="${map}">
        <p> Название группы: </p>
-       <c:out value = "${entry.key.name}" />
+       <c:out value = "${entry.value.name}" />
        <p> Id группы: </p>
-       <c:out value = "${entry.key.id}" />
+       <c:out value = "${entry.key}" />
        <p> Тренер группы: </p>
-       <c:out value = "${entry.key.trainer.name}" />
-          <c:forEach var = "map1" items="${entry.value}"> <br>
+       <c:out value = "${entry.value.trainer.name}" />
+
                 <p> Темы группы: </p>
-                         <c:forEach var = "theam" items="${map1.key}">
-                                  <c:out value = "${theam.theamName}" /> <br>
+                         <c:forEach var = "theamset" items="${entry.value.theamsSet}">
+                                  <c:out value = "${theamset.theamName}" /> <br>
                           </c:forEach><br>
+
                 <p> Студенты группы: </p>
-                          <c:forEach var = "student" items="${map1.value}">
-                                  <c:out value = "${student.name}" /> <br>
+                          <c:forEach var = "studentmap" items="${entry.value.studentMap}">
+                                  <c:out value = "${studentmap.value.name}" /> <br>
                           </c:forEach>
-          </c:forEach> <br> <hr />
+
+                          <hr/>
+                          <hr/>
   </c:forEach>
+
+  <jsp:include page="mainpage.jsp" />
      </div>
     </section>
-<br>
-  <form  action="hello">
-      <input type="submit" value="Go to Main Page!">
-  </form>
 
 <br>
 <br>

@@ -20,14 +20,11 @@
      <p><input type="submit" form="data" value="Отправить"></p>
   </form>
 <br>
+<jsp:include page="mainpage.jsp" />
    </div>
   </section>
 <br>
-<form  action="hello">
-    <input type="submit" value="Go to Main Admin!">
-</form>
 
-<br>
 <br>
  <jsp:include page="logout.jsp" />
 

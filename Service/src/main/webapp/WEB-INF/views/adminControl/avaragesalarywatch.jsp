@@ -15,10 +15,7 @@
 
 <p>Name: ${trainer.name}  have got avarage salary ${avarage} </p>
 <br>
-<form  action="hello">
-    <input type="submit" value="Go to Main Admin!">
-</form>
-<br>
+<jsp:include page="mainpage.jsp" />
    </div>
   </section>
 <br>
