@@ -13,7 +13,7 @@
 <section class="container">
 <div class="login">
 <h1> ADD NEW Group </h1>
-  <form id="data" method = "post"  action="/web/mvc/views/addgroup">
+  <form id="data"   action="/web/mvc/views/addgroup">
    <p>Выберите темы для группы</p>
       <c:forEach var = "th" items="${mapITe}">
           <c:out value = "${th.value.theamName}" />

@@ -19,6 +19,7 @@
     <input type="submit" value="Go to Main Admin!">
 </form>
 <br>
+<jsp:include page="mainpage.jsp" />
    </div>
   </section>
 <br>

@@ -51,7 +51,7 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
             stId = Integer.parseInt(studentId);
             thId = Integer.parseInt(theamId);
         } catch (IllegalArgumentException e) {
-            return "exeception.jsp";
+            return "exception.jsp";
         }
         for (int i = 0; i < markId.length; i++) {
             if (marks[i] != null && !marks[i].equals("")) {
@@ -62,7 +62,7 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
                     markIdMarkValue.put(tempMarkId, tempMarkValue);
                     log.info("In dochangeServlet = {}", tempMarkId + " " + tempMarkValue);
                 } catch (IllegalArgumentException e) {
-                    return "exeception.jsp";
+                    return "exception.jsp";
                 }
             }
 
@@ -86,7 +86,7 @@ public class ChangeAndCreateMarkServlet extends HttpServlet {
 
         } catch (IllegalArgumentException e) {
             log.info("Exeception ={}", e.getMessage());
-            return "exeception.jsp";
+            return "exception.jsp";
         }
 
         return "TrainerControlPage/trainerActList.jsp";

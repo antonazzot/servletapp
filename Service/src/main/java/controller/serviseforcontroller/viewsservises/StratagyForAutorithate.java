@@ -45,6 +45,35 @@ public class StratagyForAutorithate {
             }
         }
 
-        return "mvc_hello";
+        return "redirect:hello";
+    }
+
+    public static String authorizatUser(HttpSession session, Model model) {
+        UserImpl user = (UserImpl) session.getAttribute("user");
+        if (Role.ADMINISTRATOR.equals(user.getRole())) {
+            return "adminControl/adminActList";
+        } else if (Role.STUDENT.equals(user.getRole())) {
+            return "StudentPage/studentstartpage";
+        } else if (Role.TRAINER.equals(user.getRole())) {
+            if (ThreadRepositoryFactory.getRepository().allGroup()
+                    .values()
+                    .stream()
+                    .anyMatch(g -> g.getTrainer().getId() == user.getId())) {
+                Group group = ThreadRepositoryFactory.getRepository().allGroup()
+                        .values()
+                        .stream()
+                        .filter(g -> g.getTrainer().getId() == user.getId())
+                        .findAny()
+                        .get();
+
+                Map<Integer, Student> studentHashMap = group.getStudentMap();
+                Set<Theams> theams = group.getTheamsSet();
+                return "trainerpage/trainerstartpage";
+
+            } else {
+                return "TrainerControlPage/groupnotexist";
+            }
+        }
+        return "redirect:hello";
     }
 }

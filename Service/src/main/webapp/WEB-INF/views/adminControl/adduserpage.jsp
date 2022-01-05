@@ -29,12 +29,9 @@
     <br>
     <input type="submit" form="data" />
 <br>
+<jsp:include page="mainpage.jsp" />
       </div>
           </section>
-
-
-<br>
-<jsp:include page="mainpage.jsp" />
 <br>
  <jsp:include page="logout.jsp" />
 </body>

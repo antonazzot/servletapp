@@ -9,10 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupAdderService {
-    public static List<UserImpl> studentList (int [] studentMass) {
+    public static List<UserImpl> studentList (String [] studentMass) {
         List<UserImpl> studentList = new ArrayList<>();
         for (int i = 0; i < studentMass.length; i++) {
-            studentList.add(RepositoryFactory.getRepository().getStudentById(studentMass[i]));
+            int studentId = 0;
+            try {
+               studentId = Integer.parseInt(studentMass[i]);
+            }
+            catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+            studentList.add(RepositoryFactory.getRepository().getStudentById(studentId));
         }
         return studentList;
     }

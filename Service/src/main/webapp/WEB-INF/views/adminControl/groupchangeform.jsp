@@ -21,7 +21,7 @@
              <c:out value = "${gs.value.name}" />
              <input type="checkbox" name="entytiIdforact" value="${gs.key}" ><br>
       </c:forEach>
-      <input name="id" type="hidden"  value = ${id} /> <br>
+      <input name="id" type="hidden"  value = "${groupForChange.id}" /> <br>
       <input name="act" type="hidden"  value = "studentdelete" /> <br>
       <input type="submit" form="data" value="Удалить студента">
       <hr>
@@ -33,14 +33,14 @@
                       <c:out value = "${as.name}" />
                       <input type="checkbox" name="entytiIdforact" value="${as.id}" ><br>
            </c:forEach>
-           <input name="id" type="hidden"  value = ${id} /> <br>
+           <input name="id" type="hidden"  value = "${groupForChange.id}"  /> <br>
            <input name="act" type="hidden"  value = "studentadd" /> <br>
            <input type="submit" form="data1" value="Добавить студента">
       <hr>
 </form>
 
 <form id="data2" method = "post"  action="/web/mvc/views/resultchangegroup">
-       <input name="id" type="hidden"  value = ${id} />
+       <input name="id" type="hidden"  value = "${groupForChange.id}" />
         <input name="act" type="hidden"  value = "theamdelete" /> <br>
         <p>Темы группы, выберите тему для удаления из группы </p>
              <c:forEach var = "gth" items="${groupForChange.theamsSet}">
@@ -57,7 +57,7 @@
                           <c:out value = "${fth.value.theamName}" />
                           <input type="checkbox" name="entytiIdforact" value="${fth.key}" > <br>
                 </c:forEach>
-                <input name="id" type="hidden"  value = ${id} />
+                <input name="id" type="hidden"  value = "${groupForChange.id}"  />
                 <input name="act" type="hidden"  value = "theamadd" /> <br>
                 <input type="submit" form="data3" value="Добавить тему">
     <hr>
@@ -69,20 +69,16 @@
                  <c:out value = "${ftr.value.name}" />
                  <input type="radio" name="entytiIdforact" value="${ftr.key}" >
            </c:forEach>
-        <input name="id" type="hidden"  value = ${id} />
+        <input name="id" type="hidden"  value = "${groupForChange.id}"  />
         <input name="act" type="hidden"  value = "trainer" /> <br>
         <br>
         <p><input type="submit" form="data4" value="Заменить">
         <hr>
 </form>
         <br>
+        <jsp:include page="mainpage.jsp" />
    </div>
   </section>
-
-  <form  action="hello">
-      <input type="submit" value="Go to Main Admin!">
-  </form>
-
 <br>
  <jsp:include page="logout.jsp" />
 </body>

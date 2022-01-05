@@ -35,7 +35,7 @@ public class TrainerActServlet extends HttpServlet {
         if (req.getParameter("user") == null ||
                 req.getParameter("user").equals("")
         ) {
-            req.getRequestDispatcher("exeception.jsp").forward(req, resp);
+            req.getRequestDispatcher("exception.jsp").forward(req, resp);
         }
 
         int userID = Integer.parseInt(req.getParameter("user"));
@@ -93,7 +93,7 @@ public class TrainerActServlet extends HttpServlet {
             tempTheamID = Integer.parseInt(theam);
             if (tempMark < 0 || tempMark > 100)  throw new IllegalArgumentException();
         } catch (IllegalArgumentException e) {
-            return "exeception.jsp";
+            return "exception.jsp";
         }
         log.info("in servlet add ={}", userId + " " + tempTheamID + " " + tempMark);
         ThreadRepositoryFactory.getRepository().addMarkToStudent(userId, tempTheamID, tempMark);

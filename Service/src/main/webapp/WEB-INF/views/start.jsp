@@ -14,7 +14,7 @@
   <section class="container">
     <div class="login">
       <h1>Login to Web App</h1>
-      <form id="data" method = "post"  action="/web/mvc/views/checkUser">
+      <form id="data" method = "post"  action="/web/mvc/checkUser">
         <p><input type="text" name="id" value="" placeholder="Username or Email"></p>
         <p><input type="password" name="password" value="" placeholder="Password"></p>
         <p class="remember_me">

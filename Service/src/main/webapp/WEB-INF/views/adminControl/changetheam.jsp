@@ -26,12 +26,9 @@
       <input type="submit" form="data" value="Изменить тему">
       <hr>
     </form>
+    <jsp:include page="mainpage.jsp" />
      </div>
     </section>
-  <form  action="hello">
-      <input type="submit" value="Go to Main Admin!">
-  </form>
-
 <br>
 <br>
  <jsp:include page="logout.jsp" />

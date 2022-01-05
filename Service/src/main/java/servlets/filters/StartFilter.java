@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Properties;
 
-@WebFilter(urlPatterns = {"/checkUser", "/mvc/views/checkUser"})
+@WebFilter(urlPatterns = {"/checkUser", "/mvc/checkUser", "web/mvc/checkUser"})
 public class StartFilter extends AbstractFilter {
     private static final Logger log = LoggerFactory.getLogger(StartFilter.class);
 
@@ -25,7 +25,7 @@ public class StartFilter extends AbstractFilter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         if (request.getSession(false) == null || request.getSession(false).isNew()) {
-            response.sendRedirect("/web/hello");
+            response.sendRedirect("/hello");
         }
         Properties properties = new Properties();
         properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
@@ -55,8 +55,8 @@ public class StartFilter extends AbstractFilter {
         if (user != null) {
             session.setAttribute("user", user);
             log.info("SessionWithUserCreate = {}", user);
-            request.getRequestDispatcher("/mvc/views/checkUser").forward(request, response);
-        } else request.getRequestDispatcher("exeception.jsp").forward(request, response);
+            request.getRequestDispatcher("web/mvc/checkUser").forward(request, response);
+        } else request.getRequestDispatcher("/exeception").forward(request, response);
         filterChain.doFilter(request, response);
     }
 
