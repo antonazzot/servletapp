@@ -5,12 +5,11 @@ import controller.serviseforcontroller.acttrainerstrategy.MVCAdminActStratagy;
 import controller.serviseforcontroller.viewsservises.ParserStringToInt;
 import controller.serviseforcontroller.viewsservises.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import repository.RepositoryFactory;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import repository.threadmodelrep.ThreadRepositoryFactory;
@@ -23,26 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+@SessionAttributes("user")
 @Controller
 @Slf4j
+@Scope("session")
 @RequestMapping(path = "/mvc/views")
 public class AdminController {
-
-    @GetMapping("/hello")
-    public String hello() {
-        StartService.initAdmin();
-        return "start";
-    }
-
-    @PostMapping("/checkUser")
-    public String checkUser(HttpSession session, Model model) {
-//        log.info("Session??????>>>>>>={}","id: " + id + " pass: " + password + " Sesssion:  " + session + " user ");
-        if (session != null && session.getAttribute("user") != null) {
-            return StratagyForAutorithate.authorizationStratagy(session, model);
-        }
-        return "hello";
-    }
 
     @PostMapping("/adminact")
     public String adminAct (@RequestParam("entity") String entity, @RequestParam("act") String act,
@@ -57,23 +42,22 @@ public class AdminController {
                             @RequestParam("login") String login,
                             @RequestParam("password") String passsword,
                             @RequestParam(required = false, name = "age") int age
-                            ) {
-        UserImpl user = new UserImpl()
-                .withRole(Role.valueOf(role.toUpperCase()))
-                .withName(name)
-                .withLogin(login)
-                .withPassword(passsword)
-                .withAge(age);
-        RepositoryFactory.getRepository().saveUser(user);
-        log.info("USER for SAVE INF ={}", " Role: " + role + " More about: ->>> " + user.getInf() );
+    ) {
+        UserImpl user = SaverService.userForSave(role, name, login, passsword, age);
+
+        int userId = RepositoryFactory.getRepository().saveUser(user);
+        log.info("USER for SAVE INF ={}", " Role: " + role + ". UserId: " + userId + ". " + " More about: ->>> " + user.getInf() );
         return "adminControl/adminActList";
     }
 
-    @PostMapping("/addgroup")
-    public String addgroup (@RequestParam(required = false, name = "theamId") int [] theamId,
-                            @RequestParam (required = false, name = "stId") int [] studentId,
+    @GetMapping("/addgroup")
+    public String addgroup (@RequestParam(required = false, name = "theamId") String [] theamId,
+                            @RequestParam (required = false, name = "stId") String [] studentId,
                             @RequestParam("tr") Integer trId) {
-        ThreadRepositoryFactory.getRepository().addGroup(GroupAdderService.studentList(studentId),  ParserStringToInt.parseArraySIntegerToListInteger(theamId), trId);
+//        log.info("theamId= {}", theamId.toString() );
+//        log.info("stId= {}", studentId.toString() );
+//        log.info("trId= {}", trId );
+        ThreadRepositoryFactory.getRepository().addGroup(GroupAdderService.studentList(studentId),  ParserStringToInt.parseArrayStringToListInteger(theamId), trId);
         return "adminControl/adminActList";
     }
     @GetMapping ("/addsalary")
@@ -131,7 +115,7 @@ public class AdminController {
         RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(id, name,login,password,age));
         return "adminControl/adminActList";
     }
-//
+    //
     @PostMapping  ("/changetheam")
     public String changeTheam ( @RequestParam("theamid") int id,
                                 @RequestParam(required = false, name = "newName" ) String name
@@ -154,13 +138,10 @@ public class AdminController {
     @PostMapping ("/resultchangegroup")
     public String resultChangeGroup ( @RequestParam("id") int id,
                                       @RequestParam("act") String act,
-                                      @RequestParam("entytiIdforact") String [] entytiIdforact
+                                      @RequestParam(required = false, value = "entytiIdforact") String [] entytiIdforact
     ) {
         ThreadRepositoryFactory.getRepository().updateGroup(id, act, ParserStringToInt.parseArrayString(entytiIdforact) );
-        return "adminviews/adminmain";
+        return "adminControl/adminActList";
     }
-    @GetMapping ("/logout")
-    public String logOut () {
-        return "start";
-    }
+
 }

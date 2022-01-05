@@ -22,30 +22,37 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-       ApplicationContext ctx = new AnnotationConfigApplicationContext ("repository");
-//
-////        UserRepository userRepository = ctx.getBean(UserRepository.class);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext("repository");
+
+//        UserRepository userRepository = ctx.getBean(UserRepository.class);
 //        UserRepository repository = RepositoryFactory.getRepository();
 //        System.out.println("---------------->>>>>>>>"+repository);
 //        repository.allStudent().values().stream().map(s->s.getInf()+"***************").forEach(System.out::println);
-
+//
 //         UserFunctionJpa.getAllUser().values().stream().map(s->s.getInf()).forEach(System.out::println);
+        UserImpl user = RepositoryFactory.getRepository().allUser().values().stream()
+                .filter(u -> u.getLogin().equals("Admin") && u.getPassword().equals("pass"))
+                .findFirst().orElse(null);
 
-        Administrator administrator = (Administrator) new Administrator()
-                .withRole(Role.ADMINISTRATOR)
-                .withName("Anton")
-                .withLogin("Admin")
-                .withPassword("pass")
-                .withAge(34);
-        if (RepositoryFactory.getRepository().allUser().values().stream()
-                .filter(user -> user.getLogin()!=null
-                        &&  user.getName()!=null
-                        &&  user.getPassword()!=null)
-                .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
-                        u.getPassword().equals(administrator.getPassword()) &&
-                        u.getName().equals(administrator.getName()) &&
-                        u.getAge() == administrator.getAge())
-        )
-            System.out.println("++++++++++++");
+        System.out.println(user.getInf());
+
+
+//        Administrator administrator = (Administrator) new Administrator()
+//                .withRole(Role.ADMINISTRATOR)
+//                .withName("Anton")
+//                .withLogin("Admin")
+//                .withPassword("pass")
+//                .withAge(34);
+//        if (RepositoryFactory.getRepository().allUser().values().stream()
+//                .filter(user -> user.getLogin()!=null
+//                        &&  user.getName()!=null
+//                        &&  user.getPassword()!=null)
+//                .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
+//                        u.getPassword().equals(administrator.getPassword()) &&
+//                        u.getName().equals(administrator.getName()) &&
+//                        u.getAge() == administrator.getAge())
+//        )
+//            System.out.println("++++++++++++");
+//    }
     }
 }

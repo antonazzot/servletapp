@@ -1,6 +1,7 @@
 package controller.serviseforcontroller.viewsservises;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.taglibs.standard.extra.spath.Predicate;
 import repository.RepositoryFactory;
 import users.Administrator;
 import users.Role;
@@ -13,8 +14,8 @@ public class StartService {
 
     public static void initAdmin(){
         {
-            String adminLogin = null;
-            String adminPassword = null;
+            String adminLogin = "Admin";
+            String adminPassword = "pass";
             Properties properties = new Properties();
             try {
                 properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
@@ -32,16 +33,18 @@ public class StartService {
                     .withAge(34);
             log.info("Types of using memory ={}", properties.getProperty("repository.type"));
             log.info("Repository ={}", RepositoryFactory.getRepository().getClass().getName());
-            if (RepositoryFactory.getRepository().allUser().values().stream()
-                    .filter(user -> user.getLogin()!=null
-                            &&  user.getName()!=null
-                            &&  user.getPassword()!=null)
-                    .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
-                            u.getPassword().equals(administrator.getPassword()) &&
-                            u.getName().equals(administrator.getName()) &&
-                            u.getAge() == administrator.getAge())
-            )
+
+            if ( RepositoryFactory.getRepository().allAdmin().isEmpty() ||
+                    RepositoryFactory.getRepository().allAdmin().values().stream()
+                            .filter(user -> user.getLogin()!=null
+                                    &&  user.getName()!=null
+                                    &&  user.getPassword()!=null)
+                            .noneMatch(u -> u.getLogin().equals(administrator.getLogin()) &&
+                                    u.getPassword().equals(administrator.getPassword()) &&
+                                    u.getName().equals(administrator.getName()) &&
+                                    u.getAge() == administrator.getAge())) {
                 RepositoryFactory.getRepository().saveUser(administrator);
+            }
             log.info("Admin = {}", administrator.getInf());
         }
     }
