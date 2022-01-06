@@ -22,6 +22,8 @@
           <c:forEach var = "list" items="${entry.value}">
            <c:out value = "${list.bigDecimalSalary}" /> <br>
             </c:forEach>
+            <hr/>
+            <hr/>
           </c:forEach>
 
     <br>  <p><h1> Выбирите тренера и введите значение зарплаты для добавления </h1>

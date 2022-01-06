@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class LogingAspect {
 
 
-    @Pointcut("execution(* controller.viewscontrollers*.*(..))")
+    @Pointcut("execution(* controller.viewscontrollers.*.*(..))")
     public void controllers() {
         // pointcut
     }
