@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 @Component
 @Slf4j
-@Aspect
+//@Aspect
 public class LogingAspect {
 
 

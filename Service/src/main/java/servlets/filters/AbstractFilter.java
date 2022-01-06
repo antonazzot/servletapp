@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/*"})
+//@WebFilter(urlPatterns = {"/*"})
 public class AbstractFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {

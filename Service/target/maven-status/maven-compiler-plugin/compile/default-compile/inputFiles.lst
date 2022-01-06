@@ -66,6 +66,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\FreeStudentExtract.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TrainerAddSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\aspect\LogingAspect.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\interceptors\RealContentCashingWrapper.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\GroupFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\CheckServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninpostgres\GroupFunction.java
@@ -92,6 +93,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\MyController.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\LogOutFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\SalaryFunctionJpa.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\RequsetLoggingFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\viewscontrollers\TrainerController.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\CalculateAvarageSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ParserStringToInt.java
