@@ -15,7 +15,7 @@
  <p>Name: ${student.name} </p>
   <p>Оценки Студента:</p>
   <p></p>
- <form id="data" action="hello">
+ <form id="data" action="/web/mvc/hello">
          <c:forEach var = "entry" items="${mapWithTheamAndMark}">
          <c:out value = "${entry.key.theamName}" /> <br>
           <c:forEach var = "list" items="${entry.value}">

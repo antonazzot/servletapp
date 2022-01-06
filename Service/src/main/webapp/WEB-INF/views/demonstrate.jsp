@@ -26,10 +26,7 @@
   </c:forEach>
 
 <br>
-  <form  action="hello">
-      <input type="submit" value="Go to Main Page!">
-  </form>
-<br>
+ <jsp:include page="mainpage.jsp" />
    </div>
   </section>
  <jsp:include page="logout.jsp" />

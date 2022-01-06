@@ -4,12 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
+import threadmodel.Mark;
 import threadmodel.Theams;
 import users.Role;
 import users.Student;
 import users.UserImpl;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 @Slf4j
@@ -23,9 +25,9 @@ public class StratagyForAutorithate {
             model.addAttribute("admin", user);
            result = "adminControl/adminActList";
         } else if (Role.STUDENT.equals(user.getRole())) {
-            model.addAttribute("student", user);
-            log.info("user Autorithate student ={}", "--->>>" + user.getInf());
-            result = "StudentPage/studentstartpage";
+            Map<UserImpl, Map<Theams, List<Mark>>> userMapMap = ThreadRepositoryFactory.getRepository().studentTheamMark(user.getId());
+            model.addAttribute("studentMapMark",userMapMap );
+            result = "StudentPage/studentinf";
         } else if (Role.TRAINER.equals(user.getRole())) {
             if (ThreadRepositoryFactory.getRepository().allGroup()
                     .values()
@@ -58,8 +60,9 @@ public class StratagyForAutorithate {
 
             return "adminControl/adminActList";
         } else if (Role.STUDENT.equals(user.getRole())) {
-
-            return "StudentPage/studentstartpage";
+            Map<UserImpl, Map<Theams, List<Mark>>> userMapMap = ThreadRepositoryFactory.getRepository().studentTheamMark(user.getId());
+            model.addAttribute("studentMapMark",userMapMap );
+            return "StudentPage/studentinf";
         } else if (Role.TRAINER.equals(user.getRole())) {
             if (ThreadRepositoryFactory.getRepository().allGroup()
                     .values()
@@ -72,8 +75,8 @@ public class StratagyForAutorithate {
                         .findAny()
                         .get();
 
-                Map<Integer, Student> studentHashMap = group.getStudentMap();
-                Set<Theams> theams = group.getTheamsSet();
+                model.addAttribute("groupT", group);
+                model.addAttribute("trainer", user);
 
                 return "TrainerControlPage/trainerstartpage";
 

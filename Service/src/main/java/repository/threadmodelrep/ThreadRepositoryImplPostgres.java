@@ -1,7 +1,5 @@
 package repository.threadmodelrep;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import repository.threadmodelrep.threadfunction.functioninpostgres.GroupFunction;
 import repository.threadmodelrep.threadfunction.functioninpostgres.MarkFunction;
@@ -99,7 +97,7 @@ public class ThreadRepositoryImplPostgres implements ThreadRepository {
     }
 
     @Override
-    public void changeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
+    public void changeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
         MarkFunction.dochangeMark(markIdMarkValue, studentId, theamId);
     }
 

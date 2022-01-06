@@ -16,7 +16,7 @@
  <p>Theam: ${th.theamName}  </p>
 
   <p>Выберите оценку для удаления</p>
- <form id="data" method = "post"  action="/mvc/trainer/dodeletemark">
+ <form id="data" method = "post"  action="/web/mvc/trainer/dodeletemark">
 <input type="hidden" name="student" value="${student.id}"/>
 <input type="hidden" name="act" value="delete"/>
 <input type="hidden" name="th" value="${th.id}"/>
@@ -28,10 +28,7 @@
      <p><input type="submit" form="data" value="Отправить"></p>
   </form>
 <br>
-<form  action="hello">
-    <input type="submit" value="Go to Main Page">
-</form>
-<br>
+ <jsp:include page="mainpage.jsp" />
    </div>
   </section>
 <br>

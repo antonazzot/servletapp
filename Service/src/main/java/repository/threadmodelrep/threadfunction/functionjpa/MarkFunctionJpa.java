@@ -103,7 +103,7 @@ public class MarkFunctionJpa {
         }
     }
 
-    public static void dochangeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
+    public static void dochangeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
         for (Map.Entry<Integer, Integer> entry : markIdMarkValue.entrySet()) {
             EntityManager em = null;
             int tempId = entry.getKey();

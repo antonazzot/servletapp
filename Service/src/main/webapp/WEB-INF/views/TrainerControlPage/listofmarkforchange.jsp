@@ -5,38 +5,34 @@
 <head>
     <title>Test Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="static/css/style.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
 <section class="container">
 <div class="login">
 <h1> Trainer control List </h1>
 
- <p>Name: ${student.name} </p>
+ <p>Student name: ${student.name} </p>
   <p>Theam: ${th.theamName}  </p>
 
   <p>ВВедите новое значение для изменения оценки</p>
 
-    <form id="data" method = "post"  action="changeandcreatemark">
-    <input type="hidden" name="student" value="${student.id}"/>
-    <input type="hidden" name="act" value="change"/>
-    <input type="hidden" name="th" value="${th.id}"/>
+    <form id="data" method = "post"  action="/web/mvc/trainer/dochangemark">
+    <input type="hidden" name="studentId" value="${student.id}"/>
+    <input type="hidden" name="thId" value="${th.id}"/>
 
-    <c:forEach var = "entry" items="${map}">
+    <c:forEach var = "entry" items="${markIDListbyTheam}">
+    <c:out value = "Текущее значение оценки" /> <br>
     <c:out value = "${entry.value.valuesOfMark}" /> <br>
-           <input type="hidden" name="markid" value="${entry.key}"/>
-          <input type="text"  name="marks"  placeholder="${list.valuesOfMark}"> <br>
+           <input type="hidden" name="markId" value="${entry.key}"/>
+          <input type="text"  name="markValue"  placeholder="${entry.value.valuesOfMark}"> <br>
     </c:forEach>
 
-
-
-     <p><input type="submit" form="data" value="Отправить"></p>
+     <p><input type="submit" form="data" value="Изменить оценки"></p>
   </form>
 <br>
-<br>
-<form  action="hello">
-    <input type="submit" value="Go to Main Page">
-</form>
+ <jsp:include page="mainpage.jsp" />
 <br>
    </div>
   </section>

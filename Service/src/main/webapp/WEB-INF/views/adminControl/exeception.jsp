@@ -14,12 +14,10 @@
 <h1> Введено неверное значение </h1>
 <h1> Произошла ошибка </h1>
 <br>
-  <form  action="/web/mvc/hello">
-      <input type="submit" value="Go to Main Page!">
-  </form>
+ <jsp:include page="mainpage.jsp" />
 <br>
 <form  action="/web/mvc/logout">
-    <input type="submit" value="Go to LogIN page!">
+    <input type="submit" value="LogIN page!">
 </form>
    </div>
   </section>

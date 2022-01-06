@@ -9,7 +9,6 @@ import users.Student;
 import users.Trainer;
 import users.UserImpl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -45,7 +44,7 @@ public interface ThreadRepository {
 
     void deleteMarksById(int[] tempMarksId, int theamId, int studentid);
 
-    void changeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId);
+    void changeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId);
 
     void updateGroup(int groupId, String act, int[] entytiIdforact);
 

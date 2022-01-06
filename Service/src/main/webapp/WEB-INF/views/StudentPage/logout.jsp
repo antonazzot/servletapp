@@ -7,12 +7,13 @@
 <head>
     <meta charset="UTF-8">
     <title>LogOut Page</title>
-    <link href="static/css/style.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 <body>
 
 <br>
-<form  action="logout">
+<form  action="/web/mvc/logout">
     <input type="submit" value="LogOut">
 </form>
 

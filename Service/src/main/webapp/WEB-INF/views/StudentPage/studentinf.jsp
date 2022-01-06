@@ -12,24 +12,21 @@
 <div class="login">
 <h1> Student List </h1>
 
- <p>Name: ${student.name} </p>
-
   <p>Информация о вашей успеваемости</p>
 
-
-
-    <c:forEach var = "entry" items="${mapmap}">
+    <c:forEach var = "entry" items="${studentMapMark}">
+    <c:out value = "${entry.key.name}" /> <br>
     <p> <c:forEach var = "map" items="${entry.value}">
+                <c:out value = "Theam name: " />
                 <c:out value = "${map.key.theamName}" /> <br>
+                <div>  Mark value:
                     <c:forEach var = "list" items="${map.value}">
                                 <c:out value = "${list.valuesOfMark}" /> <br>
                  </c:forEach> </p> <hr>
+                 <div/>
        </c:forEach>
    </c:forEach>
 
-
-
-<br>
    </div>
   </section>
 <br>
