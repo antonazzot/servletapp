@@ -18,7 +18,7 @@ import repository.threadmodelrep.ThreadRepositoryFactory;
 
 import javax.sql.DataSource;
 
-@ComponentScan({"controller", "repository", "aspect"})
+@ComponentScan({"controller", "repository", "aspect", "interceptors"})
 @Configuration
 @EnableWebMvc
 @RequiredArgsConstructor

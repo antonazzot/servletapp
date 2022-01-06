@@ -8,11 +8,15 @@ import threadmodel.Group;
 public class MVCTrainerActCreateStratagyImpl implements MVCTrainerActStratagy{
     @Override
     public String doAct(Group group, String studentId, String thId, String mark, Model model) {
+        if (mark==null || mark.equals("") || studentId==null || studentId.equals("") || thId==null || thId.equals("")) {
+            return "exception";
+        }
+
         ThreadRepositoryFactory.getRepository().addMarkToStudent(
                 ParserStringToInt.simpleParserStringToInt(studentId),
                 ParserStringToInt.simpleParserStringToInt(thId),
                 ParserStringToInt.simpleParserStringToInt(mark)
         );
-        return "redirect: /mvc/hello";
+        return "redirect: /web/mvc/hello";
     }
 }

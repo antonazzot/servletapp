@@ -11,6 +11,10 @@ import users.Student;
 public class MVCTrainerActDeleteStratagyImpl implements MVCTrainerActStratagy{
     @Override
     public String doAct(Group group, String studentId, String thId, String mark, Model model) {
+        if (studentId==null || studentId.equals("") || thId==null || thId.equals("")) {
+            return "exception";
+        }
+
         Theams theams = ThreadRepositoryFactory.getRepository().theamById(ParserStringToInt.simpleParserStringToInt(thId));
         Student student = RepositoryFactory.getRepository().getStudentById(ParserStringToInt.simpleParserStringToInt(studentId));
         model.addAttribute("th", theams);

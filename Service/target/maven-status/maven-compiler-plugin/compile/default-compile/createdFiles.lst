@@ -7,6 +7,7 @@ repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\Delete
 repository\threadmodelrep\ThreadRepositoryFactory.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\UpdateStratageJpa.class
 servlets\StartPage.class
+springmvcconfig\InterceptorsConfig.class
 controller\serviseforcontroller\viewsservises\SaverService.class
 controller\serviseforcontroller\actadminstrategy\MVCAdminActDeleteStratagyImpl.class
 servlets\LogOutServlet.class
@@ -85,6 +86,7 @@ servlets\AvarageSalaryServlet.class
 servlets\servletstratagy\watchservletstratagy\WatchServletWatchStratagyImpl.class
 aspect\LogingAspect.class
 controller\serviseforcontroller\viewsservises\ChangeUser.class
+interceptors\LogingIntercepter.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTheamDelete.class
 repository\modelrepository\UserRepository.class
 servlets\servletstratagy\watchservletstratagy\WatchServletCreateStratagyImpl.class

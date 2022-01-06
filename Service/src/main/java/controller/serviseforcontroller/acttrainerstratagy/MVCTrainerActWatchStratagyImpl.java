@@ -17,6 +17,7 @@ import java.util.Map;
 public class MVCTrainerActWatchStratagyImpl implements MVCTrainerActStratagy{
     @Override
     public String doAct(Group group, String studentId, String thId, String mark, Model model) {
+
         Student student =  RepositoryFactory.getRepository().getStudentById(ParserStringToInt.simpleParserStringToInt(studentId));
         Theams theams = ThreadRepositoryFactory.getRepository().theamById(ParserStringToInt.simpleParserStringToInt(thId));
         model.addAttribute("student", student);

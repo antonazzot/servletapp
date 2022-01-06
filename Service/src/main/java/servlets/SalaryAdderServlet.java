@@ -36,7 +36,7 @@ public class SalaryAdderServlet extends HttpServlet {
                 ThreadRepositoryFactory.getRepository().addSalaryToTrainer(id, salary);
                 result = "adminControl/adminActList.jsp";
             } catch (IllegalArgumentException e) {
-                result = "exeception.jsp";
+                result = "exception.jsp";
             }
 
         }

@@ -16,6 +16,9 @@ import java.util.Map;
 public class MVCTrainerActChangeStratagyImpl implements MVCTrainerActStratagy{
     @Override
     public String doAct(Group group, String studentId, String thId, String mark, Model model) {
+        if (studentId==null || studentId.equals("") || thId==null || thId.equals("")) {
+            return "exception";
+        }
         int stId = ParserStringToInt.simpleParserStringToInt(studentId);
         Student student = RepositoryFactory.getRepository().getStudentById(stId);
         Theams theams = ThreadRepositoryFactory.getRepository().theamById( Integer.parseInt(thId));

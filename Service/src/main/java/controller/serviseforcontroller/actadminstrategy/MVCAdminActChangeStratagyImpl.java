@@ -24,7 +24,7 @@ public class MVCAdminActChangeStratagyImpl implements MVCAdminActStratagy {
             model.addAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
             return "adminControl/changeGroup";
         } else {
-            return "exeception.jsp";
+            return "exception.jsp";
         }
 
     }

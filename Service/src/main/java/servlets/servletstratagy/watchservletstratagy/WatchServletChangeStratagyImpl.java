@@ -25,7 +25,7 @@ public class WatchServletChangeStratagyImpl implements WatchServletStratagy {
             req.setAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
             return "adminControl/changeGroup.jsp";
         } else {
-            return "exeception.jsp";
+            return "exception.jsp";
         }
     }
     /**

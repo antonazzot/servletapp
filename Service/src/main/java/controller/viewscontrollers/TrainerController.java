@@ -29,7 +29,7 @@ public class TrainerController {
             @RequestParam (required = false, value = "mark") String mark,
             Model model
     ) {
-        if (studentId.equals("") || thId.equals("")) {
+        if ( studentId==null || studentId.equals("") || thId==null || thId.equals("")) {
             return "exception";
         }
         Group group = (Group) model.getAttribute("groupT");
@@ -64,6 +64,6 @@ public class TrainerController {
         ThreadRepositoryFactory.getRepository().changeMark(MarkIdMarkValueIntegration.doIntegration(markValue, markId),
                 ParserStringToInt.simpleParserStringToInt(studentId), ParserStringToInt.simpleParserStringToInt(thId));
 
-        return "redirect:/mvc/hello"; }
+        return "redirect:/web/mvc/hello"; }
 
 }

@@ -41,7 +41,7 @@ public class GroupCreaterServlet extends HttpServlet {
             ThreadRepositoryFactory.getRepository().addGroup(studentList, thId, trainerID);
             req.getRequestDispatcher("adminControl/adminActList.jsp").forward(req, resp);
         } catch (IllegalArgumentException e) {
-            req.getRequestDispatcher("exeception.jsp").forward(req, resp);
+            req.getRequestDispatcher("exception.jsp").forward(req, resp);
         }
     }
 

@@ -11,7 +11,7 @@ public class WatchServletDeleteStratagyImpl implements WatchServletStratagy {
         try {
             entityId = Integer.parseInt(req.getParameter("id"));
         } catch (IllegalArgumentException var5) {
-            return "exeception.jsp";
+            return "exception.jsp";
         }
 
         RepositoryFactory.getRepository().removeUser(entityId, entity);
