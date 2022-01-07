@@ -52,6 +52,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\watchservletstratagy\WatchServletStratagy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\StudentServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTheamAdd.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\aspect\JpaTransactionAspect.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplInMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\watchservletstratagy\WatchServletDeleteStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\viewscontrollers\InitController.java
@@ -93,6 +94,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\MyController.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\LogOutFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\SalaryFunctionJpa.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\config\EntityManagerConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\RequsetLoggingFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\viewscontrollers\TrainerController.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\CalculateAvarageSalaryServlet.java
@@ -100,6 +102,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\servise
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\ChangeAndCreateMarkServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ChangeAdminActStratagy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\restcontrollers\ThreadRestController.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\aspect\JpaTransaction.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActDeleteStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserRepositoryImplJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionjpaerepositiry\TrainerFunctionJpa.java

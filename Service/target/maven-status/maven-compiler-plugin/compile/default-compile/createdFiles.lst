@@ -9,6 +9,7 @@ repository\threadmodelrep\threadfunction\updategroupstratagy\UpdateStratageJpa.c
 servlets\StartPage.class
 controller\serviseforcontroller\viewsservises\SaverService.class
 controller\serviseforcontroller\actadminstrategy\MVCAdminActDeleteStratagyImpl.class
+repository\config\EntityManagerConfig.class
 servlets\LogOutServlet.class
 servlets\ActionChangeServlet.class
 controller\MyController.class
@@ -92,6 +93,7 @@ repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestra
 repository\modelrepository\UserRepository.class
 servlets\servletstratagy\watchservletstratagy\WatchServletCreateStratagyImpl.class
 servlets\servletstratagy\watchservletstratagy\WatchServletDeleteStratagyImpl.class
+aspect\JpaTransactionAspect.class
 repository\modelrepository\modelfunction\functionjpaerepositiry\AdminFunctionJpa.class
 servlets\TrainerAddSalaryServlet.class
 controller\serviseforcontroller\viewsservises\ParserStringToInt.class
@@ -102,6 +104,7 @@ repository\threadmodelrep\threadfunction\functioninpostgres\SalaryFunction.class
 servlets\GroupCreaterServlet.class
 repository\threadmodelrep\threadfunction\functioninpostgres\TheamFunction.class
 repository\modelrepository\modelfunction\functionpostgress\AdminFunctionPostgres.class
+aspect\JpaTransaction.class
 servlets\filters\TrainerFilter.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressStudentAdd.class
 controller\serviseforcontroller\viewsservises\ChangeTrinerActStratagy.class

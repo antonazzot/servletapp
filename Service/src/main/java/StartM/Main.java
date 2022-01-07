@@ -22,19 +22,20 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext("controller");
+        ApplicationContext ctx = new AnnotationConfigApplicationContext("repository");
 
 //        UserRepository userRepository = ctx.getBean(UserRepository.class);
 //        UserRepository repository = RepositoryFactory.getRepository();
 //        System.out.println("---------------->>>>>>>>"+repository);
 //        repository.allStudent().values().stream().map(s->s.getInf()+"***************").forEach(System.out::println);
 //
-//         UserFunctionJpa.getAllUser().values().stream().map(s->s.getInf()).forEach(System.out::println);
-//        UserImpl user = RepositoryFactory.getRepository().allUser().values().stream()
-//                .filter(u -> u.getLogin().equals("Admin") && u.getPassword().equals("pass"))
-//                .findFirst().orElse(null);
-//
-//        System.out.println(user.getInf());
+         UserFunctionJpa.getAllUser().values().stream().map(s->s.getInf()).forEach(System.out::println);
+        UserImpl user = RepositoryFactory.getRepository().allUser().values().stream()
+                .filter(u -> u.getLogin().equals("Admin") && u.getPassword().equals("pass"))
+                .findFirst().orElse(null);
+        UserImpl user1 = new UserImpl().withName("name").withLogin("login").withPassword("passs").withAge(130);
+        RepositoryFactory.getRepository().saveUser(user1);
+        System.out.println(user.getInf());
 
 
 //        Administrator administrator = (Administrator) new Administrator()

@@ -1,5 +1,6 @@
 package repository.modelrepository.modelfunction.functionjpaerepositiry;
 
+import aspect.JpaTransaction;
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ public class UserFunctionJpa {
         result.putAll(AdminFunctionJpa.getAllAdmin());
         return result;
     }
-
+//    @JpaTransaction
     public static int doSaveUser(UserImpl user) {
         EntityManager em = null;
         try {
