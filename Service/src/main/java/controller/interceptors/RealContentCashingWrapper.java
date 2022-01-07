@@ -2,7 +2,7 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-package interceptors;
+package controller.interceptors;
 import java.io.*;
 import java.net.URLEncoder;
 import java.util.Arrays;
@@ -14,6 +14,8 @@ import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.lang.Nullable;
 import org.springframework.http.HttpMethod;
@@ -50,6 +52,7 @@ import java.util.Map;
  * @since 4.1.3
  * @see ContentCachingResponseWrapper
  */
+@Slf4j
 public class RealContentCashingWrapper extends HttpServletRequestWrapper {
 
     private static final String FORM_CONTENT_TYPE = "application/x-www-form-urlencoded";
@@ -79,6 +82,7 @@ public class RealContentCashingWrapper extends HttpServletRequestWrapper {
         this.contentCacheLimit = null;
         writeRequestParametersToCachedContent();
         data = request.getInputStream().readAllBytes();
+        log.info("bytedata={}", new String(Arrays.copyOf(data, 1024)) );
     }
 
     /**

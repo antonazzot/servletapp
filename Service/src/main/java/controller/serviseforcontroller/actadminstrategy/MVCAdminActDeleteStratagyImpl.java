@@ -11,7 +11,7 @@ public class MVCAdminActDeleteStratagyImpl implements MVCAdminActStratagy {
         try {
             entityId = Integer.parseInt(deleteId);
         } catch (IllegalArgumentException var5) {
-            return "exeception";
+            return "exception";
         }
         RepositoryFactory.getRepository().removeUser(entityId, entity);
         return "redirect:/check";

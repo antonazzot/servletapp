@@ -1,24 +1,14 @@
 package springmvcconfig;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import repository.RepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 
-import javax.sql.DataSource;
-
-@ComponentScan({"controller", "repository", "aspect", "interceptors"})
+@ComponentScan({"controller", "repository", "aspect"})
 @Configuration
 @EnableWebMvc
 @RequiredArgsConstructor

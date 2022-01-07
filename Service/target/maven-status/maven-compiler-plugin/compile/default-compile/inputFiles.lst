@@ -1,11 +1,12 @@
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\springmvcconfig\InterceptorsConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\TheamFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninmemory\GroupFunction.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\MarkFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteGroupImpJPA.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\interceptors\RealContentCashingWrapper.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\MarkIdMarkValueIntegration.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\StratagyForAutorithate.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\RoleIDParametrCheker.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\interceptors\LogingIntercepter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\StartService.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninpostgres\TheamFunction.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTheamDelete.java
@@ -20,6 +21,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\springmvcconfig\SpringConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActChangeStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\GroupCreaterServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ContentInParamChecker.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyJpaStudentAdd.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TrainerActServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\closebaseconnection\PostgresSQLUtils.java
@@ -66,7 +68,6 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\FreeStudentExtract.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TrainerAddSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\aspect\LogingAspect.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\interceptors\RealContentCashingWrapper.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\GroupFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\CheckServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninpostgres\GroupFunction.java
@@ -84,7 +85,6 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\AdminFunctionPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplPostgres.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\interceptors\LogingIntercepter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\UsersFunctionPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\GroupUpdateActionServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteStudentImpJPA.java
@@ -111,6 +111,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\servise
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\SalaryAdderServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryFactory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\ActionChangeServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\interceptors\InterceptorsConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\SaverService.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteTrainerImpJPA.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTheamAdd.java

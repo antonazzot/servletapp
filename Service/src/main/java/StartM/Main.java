@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext("repository");
+        ApplicationContext ctx = new AnnotationConfigApplicationContext("controller");
 
 //        UserRepository userRepository = ctx.getBean(UserRepository.class);
 //        UserRepository repository = RepositoryFactory.getRepository();
@@ -30,11 +30,11 @@ public class Main {
 //        repository.allStudent().values().stream().map(s->s.getInf()+"***************").forEach(System.out::println);
 //
 //         UserFunctionJpa.getAllUser().values().stream().map(s->s.getInf()).forEach(System.out::println);
-        UserImpl user = RepositoryFactory.getRepository().allUser().values().stream()
-                .filter(u -> u.getLogin().equals("Admin") && u.getPassword().equals("pass"))
-                .findFirst().orElse(null);
-
-        System.out.println(user.getInf());
+//        UserImpl user = RepositoryFactory.getRepository().allUser().values().stream()
+//                .filter(u -> u.getLogin().equals("Admin") && u.getPassword().equals("pass"))
+//                .findFirst().orElse(null);
+//
+//        System.out.println(user.getInf());
 
 
 //        Administrator administrator = (Administrator) new Administrator()

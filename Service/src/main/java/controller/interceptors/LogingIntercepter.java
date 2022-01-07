@@ -1,19 +1,17 @@
-package interceptors;
+package controller.interceptors;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.ContentCachingRequestWrapper;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedInputStream;
 import java.io.IOException;
 
 @Slf4j
-@Component
+//@Component
 public class LogingIntercepter extends HandlerInterceptorAdapter {
 
     @Override
@@ -24,11 +22,11 @@ public class LogingIntercepter extends HandlerInterceptorAdapter {
         LoggingBody(request);
         return true;
     }
-
-    private void LoggingBody(HttpServletRequest request) throws IOException {
+    @SneakyThrows
+    private void LoggingBody(HttpServletRequest request)  {
         RealContentCashingWrapper reqWrapper = (RealContentCashingWrapper) request;
         String body = new String(reqWrapper.getContentAsByteArray(), request.getCharacterEncoding());
-        log.debug("*************Request Body***************: \n {}", body);
+        log.info("*************Request Body***************: \n {}", body);
     }
 
     private void LoggingURL(HttpServletRequest request) {

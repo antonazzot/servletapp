@@ -33,12 +33,14 @@ public class AdminController {
 
     @PostMapping("/saveuser")
     public String saveUser (@RequestParam("role") String role,
-                            @RequestParam("name") String name,
-                            @RequestParam("login") String login,
-                            @RequestParam("password") String passsword,
+                            @RequestParam(required = false,name = "name") String name,
+                            @RequestParam(required = false,name ="login") String login,
+                            @RequestParam(required = false,name ="password") String password,
                             @RequestParam(required = false, name = "age") int age
     ) {
-        UserImpl user = SaverService.userForSave(role, name, login, passsword, age);
+        if(ContentInParamChecker.checkParam(name, login, password)) return "exception";
+
+        UserImpl user = SaverService.userForSave(role, name, login, password, age);
 
         int userId = RepositoryFactory.getRepository().saveUser(user);
         log.info("USER for SAVE INF ={}", " Role: " + role + ". UserId: " + userId + ". " + " More about: ->>> " + user.getInf() );
@@ -49,9 +51,8 @@ public class AdminController {
     public String addgroup (@RequestParam(required = false, name = "teamId") String [] theamId,
                             @RequestParam (required = false, name = "stId") String [] studentId,
                             @RequestParam("tr") Integer trId) {
-//        log.info("theamId= {}", theamId.toString() );
-//        log.info("stId= {}", studentId.toString() );
-//        log.info("trId= {}", trId );
+
+
         ThreadRepositoryFactory.getRepository()
                 .addGroup(GroupAdderService.studentList(studentId),
                         ParserStringToInt.parseArrayStringToListInteger(theamId),

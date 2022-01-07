@@ -64,6 +64,6 @@ public class TrainerController {
         ThreadRepositoryFactory.getRepository().changeMark(MarkIdMarkValueIntegration.doIntegration(markValue, markId),
                 ParserStringToInt.simpleParserStringToInt(studentId), ParserStringToInt.simpleParserStringToInt(thId));
 
-        return "redirect:/web/mvc/hello"; }
+        return "redirect:/mvc/hello"; }
 
 }

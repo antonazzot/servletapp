@@ -8,7 +8,7 @@ import servlets.filters.StartFilter;
 
 import javax.servlet.Filter;
 
-public class MySpringMVCDispatcherServletInit extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class MySpringMVCDispatcherServletInit extends AbstractAnnotationConfigDispatcherServletInitializer  {
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;
