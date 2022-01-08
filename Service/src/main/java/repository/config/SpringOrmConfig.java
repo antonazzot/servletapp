@@ -27,7 +27,7 @@ public class SpringOrmConfig {
     containerEntityManagerFactoryBean.setDataSource(dataSource);
     containerEntityManagerFactoryBean.setPersistenceUnitName("jpa-unit");
     containerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-    containerEntityManagerFactoryBean.setPackagesToScan("users");
+    containerEntityManagerFactoryBean.setPackagesToScan("users", "threadmodel");
     containerEntityManagerFactoryBean.setJpaProperties(jpaProperties);
     return containerEntityManagerFactoryBean;
     }

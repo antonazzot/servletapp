@@ -1,5 +1,6 @@
 package repository.modelrepository;
 
+import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import repository.modelrepository.modelfunction.deleteentitystratage.jpastratagy.*;
@@ -22,54 +23,105 @@ public class UserSpringOrmRepository implements UserRepository{
     @Override
     public Map<Integer, UserImpl> allUser() {
         Map <Integer, UserImpl> result = new HashMap<>();
-        begin();
-        getEm().createQuery("select u from users u", UserImpl.class).getResultList()
-                .forEach(user -> result.put(user.getId(),user));
+        try {
+            begin();
+            getEm().createQuery("select u from users u", UserImpl.class).getResultList()
+                    .forEach(user -> result.put(user.getId(),user));
+
+        }
+        catch (Exception e) {
+            JpaUtils.rollBackQuietly(getEm(),e);
+        }
+        finally {
+            JpaUtils.closeQuietly(getEm());
+        }
+
+
         return result;
     }
 
     @Override
     public Map<Integer, UserImpl> allTrainer() {
         Map <Integer, UserImpl> result = new HashMap<>();
+       try {
         begin();
         TypedQuery<Trainer> alltrainer = getEm().createQuery("select t from Trainer t where t.role = :role", Trainer.class);
         alltrainer.setParameter("role", Role.TRAINER);
         alltrainer.getResultList().forEach(trainer -> result.put(trainer.getId(), trainer));
+    }
+        catch (Exception e) {
+        JpaUtils.rollBackQuietly(getEm(),e);
+    }
+        finally {
+        JpaUtils.closeQuietly(getEm());
+    }
         return result;
     }
 
     @Override
     public Map<Integer, UserImpl> allStudent() {
         Map <Integer, UserImpl> result = new HashMap<>();
+       try {
         begin();
         TypedQuery<Student> allStudent = getEm().createQuery("select s from Student s where s.role = :role", Student.class);
         allStudent.setParameter("role", Role.STUDENT);
         allStudent.getResultList().forEach(student -> result.put(student.getId(), student));
+    }
+        catch (Exception e) {
+        JpaUtils.rollBackQuietly(getEm(),e);
+    }
+        finally {
+        JpaUtils.closeQuietly(getEm());
+    }
         return result;
     }
 
     @Override
     public Map<Integer, UserImpl> allAdmin() {
         Map <Integer, UserImpl> result = new HashMap<>();
+      try {
         begin();
         TypedQuery<Administrator> allAdmin = getEm().createQuery("select a from Administrator a where a.role = :role", Administrator.class);
         allAdmin.setParameter("role", Role.ADMINISTRATOR);
         allAdmin.getResultList().forEach(administrator -> result.put(administrator.getId(), administrator));
+    }
+        catch (Exception e) {
+        JpaUtils.rollBackQuietly(getEm(),e);
+    }
+        finally {
+        JpaUtils.closeQuietly(getEm());
+    }
         return result;
     }
 
     @Override
     public UserImpl getUserById(Integer id) {
+        UserImpl user = null;
+        try {
         begin();
-        UserImpl user = getEm().find(UserImpl.class, id);
+        user = getEm().find(UserImpl.class, id);    }
+        catch (Exception e) {
+        JpaUtils.rollBackQuietly(getEm(),e);
+    }
+        finally {
+        JpaUtils.closeQuietly(getEm());
+    }
         return user;
     }
 
     @Override
     public int saveUser(UserImpl user) {
+     try {
         begin();
         getEm().persist(user);
         commit();
+    }
+        catch (Exception e) {
+        JpaUtils.rollBackQuietly(getEm(),e);
+    }
+        finally {
+        JpaUtils.closeQuietly(getEm());
+    }
         return user.getId();
     }
 
@@ -133,20 +185,46 @@ public class UserSpringOrmRepository implements UserRepository{
 
     @Override
     public Trainer getTrainerById(int id) {
+     try {
        begin();
        return getEm().find(Trainer.class, id);
     }
-
+        catch (Exception e) {
+        JpaUtils.rollBackQuietly(getEm(),e);
+    }
+        finally {
+        JpaUtils.closeQuietly(getEm());
+    }
+     return null;
+    }
     @Override
     public Administrator getAdministratorById(int id) {
+       try {
         begin();
         return getEm().find(Administrator.class, id);
+    }
+        catch (Exception e) {
+        JpaUtils.rollBackQuietly(getEm(),e);
+    }
+        finally {
+        JpaUtils.closeQuietly(getEm());
+    }
+       return null;
     }
 
     @Override
     public Student getStudentById(int id) {
+     try {
         begin();
         return getEm().find(Student.class, id);
+    }
+        catch (Exception e) {
+        JpaUtils.rollBackQuietly(getEm(),e);
+    }
+        finally {
+        JpaUtils.closeQuietly(getEm());
+    }
+     return null;
     }
 
     public EntityManager getEm () {
@@ -166,6 +244,10 @@ public class UserSpringOrmRepository implements UserRepository{
 
     public void rollback () {
         getEm().getTransaction().rollback();
+    }
+
+    public void close () {
+        getEm().close();
     }
 
 

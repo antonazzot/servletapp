@@ -89,6 +89,7 @@ servlets\AvarageSalaryServlet.class
 servlets\servletstratagy\watchservletstratagy\WatchServletWatchStratagyImpl.class
 aspect\LogingAspect.class
 controller\serviseforcontroller\viewsservises\ChangeUser.class
+repository\modelrepository\UserSpringOrmRepository.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTheamDelete.class
 repository\modelrepository\UserRepository.class
 servlets\servletstratagy\watchservletstratagy\WatchServletCreateStratagyImpl.class
@@ -130,5 +131,6 @@ repository\RepositoryTypes.class
 springmvcconfig\SpringConfig.class
 repository\threadmodelrep\threadfunction\functioninmemory\SalaryFunction.class
 repository\RepositoryFactory.class
+repository\config\SpringOrmConfig.class
 repository\RepositoryDatasourse.class
 repository\threadmodelrep\threadfunction\functioninmemory\GroupFunction.class
