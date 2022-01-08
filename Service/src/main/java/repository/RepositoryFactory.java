@@ -37,15 +37,15 @@ public class RepositoryFactory {
         return repository;
     }
 
-    @Bean
-    public org.hibernate.cfg.Configuration configuration () {
-        org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration().configure();
-        return configuration;
-    }
-
-    @Bean
-    public SessionFactory sessionFactory () {
-        return configuration().buildSessionFactory();
-    }
+//    @Bean
+//    public org.hibernate.cfg.Configuration configuration () {
+//        org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration().configure();
+//        return configuration;
+//    }
+//
+//    @Bean
+//    public SessionFactory sessionFactory () {
+//        return configuration().buildSessionFactory();
+//    }
 
 }
