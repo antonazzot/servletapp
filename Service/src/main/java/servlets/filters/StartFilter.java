@@ -58,7 +58,7 @@ public class StartFilter extends AbstractFilter {
             session.setAttribute("user", user);
             log.info("SessionWithUserCreate = {}", user);
             request.getRequestDispatcher("/mvc/checkUser").forward(request, response);
-        } else request.getRequestDispatcher("mvc/exeception").forward(request, response);
+        } else request.getRequestDispatcher("/mvc/exeception").forward(request, response);
         filterChain.doFilter(request, response);
     }
 
@@ -78,8 +78,15 @@ public class StartFilter extends AbstractFilter {
     }
 
     private UserImpl itRightCondition(String login, String password) {
-        return RepositoryFactory.getRepository().allUser().values().stream()
+        log.info("in start filter before check = {}", "login: " + login +"  " + "password: " +password );
+
+        UserImpl user = RepositoryFactory.getRepository().allUser().values().stream()
                 .filter(u -> u.getLogin().equals(login) && u.getPassword().equals(password))
                 .findFirst().orElse(null);
+
+        assert user != null;
+        log.info("in start filter after check = {}", user.getInf() );
+
+        return  user;
     }
 }

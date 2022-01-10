@@ -18,7 +18,6 @@ import java.util.Set;
 public class StratagyForAutorithate {
     public static String authorizationStratagy(HttpSession session, Model model) {
         String result = "exception";
-
         UserImpl user = (UserImpl) session.getAttribute("user");
         log.info("user Autorithate ={}", "--->>>" + user.getInf());
         if (Role.ADMINISTRATOR.equals(user.getRole())) {

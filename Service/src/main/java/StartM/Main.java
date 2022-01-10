@@ -26,8 +26,9 @@ public class Main {
 
 //        UserRepository userRepository = ctx.getBean(UserRepository.class);
 //        UserRepository repository = RepositoryFactory.getRepository();
-        RepositoryFactory.getRepository().allStudent().values().stream()
+        RepositoryFactory.getRepository().allUser().values().stream()
                 .map(UserImpl::getInf).forEach(System.out::println);
+
 //        System.out.println("---------------->>>>>>>>"+repository);
 //        repository.allStudent().values().stream().map(s->s.getInf()+"***************").forEach(System.out::println);
 //

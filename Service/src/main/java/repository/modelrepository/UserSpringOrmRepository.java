@@ -2,8 +2,12 @@ package repository.modelrepository;
 
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import repository.modelrepository.modelfunction.deleteentitystratage.jpastratagy.*;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.AdminFunctionJpa;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
+import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
 import threadmodel.Group;
@@ -17,27 +21,22 @@ import java.util.*;
 @RequiredArgsConstructor
 @Repository("Orm")
 public class UserSpringOrmRepository implements UserRepository{
-    private final EntityManagerFactory emf;
+    private  EntityManagerFactory emf;
     private final ThreadLocal<EntityManager> emThreadLocal = new ThreadLocal<>();
+
+    @Autowired
+    public void setEmf(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     @Override
     public Map<Integer, UserImpl> allUser() {
         Map <Integer, UserImpl> result = new HashMap<>();
-        try {
-            begin();
-            getEm().createQuery("select u from users u", UserImpl.class).getResultList()
-                    .forEach(user -> result.put(user.getId(),user));
-
-        }
-        catch (Exception e) {
-            JpaUtils.rollBackQuietly(getEm(),e);
-        }
-        finally {
-            JpaUtils.closeQuietly(getEm());
-        }
-
-
+        result.putAll(TrainerFunctionJpa.getallTrainer());
+        result.putAll(StudentFunctionJpa.getAllStudent());
+        result.putAll(AdminFunctionJpa.getAllAdmin());
         return result;
+
     }
 
     @Override
@@ -50,10 +49,10 @@ public class UserSpringOrmRepository implements UserRepository{
         alltrainer.getResultList().forEach(trainer -> result.put(trainer.getId(), trainer));
     }
         catch (Exception e) {
-        JpaUtils.rollBackQuietly(getEm(),e);
+        rollback();
     }
         finally {
-        JpaUtils.closeQuietly(getEm());
+       close();
     }
         return result;
     }
@@ -68,10 +67,10 @@ public class UserSpringOrmRepository implements UserRepository{
         allStudent.getResultList().forEach(student -> result.put(student.getId(), student));
     }
         catch (Exception e) {
-        JpaUtils.rollBackQuietly(getEm(),e);
+        rollback();
     }
         finally {
-        JpaUtils.closeQuietly(getEm());
+           close();
     }
         return result;
     }
@@ -80,16 +79,17 @@ public class UserSpringOrmRepository implements UserRepository{
     public Map<Integer, UserImpl> allAdmin() {
         Map <Integer, UserImpl> result = new HashMap<>();
       try {
+          getEm();
         begin();
         TypedQuery<Administrator> allAdmin = getEm().createQuery("select a from Administrator a where a.role = :role", Administrator.class);
         allAdmin.setParameter("role", Role.ADMINISTRATOR);
         allAdmin.getResultList().forEach(administrator -> result.put(administrator.getId(), administrator));
     }
         catch (Exception e) {
-        JpaUtils.rollBackQuietly(getEm(),e);
+        rollback();
     }
         finally {
-        JpaUtils.closeQuietly(getEm());
+        close();
     }
         return result;
     }
@@ -101,10 +101,10 @@ public class UserSpringOrmRepository implements UserRepository{
         begin();
         user = getEm().find(UserImpl.class, id);    }
         catch (Exception e) {
-        JpaUtils.rollBackQuietly(getEm(),e);
+        rollback();
     }
         finally {
-        JpaUtils.closeQuietly(getEm());
+        close();
     }
         return user;
     }
@@ -117,10 +117,10 @@ public class UserSpringOrmRepository implements UserRepository{
         commit();
     }
         catch (Exception e) {
-        JpaUtils.rollBackQuietly(getEm(),e);
+        rollback();
     }
         finally {
-        JpaUtils.closeQuietly(getEm());
+       close();
     }
         return user.getId();
     }
@@ -190,10 +190,10 @@ public class UserSpringOrmRepository implements UserRepository{
        return getEm().find(Trainer.class, id);
     }
         catch (Exception e) {
-        JpaUtils.rollBackQuietly(getEm(),e);
+        rollback();
     }
         finally {
-        JpaUtils.closeQuietly(getEm());
+        close();
     }
      return null;
     }
@@ -204,10 +204,10 @@ public class UserSpringOrmRepository implements UserRepository{
         return getEm().find(Administrator.class, id);
     }
         catch (Exception e) {
-        JpaUtils.rollBackQuietly(getEm(),e);
+        rollback();
     }
         finally {
-        JpaUtils.closeQuietly(getEm());
+        close();
     }
        return null;
     }
@@ -219,10 +219,10 @@ public class UserSpringOrmRepository implements UserRepository{
         return getEm().find(Student.class, id);
     }
         catch (Exception e) {
-        JpaUtils.rollBackQuietly(getEm(),e);
+        rollback();
     }
         finally {
-        JpaUtils.closeQuietly(getEm());
+        close();
     }
      return null;
     }

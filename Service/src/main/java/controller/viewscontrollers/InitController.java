@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import users.UserImpl;
 
 import javax.servlet.http.HttpSession;
 @SessionAttributes("user")
@@ -34,10 +35,12 @@ public class InitController {
         log.info("Session??????>>>>>>={}", " Sesssion:  " + session + " user " );
         if (session != null && session.getAttribute("user") != null) {
             model.addAttribute("user", session.getAttribute("user"));
+                log.info("user??????>>>>>>={}", " Sesssion:  " + session + session.getAttribute("user") );
             return StratagyForAutorithate.authorizationStratagy(session, model);
         }
         else
-            return "redirect:/hello";
+            log.info("userThis>>>>>>={}", " Sesssion:  " + session  );
+            return "redirect:/mvc/hello";
     }
     @GetMapping ("/exception")
     public String exception () {

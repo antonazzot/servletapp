@@ -24,7 +24,7 @@ public class MarkFunctionJpa {
 
     public static Map<UserImpl, Map<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
         Map<UserImpl, Map<Theams, List<Mark>>> studentTheamMarkMap = new HashMap<>();
-        Student student = StudentFunctionJpa.doGetStudentById(studentId);
+        Student student = RepositoryFactory.getRepository().getStudentById(studentId);
         Set<Theams> theams = getTheamsSet(student);
         Map<Theams, List<Mark>> theamsListHashMap = getTheamsListHashMap(studentId, theams);
         studentTheamMarkMap.put(student, theamsListHashMap);
