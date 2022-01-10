@@ -153,12 +153,12 @@ public class UserSpringOrmRepository implements UserRepository{
 
     @Override
     public Map<Integer, UserImpl> freeTrainer() {
-        if (ThreadRepositoryFactory.getRepository().allGroup().isEmpty())
+        Collection<Group> values = ThreadRepositoryFactory.getRepository().allGroup().values();
+        if (values.isEmpty())
             return allTrainer();
         else {
             List<UserImpl> busyTrainer = new ArrayList<>();
-            GroupFunctionJpa.getAllGroup().values()
-                    .forEach(group -> busyTrainer.add(group.getTrainer()));
+            values.forEach(group -> busyTrainer.add(group.getTrainer()));
             return freeTrainerexecute(busyTrainer);
         }
     }

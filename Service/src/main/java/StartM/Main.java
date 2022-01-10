@@ -13,10 +13,8 @@ import repository.modelrepository.UserRepositoryImplJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.UserFunctionJpa;
 import repository.threadmodelrep.ThreadRepository;
 import repository.threadmodelrep.ThreadRepositoryFactory;
-import users.Administrator;
-import users.Role;
-import users.Student;
-import users.UserImpl;
+import threadmodel.Mark;
+import users.*;
 
 import java.util.Map;
 
@@ -26,8 +24,22 @@ public class Main {
 
 //        UserRepository userRepository = ctx.getBean(UserRepository.class);
 //        UserRepository repository = RepositoryFactory.getRepository();
-        RepositoryFactory.getRepository().allUser().values().stream()
-                .map(UserImpl::getInf).forEach(System.out::println);
+//        ThreadRepositoryFactory.getRepository().trainerSalary().values().stream()
+//              .forEach(System.out::println);
+//        RepositoryFactory.getRepository().freeTrainer().values()
+//                .stream().map(user -> (Trainer)user)
+//                .map(trainer -> trainer.getInf())
+//                .forEach(System.out::println);
+//            ThreadRepositoryFactory.getRepository().allGroup().values()
+//                    .stream().map(group -> group.getInf()).forEach(System.out::println);
+//        System.out.println(ThreadRepositoryFactory.getRepository().theamById(60));;
+            ThreadRepositoryFactory.getRepository()
+                    .getMarkListbyTheam(
+                            ThreadRepositoryFactory
+                                    .getRepository()
+                                    .theamById(60), 150).stream().map(Mark::getValuesOfMark)
+                    .forEach(System.out::println);
+//        ThreadRepositoryFactory.getRepository().addMarkToStudent(150, 60, 99);
 
 //        System.out.println("---------------->>>>>>>>"+repository);
 //        repository.allStudent().values().stream().map(s->s.getInf()+"***************").forEach(System.out::println);

@@ -45,6 +45,7 @@ servlets\ChangeAndCreateMarkServlet.class
 repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyJpaStudentDelete.class
 repository\modelrepository\modelfunction\functionjpaerepositiry\UserFunctionJpa.class
 controller\serviseforcontroller\viewsservises\StratagyForAutorithate.class
+repository\threadmodelrep\ThreadRepositoryOrm.class
 servlets\WatchServlet.class
 controller\serviseforcontroller\acttrainerstratagy\MVCTrainerActStratagy.class
 repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteTrainerImpJPA.class
@@ -121,6 +122,7 @@ StartM\Main.class
 controller\serviseforcontroller\actadminstrategy\MVCAdminActCreateStratagyImpl.class
 servlets\TheamAddServlet.class
 controller\serviseforcontroller\acttrainerstratagy\MVCTrainerActCreateStratagyImpl.class
+repository\threadmodelrep\threadfunction\functionorm\Markormservice.class
 servlets\ChangeUser.class
 repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteGroupImpJPA.class
 controller\interceptors\LogingIntercepter.class

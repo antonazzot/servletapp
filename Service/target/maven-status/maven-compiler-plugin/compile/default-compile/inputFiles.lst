@@ -20,6 +20,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletst
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\AbstractFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\UpdateStratageJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\springmvcconfig\SpringConfig.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActChangeStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\GroupCreaterServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ContentInParamChecker.java
@@ -97,6 +98,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\L
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\SalaryFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\config\EntityManagerConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\RequsetLoggingFilter.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionorm\Markormservice.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\viewscontrollers\TrainerController.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\CalculateAvarageSalaryServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ParserStringToInt.java

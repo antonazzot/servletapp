@@ -28,25 +28,23 @@ public class StratagyForAutorithate {
             model.addAttribute("studentMapMark",userMapMap );
             result = "StudentPage/studentinf";
         } else if (Role.TRAINER.equals(user.getRole())) {
-            if (ThreadRepositoryFactory.getRepository().allGroup()
-                    .values()
-                    .stream()
-                    .anyMatch(g -> g.getTrainer().getId() == user.getId())) {
-                Group group = ThreadRepositoryFactory.getRepository().allGroup()
-                        .values()
-                        .stream()
-                        .filter(g -> g.getTrainer().getId() == user.getId())
-                        .findAny()
-                        .get();
-                log.info("user Autorithate trainer ={}", "--->>>" + user.getInf());
+                try {
+                    Group group = ThreadRepositoryFactory.getRepository().allGroup()
+                            .values()
+                            .stream()
+                            .filter(g -> g.getTrainer().getId() == user.getId())
+                            .findAny()
+                            .get();
+                    log.info("user Autorithate trainer ={}", "--->>>" + user.getInf());
 
-                model.addAttribute("groupT", group);
-                model.addAttribute("trainer", user);
-                result = "TrainerControlPage/trainerstartpage";
-
-            } else {
-                return "TrainerControlPage/groupnotexist";
-            }
+                    model.addAttribute("groupT", group);
+                    model.addAttribute("trainer", user);
+                    result = "TrainerControlPage/trainerstartpage";
+                }
+                catch (IllegalArgumentException e) {
+                    log.error(e.getMessage());
+                    return "TrainerControlPage/groupnotexist";
+                }
         }
         log.info("just lost = {}", "lost");
         log.info("Init result = {}", result);
@@ -63,23 +61,21 @@ public class StratagyForAutorithate {
             model.addAttribute("studentMapMark",userMapMap );
             return "StudentPage/studentinf";
         } else if (Role.TRAINER.equals(user.getRole())) {
-            if (ThreadRepositoryFactory.getRepository().allGroup()
-                    .values()
-                    .stream()
-                    .anyMatch(g -> g.getTrainer().getId() == user.getId())) {
+            try {
                 Group group = ThreadRepositoryFactory.getRepository().allGroup()
                         .values()
                         .stream()
                         .filter(g -> g.getTrainer().getId() == user.getId())
                         .findAny()
                         .get();
+                log.info("user Autorithate trainer ={}", "--->>>" + user.getInf());
 
                 model.addAttribute("groupT", group);
                 model.addAttribute("trainer", user);
-
-                return "TrainerControlPage/trainerstartpage";
-
-            } else {
+                return  "TrainerControlPage/trainerstartpage";
+            }
+            catch (IllegalArgumentException e) {
+                log.error(e.getMessage());
                 return "TrainerControlPage/groupnotexist";
             }
         }
