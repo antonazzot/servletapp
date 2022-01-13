@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Properties;
 
-@WebFilter("/checkUser")
+@WebFilter(urlPatterns = {"/checkUser", "/mvc/views/checkUser","/mvc/checkUser" })
 public class StartFilter extends AbstractFilter {
     private static final Logger log = LoggerFactory.getLogger(StartFilter.class);
 
@@ -43,6 +43,8 @@ public class StartFilter extends AbstractFilter {
             doesItLogin = true;
         }
         String password = request.getParameter("password");
+        log.info("Enter by pass = {}", password);
+
         if (doesItLogin) {
             //Authentication by login
             user = checkUser(login, password);
@@ -55,8 +57,8 @@ public class StartFilter extends AbstractFilter {
         if (user != null) {
             session.setAttribute("user", user);
             log.info("SessionWithUserCreate = {}", user);
-            request.getRequestDispatcher("/checkUser").forward(request, response);
-        } else request.getRequestDispatcher("exeception.jsp").forward(request, response);
+            request.getRequestDispatcher("/mvc/checkUser").forward(request, response);
+        } else request.getRequestDispatcher("/mvc/exeception").forward(request, response);
         filterChain.doFilter(request, response);
     }
 
@@ -76,9 +78,15 @@ public class StartFilter extends AbstractFilter {
     }
 
     private UserImpl itRightCondition(String login, String password) {
-        return RepositoryFactory.getRepository().allUser().values().stream()
+        log.info("in start filter before check = {}", "login: " + login +"  " + "password: " +password );
+
+        UserImpl user = RepositoryFactory.getRepository().allUser().values().stream()
                 .filter(u -> u.getLogin().equals(login) && u.getPassword().equals(password))
                 .findFirst().orElse(null);
 
+        assert user != null;
+        log.info("in start filter after check = {}", user.getInf() );
+
+        return  user;
     }
 }

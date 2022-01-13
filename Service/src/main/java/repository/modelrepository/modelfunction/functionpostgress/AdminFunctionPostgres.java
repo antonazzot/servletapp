@@ -41,7 +41,6 @@ public class AdminFunctionPostgres {
                                             .withName(rs.getString("name"))
                                             .withAge(rs.getInt("age"))
                                             .withRole(RoleIDParametrCheker.checkRole(rs.getInt("role_id")))
-
                             );
                     }
                 }

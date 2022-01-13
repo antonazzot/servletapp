@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Configuration
-@PropertySource("app.properties")
+@PropertySource("classpath:app.properties")
 public class ThreadRepositoryFactory {
 
     @Value("${repository.type}")

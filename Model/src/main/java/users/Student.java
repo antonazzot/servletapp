@@ -1,5 +1,6 @@
 package users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import threadmodel.Group;
 import threadmodel.Mark;
@@ -15,18 +16,20 @@ import java.util.*;
 @ToString(callSuper = true)
 @Entity
 @Table(name = "users")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @NamedQueries(
         {
                 @NamedQuery(name = "studenById", query = "select s from Student s where s.id = :id")
         }
 )
-public class Student extends UserImpl {
+public class Student extends UserImpl  {
     @ManyToMany
     @JoinTable   (
             name = "student_group",
             joinColumns = @JoinColumn (name = "student_id"),
             inverseJoinColumns = @JoinColumn (name = "group_id")
     )
+    @JsonIgnore
     private Set <Group> groupSet;
     @OneToMany
     @JoinTable(
@@ -35,8 +38,10 @@ public class Student extends UserImpl {
             inverseJoinColumns = @JoinColumn (name = "mark_id")
     )
     @MapKey
+    @JsonIgnore
     private Map <Integer, Mark> markMap = new HashMap<>();
     @Transient
+    @JsonIgnore
     private Map<Theams, List<Mark>> listOfMark;
 
     public Student withName(String name) {

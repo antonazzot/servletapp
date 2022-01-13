@@ -13,7 +13,6 @@ import users.Student;
 import users.Trainer;
 import users.UserImpl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -99,7 +98,7 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
     }
 
     @Override
-    public void changeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
+    public void changeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
         MarkFunction.dochangeMark(markIdMarkValue, studentId, theamId);
     }
 

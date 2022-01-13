@@ -2,6 +2,7 @@ package repository.modelrepository.modelfunction.functionpostgress;
 
 import helperutils.closebaseconnection.PostgresSQLUtils;
 import helperutils.myexceptionutils.MySqlException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
@@ -17,10 +18,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@RequiredArgsConstructor
 @Slf4j
 public class StudentFunctionPostgres {
     public static RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
+
+//    private final JdbcTemplate jdbcTemplate;
 
     public static Map<Integer, UserImpl> allStudent() {
         Map<Integer, UserImpl> students = new HashMap<>();

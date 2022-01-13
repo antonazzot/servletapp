@@ -14,7 +14,7 @@ public class DeleteGroupPSQLImpl implements DeleteEntityPSQL {
     public void removeEntity(int id, Connection connection) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = connection.prepareStatement("DELETE FROM \"group\" where id = ?");
+            ps = connection.prepareStatement("DELETE FROM gr_oup where id = ?");
             ps.setInt(1, id);
             ps.executeUpdate();
         }

@@ -1,6 +1,5 @@
 package servlets;
 
-import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import repository.RepositoryFactory;
@@ -31,7 +30,7 @@ public class UserActionServlet extends HttpServlet {
         try {
             age = Integer.parseInt(req.getParameter("age"));
         } catch (IllegalArgumentException e) {
-            req.getRequestDispatcher("exeception.jsp").forward(req, resp);
+            req.getRequestDispatcher("exception.jsp").forward(req, resp);
         }
         // add some user
         checkRole(role, name, login, password, age);

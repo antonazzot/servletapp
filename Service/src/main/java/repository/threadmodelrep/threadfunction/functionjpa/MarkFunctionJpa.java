@@ -24,7 +24,7 @@ public class MarkFunctionJpa {
 
     public static Map<UserImpl, Map<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
         Map<UserImpl, Map<Theams, List<Mark>>> studentTheamMarkMap = new HashMap<>();
-        Student student = StudentFunctionJpa.doGetStudentById(studentId);
+        Student student = RepositoryFactory.getRepository().getStudentById(studentId);
         Set<Theams> theams = getTheamsSet(student);
         Map<Theams, List<Mark>> theamsListHashMap = getTheamsListHashMap(studentId, theams);
         studentTheamMarkMap.put(student, theamsListHashMap);
@@ -103,7 +103,7 @@ public class MarkFunctionJpa {
         }
     }
 
-    public static void dochangeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
+    public static void dochangeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
         for (Map.Entry<Integer, Integer> entry : markIdMarkValue.entrySet()) {
             EntityManager em = null;
             int tempId = entry.getKey();

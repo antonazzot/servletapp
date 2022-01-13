@@ -57,7 +57,7 @@ public class MarkFunction {
         }
     }
 
-    public static void dochangeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
+    public static void dochangeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
         Student student = (Student) RepositoryFactory.getRepository().allStudent().get(studentId);
         for (Map.Entry<Integer, Integer> entry : markIdMarkValue.entrySet()) {
             Mark tempMark = student.getListOfMark()

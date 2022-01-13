@@ -236,7 +236,7 @@ public class MarkFunction {
         }
     }
 
-    public static void dochangeMark(HashMap<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
+    public static void dochangeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
         try (Connection connection = datasourse.getConnection()){
             PreparedStatement ps = null;
             for (Map.Entry <Integer, Integer> entry: markIdMarkValue.entrySet()) {

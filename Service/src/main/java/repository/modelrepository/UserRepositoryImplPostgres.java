@@ -1,7 +1,9 @@
 package repository.modelrepository;
 
-import jakarta.validation.Valid;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import repository.modelrepository.modelfunction.functionpostgress.AdminFunctionPostgres;
@@ -18,7 +20,10 @@ import java.util.Map;
 import java.util.Optional;
 @Repository("Postgres")
 @Slf4j
+@RequiredArgsConstructor
 public class UserRepositoryImplPostgres implements UserRepository {
+
+//    private final JdbcTemplate jdbcTemplate;
 
     @Override
     public Map<Integer, UserImpl> allUser() {
@@ -46,7 +51,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
-    public int saveUser(@Valid UserImpl user) {
+    public int saveUser(UserImpl user) {
         return UsersFunctionPostgres.saveUser(user);
     }
 
@@ -72,7 +77,7 @@ public class UserRepositoryImplPostgres implements UserRepository {
 
     @Override
     public Trainer getTrainerById(int id) {
-        return null;
+        return TrainerFunctionPostgres.getTrainerById(id);
     }
 
     @Override

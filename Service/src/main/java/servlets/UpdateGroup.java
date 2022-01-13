@@ -28,7 +28,7 @@ public class UpdateGroup extends HttpServlet {
         req.setAttribute("groupth", ThreadRepositoryFactory.getRepository().theamFromGroup(id));
         req.setAttribute("freeth", ThreadRepositoryFactory.getRepository().freeTheams());
         req.setAttribute("freetr", RepositoryFactory.getRepository().freeTrainer());
-        req.getRequestDispatcher("adminControl/actionchangegroup.jsp").forward(req, resp);
+        req.getRequestDispatcher("adminControl/groupchangeform.jsp").forward(req, resp);
     }
 
 }
