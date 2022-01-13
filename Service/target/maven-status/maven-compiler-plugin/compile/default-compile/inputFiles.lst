@@ -1,3 +1,4 @@
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\aspect\ControllerAspect.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\config\SpringOrmConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\TheamFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninmemory\GroupFunction.java
@@ -115,7 +116,6 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\watchservletstratagy\WatchServletChangeStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexceptionutils\MyJpaException.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionjpaerepositiry\StudentFunctionJpa.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\RestContr.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\SalaryAdderServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserSpringOrmRepository.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryFactory.java
@@ -125,6 +125,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\servise
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteTrainerImpJPA.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTheamAdd.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TheamAddServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\restsservice\ChangeUserToAgregateMap.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActStratagy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ChangeTrinerActStratagy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ChangeUser.java

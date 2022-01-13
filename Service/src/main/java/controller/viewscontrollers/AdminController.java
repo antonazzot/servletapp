@@ -65,8 +65,10 @@ public class AdminController {
 
     @PostMapping("/addSalaryForTrainer")
     public String addSalaryTrainer(
-            @RequestParam("trainerId") String trainerId, @RequestParam("sal") String salValue
+            @RequestParam("trainerId") String trainerId,
+            @RequestParam("sal") String salValue
     ) {
+
         ThreadRepositoryFactory.getRepository().addSalaryToTrainer(Integer.parseInt(trainerId), Integer.parseInt(salValue));
         return "adminControl/adminActList";
     }

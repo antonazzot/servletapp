@@ -14,6 +14,6 @@ public class MVCAdminActDeleteStratagyImpl implements MVCAdminActStratagy {
             return "exception";
         }
         RepositoryFactory.getRepository().removeUser(entityId, entity);
-        return "redirect:/check";
+        return "redirect:/mvc/hello";
     }
 }

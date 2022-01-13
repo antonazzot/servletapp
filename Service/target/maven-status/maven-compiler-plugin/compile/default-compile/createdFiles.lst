@@ -76,6 +76,7 @@ repository\threadmodelrep\threadfunction\functionjpa\SalaryFunctionJpa.class
 repository\threadmodelrep\ThreadRepository.class
 helperutils\closebaseconnection\JpaUtils.class
 repository\modelrepository\modelfunction\functionunmemory\TrainerFunctionMemory.class
+controller\serviseforcontroller\restsservice\ChangeUserToAgregateMap.class
 repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteTheamImpJPA.class
 servlets\servletstratagy\watchservletstratagy\WatchServletChangeStratagyImpl.class
 repository\modelrepository\modelfunction\functionunmemory\StudentFunctionMemory.class
@@ -138,3 +139,4 @@ repository\RepositoryFactory.class
 repository\config\SpringOrmConfig.class
 repository\RepositoryDatasourse.class
 repository\threadmodelrep\threadfunction\functioninmemory\GroupFunction.class
+aspect\ControllerAspect.class
