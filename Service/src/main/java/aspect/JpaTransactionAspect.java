@@ -9,7 +9,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -20,19 +19,17 @@ import javax.persistence.EntityTransaction;
 @Component
 public class JpaTransactionAspect {
     private final SessionFactory sessionFactory;
+
     @SneakyThrows
     @Around("@annotation(JpaTransaction)")
-    public Object transaction (ProceedingJoinPoint pjp) {
+    public Object transaction(ProceedingJoinPoint pjp) {
         Object result = null;
-
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
-
             result = pjp.proceed();
-
             transaction.commit();
         } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);

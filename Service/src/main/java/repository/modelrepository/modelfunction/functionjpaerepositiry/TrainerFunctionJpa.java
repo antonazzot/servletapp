@@ -5,9 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.springframework.beans.factory.annotation.Autowired;
 import repository.threadmodelrep.ThreadRepositoryFactory;
-import repository.threadmodelrep.ThreadRepositoryImplPostgres;
 import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
 import users.Role;
 import users.Trainer;
@@ -29,11 +27,11 @@ public class TrainerFunctionJpa {
 //    @Autowired
 //    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
 
-    public static  Configuration conf = new Configuration().configure();
+    public static Configuration conf = new Configuration().configure();
     public static SessionFactory sessionFactory = conf.buildSessionFactory();
 
     public static Map<Integer, UserImpl> getallTrainer() {
-        Map <Integer, UserImpl> result = new HashMap<>();
+        Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -42,8 +40,7 @@ public class TrainerFunctionJpa {
             TypedQuery<Trainer> alltrainer = em.createQuery("select t from Trainer t where t.role = :role", Trainer.class);
             alltrainer.setParameter("role", Role.TRAINER);
             alltrainer.getResultList().forEach(trainer -> result.put(trainer.getId(), trainer));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);
@@ -55,10 +52,10 @@ public class TrainerFunctionJpa {
         if (ThreadRepositoryFactory.getRepository().allGroup().isEmpty())
             return getallTrainer();
         else {
-                List<UserImpl> busyTrainer = new ArrayList<>();
-                GroupFunctionJpa.getAllGroup().values()
-                        .forEach(group -> busyTrainer.add(group.getTrainer()));
-                return freeTrainerexecute(busyTrainer);
+            List<UserImpl> busyTrainer = new ArrayList<>();
+            GroupFunctionJpa.getAllGroup().values()
+                    .forEach(group -> busyTrainer.add(group.getTrainer()));
+            return freeTrainerexecute(busyTrainer);
         }
     }
 
@@ -79,11 +76,10 @@ public class TrainerFunctionJpa {
         try {
             em = sessionFactory.createEntityManager();
             // I know, that I can do it by JPA find, but it was build this way for learning jpql too.
-            TypedQuery <Trainer> query = em.createNamedQuery("trainerById", Trainer.class);
+            TypedQuery<Trainer> query = em.createNamedQuery("trainerById", Trainer.class);
             query.setParameter("id", id);
             return query.getSingleResult();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);

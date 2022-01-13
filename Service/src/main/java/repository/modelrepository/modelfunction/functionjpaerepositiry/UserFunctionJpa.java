@@ -1,12 +1,10 @@
 package repository.modelrepository.modelfunction.functionjpaerepositiry;
 
-import aspect.JpaTransaction;
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.springframework.beans.factory.annotation.Autowired;
 import repository.modelrepository.modelfunction.deleteentitystratage.jpastratagy.*;
 import users.UserImpl;
 
@@ -24,7 +22,7 @@ public class UserFunctionJpa {
 //    @Autowired
 //    public static SessionFactory sessionFactory;
 
-    public static  Configuration conf = new Configuration().configure();
+    public static Configuration conf = new Configuration().configure();
     public static SessionFactory sessionFactory = conf.buildSessionFactory();
 
     public static UserImpl getUserById(Integer id) {
@@ -38,7 +36,8 @@ public class UserFunctionJpa {
         result.putAll(AdminFunctionJpa.getAllAdmin());
         return result;
     }
-//    @JpaTransaction
+
+    //    @JpaTransaction
     public static int doSaveUser(UserImpl user) {
         EntityManager em = null;
         try {

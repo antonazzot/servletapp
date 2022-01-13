@@ -1,11 +1,9 @@
 package repository.modelrepository.modelfunction.functionjpaerepositiry;
 
 import helperutils.closebaseconnection.JpaUtils;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.springframework.beans.factory.annotation.Autowired;
 import threadmodel.Group;
 import users.Role;
 import users.Student;
@@ -21,11 +19,11 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 public class StudentFunctionJpa {
-//    @Autowired
+    //    @Autowired
 //    public static Configuration configuration;
 //    @Autowired
 //    public   SessionFactory sessionFactory;
-    public static  Configuration conf = new Configuration().configure();
+    public static Configuration conf = new Configuration().configure();
     public static SessionFactory sessionFactory = conf.buildSessionFactory();
 
     public static Map<Integer, UserImpl> getAllStudent() {

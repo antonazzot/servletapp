@@ -4,7 +4,7 @@ import repository.RepositoryFactory;
 import users.UserImpl;
 
 public class ChangeUser {
-    public static UserImpl userForChange (int id,String name, String login, String password, String age) {
+    public static UserImpl userForChange(int id, String name, String login, String password, String age) {
         UserImpl user = RepositoryFactory.getRepository().getUserById(id);
 
         login = login.equals("") ? user.getLogin() : login;

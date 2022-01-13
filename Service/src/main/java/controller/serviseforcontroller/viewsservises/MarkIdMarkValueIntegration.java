@@ -1,13 +1,13 @@
 package controller.serviseforcontroller.viewsservises;
 
 import lombok.extern.slf4j.Slf4j;
-import repository.threadmodelrep.ThreadRepositoryFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+
 @Slf4j
 public class MarkIdMarkValueIntegration {
-    public static Map <Integer, Integer> doIntegration (String[] marks, String[] markId) {
+    public static Map<Integer, Integer> doIntegration(String[] marks, String[] markId) {
         Map<Integer, Integer> markIdMarkValue = new HashMap<>();
 
         for (int i = 0; i < markId.length; i++) {
@@ -15,9 +15,8 @@ public class MarkIdMarkValueIntegration {
                 try {
                     int tempMarkId = Integer.parseInt(markId[i]);
                     int tempMarkValue = Integer.parseInt(marks[i]);
-                    if (tempMarkValue < 0 || tempMarkValue > 100)  throw new IllegalArgumentException();
+                    if (tempMarkValue < 0 || tempMarkValue > 100) throw new IllegalArgumentException();
                     markIdMarkValue.put(tempMarkId, tempMarkValue);
-                    log.info("In dochangeServlet = {}", tempMarkId + " " + tempMarkValue);
                 } catch (IllegalArgumentException e) {
                     log.error(e.getMessage());
                 }

@@ -26,21 +26,23 @@ public class Main {
 //        UserRepository repository = RepositoryFactory.getRepository();
 //        ThreadRepositoryFactory.getRepository().trainerSalary().values().stream()
 //              .forEach(System.out::println);
-//        RepositoryFactory.getRepository().freeTrainer().values()
-//                .stream().map(user -> (Trainer)user)
-//                .map(trainer -> trainer.getInf())
-//                .forEach(System.out::println);
+        RepositoryFactory.getRepository().allTrainer().values()
+                .stream().map(user -> (Trainer)user)
+                .map(trainer -> trainer.getInf())
+                .forEach(System.out::println);
 //            ThreadRepositoryFactory.getRepository().allGroup().values()
-//                    .stream().map(group -> group.getInf()).forEach(System.out::println);
+//                    .stream().map(group -> group.getInf()).forE  ach(System.out::println);
 //        System.out.println(ThreadRepositoryFactory.getRepository().theamById(60));;
-            ThreadRepositoryFactory.getRepository()
-                    .getMarkListbyTheam(
-                            ThreadRepositoryFactory
-                                    .getRepository()
-                                    .theamById(60), 150).stream().map(Mark::getValuesOfMark)
-                    .forEach(System.out::println);
+//            ThreadRepositoryFactory.getRepository()
+//                    .getMarkListbyTheam(
+//                            ThreadRepositoryFactory
+//                                    .getRepository()
+//                                    .theamById(60), 150)
+//                    .stream()
+//                    .map(Mark::getValuesOfMark)
+//                    .forEach(System.out::println);
 //        ThreadRepositoryFactory.getRepository().addMarkToStudent(150, 60, 99);
-
+//        System.out.println(ThreadRepositoryFactory.getRepository().theamById(60));
 //        System.out.println("---------------->>>>>>>>"+repository);
 //        repository.allStudent().values().stream().map(s->s.getInf()+"***************").forEach(System.out::println);
 //

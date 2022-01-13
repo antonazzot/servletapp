@@ -4,7 +4,6 @@ import helperutils.closebaseconnection.PostgresSQLUtils;
 import helperutils.myexceptionutils.MySqlException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.core.JdbcTemplate;
 import repository.RepositoryDatasourse;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import users.Role;

@@ -12,10 +12,8 @@ public class MVCAdminActCreateStratagyImpl implements MVCAdminActStratagy {
     @Override
     public String watchEntity(String entity, Model model, String deleteId) {
         if (!entity.equals("group") && !entity.equals("theam")) {
-            log.info("Create user ={}", entity);
             model.addAttribute("role", entity);
 //            model.addAttribute("userImpl", new UserImpl().withRole(RoleIDParametrCheker.getRoleByString(entity)));
-            log.info("Model attribute ={}", model.getAttribute("role"));
             return "adminControl/adduserpage";
         } else if (!entity.equals("theam")) {
             log.info("Create group ={}", entity);

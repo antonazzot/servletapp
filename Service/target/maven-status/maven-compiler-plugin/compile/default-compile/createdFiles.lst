@@ -18,6 +18,7 @@ servlets\StudentServlet.class
 helperutils\myexceptionutils\MyJpaException.class
 controller\serviseforcontroller\actadminstrategy\MVCAdminActWatchStratagyImpl.class
 controller\viewscontrollers\InitController.class
+helperutils\myexceptionutils\ControllerException.class
 repository\threadmodelrep\threadfunction\functioninmemory\TheamFunction.class
 controller\serviseforcontroller\actadminstrategy\MVCAdminActChangeStratagyImpl.class
 repository\modelrepository\modelfunction\functionjpaerepositiry\TrainerFunctionJpa.class
@@ -95,6 +96,7 @@ repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestra
 repository\modelrepository\UserRepository.class
 servlets\servletstratagy\watchservletstratagy\WatchServletCreateStratagyImpl.class
 servlets\servletstratagy\watchservletstratagy\WatchServletDeleteStratagyImpl.class
+aspect\ControllerViewsException.class
 aspect\JpaTransactionAspect.class
 repository\modelrepository\modelfunction\functionjpaerepositiry\AdminFunctionJpa.class
 servlets\TrainerAddSalaryServlet.class

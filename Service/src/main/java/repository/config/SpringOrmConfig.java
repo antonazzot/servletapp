@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.TransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -15,21 +17,22 @@ import java.util.Properties;
 public class SpringOrmConfig {
 
     @Autowired
-    private  DataSource dataSource;
+    private DataSource dataSource;
 
     public SpringOrmConfig(@Autowired DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean factoryBean (@Autowired Properties jpaProperties) {
-    LocalContainerEntityManagerFactoryBean containerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-    containerEntityManagerFactoryBean.setDataSource(dataSource);
-    containerEntityManagerFactoryBean.setPersistenceUnitName("jpa-unit");
-    containerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-    containerEntityManagerFactoryBean.setPackagesToScan("users", "threadmodel");
-    containerEntityManagerFactoryBean.setJpaProperties(jpaProperties);
-    return containerEntityManagerFactoryBean;
+    public LocalContainerEntityManagerFactoryBean factoryBean(@Autowired Properties jpaProperties) {
+        LocalContainerEntityManagerFactoryBean containerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        containerEntityManagerFactoryBean.setDataSource(dataSource);
+        containerEntityManagerFactoryBean.setPersistenceUnitName("jpa-unit");
+        containerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        containerEntityManagerFactoryBean.setPackagesToScan("users", "threadmodel");
+        containerEntityManagerFactoryBean.setJpaProperties(jpaProperties);
+
+        return containerEntityManagerFactoryBean;
     }
 
     @Bean
@@ -49,4 +52,11 @@ public class SpringOrmConfig {
         return properties;
     }
 
+    @Bean
+    public TransactionManager transactionManager(@Autowired LocalContainerEntityManagerFactoryBean factoryBean) {
+
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+        jpaTransactionManager.setEntityManagerFactory(factoryBean.getObject());
+        return jpaTransactionManager;
+    }
 }

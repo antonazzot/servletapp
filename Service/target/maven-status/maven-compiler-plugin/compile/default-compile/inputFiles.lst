@@ -60,6 +60,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletst
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\viewscontrollers\InitController.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\UpdateGroup.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionjpaerepositiry\UserFunctionJpa.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexceptionutils\ControllerException.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexceptionutils\MySqlException.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTheamDelete.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\ChangeUser.java
@@ -70,6 +71,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserRepository.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\FreeStudentExtract.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\TrainerAddSalaryServlet.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\aspect\ControllerViewsException.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\aspect\LogingAspect.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functionjpa\GroupFunctionJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\CheckServlet.java
