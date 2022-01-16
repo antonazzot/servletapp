@@ -37,14 +37,17 @@ public class Main {
 //        ThreadRepositoryFactory.getRepository().allGroup().values()
 //                    .stream().map(group -> group.getInf()).forE  ach(System.out::println);
 //        System.out.println(ThreadRepositoryFactory.getRepository().theamById(60));;
-            ThreadRepositoryFactory.getRepository()
-                    .getMarkListbyTheam(
-                            ThreadRepositoryFactory
-                                    .getRepository()
-                                    .theamById(60), 150)
-                    .stream()
-                    .map(Mark::getValuesOfMark)
-                    .forEach(System.out::println);
+//            ThreadRepositoryFactory.getRepository()
+//                    .getMarkListbyTheam(
+//                            ThreadRepositoryFactory
+//                                    .getRepository()
+//                                    .theamById(60), 150)
+//                    .stream()
+//                    .map(Mark::getValuesOfMark)
+//                    .forEach(System.out::println);
+
+        ThreadRepositoryFactory.getRepository().addSalaryToTrainer(264, 77777);
+        RepositoryFactory.getRepository().getTrainerById(264).getSalarylist().forEach(System.out::println);
 //        ThreadRepositoryFactory.getRepository().addMarkToStudent(150, 60, 99);
 //        System.out.println(ThreadRepositoryFactory.getRepository().theamById(60));
 //        System.out.println("---------------->>>>>>>>"+repository);

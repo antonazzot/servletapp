@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/traineract", "/changeandcreatemark"})
+@WebFilter(urlPatterns = {"/traineract", "/changeandcreatemark", "/mvc/trainer/*"})
 public class TrainerFilter extends AbstractFilter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -21,11 +21,11 @@ public class TrainerFilter extends AbstractFilter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("/web/hello");
+            response.sendRedirect(request.getContextPath()+"/mvc/hello");
         } else {
             UserImpl user = (UserImpl) session.getAttribute("user");
             if (user == null || (!Role.TRAINER.equals(user.getRole())))
-                response.sendRedirect("/web/hello");
+                response.sendRedirect(request.getContextPath()+"/mvc/hello");
             else if ((Role.TRAINER.equals(user.getRole()))) {
                 filterChain.doFilter(request, response);
             }

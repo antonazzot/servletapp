@@ -28,20 +28,27 @@ public class StratagyForAutorithate {
             result = "StudentPage/studentinf";
         } else if (Role.TRAINER.equals(user.getRole())) {
             try {
-                Group group = ThreadRepositoryFactory.getRepository().allGroup()
+                if (ThreadRepositoryFactory.getRepository()
+                        .allGroup()
                         .values()
                         .stream()
-                        .filter(g -> g.getTrainer().getId() == user.getId())
-                        .findAny()
-                        .get();
-                log.info("user Autorithate trainer ={}", "--->>>" + user.getInf());
-
-                model.addAttribute("groupT", group);
-                model.addAttribute("trainer", user);
-                result = "TrainerControlPage/trainerstartpage";
+                        .anyMatch(g -> g.getTrainer().getId() == user.getId())) {
+                    Group group = ThreadRepositoryFactory.getRepository().allGroup()
+                            .values()
+                            .stream()
+                            .filter(g -> g.getTrainer().getId() == user.getId())
+                            .findFirst()
+                            .get();
+                    log.info("user Autorithate trainer ={}", "--->>>" + user.getInf());
+                    model.addAttribute("groupT", group);
+                    model.addAttribute("trainer", user);
+                    result = "TrainerControlPage/trainerstartpage";
+                }
+                else
+                result = "TrainerControlPage/groupnotexist";
             } catch (IllegalArgumentException e) {
                 log.error(e.getMessage());
-                return "TrainerControlPage/groupnotexist";
+                result = "TrainerControlPage/groupnotexist";
             }
         }
         log.info("just lost = {}", "lost");
@@ -52,7 +59,6 @@ public class StratagyForAutorithate {
     public static String authorizatUser(HttpSession session, Model model) {
         UserImpl user = (UserImpl) session.getAttribute("user");
         if (Role.ADMINISTRATOR.equals(user.getRole())) {
-
             return "adminControl/adminActList";
         } else if (Role.STUDENT.equals(user.getRole())) {
             Map<UserImpl, Map<Theams, List<Mark>>> userMapMap = ThreadRepositoryFactory.getRepository().studentTheamMark(user.getId());

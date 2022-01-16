@@ -11,6 +11,7 @@ public class MVCTrainerActCreateStratagyImpl implements MVCTrainerActStratagy {
         if (mark == null || mark.equals("") || studentId == null || studentId.equals("") || thId == null || thId.equals("")) {
             return "exception";
         }
+
         ThreadRepositoryFactory.getRepository().addMarkToStudent(
                 ParserStringToInt.simpleParserStringToInt(studentId),
                 ParserStringToInt.simpleParserStringToInt(thId),

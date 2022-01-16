@@ -32,12 +32,16 @@ public class InitController {
     @PostMapping("/checkUser")
     public String checkUser(HttpSession session, Model model) {
         log.info("Session??????>>>>>>={}", " Sesssion:  " + session + " user ");
-        if (session != null && session.getAttribute("user") != null) {
-            model.addAttribute("user", session.getAttribute("user"));
-            log.info("user??????>>>>>>={}", " Sesssion:  " + session + session.getAttribute("user"));
-            return StratagyForAutorithate.authorizationStratagy(session, model);
-        } else
-            log.info("userThis>>>>>>={}", " Sesssion:  " + session);
+        if (session != null ) {
+            if (session.getAttribute("user")==null) {
+                return "exception";
+            }
+            else {
+                model.addAttribute("user", session.getAttribute("user"));
+                log.info("user??????>>>>>>={}", " Sesssion:  " + session + session.getAttribute("user"));
+                return StratagyForAutorithate.authorizationStratagy(session, model);
+            }
+        }
         return "redirect:/mvc/hello";
     }
 

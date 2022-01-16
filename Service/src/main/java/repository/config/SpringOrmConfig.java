@@ -11,6 +11,7 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -60,7 +61,11 @@ public class SpringOrmConfig {
 
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setEntityManagerFactory(factoryBean.getObject());
-
         return jpaTransactionManager;
+    }
+
+    @Bean
+    public EntityManager em (@Autowired LocalContainerEntityManagerFactoryBean factoryBean) {
+      return   factoryBean.getNativeEntityManagerFactory().createEntityManager();
     }
 }
