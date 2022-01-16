@@ -34,43 +34,42 @@ public class ThreadRepositoryOrm implements ThreadRepository {
 
     private final LocalContainerEntityManagerFactoryBean factoryBean;
 
-//    private final ThreadLocal<EntityManager> emThreadLocal = new ThreadLocal<>();
-//    @Autowired
-//    public void setEmf(EntityManagerFactory emf) {
-//        this.emf = emf;
-//    }
+
+    private final EntityManagerFactory emf;
+    private final ThreadLocal<EntityManager> emThreadLocal = new ThreadLocal<>();
+
 
     @Override
     public Map<Integer, Group> allGroup() {
         Map <Integer, Group> result = new HashMap<>();
-//        try {
-//            begin();
+        try {
+            begin();
             getEm().createQuery("from Group", Group.class)
                     .getResultList().forEach(group -> result.put(group.getId(), group));
-//        }
-//        catch (IllegalArgumentException e) {
-//            JpaUtils.rollBackQuietly(getEm(), e);
-//        }
-//        finally {
-//            JpaUtils.closeQuietly(getEm());
-//        }
+        }
+        catch (IllegalArgumentException e) {
+            JpaUtils.rollBackQuietly(getEm(), e);
+        }
+        finally {
+            JpaUtils.closeQuietly(getEm());
+        }
         return  result;
     }
 
     @Override
     public Map<Integer, Theams> allTheams() {
         Map <Integer, Theams> result = new HashMap<>();
-//        try {
-//            begin();
+        try {
+            begin();
             getEm().createQuery("from Theams", Theams.class).getResultList()
                     .stream().forEach(theams -> result.put(theams.getId(), theams));
-//        }
-//        catch (IllegalArgumentException e) {
-//            JpaUtils.rollBackQuietly(getEm(), e);
-//        }
-//        finally {
-//            JpaUtils.closeQuietly(getEm());
-//        }
+        }
+        catch (IllegalArgumentException e) {
+            JpaUtils.rollBackQuietly(getEm(), e);
+        }
+        finally {
+            JpaUtils.closeQuietly(getEm());
+        }
         return  result;
     }
 
@@ -96,20 +95,20 @@ public class ThreadRepositoryOrm implements ThreadRepository {
 //    @Transactional
     @Override
     public List<Mark> getMarkListbyTheam(Theams theam, int studentId) {
-//        try {
-//            begin();
+        try {
+            begin();
             TypedQuery<Mark> query = getEm().createQuery("select m from Mark m where m.student.id=:student_id and m.theams.id=:theam_id", Mark.class);
             query.setParameter("student_id", studentId);
             query.setParameter("theam_id", theam.getId());
             return query.getResultList();
-//        }
-//        catch (IllegalArgumentException e) {
-//            JpaUtils.rollBackQuietly(getEm(), e);
-//        }
-//        finally {
-//            JpaUtils.closeQuietly(getEm());
-//        }
-//        return  null;
+        }
+        catch (IllegalArgumentException e) {
+            JpaUtils.rollBackQuietly(getEm(), e);
+        }
+        finally {
+            JpaUtils.closeQuietly(getEm());
+        }
+        return  null;
     }
 
     @Override
@@ -122,17 +121,17 @@ public class ThreadRepositoryOrm implements ThreadRepository {
 //    @Transactional
     @Override
     public Theams theamById(Integer id) {
-//        try {
-//            begin();
+        try {
+            begin();
             return getEm().find(Theams.class, id);
-//        }
-//        catch (IllegalArgumentException e) {
-//        JpaUtils.rollBackQuietly(getEm(), e);
-//    }
-//        finally {
-//        JpaUtils.closeQuietly(getEm());
-//    }
-//        return  null;
+        }
+        catch (IllegalArgumentException e) {
+        JpaUtils.rollBackQuietly(getEm(), e);
+    }
+        finally {
+        JpaUtils.closeQuietly(getEm());
+    }
+        return  null;
     }
 
     @Override
@@ -147,17 +146,17 @@ public class ThreadRepositoryOrm implements ThreadRepository {
 
     @Override
     public void addTheam(String theam) {
-//    try {
-//        begin();
+    try {
+        begin();
         getEm().persist(new Theams().withValue(theam));
-//        commit();
-//    }
-//    catch (IllegalArgumentException e) {
-//        JpaUtils.rollBackQuietly(getEm(), e);
-//    }
-//    finally {
-//        JpaUtils.closeQuietly(getEm());
-//    }
+        commit();
+    }
+    catch (IllegalArgumentException e) {
+        JpaUtils.rollBackQuietly(getEm(), e);
+    }
+    finally {
+        JpaUtils.closeQuietly(getEm());
+    }
     }
 
     @Override
@@ -169,8 +168,8 @@ public class ThreadRepositoryOrm implements ThreadRepository {
         theamsIdList.stream()
                 .forEach(id -> theamsSet.add(theamById(id)));
         Trainer trainer = RepositoryFactory.getRepository().getTrainerById(trainerId);
-//        try {
-//            begin();
+        try {
+            begin();
             getEm().persist(
                     new Group()
                             .withName("Groups:" + trainerId)
@@ -178,31 +177,31 @@ public class ThreadRepositoryOrm implements ThreadRepository {
                             .withStudents(studentMap)
                             .withTheam(theamsSet)
             );
-//            commit();
-//        }
-//        catch (IllegalArgumentException e) {
-//            JpaUtils.rollBackQuietly(getEm(), e);
-//        }
-//        finally {
-//            JpaUtils.closeQuietly(getEm());
-//        }
+            commit();
+        }
+        catch (IllegalArgumentException e) {
+            JpaUtils.rollBackQuietly(getEm(), e);
+        }
+        finally {
+            JpaUtils.closeQuietly(getEm());
+        }
     }
 
     @Override
     public Map<Integer, Theams> freeTheams() {
         Map<Integer, Theams> result = new HashMap<>();
-//        try {
+        try {
 
             getEm().createQuery("select t from Theams t where t.group=null", Theams.class).getResultList()
                   .stream().forEach(theams -> result.put(theams.getId(), theams));
           return  result;
-//        }
-//        catch (IllegalArgumentException e) {
-//            JpaUtils.rollBackQuietly(getEm(), e);
-//        }
-//        finally {
-//            JpaUtils.closeQuietly(getEm());
-//        }
+        }
+        catch (IllegalArgumentException e) {
+            JpaUtils.rollBackQuietly(getEm(), e);
+        }
+        finally {
+            JpaUtils.closeQuietly(getEm());
+        }
 //        Map<Integer, Theams> busyTheam = getBuzyTeam();
 //        Map<Integer, Theams> freeTh = new HashMap<>(ThreadRepositoryFactory.getRepository().allTheams());
 //        Map<Integer, Theams> allTheam = Map.copyOf(freeTh);
@@ -221,25 +220,25 @@ public class ThreadRepositoryOrm implements ThreadRepository {
 //                }
 //            }
 //            return freeTh;
-//        return result;
+        return result;
     }
 
     @Override
     public void addSalaryToTrainer(int trainerId, int salaryValue) {
         Trainer trainer = RepositoryFactory.getRepository().getTrainerById(trainerId);
-//    try {
-//        begin();
+    try {
+        begin();
         getEm().persist(new Salary()
                 .withTrainer(trainer)
                 .withValue(salaryValue));
-//        commit();
-//    }
-//        catch (IllegalArgumentException e) {
-//        JpaUtils.rollBackQuietly(getEm(), e);
-//    }
-//        finally {
-//        JpaUtils.closeQuietly(getEm());
-//    }
+        commit();
+    }
+        catch (IllegalArgumentException e) {
+        JpaUtils.rollBackQuietly(getEm(), e);
+    }
+        finally {
+        JpaUtils.closeQuietly(getEm());
+    }
     }
 
     @Override
@@ -247,38 +246,38 @@ public class ThreadRepositoryOrm implements ThreadRepository {
         Student student = RepositoryFactory.getRepository().getStudentById(studentId);
         Theams theams = theamById(theamID);
         log.info("in add mark block ->> ={}, {}", student.getInf(), theams.toString());
-//    try {
-//        begin();
+    try {
+        begin();
         getEm().persist(new Mark()
                 .withStudent(student)
                 .withTheam(theams)
                 .withValue(markValue));
-//        commit();
-//    }
-//    catch (IllegalArgumentException e) {
-//        JpaUtils.rollBackQuietly(getEm(), e);
-//    }
-//    finally {
-//        JpaUtils.closeQuietly(getEm());
-//    }
+        commit();
+    }
+    catch (IllegalArgumentException e) {
+        JpaUtils.rollBackQuietly(getEm(), e);
+    }
+    finally {
+        JpaUtils.closeQuietly(getEm());
+    }
     }
 
     @Override
     public void deleteMarksById(int[] tempMarksId, int theamId, int studentid) {
-//    try {
+    try {
         for (int i : tempMarksId) {
             Mark mark = getMarkById(i);
             begin();
             getEm().remove(mark);
-//            commit();
+            commit();
         }
-//    }
-//    catch (IllegalArgumentException e) {
-//        JpaUtils.rollBackQuietly(getEm(), e);
-//    }
-//    finally {
-//        JpaUtils.closeQuietly(getEm());
-//    }
+    }
+    catch (IllegalArgumentException e) {
+        JpaUtils.rollBackQuietly(getEm(), e);
+    }
+    finally {
+        JpaUtils.closeQuietly(getEm());
+    }
     }
 
     @Override
@@ -288,21 +287,19 @@ public class ThreadRepositoryOrm implements ThreadRepository {
             Mark mark = getMarkById(map.getKey());
             if (map.getValue()!=null)
                 mark = mark.withValue(map.getValue());
-//            try {
-//                begin();
+            try {
+                begin();
             EntityManager em = getEm();
             if (map.getValue()!=null)
-
                 em.merge(mark);
-
-//                commit();
-//            }
-//            catch (IllegalArgumentException e) {
-//                JpaUtils.rollBackQuietly(getEm(), e);
-//            }
-//            finally {
-//                JpaUtils.closeQuietly(getEm());
-//            }
+                commit();
+            }
+            catch (IllegalArgumentException e) {
+                JpaUtils.rollBackQuietly(getEm(), e);
+            }
+            finally {
+                JpaUtils.closeQuietly(getEm());
+            }
         }
     }
 
@@ -316,27 +313,32 @@ public class ThreadRepositoryOrm implements ThreadRepository {
         Theams theams = theamById(theamId);
         if (!theamName.equals(""))
          theams = theams.withValue(theamName);
-//        try {
-//    begin();
+        try {
+    begin();
     getEm().merge(theams);
-//}
-//catch (IllegalArgumentException e) {
-//    JpaUtils.rollBackQuietly(getEm(), e);
-//}
-//finally {
-//    JpaUtils.closeQuietly(getEm());
-//}
+}
+catch (IllegalArgumentException e) {
+    JpaUtils.rollBackQuietly(getEm(), e);
+}
+finally {
+    JpaUtils.closeQuietly(getEm());
+}
     }
 
     public EntityManager getEm () {
-////        if (emThreadLocal.get()==null){
+//        if (emThreadLocal.get()==null){
 //            emThreadLocal.set(emf.createEntityManager());
-////        }
+//        }
 //        return emThreadLocal.get();
-    return factoryBean.getObject().createEntityManager();
+   return      factoryBean.getNativeEntityManagerFactory().createEntityManager();
+//    return factoryBean.getObject().createEntityManager();
+
     }
+
+
+
     public void begin () {
-        getEm().getTransaction().begin();
+   getEm().getTransaction().begin();
     }
 
     public void commit () {

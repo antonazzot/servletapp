@@ -14,8 +14,10 @@ import repository.modelrepository.modelfunction.functionjpaerepositiry.UserFunct
 import repository.threadmodelrep.ThreadRepository;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Mark;
+import threadmodel.Theams;
 import users.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -26,21 +28,23 @@ public class Main {
 //        UserRepository repository = RepositoryFactory.getRepository();
 //        ThreadRepositoryFactory.getRepository().trainerSalary().values().stream()
 //              .forEach(System.out::println);
-        RepositoryFactory.getRepository().allTrainer().values()
-                .stream().map(user -> (Trainer)user)
-                .map(trainer -> trainer.getInf())
-                .forEach(System.out::println);
-//            ThreadRepositoryFactory.getRepository().allGroup().values()
+//        RepositoryFactory.getRepository().allTrainer().values()
+//                .stream().map(user -> (Trainer)user)
+//                .map(trainer -> trainer.getInf())
+//                .forEach(System.out::println);
+//        Map<UserImpl, Map<Theams, List<Mark>>> userMapMap = ThreadRepositoryFactory.getRepository().studentTheamMark(150);
+//        userMapMap.isEmpty();
+//        ThreadRepositoryFactory.getRepository().allGroup().values()
 //                    .stream().map(group -> group.getInf()).forE  ach(System.out::println);
 //        System.out.println(ThreadRepositoryFactory.getRepository().theamById(60));;
-//            ThreadRepositoryFactory.getRepository()
-//                    .getMarkListbyTheam(
-//                            ThreadRepositoryFactory
-//                                    .getRepository()
-//                                    .theamById(60), 150)
-//                    .stream()
-//                    .map(Mark::getValuesOfMark)
-//                    .forEach(System.out::println);
+            ThreadRepositoryFactory.getRepository()
+                    .getMarkListbyTheam(
+                            ThreadRepositoryFactory
+                                    .getRepository()
+                                    .theamById(60), 150)
+                    .stream()
+                    .map(Mark::getValuesOfMark)
+                    .forEach(System.out::println);
 //        ThreadRepositoryFactory.getRepository().addMarkToStudent(150, 60, 99);
 //        System.out.println(ThreadRepositoryFactory.getRepository().theamById(60));
 //        System.out.println("---------------->>>>>>>>"+repository);
@@ -52,7 +56,7 @@ public class Main {
 //                .findFirst().orElse(null);
 //        UserImpl user1 = new UserImpl().withName("name").withLogin("login").withPassword("passs").withAge(130);
 //        RepositoryFactory.getRepository().saveUser(user1);
-//        System.out.println(user.getInf());
+//         System.out.println(user.getInf());
 
 
 //        Administrator administrator = (Administrator) new Administrator()
