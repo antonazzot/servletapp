@@ -1,5 +1,6 @@
 package StartM;
 
+import controller.viewscontrollers.AdminController;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,12 @@ public class Main {
 //                    .map(Mark::getValuesOfMark)
 //                    .forEach(System.out::println);
 
-        ThreadRepositoryFactory.getRepository().addSalaryToTrainer(264, 77777);
-        RepositoryFactory.getRepository().getTrainerById(264).getSalarylist().forEach(System.out::println);
+        RepositoryFactory.getRepository().removeUser(62, "theam");
+
+
+
+//        ThreadRepositoryFactory.getRepository().addSalaryToTrainer(264, 77777);
+//        RepositoryFactory.getRepository().getTrainerById(264).getSalarylist().forEach(System.out::println);
 //        ThreadRepositoryFactory.getRepository().addMarkToStudent(150, 60, 99);
 //        System.out.println(ThreadRepositoryFactory.getRepository().theamById(60));
 //        System.out.println("---------------->>>>>>>>"+repository);

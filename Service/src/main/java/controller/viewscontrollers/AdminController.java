@@ -1,5 +1,6 @@
 package controller.viewscontrollers;
 
+import controller.serviseforcontroller.actadminstrategy.MVCAdminActDeleteStratagyImpl;
 import controller.serviseforcontroller.actadminstrategy.MVCAdminActStratagy;
 import controller.serviseforcontroller.viewsservises.*;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import repository.RepositoryFactory;
+import repository.modelrepository.UserRepositoryImplJpa;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
 import users.Trainer;
@@ -150,6 +152,15 @@ public class AdminController {
     ) {
         ThreadRepositoryFactory.getRepository().updateGroup(id, act, ParserStringToInt.parseArrayString(entytiIdforact));
         return "adminControl/adminActList";
+    }
+    @GetMapping ("/dodeleteentity")
+    public  String dodeleteentity (
+            @RequestParam("entityId") int entityId,
+            @RequestParam ( required = false ,name = "entity") String entity,
+            Model model
+    ) {
+        RepositoryFactory.getRepository().removeUser(entityId, entity);
+       return   adminAct(entity,"delete", "id", model);
     }
 
 }

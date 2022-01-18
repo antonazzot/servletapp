@@ -11,6 +11,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\interceptors\LogingIntercepter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\StartService.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninpostgres\TheamFunction.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\springormstratagy\DeleteTheamImpOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTheamDelete.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\StudentFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionunmemory\TrainerFunctionMemory.java
@@ -47,15 +48,18 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyStudentDelete.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\restcontrollers\UsersRestController.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTrainerChange.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\springormstratagy\DeleteStudentImpOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\postgresqlstratagy\DeleteUserPSQLImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActCreateStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\acttrainerstratagy\MVCTrainerActChangeStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\functionpostgress\TrainerFunctionPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\functioninmemory\SalaryFunction.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\springormstratagy\DeleteTrainerImpOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\watchservletstratagy\WatchServletStratagy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\StudentServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTheamAdd.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\aspect\JpaTransactionAspect.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\springormstratagy\DeleteStratageOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplInMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\watchservletstratagy\WatchServletDeleteStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\viewscontrollers\InitController.java
@@ -64,6 +68,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexceptionutils\ControllerException.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexceptionutils\MySqlException.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadfunction\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTheamDelete.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\springormstratagy\DeleteGroupImpOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\ChangeUser.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\StartM\Main.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\acttrainerstratagy\MVCTrainerActCreateStratagyImpl.java
@@ -84,6 +89,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\servletstratagy\watchservletstratagy\WatchServletWatchStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\jpastratagy\DeleteStratageJPA.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepository.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelfunction\deleteentitystratage\springormstratagy\DeleteAdminImpOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\LogOutServlet.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\StartPage.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\acttrainerstratagy\MVCTrainerActStratagy.java

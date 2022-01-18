@@ -1,10 +1,11 @@
 package repository.modelrepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import repository.modelrepository.modelfunction.deleteentitystratage.jpastratagy.*;
+import repository.modelrepository.modelfunction.deleteentitystratage.springormstratagy.*;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.AdminFunctionJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
 import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
@@ -77,18 +78,19 @@ public class UserSpringOrmRepository implements UserRepository {
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-        DeleteStratageJPA deleteStratageJPA = changeStratageForDelete(entity);
-        deleteStratageJPA.doDeleteEntity(id, em);
-        return Optional.ofNullable(getStudentById(id));
+        DeleteStratageOrm deleteStratageORM = changeStratageForDelete(entity);
+        deleteStratageORM.doDeleteEntity(id);
+        return Optional.empty();
     }
 
-    private static DeleteStratageJPA changeStratageForDelete(String entity) {
-        Map<String, DeleteStratageJPA> stratageMap = Map.of(
-                "student", new DeleteStudentImpJPA(),
-                "trainer", new DeleteTrainerImpJPA(),
-                "administrator", new DeleteAdminImpJPA(),
-                "group", new DeleteGroupImpJPA(),
-                "theam", new DeleteTheamImpJPA()
+    private  DeleteStratageOrm changeStratageForDelete(String entity) {
+
+        Map<String, DeleteStratageOrm> stratageMap = Map.of(
+                "student", new DeleteStudentImpOrm(em),
+                "trainer", new DeleteTrainerImpOrm(em),
+                "administrator", new DeleteAdminImpOrm(em),
+                "group", new DeleteGroupImpOrm(em),
+                "theam", new DeleteTheamImpOrm(em)
         );
         return stratageMap.get(entity);
     }

@@ -11,11 +11,17 @@ public class MVCTrainerActCreateStratagyImpl implements MVCTrainerActStratagy {
         if (mark == null || mark.equals("") || studentId == null || studentId.equals("") || thId == null || thId.equals("")) {
             return "exception";
         }
-
-        ThreadRepositoryFactory.getRepository().addMarkToStudent(
+        int markInt;
+        try {
+             markInt = Integer.parseInt(mark);
+        }
+        catch (IllegalArgumentException e) {
+            return "exception";
+        }
+                ThreadRepositoryFactory.getRepository().addMarkToStudent(
                 ParserStringToInt.simpleParserStringToInt(studentId),
                 ParserStringToInt.simpleParserStringToInt(thId),
-                ParserStringToInt.simpleParserStringToInt(mark)
+                markInt
         );
         return "redirect: /web/mvc/hello";
     }
