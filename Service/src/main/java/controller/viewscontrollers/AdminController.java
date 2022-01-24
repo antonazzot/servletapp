@@ -42,8 +42,8 @@ public class AdminController {
     ) {
         if (ContentInParamChecker.checkParam(name, login, password))
             return "exception";
-        UserImpl user = SaverService.userForSave(role, name, login, password, age);
-        int userId = RepositoryFactory.getRepository().saveUser(user);
+        else
+        RepositoryFactory.getRepository().saveUser(SaverService.userForSave(role, name, login, password, age));
         return "adminControl/adminActList";
     }
 
@@ -70,7 +70,6 @@ public class AdminController {
             @RequestParam("trainerId") String trainerId,
             @RequestParam("sal") String salValue
     ) {
-
         ThreadRepositoryFactory.getRepository().addSalaryToTrainer(Integer.parseInt(trainerId), Integer.parseInt(salValue));
         return "adminControl/adminActList";
     }
@@ -91,9 +90,8 @@ public class AdminController {
     public String avarageSalary(@RequestParam("trId") int trainerId,
                                 @RequestParam("period") int period,
                                 Model model) {
-        Trainer trainer = RepositoryFactory.getRepository().getTrainerById(trainerId);
         long avaragesalary = AvarageSalaryCalculate.avarageSalaryCalc(
-                trainer.getSalarylist(),
+                RepositoryFactory.getRepository().getTrainerById(trainerId).getSalarylist(),
                 period
         );
         model.addAttribute("avarage", avaragesalary);

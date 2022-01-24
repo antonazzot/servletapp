@@ -12,6 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <docker.image.prefix>leesia</docker.image.prefix>
     </properties>
     <modules>
         <module>Model</module>
@@ -163,9 +164,21 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>5.3.13</version>
+        </dependency>
+
+        <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>5.3.15</version>
         </dependency>
 
         <dependency>
@@ -239,6 +252,26 @@
                     </execution>
                 </executions>
             </plugin>
+
+           <plugin>
+               <groupId>com.spotify</groupId>
+               <artifactId>docker-maven-plugin</artifactId>
+               <version>1.0.0</version>
+               <configuration>
+                   <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                   <dockerDirectory></dockerDirectory>
+                   <resources>
+                       <resource>
+                           <targetPath>/</targetPath>
+                           <directory>${project.build.directory}</directory>
+                           <include>${project.build.finalName}.jar</include>
+                       </resource>
+                   </resources>
+               </configuration>
+
+           </plugin>
+
+
         </plugins>
     </build>
 

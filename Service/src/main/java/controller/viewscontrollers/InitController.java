@@ -21,7 +21,6 @@ public class InitController {
 
     @GetMapping("/hello")
     public String hello(HttpSession session, Model model) {
-        log.info("It work ={}", "work");
         if (session != null && session.getAttribute("user") != null) {
             return StratagyForAutorithate.authorizatUser(session, model);
         } else
@@ -31,14 +30,12 @@ public class InitController {
 
     @PostMapping("/checkUser")
     public String checkUser(HttpSession session, Model model) {
-        log.info("Session??????>>>>>>={}", " Sesssion:  " + session + " user ");
         if (session != null ) {
             if (session.getAttribute("user")==null) {
                 return "exception";
             }
             else {
                 model.addAttribute("user", session.getAttribute("user"));
-                log.info("user??????>>>>>>={}", " Sesssion:  " + session + session.getAttribute("user"));
                 return StratagyForAutorithate.authorizationStratagy(session, model);
             }
         }

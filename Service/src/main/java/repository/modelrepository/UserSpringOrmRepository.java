@@ -1,7 +1,6 @@
 package repository.modelrepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.*;
 
-@Transactional(propagation = Propagation.REQUIRED)
+//@Transactional(propagation = Propagation.REQUIRED)
 @RequiredArgsConstructor
 @Repository("Orm")
 public class UserSpringOrmRepository implements UserRepository {
@@ -33,10 +32,9 @@ public class UserSpringOrmRepository implements UserRepository {
         result.putAll(StudentFunctionJpa.getAllStudent());
         result.putAll(AdminFunctionJpa.getAllAdmin());
         return result;
-
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public Map<Integer, UserImpl> allTrainer() {
         Map<Integer, UserImpl> result = new HashMap<>();
@@ -46,7 +44,7 @@ public class UserSpringOrmRepository implements UserRepository {
                 .put(trainer.getId(), trainer));
         return result;
     }
-
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public Map<Integer, UserImpl> allStudent() {
         Map<Integer, UserImpl> result = new HashMap<>();
@@ -55,7 +53,7 @@ public class UserSpringOrmRepository implements UserRepository {
         allStudent.getResultList().forEach(student -> result.put(student.getId(), student));
         return result;
     }
-
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public Map<Integer, UserImpl> allAdmin() {
         Map<Integer, UserImpl> result = new HashMap<>();
@@ -64,18 +62,19 @@ public class UserSpringOrmRepository implements UserRepository {
         allAdmin.getResultList().forEach(administrator -> result.put(administrator.getId(), administrator));
         return result;
     }
-
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public UserImpl getUserById(Integer id) {
         return em.find(UserImpl.class, id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public int saveUser(UserImpl user) {
         em.persist(user);
         return user.getId();
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
         DeleteStratageOrm deleteStratageORM = changeStratageForDelete(entity);
@@ -94,7 +93,7 @@ public class UserSpringOrmRepository implements UserRepository {
         );
         return stratageMap.get(entity);
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public UserImpl updateUser(UserImpl user) {
         return em.merge(user);
@@ -123,7 +122,7 @@ public class UserSpringOrmRepository implements UserRepository {
         }
         return result;
     }
-
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public List<Student> studentFromGroup(Integer groupId) {
         List<Student> result = new ArrayList<>();
@@ -132,16 +131,19 @@ public class UserSpringOrmRepository implements UserRepository {
         return result;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public Trainer getTrainerById(int id) {
         return em.find(Trainer.class, id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public Administrator getAdministratorById(int id) {
         return em.find(Administrator.class, id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public Student getStudentById(int id) {
         return em.find(Student.class, id);

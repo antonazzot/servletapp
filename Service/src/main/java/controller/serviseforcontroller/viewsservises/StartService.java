@@ -22,8 +22,7 @@ public class StartService {
                 adminPassword = properties.getProperty("adminPassword");
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-
+        }
             Administrator administrator = (Administrator) new Administrator()
                     .withRole(Role.ADMINISTRATOR)
                     .withName("Anton")

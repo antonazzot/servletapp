@@ -1,25 +1,9 @@
-package StartM;
+package start;
 
-import controller.viewscontrollers.AdminController;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import repository.RepositoryFactory;
-import repository.modelrepository.UserRepository;
-import repository.modelrepository.UserRepositoryImplJpa;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.UserFunctionJpa;
-import repository.threadmodelrep.ThreadRepository;
-import repository.threadmodelrep.ThreadRepositoryFactory;
-import threadmodel.Mark;
-import threadmodel.Theams;
-import users.*;
-
-import java.util.List;
-import java.util.Map;
+import users.Trainer;
 
 public class Main {
     public static void main(String[] args) {
@@ -47,8 +31,8 @@ public class Main {
 //                    .map(Mark::getValuesOfMark)
 //                    .forEach(System.out::println);
 
-        RepositoryFactory.getRepository().removeUser(62, "theam");
 
+        System.out.println(RepositoryFactory.getRepository().getTrainerById(181).getInf());
 
 
 //        ThreadRepositoryFactory.getRepository().addSalaryToTrainer(264, 77777);
