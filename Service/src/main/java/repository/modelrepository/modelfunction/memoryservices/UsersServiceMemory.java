@@ -1,4 +1,4 @@
-package repository.modelrepository.modelfunction.functionunmemory;
+package repository.modelrepository.modelfunction.memoryservices;
 
 import action.IdFactory;
 import database.DataBaseInf;
@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-public class UsersFunctionMemory {
+public class UsersServiceMemory {
     public static Map<Integer, UserImpl> getallUser() {
         Map<Integer, UserImpl> allUsers = new HashMap<>();
         allUsers.putAll(DataBaseInf.getTrainerHashMap());

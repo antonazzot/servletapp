@@ -1,4 +1,4 @@
-package repository.modelrepository.modelfunction.functionpostgress;
+package repository.modelrepository.modelfunction.postgresservices;
 
 import helperutils.closebaseconnection.PostgresSQLUtils;
 import helperutils.myexceptionutils.MySqlException;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
-public class UsersFunctionPostgres {
+public class UsersServicePostgres {
     public static RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 
     public static Map<Integer, UserImpl> allUser() {

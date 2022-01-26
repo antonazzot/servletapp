@@ -1,9 +1,12 @@
-package repository.threadmodelrep.threadfunction.functionjpa;
+package repository.threadmodelrep.threadfunction.jpaservices;
 
 import helperutils.closebaseconnection.JpaUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Theams;
 
 import javax.persistence.EntityManager;
@@ -14,13 +17,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+@Service
+@RequiredArgsConstructor
 @Slf4j
-public class TheamFunctionJpa {
-    public static Configuration cnf = new Configuration().configure();
-    public static SessionFactory sessionFactory = cnf.buildSessionFactory();
+public class TheamServiceJpa {
+    @Autowired
+    private final SessionFactory sessionFactory;
 
-    public static Map<Integer, Theams> getallTheams() {
+    public  Map<Integer, Theams> getallTheams() {
         Map<Integer, Theams> result = new HashMap<>();
         EntityManager em = null;
         try {
@@ -35,7 +39,7 @@ public class TheamFunctionJpa {
         return result;
     }
 
-    public static Theams gettheamById(Integer id) {
+    public  Theams gettheamById(Integer id) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -51,11 +55,11 @@ public class TheamFunctionJpa {
 
     }
 
-    public static Set<Theams> gettheamFromGroup(Integer groupId) {
-        return GroupFunctionJpa.getGroupById(groupId).getTheamsSet();
+    public  Set<Theams> gettheamFromGroup(Integer groupId) {
+        return ThreadRepositoryFactory.getRepository().allGroup().get(groupId).getTheamsSet();
     }
 
-    public static void doaddTheam(String theam) {
+    public  void doaddTheam(String theam) {
         if (!getallTheams().values().stream().map(Theams::getTheamName)
                 .collect(Collectors.toList()).contains(theam) &&
                 getallTheams().values().stream().map(Theams::getTheamName)
@@ -76,11 +80,11 @@ public class TheamFunctionJpa {
         }
     }
 
-    public static Map<Integer, Theams> getfreeTheams() {
+    public  Map<Integer, Theams> getfreeTheams() {
         Map<Integer, Theams> busyTheam = getBuzyTeam();
         Map<Integer, Theams> freeTh = new HashMap<>(getallTheams());
         log.info("free Start {}", busyTheam.values());
-        if (GroupFunctionJpa.getAllGroup().isEmpty()) {
+        if (ThreadRepositoryFactory.getRepository().allGroup().isEmpty()) {
             return getallTheams();
         } else {
             log.info("in for {}", busyTheam.values());
@@ -97,10 +101,10 @@ public class TheamFunctionJpa {
         }
     }
 
-    private static Map<Integer, Theams> getBuzyTeam() {
+    private  Map<Integer, Theams> getBuzyTeam() {
         Map<Integer, Theams> busyTheam = new HashMap<>();
         Set<Theams> theamsSet = new HashSet<>();
-        GroupFunctionJpa.getAllGroup().values()
+        ThreadRepositoryFactory.getRepository().allGroup().values()
                 .forEach(group -> theamsSet.addAll(group.getTheamsSet()));
         for (Theams theams : theamsSet) {
             busyTheam.put(theams.getId(), theams);
@@ -108,7 +112,7 @@ public class TheamFunctionJpa {
         return busyTheam;
     }
 
-    public static void doupdateTheam(int theamId, String theamName) {
+    public  void doupdateTheam(int theamId, String theamName) {
         Theams theams = getTheamById(theamId);
         theams.withValue(theamName);
         EntityManager em = null;
@@ -125,7 +129,7 @@ public class TheamFunctionJpa {
         }
     }
 
-    private static Theams getTheamById(int id) {
+    private  Theams getTheamById(int id) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();

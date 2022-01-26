@@ -4,8 +4,8 @@ import helperutils.closebaseconnection.PostgresSQLUtils;
 import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
-import repository.modelrepository.modelfunction.functionpostgress.StudentFunctionPostgres;
-import repository.modelrepository.modelfunction.functionpostgress.TrainerFunctionPostgres;
+import repository.modelrepository.modelfunction.postgresservices.StudentServicePostgres;
+import repository.modelrepository.modelfunction.postgresservices.TrainerServicePostgres;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.UpdateGroupStratagyPostgress;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.postgressupdatestratage.*;
 import threadmodel.Group;
@@ -37,7 +37,7 @@ public class GroupFunction {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     int groupId = rs.getInt("id");
-                    Trainer trainer = TrainerFunctionPostgres
+                    Trainer trainer = TrainerServicePostgres
                             .getTrainerById(rs.getInt("trainer_id"));
                     result.put(groupId,
                             new Group()
@@ -69,7 +69,7 @@ public class GroupFunction {
                 ps = connection.prepareStatement("select * from student_group where group_id = " + groupId);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Student student = StudentFunctionPostgres
+                    Student student = StudentServicePostgres
                             .getStudentById(rs.getInt("student_id"));
                     result.put(student.getId(), student);
                 }

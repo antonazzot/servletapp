@@ -1,7 +1,7 @@
 package repository.modelrepository.modelfunction.deleteentitystratage.jpastratagy;
 
 import helperutils.closebaseconnection.JpaUtils;
-import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
+import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
 
 import javax.persistence.EntityManager;
@@ -10,7 +10,7 @@ import javax.persistence.EntityTransaction;
 public class DeleteGroupImpJPA implements DeleteStratageJPA {
     @Override
     public void doDeleteEntity(int id, EntityManager em) {
-        Group group = GroupFunctionJpa.getGroupById(id);
+        Group group = ThreadRepositoryFactory.getRepository().allGroup().get(id);
         try {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();

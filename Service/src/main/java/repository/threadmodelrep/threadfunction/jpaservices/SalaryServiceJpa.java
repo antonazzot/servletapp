@@ -1,12 +1,12 @@
-package repository.threadmodelrep.threadfunction.functionjpa;
+package repository.threadmodelrep.threadfunction.jpaservices;
 
 import helperutils.closebaseconnection.JpaUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import repository.RepositoryFactory;
-import repository.modelrepository.UserRepositoryImplJpa;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import threadmodel.Salary;
 import users.Trainer;
 
@@ -15,13 +15,14 @@ import javax.persistence.EntityTransaction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Service
+@RequiredArgsConstructor
 @Slf4j
-public class SalaryFunctionJpa {
-    public static Configuration cnf = new Configuration().configure();
-    public static SessionFactory sessionFactory = cnf.buildSessionFactory();
+public class SalaryServiceJpa {
+    @Autowired
+    private final SessionFactory sessionFactory;
 
-    public static Map<Trainer, List<Salary>> gettrainerSalary() {
+    public  Map<Trainer, List<Salary>> gettrainerSalary() {
         Map<Trainer, List<Salary>> result = new HashMap<>();
         RepositoryFactory.getRepository().allTrainer().values()
                 .stream().map(trainer -> (Trainer)trainer)
@@ -29,8 +30,8 @@ public class SalaryFunctionJpa {
         return result;
     }
 
-    public static void doaddSalaryToTrainer(int trainerId, int salaryValue ) {
-       Trainer trainer =  TrainerFunctionJpa.doGetTrainerById(trainerId);
+    public  void doaddSalaryToTrainer(int trainerId, int salaryValue ) {
+       Trainer trainer =  RepositoryFactory.getRepository().getTrainerById(trainerId);
        Salary salary = new Salary()
                .withValue(salaryValue)
                .withTrainer(trainer);

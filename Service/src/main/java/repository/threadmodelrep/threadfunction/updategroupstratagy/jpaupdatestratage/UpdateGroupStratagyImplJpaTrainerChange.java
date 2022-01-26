@@ -3,7 +3,7 @@ package repository.threadmodelrep.threadfunction.updategroupstratagy.jpaupdatest
 import helperutils.myexceptionutils.MyJpaException;
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
+import repository.RepositoryFactory;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.UpdateStratageJpa;
 import threadmodel.Group;
 
@@ -18,7 +18,7 @@ public class UpdateGroupStratagyImplJpaTrainerChange implements UpdateStratageJp
         try {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
-            group.withTrainer(TrainerFunctionJpa.doGetTrainerById(entytiIdforact[0]));
+            group.withTrainer(RepositoryFactory.getRepository().getTrainerById(entytiIdforact[0]));
             em.merge(group);
             transaction.commit();
         }

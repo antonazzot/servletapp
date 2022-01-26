@@ -1,12 +1,12 @@
-package repository.modelrepository.modelfunction.functionjpaerepositiry;
+package repository.modelrepository.modelfunction.jpaservicese;
 
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import repository.threadmodelrep.ThreadRepositoryFactory;
-import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
 import users.Role;
 import users.Trainer;
 import users.UserImpl;
@@ -18,19 +18,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Service
 @Slf4j
 @RequiredArgsConstructor
-public class TrainerFunctionJpa {
+public class TrainerServiceJpa {
 //    @Autowired
 //    static Configuration configuration;
 //    @Autowired
 //    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
 
-    public static Configuration conf = new Configuration().configure();
-    public static SessionFactory sessionFactory = conf.buildSessionFactory();
+    @Autowired
+    private final  SessionFactory sessionFactory;
 
-    public static Map<Integer, UserImpl> getallTrainer() {
+    public  Map<Integer, UserImpl> getallTrainer() {
         Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
@@ -48,18 +48,18 @@ public class TrainerFunctionJpa {
         return result;
     }
 
-    public static Map<Integer, UserImpl> freeTrainer() {
+    public  Map<Integer, UserImpl> freeTrainer() {
         if (ThreadRepositoryFactory.getRepository().allGroup().isEmpty())
             return getallTrainer();
         else {
             List<UserImpl> busyTrainer = new ArrayList<>();
-            GroupFunctionJpa.getAllGroup().values()
+            ThreadRepositoryFactory.getRepository().allGroup().values()
                     .forEach(group -> busyTrainer.add(group.getTrainer()));
             return freeTrainerexecute(busyTrainer);
         }
     }
 
-    private static Map<Integer, UserImpl> freeTrainerexecute(List<UserImpl> busyTrainer) {
+    private  Map<Integer, UserImpl> freeTrainerexecute(List<UserImpl> busyTrainer) {
         Map<Integer, UserImpl> result = new HashMap<>(getallTrainer());
         for (UserImpl alltrainer :
                 getallTrainer().values()) {
@@ -71,7 +71,7 @@ public class TrainerFunctionJpa {
         return result;
     }
 
-    public static Trainer doGetTrainerById(int id) {
+    public  Trainer doGetTrainerById(int id) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();

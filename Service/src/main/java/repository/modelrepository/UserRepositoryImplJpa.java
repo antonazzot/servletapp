@@ -1,83 +1,92 @@
 package repository.modelrepository;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.AdminFunctionJpa;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.UserFunctionJpa;
+import repository.modelrepository.modelfunction.jpaservicese.AdminServiceJpa;
+import repository.modelrepository.modelfunction.jpaservicese.StudentServiceJpa;
+import repository.modelrepository.modelfunction.jpaservicese.TrainerServiceJpa;
+import repository.modelrepository.modelfunction.jpaservicese.UserServiceJpa;
 import users.Administrator;
 import users.Student;
 import users.Trainer;
 import users.UserImpl;
 
-import java.lang.module.Configuration;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+@RequiredArgsConstructor
 @Repository("Jpa")
 public class UserRepositoryImplJpa implements UserRepository {
 
+    @Autowired
+    private final AdminServiceJpa adminServiceJpa;
+    @Autowired
+    private final StudentServiceJpa studentServiceJpa;
+    @Autowired
+    private final TrainerServiceJpa trainerServiceJpa;
+    @Autowired
+    private final UserServiceJpa userServiceJpa;
+
     @Override
     public Map<Integer, UserImpl> allUser() {
-       return UserFunctionJpa.getAllUser();
+       return userServiceJpa.getAllUser();
     }
 
     @Override
     public Map<Integer, UserImpl> allTrainer() {
-       return TrainerFunctionJpa.getallTrainer();
+       return trainerServiceJpa.getallTrainer();
     }
 
     @Override
     public Map<Integer, UserImpl> allStudent() {
-        return StudentFunctionJpa.getAllStudent();
+        return studentServiceJpa.getAllStudent();
     }
 
     @Override
     public Map<Integer, UserImpl> allAdmin() {
-        return AdminFunctionJpa.getAllAdmin();
+        return adminServiceJpa.getAllAdmin();
     }
 
     @Override
     public UserImpl getUserById(Integer id) {
-        return UserFunctionJpa.getUserById(id);
+        return userServiceJpa.getUserById(id);
     }
 
     @Override
     public int saveUser(UserImpl user) {
-     return UserFunctionJpa.doSaveUser (user);
+     return userServiceJpa.doSaveUser (user);
     }
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-        return UserFunctionJpa.doRemoveUser(id, entity);
+        return userServiceJpa.doRemoveUser(id, entity);
     }
 
     @Override
     public UserImpl updateUser(UserImpl user) {
-        return UserFunctionJpa.doUpdateUser(user);
+        return userServiceJpa.doUpdateUser(user);
     }
 
     @Override
     public Map<Integer, UserImpl> freeTrainer() {
-      return TrainerFunctionJpa.freeTrainer();
+      return trainerServiceJpa.freeTrainer();
     }
 
     @Override
     public List<Student> studentFromGroup(Integer groupId) {
-        return StudentFunctionJpa.getStudentFromGroup(groupId);
+        return studentServiceJpa.getStudentFromGroup(groupId);
     }
     @Override
     public Trainer getTrainerById (int id) {
-     return TrainerFunctionJpa.doGetTrainerById (id);
+     return trainerServiceJpa.doGetTrainerById (id);
     }
     @Override
     public Administrator getAdministratorById (int id) {
-        return AdminFunctionJpa.doGetAdministratorById (id);
+        return adminServiceJpa.doGetAdministratorById (id);
     }
     @Override
     public Student getStudentById (int id) {
-        return StudentFunctionJpa.doGetStudentById (id);
+        return studentServiceJpa.doGetStudentById (id);
     }
 }

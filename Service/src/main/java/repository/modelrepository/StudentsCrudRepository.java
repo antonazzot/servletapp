@@ -1,71 +1,82 @@
 package repository.modelrepository;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import repository.modelrepository.modelfunction.memoryservices.AdminServiceMemory;
-import repository.modelrepository.modelfunction.memoryservices.StudentServiceMemory;
-import repository.modelrepository.modelfunction.memoryservices.TrainerServiceMemory;
-import repository.modelrepository.modelfunction.memoryservices.UsersServiceMemory;
+import org.springframework.transaction.annotation.Transactional;
+import repository.StudentCrudRepository;
 import users.Administrator;
 import users.Student;
 import users.Trainer;
 import users.UserImpl;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@Repository("Memory")
-@Slf4j
-public class UserRepositoryImplInMemory implements UserRepository {
 
+@RequiredArgsConstructor
+@Repository("Crud")
+public class StudentsCrudRepository implements UserRepository{
+//
+//    @Autowired
+//    private StudentCrudRepository crudRepository;
+    @PersistenceContext
+    private final EntityManager em;
+
+    @Transactional
     @Override
     public Map<Integer, UserImpl> allUser() {
-        return UsersServiceMemory.getallUser();
+  return null;
     }
 
     @Override
     public Map<Integer, UserImpl> allTrainer() {
-        return TrainerServiceMemory.getallTrainer();
+        return null;
     }
 
     @Override
     public Map<Integer, UserImpl> allStudent() {
-        return StudentServiceMemory.getallStudent();
+        Map<Integer, UserImpl> result = new HashMap<>();
+//        crudRepository.findAll().forEach(user -> result.put(user.getId(), user));
+        return result;
     }
 
     @Override
     public Map<Integer, UserImpl> allAdmin() {
-        return AdminServiceMemory.getallAdmin();
+        return null;
     }
 
     @Override
     public UserImpl getUserById(Integer id) {
-        return UsersServiceMemory.getUserById(id);
+        return null;
     }
 
     @Override
     public int saveUser(UserImpl user) {
-        return UsersServiceMemory.saveUser(user);
+        return 0;
     }
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-        return UsersServiceMemory.doremoveUser(id, entity);
+        return Optional.empty();
     }
 
     @Override
     public UserImpl updateUser(UserImpl user) {
-        return UsersServiceMemory.doupdateUser(user);
+        return null;
     }
 
     @Override
     public Map<Integer, UserImpl> freeTrainer() {
-        return TrainerServiceMemory.getfreeTrainer();
+        return null;
     }
 
     @Override
     public List<Student> studentFromGroup(Integer groupId) {
-        return StudentServiceMemory.studentFromGroup(groupId);
+        return null;
     }
 
     @Override

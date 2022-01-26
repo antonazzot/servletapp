@@ -5,9 +5,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import repository.modelrepository.modelfunction.deleteentitystratage.springormstratagy.*;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.AdminFunctionJpa;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
 import users.*;
@@ -28,9 +25,9 @@ public class UserSpringOrmRepository implements UserRepository {
     @Override
     public Map<Integer, UserImpl> allUser() {
         Map<Integer, UserImpl> result = new HashMap<>();
-        result.putAll(TrainerFunctionJpa.getallTrainer());
-        result.putAll(StudentFunctionJpa.getAllStudent());
-        result.putAll(AdminFunctionJpa.getAllAdmin());
+//        result.putAll(TrainerServiceJpa.getallTrainer());
+//        result.putAll(StudentServiceJpa.getAllStudent());
+//        result.putAll(AdminServiceJpa.getAllAdmin());
         return result;
     }
 

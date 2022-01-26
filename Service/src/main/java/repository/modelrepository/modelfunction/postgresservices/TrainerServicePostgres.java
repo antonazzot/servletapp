@@ -1,13 +1,11 @@
-package repository.modelrepository.modelfunction.functionpostgress;
+package repository.modelrepository.modelfunction.postgresservices;
 
 import helperutils.closebaseconnection.PostgresSQLUtils;
 import helperutils.myexceptionutils.MySqlException;
 import lombok.extern.slf4j.Slf4j;
 import repository.RepositoryDatasourse;
-import repository.RepositoryFactory;
 import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import repository.threadmodelrep.ThreadRepositoryFactory;
-import repository.threadmodelrep.ThreadRepositoryImplPostgres;
 import users.Role;
 import users.Trainer;
 import users.UserImpl;
@@ -22,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class TrainerFunctionPostgres {
+public class TrainerServicePostgres {
 
     public static RepositoryDatasourse datasourse = RepositoryDatasourse.getInstance();
 

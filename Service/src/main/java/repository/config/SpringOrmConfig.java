@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -18,6 +19,7 @@ import java.util.Properties;
 @Configuration
 @RequiredArgsConstructor
 @EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "repository", entityManagerFactoryRef = "factoryBean")
 public class SpringOrmConfig {
 
     @Autowired
@@ -26,7 +28,7 @@ public class SpringOrmConfig {
     public SpringOrmConfig(@Autowired DataSource dataSource) {
         this.dataSource = dataSource;
     }
-
+    @Primary
     @Bean
     public LocalContainerEntityManagerFactoryBean factoryBean(@Autowired Properties jpaProperties) {
         LocalContainerEntityManagerFactoryBean containerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -65,7 +67,7 @@ public class SpringOrmConfig {
     }
 
     @Bean
-    public EntityManager em (@Autowired LocalContainerEntityManagerFactoryBean factoryBean) {
-      return   factoryBean.getNativeEntityManagerFactory().createEntityManager();
+    public EntityManager em(@Autowired LocalContainerEntityManagerFactoryBean factoryBean) {
+        return factoryBean.getNativeEntityManagerFactory().createEntityManager();
     }
 }

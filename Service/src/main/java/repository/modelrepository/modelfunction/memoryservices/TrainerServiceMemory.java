@@ -1,4 +1,4 @@
-package repository.modelrepository.modelfunction.functionunmemory;
+package repository.modelrepository.modelfunction.memoryservices;
 
 import database.DataBaseInf;
 import threadmodel.Group;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class TrainerFunctionMemory {
+public class TrainerServiceMemory {
 
     public static Map<Integer, UserImpl> getallTrainer() {
         return  DataBaseInf.getTrainerHashMap();

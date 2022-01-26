@@ -1,4 +1,4 @@
-package repository.modelrepository.modelfunction.functionunmemory;
+package repository.modelrepository.modelfunction.memoryservices;
 
 import database.DataBaseInf;
 import threadmodel.Group;
@@ -8,7 +8,7 @@ import users.UserImpl;
 import java.util.List;
 import java.util.Map;
 
-public class StudentFunctionMemory {
+public class StudentServiceMemory {
     public static Map<Integer, UserImpl> getallStudent() {
         return  DataBaseInf.getStudentHashMap();
     }

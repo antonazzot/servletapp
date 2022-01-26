@@ -3,7 +3,7 @@ package repository.threadmodelrep.threadfunction.updategroupstratagy.jpaupdatest
 import helperutils.myexceptionutils.MyJpaException;
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.StudentFunctionJpa;
+import repository.RepositoryFactory;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.UpdateStratageJpa;
 import threadmodel.Group;
 import users.Student;
@@ -21,7 +21,7 @@ public class UpdateGroupStratagyJpaStudentAdd implements UpdateStratageJpa {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
             for (int id : entytiIdforact) {
-                student = StudentFunctionJpa.doGetStudentById(id);
+                student = RepositoryFactory.getRepository().getStudentById(id);
                 group.addStudent(student);
             }
             em.merge(group);

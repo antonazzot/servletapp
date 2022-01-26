@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import repository.RepositoryFactory;
-import repository.threadmodelrep.threadfunction.functionjpa.GroupFunctionJpa;
 import repository.threadmodelrep.threadfunction.functionorm.Markormservice;
 import threadmodel.Group;
 import threadmodel.Mark;
@@ -159,7 +158,7 @@ public class ThreadRepositoryOrm implements ThreadRepository {
 
     @Override
     public void updateGroup(int groupId, String act, int[] entytiIdforact) {
-        GroupFunctionJpa.doupdateGroup(groupId, act, entytiIdforact);
+        ThreadRepositoryFactory.getRepository().updateGroup(groupId, act, entytiIdforact);
     }
 
     @Override

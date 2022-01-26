@@ -1,11 +1,14 @@
-package repository.threadmodelrep.threadfunction.functionjpa;
+package repository.threadmodelrep.threadfunction.jpaservices;
 
 import helperutils.myexceptionutils.MyJpaException;
 import helperutils.closebaseconnection.JpaUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.TrainerFunctionJpa;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import repository.RepositoryFactory;
+import repository.threadmodelrep.ThreadRepositoryFactory;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.*;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.jpaupdatestratage.*;
 import threadmodel.Group;
@@ -18,13 +21,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.*;
-
+@Service
 @Slf4j
-public class GroupFunctionJpa {
-    public static Configuration cnf = new Configuration().configure();
-    public static SessionFactory sessionFactory = cnf.buildSessionFactory();
+@RequiredArgsConstructor
+public class GroupServiceJpa {
+    @Autowired
+    private final SessionFactory sessionFactory;
 
-    public static Map<Integer, Group> getAllGroup () {
+    public  Map<Integer, Group> getAllGroup () {
         Map<Integer, Group> result = new HashMap<>();
         EntityManager em = null;
         try {
@@ -40,17 +44,17 @@ public class GroupFunctionJpa {
         return result;
     }
 
-    public static Map<Integer, Student> getstudentsFromGroup(int groupId) {
+    public  Map<Integer, Student> getstudentsFromGroup(int groupId) {
         return getGroupById(groupId).getStudentMap();
     }
 
-    public static void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
+    public  void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
         Set <Theams> theams = new HashSet<>();
-        theamsIdList.forEach(id -> theams.add(TheamFunctionJpa.gettheamById(id)));
+        theamsIdList.forEach(id -> theams.add(ThreadRepositoryFactory.getRepository().theamById(id)));
         Map <Integer, Student> studentHashMap = new HashMap<>();
         studentList.stream().map(user -> (Student)user)
                 .forEach(student -> studentHashMap.put(student.getId(), student));
-        Trainer trainer = TrainerFunctionJpa.doGetTrainerById(trainerId);
+        Trainer trainer = RepositoryFactory.getRepository().getTrainerById(trainerId);
         Group group = new Group()
                 .withTrainer(trainer)
                 .withName("Groups_" +trainerId)
@@ -72,10 +76,10 @@ public class GroupFunctionJpa {
         }
     }
 
-      public static void doupdateGroup (int groupId, String act, int[] entytiIdforact) {
+      public  void doupdateGroup (int groupId, String act, int[] entytiIdforact) {
         log.info("In repository updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
         EntityManager em = null;
-        Group group = GroupFunctionJpa.getGroupById(groupId);
+        Group group = getGroupById(groupId);
           try  {
               em = sessionFactory.createEntityManager();
               UpdateStratageJpa updateGroupStratagyJpa = updateStratagyInject(act);
@@ -86,7 +90,7 @@ public class GroupFunctionJpa {
           }
     }
 
-    private static UpdateStratageJpa updateStratagyInject(String act) throws MyJpaException {
+    private  UpdateStratageJpa updateStratagyInject(String act) throws MyJpaException {
         Map <String, UpdateStratageJpa> stratagyMap = Map.of(
                 "studentdelete", new UpdateGroupStratagyJpaStudentDelete(),
                 "studentadd", new UpdateGroupStratagyJpaStudentAdd(),
@@ -96,7 +100,7 @@ public class GroupFunctionJpa {
         return stratagyMap.get(act);
     }
 
-    public static Group getGroupById (int id) {
+    public  Group getGroupById (int id) {
         EntityManager em = null;
         Group group = null;
         try {

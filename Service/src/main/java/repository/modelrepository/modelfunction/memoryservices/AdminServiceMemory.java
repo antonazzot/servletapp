@@ -1,11 +1,11 @@
-package repository.modelrepository.modelfunction.functionunmemory;
+package repository.modelrepository.modelfunction.memoryservices;
 
 import database.DataBaseInf;
 import users.UserImpl;
 
 import java.util.Map;
 
-public class AdminFunctionMemory {
+public class AdminServiceMemory {
     public static Map<Integer, UserImpl> getallAdmin() {
         return DataBaseInf.getAdminHashMap();
     }

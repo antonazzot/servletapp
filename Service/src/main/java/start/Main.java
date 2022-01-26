@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import repository.RepositoryFactory;
 import users.Trainer;
+import users.UserImpl;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,7 +33,13 @@ public class Main {
 //                    .forEach(System.out::println);
 
 
-        System.out.println(RepositoryFactory.getRepository().getTrainerById(181).getInf());
+//        System.out.println(RepositoryFactory.getRepository().getTrainerById(181).getInf());
+
+                RepositoryFactory.getRepository()
+                        .allUser().
+                        values().
+                        stream().
+                        map(UserImpl::getInf).forEach(System.out::println);
 
 
 //        ThreadRepositoryFactory.getRepository().addSalaryToTrainer(264, 77777);

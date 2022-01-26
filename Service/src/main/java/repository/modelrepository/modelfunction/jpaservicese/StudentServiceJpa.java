@@ -1,9 +1,10 @@
-package repository.modelrepository.modelfunction.functionjpaerepositiry;
+package repository.modelrepository.modelfunction.jpaservicese;
 
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import threadmodel.Group;
 import users.Role;
 import users.Student;
@@ -16,17 +17,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Service
 @RequiredArgsConstructor
-public class StudentFunctionJpa {
+public class StudentServiceJpa {
     //    @Autowired
 //    public static Configuration configuration;
 //    @Autowired
 //    public   SessionFactory sessionFactory;
-    public static Configuration conf = new Configuration().configure();
-    public static SessionFactory sessionFactory = conf.buildSessionFactory();
+    @Autowired
+    private final  SessionFactory sessionFactory;
 
-    public static Map<Integer, UserImpl> getAllStudent() {
+    public  Map<Integer, UserImpl> getAllStudent() {
         Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
@@ -45,7 +46,7 @@ public class StudentFunctionJpa {
         return result;
     }
 
-    public static List<Student> getStudentFromGroup(Integer groupId) {
+    public  List<Student> getStudentFromGroup(Integer groupId) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -61,7 +62,7 @@ public class StudentFunctionJpa {
         return null;
     }
 
-    public static Student doGetStudentById(int id) {
+    public  Student doGetStudentById(int id) {
         EntityManager em = null;
         Student student = null;
         try {

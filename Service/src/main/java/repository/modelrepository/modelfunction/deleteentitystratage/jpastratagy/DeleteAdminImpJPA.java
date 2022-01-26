@@ -1,7 +1,7 @@
 package repository.modelrepository.modelfunction.deleteentitystratage.jpastratagy;
 
 import helperutils.closebaseconnection.JpaUtils;
-import repository.modelrepository.modelfunction.functionjpaerepositiry.AdminFunctionJpa;
+import repository.RepositoryFactory;
 import users.Administrator;
 
 import javax.persistence.EntityManager;
@@ -10,7 +10,7 @@ import javax.persistence.EntityTransaction;
 public class DeleteAdminImpJPA implements DeleteStratageJPA {
     @Override
     public void doDeleteEntity(int id, EntityManager em) {
-        Administrator administrator = AdminFunctionJpa.doGetAdministratorById(id);
+        Administrator administrator = RepositoryFactory.getRepository().getAdministratorById(id);
         try {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();

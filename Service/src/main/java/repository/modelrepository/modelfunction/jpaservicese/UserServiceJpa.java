@@ -1,44 +1,70 @@
-package repository.modelrepository.modelfunction.functionjpaerepositiry;
+package repository.modelrepository.modelfunction.jpaservicese;
 
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import repository.modelrepository.modelfunction.deleteentitystratage.jpastratagy.*;
 import users.UserImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+@Service
 @Slf4j
 @RequiredArgsConstructor
-public class UserFunctionJpa {
+public class UserServiceJpa {
 //    @Autowired
 //    public  static Configuration configuration;
 //    @Autowired
 //    public static SessionFactory sessionFactory;
 
-    public static Configuration conf = new Configuration().configure();
-    public static SessionFactory sessionFactory = conf.buildSessionFactory();
+    @Autowired
+    private final  SessionFactory sessionFactory;
 
-    public static UserImpl getUserById(Integer id) {
-        return getAllUser().get(id);
+    public  UserImpl getUserById(Integer id) {
+        EntityManager em = null;
+        try {
+            em = sessionFactory.createEntityManager();
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            return em.find(UserImpl.class, id);
+        } catch (Exception e) {
+            JpaUtils.rollBackQuietly(em, e);
+        } finally {
+            JpaUtils.closeQuietly(em);
+        }
+        return null;
     }
 
-    public static Map<Integer, UserImpl> getAllUser() {
+    public  Map<Integer, UserImpl> getAllUser() {
         Map<Integer, UserImpl> result = new HashMap<>();
-        result.putAll(TrainerFunctionJpa.getallTrainer());
-        result.putAll(StudentFunctionJpa.getAllStudent());
-        result.putAll(AdminFunctionJpa.getAllAdmin());
+        EntityManager em = null;
+        try {
+            em = sessionFactory.createEntityManager();
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            List <UserImpl> resultList = em.createQuery("select s from Student s").getResultList();
+           resultList.forEach(user -> result.put(user.getId(), user));
+            return result;
+        } catch (Exception e) {
+            JpaUtils.rollBackQuietly(em, e);
+        } finally {
+            JpaUtils.closeQuietly(em);
+        }
+//        result.putAll(TrainerServiceJpa.getallTrainer());
+//        result.putAll(StudentServiceJpa.getAllStudent());
+////       result.putAll(AdminServiceJpa.getAllAdmin());
         return result;
     }
 
     //    @JpaTransaction
-    public static int doSaveUser(UserImpl user) {
+    public  int doSaveUser(UserImpl user) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -54,7 +80,7 @@ public class UserFunctionJpa {
         return user.getId();
     }
 
-    public static Optional<UserImpl> doRemoveUser(Integer id, String entity) {
+    public  Optional<UserImpl> doRemoveUser(Integer id, String entity) {
         EntityManager em = sessionFactory.createEntityManager();
         DeleteStratageJPA deleteStratageJPA = changeStratageForDelete(entity);
         deleteStratageJPA.doDeleteEntity(id, em);
@@ -72,7 +98,7 @@ public class UserFunctionJpa {
         return stratageMap.get(entity);
     }
 
-    public static UserImpl doUpdateUser(UserImpl user) {
+    public  UserImpl doUpdateUser(UserImpl user) {
         UserImpl userForChange = getUserById(user.getId());
         userForChange
                 .withLogin(user.getLogin())

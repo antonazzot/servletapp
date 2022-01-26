@@ -3,7 +3,7 @@ package repository.threadmodelrep.threadfunction.updategroupstratagy.jpaupdatest
 import helperutils.myexceptionutils.MyJpaException;
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.extern.slf4j.Slf4j;
-import repository.threadmodelrep.threadfunction.functionjpa.TheamFunctionJpa;
+import repository.threadmodelrep.ThreadRepositoryFactory;
 import repository.threadmodelrep.threadfunction.updategroupstratagy.UpdateStratageJpa;
 import threadmodel.Group;
 import threadmodel.Theams;
@@ -21,7 +21,7 @@ public class UpdateGroupStratagyImplJpaTheamAdd implements UpdateStratageJpa {
             transaction.begin();
             log.info("UpdateAddTheam = {}", group.getTheamsSet().toString());
             for (int id : entytiIdforact) {
-                theams = TheamFunctionJpa.gettheamById(id);
+                theams = ThreadRepositoryFactory.getRepository().theamById(id);
                 group.addTheam(theams);
             }
             log.info("UpdateAddTheam after add = {}", group.getTheamsSet().toString());

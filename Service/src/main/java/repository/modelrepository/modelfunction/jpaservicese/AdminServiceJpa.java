@@ -1,10 +1,11 @@
-package repository.modelrepository.modelfunction.functionjpaerepositiry;
+package repository.modelrepository.modelfunction.jpaservicese;
 
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import users.Administrator;
 import users.Role;
 import users.UserImpl;
@@ -14,18 +15,20 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.Map;
-
+@Service
 @RequiredArgsConstructor
 @Slf4j
-public class AdminFunctionJpa {
+public class AdminServiceJpa {
     //    @Autowired
 //    static Configuration configuration;
 //    @Autowired
 //    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
-    public static Configuration conf = new Configuration().configure();
-    public static SessionFactory sessionFactory = conf.buildSessionFactory();
+//    public static Configuration conf = new Configuration().configure();
+//    public static SessionFactory sessionFactory = conf.buildSessionFactory();
+    @Autowired
+    private final  SessionFactory sessionFactory;
 
-    public static Map<Integer, UserImpl> getAllAdmin() {
+    public  Map<Integer, UserImpl> getAllAdmin() {
         Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
@@ -43,7 +46,7 @@ public class AdminFunctionJpa {
         return result;
     }
 
-    public static Administrator doGetAdministratorById(int id) {
+    public  Administrator doGetAdministratorById(int id) {
         EntityManager em = null;
         Administrator administrator = null;
         try {
