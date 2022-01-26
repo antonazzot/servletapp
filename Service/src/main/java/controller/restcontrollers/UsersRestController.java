@@ -7,12 +7,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import repository.RepositoryFactory;
-import repository.modelrepository.modelfunction.RoleIDParametrCheker;
 import users.Role;
 import users.Student;
 import users.UserImpl;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 

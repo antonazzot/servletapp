@@ -2,10 +2,10 @@ package repository.modelrepository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import repository.modelrepository.modelfunction.memoryservices.AdminServiceMemory;
-import repository.modelrepository.modelfunction.memoryservices.StudentServiceMemory;
-import repository.modelrepository.modelfunction.memoryservices.TrainerServiceMemory;
-import repository.modelrepository.modelfunction.memoryservices.UsersServiceMemory;
+import repository.modelrepository.modelservices.memoryservices.AdminServiceMemory;
+import repository.modelrepository.modelservices.memoryservices.StudentServiceMemory;
+import repository.modelrepository.modelservices.memoryservices.TrainerServiceMemory;
+import repository.modelrepository.modelservices.memoryservices.UsersServiceMemory;
 import users.Administrator;
 import users.Student;
 import users.Trainer;

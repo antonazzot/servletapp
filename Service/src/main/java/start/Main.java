@@ -36,7 +36,7 @@ public class Main {
 //        System.out.println(RepositoryFactory.getRepository().getTrainerById(181).getInf());
 
                 RepositoryFactory.getRepository()
-                        .allUser().
+                        .allStudent().
                         values().
                         stream().
                         map(UserImpl::getInf).forEach(System.out::println);

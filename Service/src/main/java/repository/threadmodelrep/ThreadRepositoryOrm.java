@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import repository.RepositoryFactory;
-import repository.threadmodelrep.threadfunction.functionorm.Markormservice;
+import repository.threadmodelrep.threadservices.ormservices.Markormservice;
 import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Salary;

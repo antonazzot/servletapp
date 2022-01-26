@@ -3,11 +3,12 @@ package repository.modelrepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import repository.modelrepository.modelfunction.postgresservices.AdminServicePostgres;
-import repository.modelrepository.modelfunction.postgresservices.StudentServicePostgres;
-import repository.modelrepository.modelfunction.postgresservices.TrainerServicePostgres;
-import repository.modelrepository.modelfunction.postgresservices.UsersServicePostgres;
+import repository.modelrepository.modelservices.postgresservices.AdminServicePostgres;
+import repository.modelrepository.modelservices.postgresservices.StudentServicePostgres;
+import repository.modelrepository.modelservices.postgresservices.TrainerServicePostgres;
+import repository.modelrepository.modelservices.postgresservices.UsersServicePostgres;
 import users.Administrator;
 import users.Student;
 import users.Trainer;
@@ -22,70 +23,78 @@ import java.util.Optional;
 public class UserRepositoryImplPostgres implements UserRepository {
 
 //    private final JdbcTemplate jdbcTemplate;
+    @Autowired
+    private final AdminServicePostgres adminServicePostgres;
+    @Autowired
+    private final TrainerServicePostgres trainerServicePostgres;
+    @Autowired
+    private final StudentServicePostgres studentServicePostgres;
+    @Autowired
+    private final UsersServicePostgres usersServicePostgres;
 
     @Override
     public Map<Integer, UserImpl> allUser() {
-        return UsersServicePostgres.allUser();
+        return usersServicePostgres.allUser();
     }
 
     @Override
     public Map<Integer, UserImpl> allTrainer() {
-        return TrainerServicePostgres.getallTrainer();
+        return trainerServicePostgres.getallTrainer();
     }
 
     @Override
     public Map<Integer, UserImpl> allStudent() {
-        return StudentServicePostgres.allStudent();
+        return studentServicePostgres.allStudent();
     }
 
     @Override
     public Map<Integer, UserImpl> allAdmin() {
-        return AdminServicePostgres.allAdmin();
+        return adminServicePostgres.allAdmin();
     }
 
     @Override
     public UserImpl getUserById(Integer id) {
-        return UsersServicePostgres.getUserById(id);
+        return usersServicePostgres.getUserById(id);
     }
 
     @Override
     public int saveUser(UserImpl user) {
-        return UsersServicePostgres.saveUser(user);
+        return usersServicePostgres.saveUser(user);
     }
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-        return UsersServicePostgres.removeUser(id, entity);
+        return usersServicePostgres.removeUser(id, entity);
     }
 
     @Override
     public UserImpl updateUser(UserImpl user) {
-        return UsersServicePostgres.updateUser(user);
+        return usersServicePostgres.updateUser(user);
     }
 
     @Override
     public Map<Integer, UserImpl> freeTrainer() {
-        return TrainerServicePostgres.freeTrainer();
+        return trainerServicePostgres.freeTrainer();
     }
 
     @Override
     public List<Student> studentFromGroup(Integer groupId) {
-        return StudentServicePostgres.studentFromGroup(groupId);
+        return studentServicePostgres.studentFromGroup(groupId);
     }
 
     @Override
     public Trainer getTrainerById(int id) {
-        return TrainerServicePostgres.getTrainerById(id);
+        return trainerServicePostgres.getTrainerById(id);
     }
 
     @Override
     public Administrator getAdministratorById(int id) {
-        return null;
+     return    adminServicePostgres.getAdminById(id) ;
     }
 
     @Override
-    public Student getStudentById(int id) {
-        return null;
+    public Student getStudentById(int id)  {
+      return   studentServicePostgres.getStudentById(id);
     }
 
 }

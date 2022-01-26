@@ -1,10 +1,10 @@
 package repository.threadmodelrep;
 
 import org.springframework.stereotype.Repository;
-import repository.threadmodelrep.threadfunction.functioninmemory.GroupFunction;
-import repository.threadmodelrep.threadfunction.functioninmemory.MarkFunction;
-import repository.threadmodelrep.threadfunction.functioninmemory.SalaryFunction;
-import repository.threadmodelrep.threadfunction.functioninmemory.TheamFunction;
+import repository.threadmodelrep.threadservices.memoryservices.GroupFunction;
+import repository.threadmodelrep.threadservices.memoryservices.MarkFunction;
+import repository.threadmodelrep.threadservices.memoryservices.SalaryFunction;
+import repository.threadmodelrep.threadservices.memoryservices.TheamFunction;
 import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Salary;
