@@ -3,6 +3,8 @@ package springmvcconfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import repository.RepositoryFactory;
@@ -11,11 +13,12 @@ import repository.threadmodelrep.ThreadRepositoryFactory;
 @ComponentScan({"controller", "repository", "aspect"})
 @Configuration
 @EnableWebMvc
+@EnableWebSecurity
 @RequiredArgsConstructor
 @EnableAspectJAutoProxy
 @PropertySource("classpath:app.properties")
 @Import({RepositoryFactory.class, ThreadRepositoryFactory.class})
-public class SpringConfig  implements WebMvcConfigurer {
+public class SpringConfig extends AbstractSecurityWebApplicationInitializer implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 //    @Value("${postgres.driver}")
 //    private final String DRIVER;

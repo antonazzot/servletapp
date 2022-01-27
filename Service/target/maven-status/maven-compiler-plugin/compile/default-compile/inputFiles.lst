@@ -26,6 +26,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\springormstrategy\DeleteTheamImpOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActWatchStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\AbstractFilter.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\config\SecurityConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\crudrepositorislikeservice\StudentCrudRepository.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\springmvcconfig\SpringConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryOrm.java

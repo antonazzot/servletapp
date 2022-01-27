@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @ToString (callSuper = true)
 @Entity
-@Table(name = "users")
+@Table(name = "persons")
 @NamedQueries(
         {
                 @NamedQuery(name = "adminById", query = "select a from Administrator a where a.id = :id")

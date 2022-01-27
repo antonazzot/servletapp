@@ -109,6 +109,7 @@ aspect\JpaTransaction.class
 repository\threadmodelrep\threadservices\postgresservices\SalaryServicesPostgres.class
 servlets\filters\TrainerFilter.class
 controller\serviseforcontroller\viewsservises\ChangeTrinerActStratagy.class
+repository\config\SecurityConfig.class
 helperutils\closebaseconnection\PostgresSQLUtils.class
 servlets\filters\UserFilter.class
 repository\threadmodelrep\threadservices\updategroupstratagy\crudstrategygroupupdate\UpdateGroupStrategyCrudStudentDelete.class

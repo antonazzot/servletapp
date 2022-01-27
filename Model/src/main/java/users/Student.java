@@ -15,7 +15,7 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity
-@Table(name = "users")
+@Table(name = "persons")
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @NamedQueries(
         {
