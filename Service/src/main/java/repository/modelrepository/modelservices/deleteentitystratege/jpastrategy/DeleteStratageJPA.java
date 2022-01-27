@@ -1,4 +1,4 @@
-package repository.modelrepository.modelservices.deleteentitystratage.jpastratagy;
+package repository.modelrepository.modelservices.deleteentitystratege.jpastrategy;
 
 import javax.persistence.EntityManager;
 

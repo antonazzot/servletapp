@@ -1,20 +1,20 @@
-package repository.modelrepository.modelservices.deleteentitystratage.jpastratagy;
+package repository.modelrepository.modelservices.deleteentitystratege.jpastrategy;
 
 import helperutils.closebaseconnection.JpaUtils;
-import repository.RepositoryFactory;
-import users.Student;
+import repository.threadmodelrep.ThreadRepositoryFactory;
+import threadmodel.Group;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-public class DeleteStudentImpJPA implements DeleteStratageJPA {
+public class DeleteGroupImpJPA implements DeleteStratageJPA {
     @Override
     public void doDeleteEntity(int id, EntityManager em) {
-        Student student = RepositoryFactory.getRepository().getStudentById(id);
+        Group group = ThreadRepositoryFactory.getRepository().allGroup().get(id);
         try {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
-            em.remove(student);
+            em.remove(group);
             transaction.commit();
         } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);

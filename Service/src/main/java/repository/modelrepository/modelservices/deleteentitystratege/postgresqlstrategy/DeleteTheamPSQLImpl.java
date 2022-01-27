@@ -1,4 +1,4 @@
-package repository.modelrepository.modelservices.deleteentitystratage.postgresqlstratagy;
+package repository.modelrepository.modelservices.deleteentitystratege.postgresqlstrategy;
 
 import helperutils.closebaseconnection.PostgresSQLUtils;
 import helperutils.myexceptionutils.MySqlException;

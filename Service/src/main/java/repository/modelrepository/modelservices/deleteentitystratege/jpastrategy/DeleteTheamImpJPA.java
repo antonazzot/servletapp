@@ -1,4 +1,4 @@
-package repository.modelrepository.modelservices.deleteentitystratage.jpastratagy;
+package repository.modelrepository.modelservices.deleteentitystratege.jpastrategy;
 
 import helperutils.closebaseconnection.JpaUtils;
 import repository.threadmodelrep.ThreadRepositoryFactory;

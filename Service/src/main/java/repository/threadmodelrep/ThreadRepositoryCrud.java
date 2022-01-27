@@ -4,10 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import repository.RepositoryFactory;
+import repository.modelrepository.modelservices.crudrepositorislikeservice.StudentCrudRepository;
+import repository.modelrepository.modelservices.crudrepositorislikeservice.TrainerCrudRepository;
 import repository.threadmodelrep.threadservices.crudthreadservices.GroupCrudRepository;
 import repository.threadmodelrep.threadservices.crudthreadservices.MarkCrudRepository;
 import repository.threadmodelrep.threadservices.crudthreadservices.SalaryCrudRepository;
 import repository.threadmodelrep.threadservices.crudthreadservices.TheamCrudRepository;
+import repository.threadmodelrep.threadservices.updategroupstratagy.UpdateStratageCrud;
+import repository.threadmodelrep.threadservices.updategroupstratagy.UpdateStratageJpa;
+import repository.threadmodelrep.threadservices.updategroupstratagy.crudstrategygroupupdate.*;
+import repository.threadmodelrep.threadservices.updategroupstratagy.jpaupdatestratage.*;
 import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Salary;
@@ -29,6 +35,11 @@ public class ThreadRepositoryCrud implements ThreadRepository {
     private final MarkCrudRepository markCrudRepository;
     @Autowired
     private final SalaryCrudRepository salaryCrudRepository;
+    @Autowired
+    private final StudentCrudRepository studentCrudRepository;
+    @Autowired
+    private final TrainerCrudRepository trainerCrudRepository;
+
     @Override
     public Map<Integer, Group> allGroup() {
         Map <Integer, Group> result = new HashMap<>();
@@ -109,9 +120,13 @@ public class ThreadRepositoryCrud implements ThreadRepository {
 
     @Override
     public Map<Integer, Theams> freeTheams() {
-     Map <Integer, Theams> ressult = new HashMap<>();
-     groupCrudRepository.findAll().forEach(group -> group.getTheamsSet().forEach(ressult::remove));
-     return ressult;
+     Map <Integer, Theams> result = new HashMap<>(allTheams());
+     List<Theams> busyTheams = new ArrayList<>();
+     groupCrudRepository.findAll().forEach(group -> busyTheams.addAll(group.getTheamsSet()));
+        for (Theams busyTheam : busyTheams) {
+            result.remove(busyTheam.getId());
+        }
+     return result;
     }
 
     @Override
@@ -143,18 +158,35 @@ public class ThreadRepositoryCrud implements ThreadRepository {
     @Override
     public void changeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
         for (Map.Entry<Integer, Integer> entry : markIdMarkValue.entrySet()  ) {
-            markCrudRepository.setMarkById(entry.getKey(), entry.getValue());
+            Mark markforchange = markCrudRepository.findById(entry.getKey()).get();
+            markforchange.withValue(entry.getValue());
+            markCrudRepository.save(markforchange);
         }
 
     }
 
     @Override
     public void updateGroup(int groupId, String act, int[] entytiIdforact) {
+        Group group = groupCrudRepository.findById(groupId).get();
+        Group changeGroup = chngeStrategyForUpdateGroup(act).updateGroup(group, entytiIdforact);
+        groupCrudRepository.save(changeGroup);
+    }
 
+
+    private UpdateStratageCrud chngeStrategyForUpdateGroup(String act) {
+        Map <String, UpdateStratageCrud> stratagyMap = Map.of(
+                "studentdelete", new UpdateGroupStrategyCrudStudentDelete(),
+                "studentadd", new UpdateGroupStrategyCrudStudentAdd(studentCrudRepository),
+                "theamdelete", new UpdateGroupStrategyCrudTheamDelete(theamCrudRepository),
+                "theamadd",new UpdateGroupStrategyCrudTheamAdd(theamCrudRepository),
+                "trainer", new UpdateGroupStrategyCrudTrainerChange(trainerCrudRepository));
+        return stratagyMap.get(act);
     }
 
     @Override
     public void updateTheam(int theamId, String theamName) {
-    theamCrudRepository.setTheamById(theamId, theamName);
+        Theams theams = theamCrudRepository.findById(theamId).get();
+        theams.withValue(theamName);
+        theamCrudRepository.save(theams);
     }
 }

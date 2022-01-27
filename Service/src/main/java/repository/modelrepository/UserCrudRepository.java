@@ -2,17 +2,17 @@ package repository.modelrepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.AdministratorCrudRepository;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.StudentCrudRepository;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.TrainerCrudRepository;
+import repository.threadmodelrep.threadservices.crudthreadservices.GroupCrudRepository;
+import repository.threadmodelrep.threadservices.crudthreadservices.TheamCrudRepository;
 import users.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Repository("Crud")
@@ -24,12 +24,18 @@ public class UserCrudRepository implements UserRepository{
     private final AdministratorCrudRepository administratorCrudRepository;
     @Autowired
     private final TrainerCrudRepository trainerCrudRepository;
+    @Autowired
+    private final TheamCrudRepository theamCrudRepository;
+    @Autowired
+    private final GroupCrudRepository groupCrudRepository;
 
     @Transactional
     @Override
     public Map<Integer, UserImpl> allUser() {
         Map<Integer, UserImpl> result = new HashMap<>();
-        studentCrudRepository.findAll().forEach(user -> result.put(user.getId(), user));
+        result.putAll(allTrainer());
+        result.putAll(allAdmin());
+        result.putAll(allStudent());
         return result;
     }
 
@@ -56,7 +62,7 @@ public class UserCrudRepository implements UserRepository{
 
     @Override
     public UserImpl getUserById(Integer id) {
-        return studentCrudRepository.findById(id).get();
+        return allUser().get(id);
     }
 
     @Override
@@ -72,26 +78,57 @@ public class UserCrudRepository implements UserRepository{
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-        UserImpl userById = getUserById(id);
-        studentCrudRepository.delete(userById);
-        return Optional.of(userById);
+        CrudRepository <?, Integer> repositoryForDelete = changeStrategyForDelete(entity);
+        repositoryForDelete.deleteById(id);
+        return Optional.empty();
+    }
+
+    private CrudRepository<?, Integer> changeStrategyForDelete(String entity) {
+        Map<String, CrudRepository> map = Map.of(
+                "student", studentCrudRepository,
+                "trainer", trainerCrudRepository,
+                "administrator", administratorCrudRepository,
+                "theam", theamCrudRepository,
+                "group", groupCrudRepository
+        );
+        return map.get(entity);
     }
 
     @Override
     public UserImpl updateUser(UserImpl user) {
-        studentCrudRepository.setUserByIdWithName(user.getId(), user.getName());
+        if (user.getRole().equals(Role.ADMINISTRATOR))
+            administratorCrudRepository.save((Administrator)user);
+        else if (user.getRole().equals(Role.TRAINER))
+            trainerCrudRepository.save((Trainer) user);
+        else studentCrudRepository.save((Student) user);
+
+//        UserImpl oldUser = getUserById(user.getId());
+//        changeStrategyByRole(user.getRole()).save(user);
+
         return user;
     }
-
+    private CrudRepository<?, Integer> changeStrategyByRole(Role role) {
+        Map<Role, CrudRepository> map = Map.of(
+                Role.STUDENT, studentCrudRepository,
+                Role.TRAINER, trainerCrudRepository,
+                Role.ADMINISTRATOR, administratorCrudRepository
+        );
+        return map.get(role);
+    }
     @Override
     public Map<Integer, UserImpl> freeTrainer() {
-        return null;
+        Map<Integer, UserImpl> result = new HashMap<>();
+        Collection<UserImpl> all = allTrainer().values();
+        List <Trainer> busy = new ArrayList<>();
+        groupCrudRepository.findAll().forEach(group -> busy.add(group.getTrainer()));
+        all.removeAll(busy);
+        all.forEach(trainer -> result.put(trainer.getId(), trainer));
+        return result;
     }
 
     @Override
     public List<Student> studentFromGroup(Integer groupId) {
-//     return studentCrudRepository.findByGroupId(groupId);
-        return null;
+       return (List<Student>) groupCrudRepository.findById(groupId).get().getStudentMap().values();
     }
 
     @Override

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.modelrepository.modelservices.deleteentitystratage.jpastratagy.*;
+import repository.modelrepository.modelservices.deleteentitystratege.jpastrategy.*;
 import users.Student;
 import users.UserImpl;
 

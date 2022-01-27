@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import repository.modelrepository.modelservices.deleteentitystratage.springormstratagy.*;
+import repository.modelrepository.modelservices.deleteentitystratege.springormstrategy.*;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
 import users.*;

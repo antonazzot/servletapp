@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.RepositoryDatasourse;
 import repository.modelrepository.modelservices.comoonservice.RoleIDParametrCheker;
-import repository.modelrepository.modelservices.deleteentitystratage.postgresqlstratagy.DeleteEntityPSQL;
-import repository.modelrepository.modelservices.deleteentitystratage.postgresqlstratagy.DeleteGroupPSQLImpl;
-import repository.modelrepository.modelservices.deleteentitystratage.postgresqlstratagy.DeleteTheamPSQLImpl;
-import repository.modelrepository.modelservices.deleteentitystratage.postgresqlstratagy.DeleteUserPSQLImpl;
+import repository.modelrepository.modelservices.deleteentitystratege.postgresqlstrategy.DeleteEntityPSQL;
+import repository.modelrepository.modelservices.deleteentitystratege.postgresqlstrategy.DeleteGroupPSQLImpl;
+import repository.modelrepository.modelservices.deleteentitystratege.postgresqlstrategy.DeleteTheamPSQLImpl;
+import repository.modelrepository.modelservices.deleteentitystratege.postgresqlstrategy.DeleteUserPSQLImpl;
 import users.Role;
 import users.UserImpl;
 
