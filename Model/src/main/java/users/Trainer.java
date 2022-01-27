@@ -17,7 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true, exclude = "salarylist")
 @ToString (callSuper = true, exclude = "salarylist")
 @Entity
-@Table(name = "users")
+@Table(name = "persons")
 @NamedQueries(
         {
                 @NamedQuery(name = "trainerById", query = "select t from Trainer t where t.id = :id")
