@@ -34,7 +34,7 @@ public class StudentServicePostgres {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps = connection.prepareStatement("select * from users where role_id=" + RoleIDParametrCheker.userGetRoleForDB(Role.STUDENT));
+                ps = connection.prepareStatement("select * from persons where role_id=" + RoleIDParametrCheker.userGetRoleForDB(Role.STUDENT));
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     if (!rs.wasNull() || !rs.getString("login").equals("")) {
@@ -101,7 +101,7 @@ public class StudentServicePostgres {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps = connection.prepareStatement("SELECT * FROM users where id= ? and role_id = ?");
+                ps = connection.prepareStatement("SELECT * FROM persons where id= ? and role_id = ?");
                 ps.setInt(1, id);
                 ps.setInt(2, RoleIDParametrCheker.userGetRoleForDB(Role.STUDENT));
                 rs = ps.executeQuery();

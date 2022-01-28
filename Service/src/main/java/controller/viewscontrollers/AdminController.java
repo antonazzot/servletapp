@@ -15,6 +15,7 @@ import threadmodel.Group;
 import users.Trainer;
 import users.UserImpl;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @SessionAttributes("user")
@@ -23,6 +24,11 @@ import java.util.ArrayList;
 @Scope("session")
 @RequestMapping(path = "/mvc/views")
 public class AdminController {
+
+    @GetMapping("/mainadmin")
+    public String helloadmin() {
+        return "adminControl/adminActList";
+    }
 
     @PostMapping("/adminact")
     public String adminAct(@RequestParam("entity") String entity,

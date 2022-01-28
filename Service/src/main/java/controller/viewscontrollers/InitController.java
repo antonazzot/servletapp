@@ -28,6 +28,11 @@ public class InitController {
         return "start";
     }
 
+    @GetMapping()
+    public String hell () {
+        return "str";
+    }
+
     @PostMapping("/checkUser")
     public String checkUser(HttpSession session, Model model) {
         if (session != null ) {

@@ -36,7 +36,7 @@ public class UsersServicePostgres {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps = connection.prepareStatement("select * from users;");
+                ps = connection.prepareStatement("select * from persons;");
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     Integer userId = rs.getInt("id");
@@ -71,7 +71,7 @@ public class UsersServicePostgres {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps = connection.prepareStatement("SELECT * FROM users where id= ?");
+                ps = connection.prepareStatement("SELECT * FROM persons where id= ?");
                 ps.setInt(1, id);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -103,7 +103,7 @@ public class UsersServicePostgres {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps = connection.prepareStatement("INSERT INTO users (name, login, password, age, role_id) " +
+                ps = connection.prepareStatement("INSERT INTO persons (name, login, password, age, role_id) " +
                         "Values (?, ?, ?, ?, ?) returning id");
                 ps.setString(1, user.getName());
                 ps.setString(2, user.getLogin());
@@ -135,7 +135,7 @@ public class UsersServicePostgres {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
-                ps = connection.prepareStatement("update users set age = ?, " +
+                ps = connection.prepareStatement("update persons set age = ?, " +
                         "login = ?, name= ?, password =?, role_id = ? " +
                         "where id = ? ");
                 ps.setInt(1, user.getAge());
