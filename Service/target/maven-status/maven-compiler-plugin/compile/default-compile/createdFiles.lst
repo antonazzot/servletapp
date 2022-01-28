@@ -130,7 +130,6 @@ springmvcconfig\SpringConfig.class
 repository\threadmodelrep\threadservices\jpaservices\MarkServiceJpa.class
 repository\RepositoryFactory.class
 repository\threadmodelrep\threadservices\crudthreadservices\MarkCrudRepository.class
-repository\config\SpringOrmConfig.class
 repository\threadmodelrep\threadservices\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyJpaStudentDelete.class
 repository\modelrepository\modelservices\deleteentitystratege\postgresqlstrategy\DeleteGroupPSQLImpl.class
 repository\RepositoryDatasourse.class
