@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @SessionAttributes("user")
 @Slf4j
@@ -29,7 +30,9 @@ public class InitController {
     }
 
     @GetMapping()
-    public String hell () {
+    public String hell (Principal principal) {
+
+        log.info("Principal ={}" , principal.getName() );
         return "str";
     }
 

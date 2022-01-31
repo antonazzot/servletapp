@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 import org.springframework.transaction.TransactionManager;
@@ -25,13 +26,14 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @RequiredArgsConstructor
-//@EnableWebSecurity
+@EnableWebSecurity
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableJpaRepositories(basePackages = "repository", entityManagerFactoryRef = "factoryBean")
 @PropertySource("classpath:app.properties")
 @Import({RepositoryFactory.class, ThreadRepositoryFactory.class})
-public class SpringConfig /* extends AbstractSecurityWebApplicationInitializer */  implements WebMvcConfigurer {
+public class SpringConfig  extends AbstractSecurityWebApplicationInitializer  implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
     private final DataSource dataSource;
@@ -148,7 +150,8 @@ public class SpringConfig /* extends AbstractSecurityWebApplicationInitializer *
 //    }
 //@Override
 //public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//
 //        configurer.enable("/**");
-//        configurer.enable();
+//    configurer.enable();
 //}
 }

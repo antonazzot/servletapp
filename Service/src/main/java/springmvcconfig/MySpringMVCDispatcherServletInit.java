@@ -22,12 +22,12 @@ public class MySpringMVCDispatcherServletInit extends AbstractAnnotationConfigDi
         return new String[] {"/"};
     }
 
-    @Override
-    protected Filter[] getServletFilters() {
-        return new Filter[] {
-                new AbstractFilter(),
-                new RequsetLoggingFilter(),
-
-        };
-    }
+//    @Override
+//    protected Filter[] getServletFilters() {
+//        return new Filter[] {
+//                new AbstractFilter(),
+//                new RequsetLoggingFilter(),
+//
+//        };
+//    }
 }
