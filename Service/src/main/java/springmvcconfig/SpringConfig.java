@@ -25,13 +25,13 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @RequiredArgsConstructor
-@EnableWebSecurity
+//@EnableWebSecurity
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "repository", entityManagerFactoryRef = "factoryBean")
 @PropertySource("classpath:app.properties")
 @Import({RepositoryFactory.class, ThreadRepositoryFactory.class})
-public class SpringConfig  extends AbstractSecurityWebApplicationInitializer  implements WebMvcConfigurer {
+public class SpringConfig /* extends AbstractSecurityWebApplicationInitializer */  implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
     private final DataSource dataSource;
@@ -146,8 +146,9 @@ public class SpringConfig  extends AbstractSecurityWebApplicationInitializer  im
 //        resolver.setTemplateEngine(templateEngine());
 //        registry.viewResolver(resolver);
 //    }
-@Override
-public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-    configurer.enable();
-}
+//@Override
+//public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//        configurer.enable("/**");
+//        configurer.enable();
+//}
 }

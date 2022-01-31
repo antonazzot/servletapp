@@ -2,9 +2,7 @@ package springmvcconfig;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import servlets.filters.AbstractFilter;
-import servlets.filters.LogOutFilter;
 import servlets.filters.RequsetLoggingFilter;
-import servlets.filters.StartFilter;
 
 import javax.servlet.Filter;
 
@@ -24,12 +22,12 @@ public class MySpringMVCDispatcherServletInit extends AbstractAnnotationConfigDi
         return new String[] {"/"};
     }
 
-//    @Override
-//    protected Filter[] getServletFilters() {
-//        return new Filter[] {
-//                new AbstractFilter(),
-//                new RequsetLoggingFilter(),
-//
-//        };
-//    }
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[] {
+                new AbstractFilter(),
+                new RequsetLoggingFilter(),
+
+        };
+    }
 }

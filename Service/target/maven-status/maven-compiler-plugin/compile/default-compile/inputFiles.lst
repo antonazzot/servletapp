@@ -2,7 +2,6 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\postgresqlstrategy\DeleteUserPSQLImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTheamDelete.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\aspect\ControllerAspect.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\config\SpringOrmConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTheamAdd.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\jpaservices\TheamServiceJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\postgresservices\StudentServicePostgres.java
@@ -26,7 +25,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\springormstrategy\DeleteTheamImpOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActWatchStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\AbstractFilter.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\config\SecurityConfig.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\springmvcconfig\SecurityConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\crudrepositorislikeservice\StudentCrudRepository.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\springmvcconfig\SpringConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryOrm.java
@@ -92,10 +91,10 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\jpaservicese\StudentServiceJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\jpastrategy\DeleteTrainerImpJPA.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\memoryservices\AdminServiceMemory.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\springmvcconfig\EntityManagerConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\postgresservices\TrainerServicePostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\LogOutFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\updategroupstratagy\UpdateStratageJpa.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\config\EntityManagerConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\RequsetLoggingFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\postgresqlstrategy\DeleteTheamPSQLImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\viewscontrollers\TrainerController.java

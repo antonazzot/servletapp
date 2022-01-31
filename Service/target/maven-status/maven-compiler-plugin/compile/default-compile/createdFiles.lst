@@ -1,5 +1,6 @@
 controller\restcontrollers\ThreadRestController.class
 repository\modelrepository\UserRepositoryImplInMemory.class
+springmvcconfig\EntityManagerConfig.class
 controller\serviseforcontroller\viewsservises\GroupAdderService.class
 repository\threadmodelrep\ThreadRepositoryImplInMemory.class
 repository\threadmodelrep\threadservices\crudthreadservices\TheamCrudRepository.class
@@ -7,7 +8,6 @@ repository\threadmodelrep\ThreadRepositoryFactory.class
 repository\threadmodelrep\threadservices\memoryservices\GroupFunction.class
 controller\serviseforcontroller\viewsservises\SaverService.class
 controller\serviseforcontroller\actadminstrategy\MVCAdminActDeleteStratagyImpl.class
-repository\config\EntityManagerConfig.class
 repository\threadmodelrep\threadservices\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTrainerChange.class
 repository\modelrepository\modelservices\postgresservices\TrainerServicePostgres.class
 repository\modelrepository\modelservices\jpaservicese\AdminServiceJpa.class
@@ -109,7 +109,6 @@ aspect\JpaTransaction.class
 repository\threadmodelrep\threadservices\postgresservices\SalaryServicesPostgres.class
 servlets\filters\TrainerFilter.class
 controller\serviseforcontroller\viewsservises\ChangeTrinerActStratagy.class
-repository\config\SecurityConfig.class
 helperutils\closebaseconnection\PostgresSQLUtils.class
 servlets\filters\UserFilter.class
 repository\threadmodelrep\threadservices\updategroupstratagy\crudstrategygroupupdate\UpdateGroupStrategyCrudStudentDelete.class
@@ -131,7 +130,6 @@ springmvcconfig\SpringConfig.class
 repository\threadmodelrep\threadservices\jpaservices\MarkServiceJpa.class
 repository\RepositoryFactory.class
 repository\threadmodelrep\threadservices\crudthreadservices\MarkCrudRepository.class
-repository\config\SpringOrmConfig.class
 repository\threadmodelrep\threadservices\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyJpaStudentDelete.class
 repository\modelrepository\modelservices\deleteentitystratege\postgresqlstrategy\DeleteGroupPSQLImpl.class
 repository\RepositoryDatasourse.class

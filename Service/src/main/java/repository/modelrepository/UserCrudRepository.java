@@ -18,15 +18,11 @@ import java.util.*;
 @Repository("Crud")
 public class UserCrudRepository implements UserRepository{
 
-    @Autowired
+
     private final StudentCrudRepository studentCrudRepository;
-    @Autowired
     private final AdministratorCrudRepository administratorCrudRepository;
-    @Autowired
     private final TrainerCrudRepository trainerCrudRepository;
-    @Autowired
     private final TheamCrudRepository theamCrudRepository;
-    @Autowired
     private final GroupCrudRepository groupCrudRepository;
 
     @Transactional

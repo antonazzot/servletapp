@@ -2,13 +2,11 @@ package start;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import repository.RepositoryFactory;
-import users.Trainer;
-import users.UserImpl;
 
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext("repository");
+        ApplicationContext ctx = new AnnotationConfigApplicationContext("springmvcconfig");
+
 
 //        UserRepository userRepository = ctx.getBean(UserRepository.class);
 //        UserRepository repository = RepositoryFactory.getRepository();
@@ -35,11 +33,11 @@ public class Main {
 
 //        System.out.println(RepositoryFactory.getRepository().getTrainerById(181).getInf());
 
-                RepositoryFactory.getRepository()
-                        .allStudent().
-                        values().
-                        stream().
-                        map(UserImpl::getInf).forEach(System.out::println);
+//                RepositoryFactory.getRepository()
+//                        .allStudent().
+//                        values().
+//                        stream().
+//                        map(UserImpl::getInf).forEach(System.out::println);
 
 
 //        ThreadRepositoryFactory.getRepository().addSalaryToTrainer(264, 77777);
