@@ -30,9 +30,9 @@ public class InitController {
     }
 
     @GetMapping()
-    public String hell (Principal principal) {
+    public String hell () {
 
-        log.info("Principal ={}" , principal.getName() );
+        log.info("Principal");
         return "str";
     }
 

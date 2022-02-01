@@ -5,7 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext("springmvcconfig");
+        ApplicationContext ctx = new AnnotationConfigApplicationContext("repository");
 
 
 //        UserRepository userRepository = ctx.getBean(UserRepository.class);

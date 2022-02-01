@@ -1,6 +1,6 @@
 package servlets.filters;
 
-import controller.interceptors.RealContentCashingWrapper;
+import repository.interceptors.RealContentCashingWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.util.ContentCachingResponseWrapper;

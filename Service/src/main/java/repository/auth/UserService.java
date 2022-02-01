@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import repository.RepositoryFactory;
 import users.UserImpl;
 
@@ -16,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class UserService implements UserDetailsService {
-
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Optional<UserImpl> tempUser = RepositoryFactory.getRepository().allUser().values().

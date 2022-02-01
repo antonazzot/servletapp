@@ -1,4 +1,4 @@
-package springmvcconfig;
+package repository.springmvcconfig;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +26,14 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @RequiredArgsConstructor
-@EnableWebSecurity
-@EnableAspectJAutoProxy
+//@EnableWebSecurity
+@EnableAspectJAutoProxy(exposeProxy = true)
 @EnableTransactionManagement
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableJpaRepositories(basePackages = "repository", entityManagerFactoryRef = "factoryBean")
 @PropertySource("classpath:app.properties")
 @Import({RepositoryFactory.class, ThreadRepositoryFactory.class})
-public class SpringConfig  extends AbstractSecurityWebApplicationInitializer  implements WebMvcConfigurer {
+public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
     private final DataSource dataSource;

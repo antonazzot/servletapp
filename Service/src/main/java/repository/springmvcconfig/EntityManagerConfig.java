@@ -1,4 +1,4 @@
-package springmvcconfig;
+package repository.springmvcconfig;
 
 import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
