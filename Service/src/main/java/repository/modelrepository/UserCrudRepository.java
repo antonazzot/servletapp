@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import repository.RepositoryFactory;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.AdministratorCrudRepository;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.StudentCrudRepository;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.TrainerCrudRepository;
@@ -17,7 +18,6 @@ import java.util.*;
 @RequiredArgsConstructor
 @Repository("Crud")
 public class UserCrudRepository implements UserRepository{
-
 
     private final StudentCrudRepository studentCrudRepository;
     private final AdministratorCrudRepository administratorCrudRepository;
@@ -59,6 +59,13 @@ public class UserCrudRepository implements UserRepository{
     @Override
     public UserImpl getUserById(Integer id) {
         return allUser().get(id);
+    }
+
+    @Override
+    public UserImpl getUserByLogin(String login) {
+        Optional<UserImpl> tempUser = RepositoryFactory.getRepository().allUser().values().
+                stream().filter(user -> user.getLogin().equalsIgnoreCase(login)).findFirst();
+        return tempUser.orElse(null);
     }
 
     @Override

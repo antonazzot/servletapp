@@ -17,7 +17,7 @@ import java.util.Map;
 public class StratagyForAutorithate {
     public static String authorizationStratagy(HttpSession session, Model model) {
         String result = "exception";
-        UserImpl user = (UserImpl) session.getAttribute("user");
+        UserImpl user = (UserImpl) model.getAttribute("userbylogin");
         log.info("user Autorithate ={}", "--->>>" + user.getInf());
         if (Role.ADMINISTRATOR.equals(user.getRole())) {
             model.addAttribute("admin", user);

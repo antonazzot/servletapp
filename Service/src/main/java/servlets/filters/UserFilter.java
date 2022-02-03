@@ -19,7 +19,7 @@ import java.io.IOException;
 //        "/avarageSalary", "/calculateAvarageSalary",
 //        "/addSalaryForTrainer", "/addSalary", "/changeUserServlet", "/calculateAvarageSalary",
 //        "/updateUser", "/updateGroup", "/UserActionServlet"}
-        urlPatterns = "/mvc/views/*"
+//        urlPatterns = "/mvc/views/*"
 )
 public class UserFilter extends AbstractFilter {
     @Override

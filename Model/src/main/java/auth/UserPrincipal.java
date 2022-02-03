@@ -21,7 +21,6 @@ public class UserPrincipal implements UserDetails {
         this.authorities = new ArrayList<>();
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_" + user.getRole().name());
         this.authorities.add(simpleGrantedAuthority);
-
     }
 
     @Override
@@ -36,7 +35,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getName();
+        return user.getLogin();
     }
 
     @Override

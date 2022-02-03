@@ -54,6 +54,11 @@ public class UserRepositoryImplJpa implements UserRepository {
     }
 
     @Override
+    public UserImpl getUserByLogin(String login) {
+        return userServiceJpa.getUserByLogin(login);
+    }
+
+    @Override
     public int saveUser(UserImpl user) {
      return userServiceJpa.doSaveUser (user);
     }

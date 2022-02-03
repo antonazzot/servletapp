@@ -26,7 +26,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActWatchStratagyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\AbstractFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\crudrepositorislikeservice\StudentCrudRepository.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\springmvcconfig\SpringSecyrConfig.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\springmvcconfig\SpringSecurConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\postgresservices\SalaryServicesPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\springormstrategy\DeleteStudentImpOrm.java

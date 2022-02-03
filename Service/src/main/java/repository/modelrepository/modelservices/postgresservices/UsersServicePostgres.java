@@ -213,4 +213,8 @@ public class UsersServicePostgres {
         }
 
     }
+
+    public UserImpl getUserByLogin(String login) {
+        return allUser().values().stream().filter(user -> user.getLogin().equalsIgnoreCase(login)).findFirst().orElse(null);
+    }
 }

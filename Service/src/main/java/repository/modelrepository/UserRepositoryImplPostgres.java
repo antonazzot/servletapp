@@ -58,6 +58,11 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
+    public UserImpl getUserByLogin(String login) {
+        return usersServicePostgres.getUserByLogin(login);
+    }
+
+    @Override
     public int saveUser(UserImpl user) {
         return usersServicePostgres.saveUser(user);
     }

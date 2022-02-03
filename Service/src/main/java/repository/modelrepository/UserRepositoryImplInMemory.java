@@ -44,6 +44,11 @@ public class UserRepositoryImplInMemory implements UserRepository {
     }
 
     @Override
+    public UserImpl getUserByLogin(String login) {
+        return UsersServiceMemory.getUserByLogin(login);
+    }
+
+    @Override
     public int saveUser(UserImpl user) {
         return UsersServiceMemory.saveUser(user);
     }

@@ -26,10 +26,10 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @RequiredArgsConstructor
-//@EnableWebSecurity
+@EnableWebSecurity
 @EnableAspectJAutoProxy(exposeProxy = true)
 @EnableTransactionManagement
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableJpaRepositories(basePackages = "repository", entityManagerFactoryRef = "factoryBean")
 @PropertySource("classpath:app.properties")
 @Import({RepositoryFactory.class, ThreadRepositoryFactory.class})

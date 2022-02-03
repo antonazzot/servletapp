@@ -114,4 +114,8 @@ public class UserServiceJpa {
         }
         return userForChange;
     }
+
+    public UserImpl getUserByLogin(String login) {
+        return getAllUser().values().stream().filter(user -> user.getLogin().equalsIgnoreCase(login)).findFirst().orElse(null);
+    }
 }

@@ -25,9 +25,9 @@ public class UserSpringOrmRepository implements UserRepository {
     @Override
     public Map<Integer, UserImpl> allUser() {
         Map<Integer, UserImpl> result = new HashMap<>();
-//        result.putAll(TrainerServiceJpa.getallTrainer());
-//        result.putAll(StudentServiceJpa.getAllStudent());
-//        result.putAll(AdminServiceJpa.getAllAdmin());
+        result.putAll(allTrainer());
+        result.putAll(allStudent());
+        result.putAll(allAdmin());
         return result;
     }
 
@@ -63,6 +63,11 @@ public class UserSpringOrmRepository implements UserRepository {
     @Override
     public UserImpl getUserById(Integer id) {
         return em.find(UserImpl.class, id);
+    }
+
+    @Override
+    public UserImpl getUserByLogin(String login) {
+        return allUser().values().stream().filter(user -> user.getLogin().equalsIgnoreCase(login)).findFirst().orElse(null);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

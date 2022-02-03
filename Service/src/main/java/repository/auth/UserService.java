@@ -20,12 +20,14 @@ public class UserService implements UserDetailsService {
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        log.info("IN loadUserByUsername ");
         Optional<UserImpl> tempUser = RepositoryFactory.getRepository().allUser().values().
-                stream().filter(user -> user.getName().equalsIgnoreCase(s)).findFirst();
+                stream().filter(user -> user.getLogin().equalsIgnoreCase(s)).findFirst();
         UserImpl user = tempUser.orElseThrow(() -> {
             throw new UsernameNotFoundException("User not found");
         });
-
-        return new UserPrincipal(user);
+        UserPrincipal userPrincipal = new UserPrincipal(user);
+        log.info("THISPR={}", userPrincipal.getAuthorities().stream().findFirst().get().getAuthority());
+        return userPrincipal;
     }
 }

@@ -3,8 +3,11 @@ package controller.viewscontrollers;
 import controller.serviseforcontroller.actadminstrategy.MVCAdminActDeleteStratagyImpl;
 import controller.serviseforcontroller.actadminstrategy.MVCAdminActStratagy;
 import controller.serviseforcontroller.viewsservises.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +25,11 @@ import java.util.ArrayList;
 @Controller
 @Slf4j
 @Scope("session")
+@RequiredArgsConstructor
 @RequestMapping(path = "/mvc/views")
 public class AdminController {
+
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/mainadmin")
     public String helloadmin() {
@@ -49,7 +55,7 @@ public class AdminController {
         if (ContentInParamChecker.checkParam(name, login, password))
             return "exception";
         else
-        RepositoryFactory.getRepository().saveUser(SaverService.userForSave(role, name, login, password, age));
+        RepositoryFactory.getRepository().saveUser(SaverService.userForSave(role, name, login, passwordEncoder.encode(password), age));
         return "adminControl/adminActList";
     }
 

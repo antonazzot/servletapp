@@ -19,7 +19,7 @@
       </form>
 
       </br>
-       <form  action="/web/mvc/">
+       <form  action="/web/mvc/trainer/traineract">
                 <input type="submit" value="EnterLikeTrainer">
             </form>
             </br>

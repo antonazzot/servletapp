@@ -20,6 +20,8 @@ public interface UserRepository {
 
     UserImpl getUserById(Integer id);
 
+    UserImpl getUserByLogin (String login);
+
     int saveUser(UserImpl user);
 
     Optional<UserImpl> removeUser(Integer id, String entity);
