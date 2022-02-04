@@ -25,9 +25,10 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class SalaryServicesPostgres {
-    @Autowired
+
     private final RepositoryDatasourse datasourse;
-    public  Map<Trainer, List<Salary>> gettrainerSalary() {
+
+    public Map<Trainer, List<Salary>> gettrainerSalary() {
         Map<Trainer, List<Salary>> result = new HashMap<>();
         List<Integer> trainersIDList = new ArrayList<>(RepositoryFactory.getRepository().allTrainer().keySet());
         try (Connection connection = datasourse.getConnection()) {
@@ -72,7 +73,7 @@ public class SalaryServicesPostgres {
         return result;
     }
 
-    public  void doaddSalaryToTrainer(int trainerId, int salaryValue) {
+    public void doaddSalaryToTrainer(int trainerId, int salaryValue) {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {

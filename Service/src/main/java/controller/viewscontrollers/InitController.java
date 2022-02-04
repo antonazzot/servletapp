@@ -16,7 +16,6 @@ import repository.RepositoryFactory;
 import users.UserImpl;
 
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
 
 @SessionAttributes("user")
 @Slf4j
@@ -26,15 +25,15 @@ public class InitController {
 
     @GetMapping("/hello")
     public String hello(HttpSession session, Model model) {
-//        if (session != null && session.getAttribute("user") != null) {
-//            return StratagyForAutorithate.authorizatUser(session, model);
-//        } else
-//            StartService.initAdmin();
+        if (session != null && session.getAttribute("user") != null) {
+            return StratagyForAutorithate.authorizatUser(session, model);
+        } else
+            StartService.initAdmin();
         return "start";
     }
 
     @GetMapping("/str")
-    public String hell () {
+    public String hell() {
         log.info("Principal!!!");
         return "str";
     }
@@ -44,14 +43,15 @@ public class InitController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
         UserImpl user = null;
-        if (name!=null && name!="") {
+        if (name != null && name != "") {
             log.info("auth name = {}", name);
             user = RepositoryFactory.getRepository().getUserByLogin(name);
             log.info("user by login! ={}", user.getInf());
             log.info("user autority! ={}", auth.getAuthorities().stream().findFirst().get().getAuthority());
             model.addAttribute("userbylogin", user);
-                return StratagyForAutorithate.authorizationStratagy(session, model);
-    }
+            session.setAttribute("user1", user);
+            return StratagyForAutorithate.authorizationStratagy(session, model);
+        }
 
 //        log.info("auth = {}", auth.getDetails(), auth.getName(), auth.getCredentials(), auth.getPrincipal());
 //        if (session != null ) {
@@ -74,6 +74,6 @@ public class InitController {
     @GetMapping("/logout")
     public String logOut(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
-        return "redirect:/mvc/hello";
+        return "redirect:/logout";
     }
 }

@@ -1,7 +1,6 @@
 package repository.threadmodelrep;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import repository.RepositoryFactory;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.StudentCrudRepository;
@@ -11,9 +10,7 @@ import repository.threadmodelrep.threadservices.crudthreadservices.MarkCrudRepos
 import repository.threadmodelrep.threadservices.crudthreadservices.SalaryCrudRepository;
 import repository.threadmodelrep.threadservices.crudthreadservices.TheamCrudRepository;
 import repository.threadmodelrep.threadservices.updategroupstratagy.UpdateStratageCrud;
-import repository.threadmodelrep.threadservices.updategroupstratagy.UpdateStratageJpa;
 import repository.threadmodelrep.threadservices.updategroupstratagy.crudstrategygroupupdate.*;
-import repository.threadmodelrep.threadservices.updategroupstratagy.jpaupdatestratage.*;
 import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Salary;
@@ -27,38 +24,32 @@ import java.util.*;
 @Repository
 @RequiredArgsConstructor
 public class ThreadRepositoryCrud implements ThreadRepository {
-    @Autowired
     private final GroupCrudRepository groupCrudRepository;
-    @Autowired
     private final TheamCrudRepository theamCrudRepository;
-    @Autowired
     private final MarkCrudRepository markCrudRepository;
-    @Autowired
     private final SalaryCrudRepository salaryCrudRepository;
-    @Autowired
     private final StudentCrudRepository studentCrudRepository;
-    @Autowired
     private final TrainerCrudRepository trainerCrudRepository;
 
     @Override
     public Map<Integer, Group> allGroup() {
-        Map <Integer, Group> result = new HashMap<>();
+        Map<Integer, Group> result = new HashMap<>();
         groupCrudRepository.findAll().forEach(group -> result.put(group.getId(), group));
-        return  result;
+        return result;
     }
 
     @Override
     public Map<Integer, Theams> allTheams() {
-        Map <Integer, Theams> result = new HashMap<>();
+        Map<Integer, Theams> result = new HashMap<>();
         theamCrudRepository.findAll().forEach(theams -> result.put(theams.getId(), theams));
-        return  result;
+        return result;
     }
 
     @Override
     public Map<Trainer, List<Salary>> trainerSalary() {
-        Map<Trainer, List<Salary>> result =  new HashMap<>();
+        Map<Trainer, List<Salary>> result = new HashMap<>();
         RepositoryFactory.getRepository().allTrainer().values()
-                .stream().map(user -> (Trainer)user)
+                .stream().map(user -> (Trainer) user)
                 .forEach(trainer -> result.put(trainer, trainer.getSalarylist()));
         return result;
     }
@@ -101,54 +92,54 @@ public class ThreadRepositoryCrud implements ThreadRepository {
 
     @Override
     public void addTheam(String theam) {
-    theamCrudRepository.save(new Theams().withValue(theam));
+        theamCrudRepository.save(new Theams().withValue(theam));
     }
 
     @Override
     public void addGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
-        Map <Integer, Student> studentMap = new HashMap<>();
-        studentList.stream().map(user -> (Student)user).forEach(student -> studentMap.put(student.getId(), student));
+        Map<Integer, Student> studentMap = new HashMap<>();
+        studentList.stream().map(user -> (Student) user).forEach(student -> studentMap.put(student.getId(), student));
         Set<Theams> theamsSet = new HashSet<>();
         theamsIdList.stream().map(this::theamById).forEach(theamsSet::add);
         Group group = new Group()
-            .withStudents(studentMap)
-            .withTheam(theamsSet)
-            .withName("Group_"+trainerId)
-            .withTrainer(RepositoryFactory.getRepository().getTrainerById(trainerId));
+                .withStudents(studentMap)
+                .withTheam(theamsSet)
+                .withName("Group_" + trainerId)
+                .withTrainer(RepositoryFactory.getRepository().getTrainerById(trainerId));
         groupCrudRepository.save(group);
     }
 
     @Override
     public Map<Integer, Theams> freeTheams() {
-     Map <Integer, Theams> result = new HashMap<>(allTheams());
-     List<Theams> busyTheams = new ArrayList<>();
-     groupCrudRepository.findAll().forEach(group -> busyTheams.addAll(group.getTheamsSet()));
+        Map<Integer, Theams> result = new HashMap<>(allTheams());
+        List<Theams> busyTheams = new ArrayList<>();
+        groupCrudRepository.findAll().forEach(group -> busyTheams.addAll(group.getTheamsSet()));
         for (Theams busyTheam : busyTheams) {
             result.remove(busyTheam.getId());
         }
-     return result;
+        return result;
     }
 
     @Override
     public void addSalaryToTrainer(int trainerId, int salaryValue) {
-    Salary salary = new Salary()
-            .withTrainer(RepositoryFactory.getRepository().getTrainerById(trainerId))
-            .withValue(salaryValue);
-    salaryCrudRepository.save(salary);
+        Salary salary = new Salary()
+                .withTrainer(RepositoryFactory.getRepository().getTrainerById(trainerId))
+                .withValue(salaryValue);
+        salaryCrudRepository.save(salary);
     }
 
     @Override
     public void addMarkToStudent(int studentId, int theamID, int markValue) {
-    Mark mark = new Mark()
-            .withStudent(RepositoryFactory.getRepository().getStudentById(studentId))
-            .withTheam(theamById(theamID))
-            .withValue(markValue);
-    markCrudRepository.save(mark);
+        Mark mark = new Mark()
+                .withStudent(RepositoryFactory.getRepository().getStudentById(studentId))
+                .withTheam(theamById(theamID))
+                .withValue(markValue);
+        markCrudRepository.save(mark);
     }
 
     @Override
     public void deleteMarksById(int[] tempMarksId, int theamId, int studentid) {
-        List <Integer> integerList = new ArrayList<>();
+        List<Integer> integerList = new ArrayList<>();
         for (int i : tempMarksId) {
             integerList.add(i);
         }
@@ -157,7 +148,7 @@ public class ThreadRepositoryCrud implements ThreadRepository {
 
     @Override
     public void changeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
-        for (Map.Entry<Integer, Integer> entry : markIdMarkValue.entrySet()  ) {
+        for (Map.Entry<Integer, Integer> entry : markIdMarkValue.entrySet()) {
             Mark markforchange = markCrudRepository.findById(entry.getKey()).get();
             markforchange.withValue(entry.getValue());
             markCrudRepository.save(markforchange);
@@ -174,11 +165,11 @@ public class ThreadRepositoryCrud implements ThreadRepository {
 
 
     private UpdateStratageCrud chngeStrategyForUpdateGroup(String act) {
-        Map <String, UpdateStratageCrud> stratagyMap = Map.of(
+        Map<String, UpdateStratageCrud> stratagyMap = Map.of(
                 "studentdelete", new UpdateGroupStrategyCrudStudentDelete(),
                 "studentadd", new UpdateGroupStrategyCrudStudentAdd(studentCrudRepository),
                 "theamdelete", new UpdateGroupStrategyCrudTheamDelete(theamCrudRepository),
-                "theamadd",new UpdateGroupStrategyCrudTheamAdd(theamCrudRepository),
+                "theamadd", new UpdateGroupStrategyCrudTheamAdd(theamCrudRepository),
                 "trainer", new UpdateGroupStrategyCrudTrainerChange(trainerCrudRepository));
         return stratagyMap.get(act);
     }

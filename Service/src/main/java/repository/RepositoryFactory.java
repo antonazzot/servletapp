@@ -13,15 +13,16 @@ import java.util.Map;
 @PropertySource({"classpath:app.properties"})
 public class RepositoryFactory {
     @Value("${repository.type}")
-    private  String repositoryName;
+    private String repositoryName;
 
     private static UserRepository repository;
 
     @Autowired
-    private  Map<String, UserRepository> repositoryMap;
+    private Map<String, UserRepository> repositoryMap;
+
     @PostConstruct
-    public  void initMap () {
-      RepositoryFactory.repository = repositoryMap.get(repositoryName);
+    public void initMap() {
+        RepositoryFactory.repository = repositoryMap.get(repositoryName);
     }
 
     public static UserRepository getRepository() {

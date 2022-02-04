@@ -6,8 +6,8 @@ import controller.serviseforcontroller.actadminstrategy.*;
 import java.util.Map;
 
 public class ChangeAdminActStratagy {
-    public static MVCAdminActStratagy getStratagy (String act) {
-        Map <String, MVCAdminActStratagy> stratagyMap = Map.of(
+    public static MVCAdminActStratagy getStratagy(String act) {
+        Map<String, MVCAdminActStratagy> stratagyMap = Map.of(
                 "create", new MVCAdminActCreateStratagyImpl(),
                 "delete", new MVCAdminActDeleteStratagyImpl(),
                 "change", new MVCAdminActChangeStratagyImpl(),

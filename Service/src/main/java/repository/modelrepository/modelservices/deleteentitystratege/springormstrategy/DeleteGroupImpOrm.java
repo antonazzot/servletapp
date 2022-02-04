@@ -11,6 +11,7 @@ import threadmodel.Group;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 @Transactional(propagation = Propagation.REQUIRED)
 @Component
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class DeleteGroupImpOrm implements DeleteStratageOrm {
     @Autowired
     @PersistenceContext
     private final EntityManager em;
+
     @Override
     public void doDeleteEntity(int id) {
         Group group = ThreadRepositoryFactory.getRepository().allGroup().get(id);

@@ -13,6 +13,7 @@ public class ChangeUserToAgregateMap {
     private ChangeUserToAgregateMap() {
         //utils class
     }
+
     /**
      * This method given data for future users change
      **/

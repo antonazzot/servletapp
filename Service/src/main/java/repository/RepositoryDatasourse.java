@@ -12,14 +12,15 @@ import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
 import java.util.logging.Logger;
+
 @Component
 @AllArgsConstructor
 public class RepositoryDatasourse implements DataSource {
-//    private static volatile RepositoryDatasourse instance;
-    private  String DRIVER;
-    private  String URL;
-    private  String NAME;
-    private  String PASSWWORD;
+    //    private static volatile RepositoryDatasourse instance;
+    private String DRIVER;
+    private String URL;
+    private String NAME;
+    private String PASSWWORD;
 
     private RepositoryDatasourse() {
         Properties properties = new Properties();
@@ -31,7 +32,7 @@ public class RepositoryDatasourse implements DataSource {
         this.DRIVER = properties.getProperty("postgres.driver");
         this.NAME = properties.getProperty("postgres.name");
         this.PASSWWORD = properties.getProperty("postgres.password");
-        this.URL =  properties.getProperty("postgres.url");
+        this.URL = properties.getProperty("postgres.url");
         try {
             Class.forName(DRIVER);
         } catch (ClassNotFoundException e) {

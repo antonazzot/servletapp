@@ -10,9 +10,7 @@ import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Theams;
-import users.UserImpl;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 

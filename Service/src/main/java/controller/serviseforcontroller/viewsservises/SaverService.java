@@ -13,14 +13,15 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SaverService {
     @Autowired
-    private  final PasswordEncoder passwordEncoder;
-    public static UserImpl userForSave (String role, String name, String login, String password, int age) {
+    private final PasswordEncoder passwordEncoder;
+
+    public static UserImpl userForSave(String role, String name, String login, String password, int age) {
         Map<String, UserImpl> userMap = new HashMap<>(Map.of(
                 "administrator", new Administrator()
                         .withRole(Role.ADMINISTRATOR)
                         .withName(name)
                         .withLogin(login)
-                        .withPassword(  password)
+                        .withPassword(password)
                         .withAge(age),
                 "trainer", new Trainer()
                         .withRole(Role.TRAINER)

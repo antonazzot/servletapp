@@ -10,10 +10,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import repository.RepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryFactory;
@@ -37,15 +38,6 @@ public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
     private final DataSource dataSource;
-
-    //    @Value("${postgres.driver}")
-//    private final String DRIVER;
-//    @Value("${postgres.name}")
-//    private final String NAME;
-//    @Value("${postgres.url}")
-//    private final String URL;
-//    @Value("${postgres.password}")
-//    private final String PASSWORD;
 
     @Primary
     @Bean
@@ -91,7 +83,7 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public InternalResourceViewResolver internalResourceViewResolver (){
+    public InternalResourceViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setApplicationContext(applicationContext);
         resolver.setPrefix("/WEB-INF/views/");
@@ -101,10 +93,6 @@ public class SpringConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        WebMvcConfigurer.super.addResourceHandlers(registry);
-//        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/static/css");
-//        registry.addResourceHandler("/static/**").addResourceLocations("/css");
-//        registry.addResourceHandler("/webapp/resources/**").addResourceLocations("/resources/static/css");
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/.jsp").addResourceLocations("/WEB-INF/views/");
     }

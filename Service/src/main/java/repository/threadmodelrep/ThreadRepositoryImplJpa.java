@@ -1,7 +1,6 @@
 package repository.threadmodelrep;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import repository.threadmodelrep.threadservices.jpaservices.GroupServiceJpa;
 import repository.threadmodelrep.threadservices.jpaservices.MarkServiceJpa;
@@ -18,16 +17,13 @@ import users.UserImpl;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 @Repository
 @RequiredArgsConstructor
 public class ThreadRepositoryImplJpa implements ThreadRepository {
-    @Autowired
     private final GroupServiceJpa groupServiceJpa;
-    @Autowired
     private final MarkServiceJpa markServiceJpa;
-    @Autowired
-    private final  SalaryServiceJpa salaryServiceJpa;
-    @Autowired
+    private final SalaryServiceJpa salaryServiceJpa;
     private final TheamServiceJpa theamServiceJpa;
 
     @Override
@@ -82,7 +78,7 @@ public class ThreadRepositoryImplJpa implements ThreadRepository {
 
     @Override
     public void addGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
-    groupServiceJpa.doaddGroup(studentList, theamsIdList, trainerId);
+        groupServiceJpa.doaddGroup(studentList, theamsIdList, trainerId);
     }
 
     @Override
@@ -97,7 +93,7 @@ public class ThreadRepositoryImplJpa implements ThreadRepository {
 
     @Override
     public void addMarkToStudent(int studentId, int theamID, int markValue) {
-    markServiceJpa.doaddMarkToStudent(studentId, theamID, markValue);
+        markServiceJpa.doaddMarkToStudent(studentId, theamID, markValue);
     }
 
     @Override
@@ -107,7 +103,7 @@ public class ThreadRepositoryImplJpa implements ThreadRepository {
 
     @Override
     public void changeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
-    markServiceJpa.dochangeMark(markIdMarkValue, studentId, theamId);
+        markServiceJpa.dochangeMark(markIdMarkValue, studentId, theamId);
     }
 
     @Override
@@ -117,6 +113,6 @@ public class ThreadRepositoryImplJpa implements ThreadRepository {
 
     @Override
     public void updateTheam(int theamId, String theamName) {
-    theamServiceJpa.doupdateTheam(theamId, theamName);
+        theamServiceJpa.doupdateTheam(theamId, theamName);
     }
 }

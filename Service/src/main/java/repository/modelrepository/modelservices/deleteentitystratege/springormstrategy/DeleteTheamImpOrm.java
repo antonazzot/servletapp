@@ -11,6 +11,7 @@ import threadmodel.Theams;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 @Component
 @Transactional(propagation = Propagation.REQUIRED)
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class DeleteTheamImpOrm implements DeleteStratageOrm {
     @Autowired
     @PersistenceContext
     private final EntityManager em;
+
     @Override
     public void doDeleteEntity(int id) {
         Theams theams = ThreadRepositoryFactory.getRepository().theamById(id);

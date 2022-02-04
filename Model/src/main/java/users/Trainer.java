@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true, exclude = "salarylist")
-@ToString (callSuper = true, exclude = "salarylist")
+@ToString(callSuper = true, exclude = "salarylist")
 @Entity
 @Table(name = "persons")
 @NamedQueries(

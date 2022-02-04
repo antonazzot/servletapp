@@ -22,14 +22,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserRepositoryImplPostgres implements UserRepository {
 
-//    private final JdbcTemplate jdbcTemplate;
-    @Autowired
     private final AdminServicePostgres adminServicePostgres;
-    @Autowired
     private final TrainerServicePostgres trainerServicePostgres;
-    @Autowired
     private final StudentServicePostgres studentServicePostgres;
-    @Autowired
     private final UsersServicePostgres usersServicePostgres;
 
     @Override

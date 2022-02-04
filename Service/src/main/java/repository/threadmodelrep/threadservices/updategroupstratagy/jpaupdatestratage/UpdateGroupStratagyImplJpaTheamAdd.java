@@ -1,7 +1,7 @@
 package repository.threadmodelrep.threadservices.updategroupstratagy.jpaupdatestratage;
 
-import helperutils.myexceptionutils.MyJpaException;
 import helperutils.closebaseconnection.JpaUtils;
+import helperutils.myexceptionutils.MyJpaException;
 import lombok.extern.slf4j.Slf4j;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import repository.threadmodelrep.threadservices.updategroupstratagy.UpdateStratageJpa;
@@ -27,8 +27,7 @@ public class UpdateGroupStratagyImplJpaTheamAdd implements UpdateStratageJpa {
             log.info("UpdateAddTheam after add = {}", group.getTheamsSet().toString());
             em.merge(group);
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);

@@ -1,21 +1,17 @@
 package controller.viewscontrollers;
 
-import controller.serviseforcontroller.actadminstrategy.MVCAdminActDeleteStratagyImpl;
 import controller.serviseforcontroller.actadminstrategy.MVCAdminActStratagy;
 import controller.serviseforcontroller.viewsservises.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import repository.RepositoryFactory;
-import repository.modelrepository.UserRepositoryImplJpa;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Group;
-import users.Trainer;
 import users.UserImpl;
 
 import javax.servlet.http.HttpSession;
@@ -50,29 +46,40 @@ public class AdminController {
                            @RequestParam(required = false, name = "name") String name,
                            @RequestParam(required = false, name = "login") String login,
                            @RequestParam(required = false, name = "password") String password,
-                           @RequestParam(required = false, name = "age") int age
+                           @RequestParam(required = false, name = "age") int age,
+                           Model model
     ) {
-        if (ContentInParamChecker.checkParam(name, login, password))
+        if (ContentInParamChecker.checkParam(name, login, password)) {
+            String massage = "not right condition for user save";
+            model.addAttribute("message", massage);
             return "exception";
-        else
-        RepositoryFactory.getRepository().saveUser(SaverService.userForSave(role, name, login, passwordEncoder.encode(password), age));
+        } else
+            RepositoryFactory.getRepository().saveUser(SaverService.userForSave(role, name, login, passwordEncoder.encode(password), age));
         return "adminControl/adminActList";
     }
 
     @GetMapping("/addgroup")
     public String addgroup(@RequestParam(required = false, name = "teamId") String[] theamId,
                            @RequestParam(required = false, name = "stId") String[] studentId,
-                           @RequestParam("tr") Integer trId) {
-        ThreadRepositoryFactory.getRepository()
-                .addGroup(GroupAdderService.studentList(studentId),
-                        ParserStringToInt.parseArrayStringToListInteger(theamId),
-                        trId);
+                           @RequestParam("tr") Integer trId,
+                           Model model) {
+        try {
+            ThreadRepositoryFactory.getRepository()
+                    .addGroup(GroupAdderService.studentList(studentId),
+                            ParserStringToInt.parseArrayStringToListInteger(theamId),
+                            trId);
+        } catch (IllegalArgumentException e) {
+            log.error(e.getMessage());
+            String massage = "not right condition for add group, please try again";
+            model.addAttribute("message", massage);
+            return "exception";
+        }
+
         return "adminControl/adminActList";
     }
 
     @GetMapping("/addsalary")
     public String addSalary(Model model) throws Exception {
-//        if(true) throw new Exception("!!!______!!!!!");
         model.addAttribute("salmap", ThreadRepositoryFactory.getRepository().trainerSalary());
         return "adminControl/addsalarypage";
     }
@@ -80,10 +87,17 @@ public class AdminController {
     @PostMapping("/addSalaryForTrainer")
     public String addSalaryTrainer(
             @RequestParam("trainerId") String trainerId,
-            @RequestParam("sal") String salValue
+            @RequestParam("sal") String salValue,
+            Model model
     ) {
-        ThreadRepositoryFactory.getRepository().addSalaryToTrainer(Integer.parseInt(trainerId), Integer.parseInt(salValue));
-        return "adminControl/adminActList";
+        if (ParserStringToInt.simpleParserStringToInt(salValue) > 0) {
+            ThreadRepositoryFactory.getRepository().addSalaryToTrainer(Integer.parseInt(trainerId), Integer.parseInt(salValue));
+            return "adminControl/adminActList";
+        } else {
+            String massage = "salary must be upper then null";
+            model.addAttribute("massage", massage);
+            return "exception";
+        }
     }
 
     @GetMapping("/groupforwatch")
@@ -102,12 +116,18 @@ public class AdminController {
     public String avarageSalary(@RequestParam("trId") int trainerId,
                                 @RequestParam("period") int period,
                                 Model model) {
-        long avaragesalary = AvarageSalaryCalculate.avarageSalaryCalc(
-                RepositoryFactory.getRepository().getTrainerById(trainerId).getSalarylist(),
-                period
-        );
-        model.addAttribute("avarage", avaragesalary);
-        return "adminControl/avaragesalarywatch";
+        if (period > 0) {
+            long avaragesalary = AvarageSalaryCalculate.avarageSalaryCalc(
+                    RepositoryFactory.getRepository().getTrainerById(trainerId).getSalarylist(),
+                    period);
+            model.addAttribute("avarage", avaragesalary);
+            return "adminControl/avaragesalarywatch";
+        } else {
+            String massage = "period must be upper then null";
+            model.addAttribute("message", massage);
+            return "exception";
+        }
+
     }
 
     @PostMapping("/updateUser")
@@ -118,7 +138,8 @@ public class AdminController {
 
     @PostMapping("/savetheam")
     public String saveTheam(@RequestParam("theam") String theamName) {
-        ThreadRepositoryFactory.getRepository().addTheam(theamName);
+        if (theamName != null && !theamName.equals(""))
+            ThreadRepositoryFactory.getRepository().addTheam(theamName);
         return "adminControl/adminActList";
     }
 
@@ -147,7 +168,6 @@ public class AdminController {
                                  Model model
     ) {
         Group group = ThreadRepositoryFactory.getRepository().allGroup().get(id);
-
         model.addAttribute("groupForChange", group);
         model.addAttribute("freetheam", ThreadRepositoryFactory.getRepository().freeTheams());
         model.addAttribute("freetrainer", RepositoryFactory.getRepository().freeTrainer());
@@ -163,14 +183,29 @@ public class AdminController {
         ThreadRepositoryFactory.getRepository().updateGroup(id, act, ParserStringToInt.parseArrayString(entytiIdforact));
         return "adminControl/adminActList";
     }
-    @GetMapping ("/dodeleteentity")
-    public  String dodeleteentity (
+
+    @GetMapping("/dodeleteentity")
+    public String dodeleteentity(
             @RequestParam("entityId") int entityId,
-            @RequestParam ( required = false ,name = "entity") String entity,
+            @RequestParam(required = false, name = "entity") String entity,
             Model model
     ) {
         RepositoryFactory.getRepository().removeUser(entityId, entity);
-       return   adminAct(entity,"delete", "id", model);
+        return adminAct(entity, "delete", String.valueOf(entityId), model);
     }
 
+    @GetMapping("/prepare")
+    public String prepareAdmin(Model model, HttpSession session) {
+        UserImpl user = null;
+        try {
+            if (session != null && session.getAttribute("user") != null)
+                user = (UserImpl) session.getAttribute("user");
+        } catch (IllegalArgumentException e) {
+            log.error(e.getMessage());
+            return "exception";
+        }
+        model.addAttribute("admin", user);
+        return "adminControl/adminActList";
+
+    }
 }

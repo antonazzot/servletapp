@@ -33,7 +33,7 @@ public class GroupServicesPostgres {
     @Autowired
     private final RepositoryDatasourse datasourse;
 
-    public  Map<Integer, Group> getAllGroup() {
+    public Map<Integer, Group> getAllGroup() {
         Map<Integer, Group> result = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
@@ -66,7 +66,7 @@ public class GroupServicesPostgres {
         return result;
     }
 
-    public  Map<Integer, Student> getstudentsFromGroup(int groupId) {
+    public Map<Integer, Student> getstudentsFromGroup(int groupId) {
         Map<Integer, Student> result = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
@@ -92,7 +92,7 @@ public class GroupServicesPostgres {
         return result;
     }
 
-    public  void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
+    public void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -124,7 +124,7 @@ public class GroupServicesPostgres {
         }
     }
 
-    private  void insertIntoTheamGroup(int groupId, List<Integer> theamsIdList) {
+    private void insertIntoTheamGroup(int groupId, List<Integer> theamsIdList) {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
@@ -151,7 +151,7 @@ public class GroupServicesPostgres {
         }
     }
 
-    private  void insertIntoStudentGroup(int groupId, List<UserImpl> studentList) {
+    private void insertIntoStudentGroup(int groupId, List<UserImpl> studentList) {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
@@ -177,7 +177,7 @@ public class GroupServicesPostgres {
         }
     }
 
-    private  void insertIntoMarkTable(List<UserImpl> studentList, List<Integer> theamsIdList) {
+    private void insertIntoMarkTable(List<UserImpl> studentList, List<Integer> theamsIdList) {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
@@ -206,7 +206,7 @@ public class GroupServicesPostgres {
         }
     }
 
-    public  void doupdateGroup(int groupId, String act, int[] entytiIdforact) {
+    public void doupdateGroup(int groupId, String act, int[] entytiIdforact) {
         log.info("In repository updateGroup = {}", groupId + " " + "  " + act + " " + Arrays.toString(entytiIdforact));
         UpdateGroupStratagyPostgress updateGroupStratagyPostgress;
         try (Connection connection = datasourse.getConnection()) {

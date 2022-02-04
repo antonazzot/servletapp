@@ -21,14 +21,13 @@ public class RoleIDParametrCheker {
 
     }
 
-    public static Role getRoleByString (String role) {
+    public static Role getRoleByString(String role) {
         if (role.equalsIgnoreCase("administrator")) {
             return Role.ADMINISTRATOR;
         } else if (role.equalsIgnoreCase("trainer")) {
             return Role.TRAINER;
-        }
-        else
-        return Role.STUDENT;
+        } else
+            return Role.STUDENT;
     }
 
     public static int userGetRoleForDB(Role role) {

@@ -15,16 +15,16 @@
     <div class="login">
       <h1>Login to Web App</h1>
       <form  action="/web/mvc/views/mainadmin">
-          <input type="submit" value="EnterLikeAdmin">
+          <input type="submit" value="Enter Like Admin">
       </form>
 
       </br>
        <form  action="/web/mvc/trainer/traineract">
-                <input type="submit" value="EnterLikeTrainer">
+                <input type="submit" value="Enter Like Trainer">
             </form>
             </br>
-             <form  action="/web/mvc/checkUser">
-                      <input type="submit" value="EnterLikeStudent">
+             <form  action="/web/mvc/student">
+                      <input type="submit" value="Enter Like Student">
                   </form>
     </div>
 

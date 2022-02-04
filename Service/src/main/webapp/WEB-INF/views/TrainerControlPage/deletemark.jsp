@@ -20,6 +20,7 @@
 <input type="hidden" name="student" value="${student.id}"/>
 <input type="hidden" name="act" value="delete"/>
 <input type="hidden" name="th" value="${th.id}"/>
+<input type="hidden" name="groupId" value="${groupId}"/>
     <c:forEach var = "entry" items="${mapOfMark}">
         <c:out value = "${entry.value.valuesOfMark}" />
         <input type="checkbox"  name="markId"  value="${entry.key}"> <br>
@@ -34,7 +35,5 @@
 <br>
 <br>
  <jsp:include page="logout.jsp" />
-
-
 </body>
 </html>

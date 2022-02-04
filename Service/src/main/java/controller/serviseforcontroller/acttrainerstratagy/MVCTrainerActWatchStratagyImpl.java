@@ -4,7 +4,6 @@ import controller.serviseforcontroller.viewsservises.ParserStringToInt;
 import org.springframework.ui.Model;
 import repository.RepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryFactory;
-import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Theams;
 import users.Student;
@@ -15,11 +14,12 @@ import java.util.Map;
 
 public class MVCTrainerActWatchStratagyImpl implements MVCTrainerActStratagy {
     @Override
-    public String doAct(Group group, String studentId, String thId, String mark, Model model) {
+    public String doAct(String studentId, String thId, String mark, Model model, Integer groupId) {
         Student student = RepositoryFactory.getRepository().getStudentById(ParserStringToInt.simpleParserStringToInt(studentId));
         Theams theams = ThreadRepositoryFactory.getRepository().theamById(ParserStringToInt.simpleParserStringToInt(thId));
         model.addAttribute("student", student);
         model.addAttribute("mapWithTheamAndMark", getTheamsListHashMap(student, theams));
+        model.addAttribute("groupId", groupId);
         return "TrainerControlPage/watchmark";
     }
 

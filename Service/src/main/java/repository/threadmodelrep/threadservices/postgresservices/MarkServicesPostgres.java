@@ -1,7 +1,7 @@
 package repository.threadmodelrep.threadservices.postgresservices;
 
-import helperutils.myexceptionutils.MySqlException;
 import helperutils.closebaseconnection.PostgresSQLUtils;
+import helperutils.myexceptionutils.MySqlException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +26,9 @@ public class MarkServicesPostgres {
     @Autowired
     private final RepositoryDatasourse datasourse;
 
-    public  Map<UserImpl, Map<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
+    public Map<UserImpl, Map<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
         Map<UserImpl, Map<Theams, List<Mark>>> studentTheamMarkMap = new HashMap<>();
-        Map <Theams, List <Mark>> theamsListHashMap = new HashMap<>();
+        Map<Theams, List<Mark>> theamsListHashMap = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -40,15 +40,13 @@ public class MarkServicesPostgres {
                 while (rs.next()) {
                     theams.add(ThreadRepositoryFactory.getRepository().theamById(rs.getInt("theam_id")));
                 }
-                for (Theams theam:
+                for (Theams theam :
                         theams) {
-                    theamsListHashMap.put(theam, dogetMarkListbyTheam(theam,  studentId));
+                    theamsListHashMap.put(theam, dogetMarkListbyTheam(theam, studentId));
                 }
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("getStudentTheamMark exception = {}", e.getMessage());
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(rs);
                 PostgresSQLUtils.closeQuietly(ps);
             }
@@ -57,32 +55,31 @@ public class MarkServicesPostgres {
             e.printStackTrace();
         }
         studentTheamMarkMap.put(RepositoryFactory.getRepository().allStudent().get(studentId), theamsListHashMap);
-        return  studentTheamMarkMap;
+        return studentTheamMarkMap;
     }
-    public  List<Mark> dogetMarkListbyTheam(Theams theam, int studentId) {
-        List <Mark> marks = new ArrayList<>();
-        log.info("In getMarkListMethd getTheam method = {}",theam.getTheamName()+studentId);
+
+    public List<Mark> dogetMarkListbyTheam(Theams theam, int studentId) {
+        List<Mark> marks = new ArrayList<>();
+        log.info("In getMarkListMethd getTheam method = {}", theam.getTheamName() + studentId);
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps = connection.prepareStatement("select * from mark where student_id = ? and theam_id = ? " );
+                ps = connection.prepareStatement("select * from mark where student_id = ? and theam_id = ? ");
                 ps.setInt(1, studentId);
                 ps.setInt(2, theam.getId());
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     int tempMarkValue = rs.getInt("mark_value");
                     int markId = rs.getInt("id");
-                    if (!rs.wasNull() && tempMarkValue!=0)
-                    {
+                    if (!rs.wasNull() && tempMarkValue != 0) {
                         marks.add(new Mark(markId, tempMarkValue, null, null));
-                        log.info("Marks ={}", theam.getTheamName() + " " + tempMarkValue);}
+                        log.info("Marks ={}", theam.getTheamName() + " " + tempMarkValue);
+                    }
                 }
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("getStudentTheamMark exception = {}", e.getMessage());
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(rs);
                 PostgresSQLUtils.closeQuietly(ps);
             }
@@ -93,28 +90,26 @@ public class MarkServicesPostgres {
         return marks;
     }
 
-    public  Map<Integer, Mark> dogetMarkIDListbyTheam(Theams theam, int studentId) {
+    public Map<Integer, Mark> dogetMarkIDListbyTheam(Theams theam, int studentId) {
         Map<Integer, Mark> marks = new HashMap<>();
-        log.info("In getMarkListMethd getTheam method = {}",theam.getTheamName()+studentId);
+        log.info("In getMarkListMethd getTheam method = {}", theam.getTheamName() + studentId);
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps = connection.prepareStatement("select * from mark where student_id = ? and theam_id = ? " );
+                ps = connection.prepareStatement("select * from mark where student_id = ? and theam_id = ? ");
                 ps.setInt(1, studentId);
                 ps.setInt(2, theam.getId());
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     int markId = rs.getInt("id");
                     int tempMarkValue = rs.getInt("mark_value");
-                    marks.put(markId ,new Mark(markId, tempMarkValue, null, null));
+                    marks.put(markId, new Mark(markId, tempMarkValue, null, null));
                     log.info("Marks ={}", theam.getTheamName() + " " + tempMarkValue);
                 }
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("dogetMarkIDListbyTheam exception = {}", e.getMessage());
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(rs);
                 PostgresSQLUtils.closeQuietly(ps);
             }
@@ -124,8 +119,9 @@ public class MarkServicesPostgres {
         }
         return marks;
     }
-    public  void doaddMarkToStudent(int studentId, int theamID, int markValue) {
-        insertMark( studentId,  theamID,  markValue);
+
+    public void doaddMarkToStudent(int studentId, int theamID, int markValue) {
+        insertMark(studentId, theamID, markValue);
 //        try (Connection connection = datasourse.getConnection()){
 //            PreparedStatement ps = null;
 //            ResultSet rs = null;
@@ -167,9 +163,9 @@ public class MarkServicesPostgres {
 //        }
     }
 
-    private  void insertMark(int studentId, int theamID, int markValue)  {
-        log.info("in insert section = {} ", studentId+ " "+theamID+" " + markValue);
-        try (Connection connection = datasourse.getConnection()){
+    private void insertMark(int studentId, int theamID, int markValue) {
+        log.info("in insert section = {} ", studentId + " " + theamID + " " + markValue);
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
@@ -180,15 +176,13 @@ public class MarkServicesPostgres {
                 ps.setInt(3, theamID);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    int markId= rs.getInt("id");
+                    int markId = rs.getInt("id");
                     insertInStudentMarkTable(studentId, markId);
                 }
 
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("insertMark exception = {}", e.getMessage());
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(rs);
                 PostgresSQLUtils.closeQuietly(ps);
             }
@@ -198,8 +192,8 @@ public class MarkServicesPostgres {
         }
     }
 
-    private  void insertInStudentMarkTable(int studentId, int markId) {
-        try (Connection connection = datasourse.getConnection()){
+    private void insertInStudentMarkTable(int studentId, int markId) {
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
                 ps = connection.prepareStatement(
@@ -207,11 +201,9 @@ public class MarkServicesPostgres {
                 ps.setInt(1, markId);
                 ps.setInt(2, studentId);
                 ps.executeUpdate();
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("insertMark exception = {}", e.getMessage());
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
@@ -220,8 +212,8 @@ public class MarkServicesPostgres {
         }
     }
 
-    public  void dodeleteMarksById(int[] tempMarksId, int theamId, int studentid) {
-        try (Connection connection = datasourse.getConnection()){
+    public void dodeleteMarksById(int[] tempMarksId, int theamId, int studentid) {
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
                 for (int markId : tempMarksId) {
@@ -230,11 +222,9 @@ public class MarkServicesPostgres {
                     ps.setInt(1, markId);
                     ps.executeQuery();
                 }
-            }
-            catch (MySqlException e) {
+            } catch (MySqlException e) {
                 log.info("dodeleteMarksById exception = {}", e.getMessage());
-            }
-            finally {
+            } finally {
                 PostgresSQLUtils.closeQuietly(ps);
             }
         } catch (SQLException e) {
@@ -243,24 +233,22 @@ public class MarkServicesPostgres {
         }
     }
 
-    public  void dochangeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
-        try (Connection connection = datasourse.getConnection()){
+    public void dochangeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
+        try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
-            for (Map.Entry <Integer, Integer> entry: markIdMarkValue.entrySet()) {
+            for (Map.Entry<Integer, Integer> entry : markIdMarkValue.entrySet()) {
                 int tempId = entry.getKey();
                 int tempMarkValue = entry.getValue();
-                log.info("In changeRepository = {}", tempId + " " + tempMarkValue );
+                log.info("In changeRepository = {}", tempId + " " + tempMarkValue);
                 try {
                     ps = connection.prepareStatement(
                             "update mark set mark_value = ? where id = ?");
                     ps.setInt(1, tempMarkValue);
                     ps.setInt(2, tempId);
                     ps.executeUpdate();
-                }
-                catch (MySqlException e) {
+                } catch (MySqlException e) {
                     log.info("dochangeMark exception = {}", e.getMessage());
-                }
-                finally {
+                } finally {
                     PostgresSQLUtils.closeQuietly(ps);
                 }
             }

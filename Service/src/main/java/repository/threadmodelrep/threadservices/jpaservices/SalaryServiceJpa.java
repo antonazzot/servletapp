@@ -15,6 +15,7 @@ import javax.persistence.EntityTransaction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -22,30 +23,29 @@ public class SalaryServiceJpa {
     @Autowired
     private final SessionFactory sessionFactory;
 
-    public  Map<Trainer, List<Salary>> gettrainerSalary() {
+    public Map<Trainer, List<Salary>> gettrainerSalary() {
         Map<Trainer, List<Salary>> result = new HashMap<>();
         RepositoryFactory.getRepository().allTrainer().values()
-                .stream().map(trainer -> (Trainer)trainer)
+                .stream().map(trainer -> (Trainer) trainer)
                 .forEach(trainer -> result.put(trainer, trainer.getSalarylist()));
         return result;
     }
 
-    public  void doaddSalaryToTrainer(int trainerId, int salaryValue ) {
-       Trainer trainer =  RepositoryFactory.getRepository().getTrainerById(trainerId);
-       Salary salary = new Salary()
-               .withValue(salaryValue)
-               .withTrainer(trainer);
+    public void doaddSalaryToTrainer(int trainerId, int salaryValue) {
+        Trainer trainer = RepositoryFactory.getRepository().getTrainerById(trainerId);
+        Salary salary = new Salary()
+                .withValue(salaryValue)
+                .withTrainer(trainer);
         assert trainer != null;
         trainer.addSalary(salary);
         EntityManager em = null;
-        try{
+        try {
             em = sessionFactory.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
             em.persist(salary);
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);

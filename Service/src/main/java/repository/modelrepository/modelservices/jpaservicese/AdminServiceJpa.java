@@ -15,20 +15,16 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class AdminServiceJpa {
-    //    @Autowired
-//    static Configuration configuration;
-//    @Autowired
-//    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
-//    public static Configuration conf = new Configuration().configure();
-//    public static SessionFactory sessionFactory = conf.buildSessionFactory();
-    @Autowired
-    private final  SessionFactory sessionFactory;
 
-    public  Map<Integer, UserImpl> getAllAdmin() {
+    @Autowired
+    private final SessionFactory sessionFactory;
+
+    public Map<Integer, UserImpl> getAllAdmin() {
         Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
@@ -46,7 +42,7 @@ public class AdminServiceJpa {
         return result;
     }
 
-    public  Administrator doGetAdministratorById(int id) {
+    public Administrator doGetAdministratorById(int id) {
         EntityManager em = null;
         Administrator administrator = null;
         try {

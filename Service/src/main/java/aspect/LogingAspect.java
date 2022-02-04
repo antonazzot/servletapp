@@ -16,7 +16,6 @@ import java.util.Arrays;
 @Aspect
 public class LogingAspect {
 
-
     @Pointcut("execution(* controller.interceptors.*.*(..))")
     public void controllers() {
         // pointcut
@@ -38,7 +37,7 @@ public class LogingAspect {
         log.info("login aspect ={}", jp.getSignature().getName());
     }
 
-        @After("controllers()")
+    @After("controllers()")
     public void after(JoinPoint jp) {
         log.info("Logging after controller's method: {}", jp.getSignature().getName());
     }

@@ -19,6 +19,7 @@ public class MarkIdMarkValueIntegration {
                     markIdMarkValue.put(tempMarkId, tempMarkValue);
                 } catch (IllegalArgumentException e) {
                     log.error(e.getMessage());
+                    throw new IllegalArgumentException("mark for change not valid");
                 }
             }
 

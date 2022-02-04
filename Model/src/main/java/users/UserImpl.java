@@ -24,7 +24,7 @@ public class UserImpl implements User {
     @Column(name = "id")
     private int id;
     @Column(name = "role_id")
-    @Enumerated (EnumType.ORDINAL)
+    @Enumerated(EnumType.ORDINAL)
     private Role role;
     @Column(name = "name")
     private String name;

@@ -13,10 +13,11 @@
 <div class="login">
 <h1> Введено неверное значение </h1>
 <h1> Произошла ошибка </h1>
+<p>${massage}</p>
 <br>
  <jsp:include page="mainpage.jsp" />
 <br>
-<form  action="/web/mvc/logout">
+<form  action="logout">
     <input type="submit" value="LogIN page!">
 </form>
    </div>

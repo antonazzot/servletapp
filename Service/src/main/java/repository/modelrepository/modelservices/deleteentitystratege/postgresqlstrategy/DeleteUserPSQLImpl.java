@@ -17,8 +17,7 @@ public class DeleteUserPSQLImpl implements DeleteEntityPSQL {
             ps = connection.prepareStatement("DELETE FROM persons where id = ?");
             ps.setInt(1, id);
             ps.executeUpdate();
-        }
-        catch (MySqlException e) {
+        } catch (MySqlException e) {
             log.info("removeUser exception = {}", e.getMessage());
             e.printStackTrace();
         } finally {

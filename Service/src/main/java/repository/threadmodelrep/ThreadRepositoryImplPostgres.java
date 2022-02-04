@@ -1,7 +1,6 @@
 package repository.threadmodelrep;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import repository.threadmodelrep.threadservices.postgresservices.GroupServicesPostgres;
 import repository.threadmodelrep.threadservices.postgresservices.MarkServicesPostgres;
@@ -15,17 +14,16 @@ import users.Student;
 import users.Trainer;
 import users.UserImpl;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 @Repository
 @RequiredArgsConstructor
 public class ThreadRepositoryImplPostgres implements ThreadRepository {
-    @Autowired
     private final GroupServicesPostgres groupServicesPostgres;
-    @Autowired
     private final MarkServicesPostgres markServicesPostgres;
-    @Autowired
     private final TheamServicesPostgres theamServicesPostgres;
-    @Autowired
     private final SalaryServicesPostgres salaryServicesPostgres;
 
     @Override
@@ -70,7 +68,7 @@ public class ThreadRepositoryImplPostgres implements ThreadRepository {
 
     @Override
     public Map<Integer, Student> studentsFromGroup(int groupId) {
-        return  groupServicesPostgres.getstudentsFromGroup(groupId);
+        return groupServicesPostgres.getstudentsFromGroup(groupId);
     }
 
     @Override

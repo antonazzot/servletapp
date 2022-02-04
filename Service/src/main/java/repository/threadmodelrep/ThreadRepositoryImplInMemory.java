@@ -1,10 +1,10 @@
 package repository.threadmodelrep;
 
 import org.springframework.stereotype.Repository;
-import repository.threadmodelrep.threadservices.memoryservices.GroupFunction;
-import repository.threadmodelrep.threadservices.memoryservices.MarkFunction;
-import repository.threadmodelrep.threadservices.memoryservices.SalaryFunction;
-import repository.threadmodelrep.threadservices.memoryservices.TheamFunction;
+import repository.threadmodelrep.threadservices.memoryservices.GroupService;
+import repository.threadmodelrep.threadservices.memoryservices.MarkService;
+import repository.threadmodelrep.threadservices.memoryservices.SalaryService;
+import repository.threadmodelrep.threadservices.memoryservices.TheamService;
 import threadmodel.Group;
 import threadmodel.Mark;
 import threadmodel.Salary;
@@ -16,6 +16,7 @@ import users.UserImpl;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 @Repository
 public class ThreadRepositoryImplInMemory implements ThreadRepository {
 
@@ -24,91 +25,91 @@ public class ThreadRepositoryImplInMemory implements ThreadRepository {
 
     @Override
     public Map<Integer, Group> allGroup() {
-        return GroupFunction.getAllGroup();
+        return GroupService.getAllGroup();
     }
 
     @Override
     public Map<Integer, Theams> allTheams() {
-        return TheamFunction.getallTheams();
+        return TheamService.getallTheams();
     }
 
     @Override
     public Map<Trainer, List<Salary>> trainerSalary() {
-        return SalaryFunction.gettrainerSalary();
+        return SalaryService.gettrainerSalary();
     }
 
     @Override
     public Map<UserImpl, Map<Theams, List<Mark>>> studentTheamMark(int StudentId) {
-        return MarkFunction.getstudentTheamMark(StudentId);
+        return MarkService.getstudentTheamMark(StudentId);
     }
 
     @Override
     public List<Mark> getMarkListbyTheam(Theams theam, int studentId) {
-        return MarkFunction.dogetMarkListbyTheam(theam, studentId);
+        return MarkService.dogetMarkListbyTheam(theam, studentId);
     }
 
     @Override
     public Map<Integer, Mark> getMarkIDListbyTheam(Theams theam, int studentId) {
-        return MarkFunction.dogetMarkIDListbyTheam(theam, studentId);
+        return MarkService.dogetMarkIDListbyTheam(theam, studentId);
     }
 
     @Override
     public Theams theamById(Integer id) {
-        return TheamFunction.gettheamById(id);
+        return TheamService.gettheamById(id);
     }
 
     @Override
     public Set<Theams> theamFromGroup(Integer groupId) {
-        return TheamFunction.gettheamFromGroup(groupId);
+        return TheamService.gettheamFromGroup(groupId);
     }
 
     @Override
     public Map<Integer, Student> studentsFromGroup(int groupId) {
-        return GroupFunction.getstudentsFromGroup(groupId);
+        return GroupService.getstudentsFromGroup(groupId);
     }
 
     @Override
     public void addTheam(String theam) {
-        TheamFunction.doaddTheam(theam);
+        TheamService.doaddTheam(theam);
     }
 
     @Override
     public void addGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
-        GroupFunction.doaddGroup(studentList, theamsIdList, trainerId);
+        GroupService.doaddGroup(studentList, theamsIdList, trainerId);
     }
 
     @Override
     public Map<Integer, Theams> freeTheams() {
-        return TheamFunction.getfreeTheams();
+        return TheamService.getfreeTheams();
     }
 
     @Override
     public void addSalaryToTrainer(int trainerId, int salaryValue) {
-        SalaryFunction.doaddSalaryToTrainer(trainerId, salaryValue);
+        SalaryService.doaddSalaryToTrainer(trainerId, salaryValue);
     }
 
     @Override
     public void addMarkToStudent(int studentId, int theamID, int markValue) {
-        MarkFunction.doaddMarkToStudent(studentId, theamID, markValue);
+        MarkService.doaddMarkToStudent(studentId, theamID, markValue);
     }
 
     @Override
     public void deleteMarksById(int[] tempMarksId, int theamId, int studentid) {
-        MarkFunction.dodeleteMarksById(tempMarksId, theamId, studentid);
+        MarkService.dodeleteMarksById(tempMarksId, theamId, studentid);
     }
 
     @Override
     public void changeMark(Map<Integer, Integer> markIdMarkValue, int studentId, int theamId) {
-        MarkFunction.dochangeMark(markIdMarkValue, studentId, theamId);
+        MarkService.dochangeMark(markIdMarkValue, studentId, theamId);
     }
 
     @Override
     public void updateGroup(int groupId, String act, int[] entytiIdforact) {
-        GroupFunction.doupdateGroup(groupId, act, entytiIdforact);
+        GroupService.doupdateGroup(groupId, act, entytiIdforact);
     }
 
     @Override
     public void updateTheam(int theamId, String theamName) {
-        TheamFunction.doupdateTheam(theamId, theamName);
+        TheamService.doupdateTheam(theamId, theamName);
     }
 }

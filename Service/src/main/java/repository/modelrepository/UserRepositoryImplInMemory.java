@@ -14,6 +14,7 @@ import users.UserImpl;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 @Repository("Memory")
 @Slf4j
 public class UserRepositoryImplInMemory implements UserRepository {

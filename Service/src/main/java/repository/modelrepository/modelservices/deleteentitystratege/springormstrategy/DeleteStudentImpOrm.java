@@ -11,6 +11,7 @@ import users.Student;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 @Transactional(propagation = Propagation.REQUIRED)
 @Component
 @Slf4j
@@ -19,6 +20,7 @@ public class DeleteStudentImpOrm implements DeleteStratageOrm {
     @Autowired
     @PersistenceContext
     private final EntityManager em;
+
     @Override
     public void doDeleteEntity(int id) {
         Student studentById = RepositoryFactory.getRepository().getStudentById(id);

@@ -1,12 +1,8 @@
 package repository.springmvcconfig;
 
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jvnet.staxex.Base64Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,11 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import repository.auth.UserService;
 
-import javax.sql.DataSource;
 @Configuration
 @Slf4j
 @EnableWebSecurity
@@ -31,18 +24,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        log.info("in configur!!!!!!");
+
         http.authorizeRequests()
                 .antMatchers("/mvc/str").permitAll()
-
-//                        .antMatchers("/mvc/views/**").authenticated()
-                        .antMatchers("/mvc/views/**").hasAuthority("ROLE_ADMINISTRATOR")
-//                .antMatchers("/mvc/trainer/**").authenticated()
+                .antMatchers("/mvc/views/**").authenticated()
+                .antMatchers("/mvc/views/**").hasAuthority("ROLE_ADMINISTRATOR")
+                .antMatchers("/mvc/trainer/**").authenticated()
                 .antMatchers("/mvc/trainer/**").hasRole("TRAINER")
-                        .and().formLogin().successForwardUrl("/mvc/checkUser")
+                .antMatchers("TrainerControlPage/trainerstartpage").hasRole("TRAINER")
+                .antMatchers("TrainerControlPage/*").hasRole("TRAINER")
+                .antMatchers("/trainerstartpage.jsp").hasRole("TRAINER")
+                .antMatchers("/mvc/trainer/traineract").hasRole("TRAINER")
+                .antMatchers("/mvc/student").authenticated()
+                .antMatchers("/mvc/student").hasRole("STUDENT")
+                .and().formLogin().successForwardUrl("/mvc/checkUser")
                 .and().httpBasic()
                 .and().logout().logoutSuccessUrl("/mvc/str")
-                .and().csrf().disable();;
+                .and().csrf().disable();
+        ;
 
     }
 
@@ -54,9 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider (@Autowired UserDetailsService userService,
-                                                                @Autowired PasswordEncoder passwordEncoder) {
-        log.info("user!ser: ={}",userService.toString());
+    public DaoAuthenticationProvider daoAuthenticationProvider(@Autowired UserDetailsService userService,
+                                                               @Autowired PasswordEncoder passwordEncoder) {
+        log.info("user!ser: ={}", userService.toString());
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         daoAuthenticationProvider.setUserDetailsService(userService);

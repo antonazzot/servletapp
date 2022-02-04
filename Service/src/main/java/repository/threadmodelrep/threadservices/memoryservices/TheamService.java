@@ -9,11 +9,11 @@ import threadmodel.Theams;
 import java.util.*;
 
 @Slf4j
-public class TheamFunction {
+public class TheamService {
 
 
     public static Map<Integer, Theams> getallTheams() {
-        return  DataBaseInf.getTheamsHashMap();
+        return DataBaseInf.getTheamsHashMap();
     }
 
     public static Theams gettheamById(Integer id) {

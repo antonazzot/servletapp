@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class TheamServicesPostgres {
-    @Autowired
+
     private final RepositoryDatasourse datasourse;
 
-    public  Map<Integer, Theams> getallTheams() {
+    public Map<Integer, Theams> getallTheams() {
         Map<Integer, Theams> result = new HashMap<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
@@ -56,7 +56,7 @@ public class TheamServicesPostgres {
         return result;
     }
 
-    public  Theams gettheamById(Integer id) {
+    public Theams gettheamById(Integer id) {
         Theams theams = null;
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
@@ -82,7 +82,7 @@ public class TheamServicesPostgres {
         return theams;
     }
 
-    public  Set<Theams> gettheamFromGroup(Integer groupId) {
+    public Set<Theams> gettheamFromGroup(Integer groupId) {
         Set<Theams> result = new HashSet<>();
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
@@ -106,7 +106,7 @@ public class TheamServicesPostgres {
         return result;
     }
 
-    public  void doaddTheam(String theam) {
+    public void doaddTheam(String theam) {
         if (!getallTheams().values().stream().map(Theams::getTheamName)
                 .collect(Collectors.toList()).contains(theam) &&
                 getallTheams().values().stream().map(Theams::getTheamName)
@@ -131,7 +131,7 @@ public class TheamServicesPostgres {
         }
     }
 
-    public  Map<Integer, Theams> getfreeTheams() {
+    public Map<Integer, Theams> getfreeTheams() {
         Map<Integer, Theams> busyTheam = getBuzyTeam();
         Map<Integer, Theams> freeTh = new HashMap<>(getallTheams());
         log.info("free Start {}", busyTheam.values());
@@ -152,7 +152,7 @@ public class TheamServicesPostgres {
         }
     }
 
-    private  Map<Integer, Theams> getBuzyTeam() {
+    private Map<Integer, Theams> getBuzyTeam() {
         Map<Integer, Theams> busyTheam = new HashMap<>();
         log.info("in buzy method");
         try (Connection connection = datasourse.getConnection()) {
@@ -182,7 +182,7 @@ public class TheamServicesPostgres {
         return busyTheam;
     }
 
-    public  void doupdateTheam(int theamId, String theamName) {
+    public void doupdateTheam(int theamId, String theamName) {
         try (Connection connection = datasourse.getConnection()) {
             PreparedStatement ps = null;
             try {
