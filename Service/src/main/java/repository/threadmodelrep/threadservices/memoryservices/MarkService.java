@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class MarkFunction {
+public class MarkService {
 
     public static Map<UserImpl, Map<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
         Map<UserImpl, Map<Theams, List<Mark>>> result = new HashMap<>();
@@ -42,7 +42,7 @@ public class MarkFunction {
     public static void doaddMarkToStudent(int studentId, int theamID, int markValue) {
         Student student = (Student) DataBaseInf.getStudentHashMap().get(studentId);
         student.getListOfMark()
-                .get(TheamFunction.gettheamById(theamID))
+                .get(TheamService.gettheamById(theamID))
                 .add(new Mark()
                         .withId(IdFactory.idBuilder())
                         .withValue(markValue));
@@ -50,7 +50,7 @@ public class MarkFunction {
 
     public static void dodeleteMarksById(int[] tempMarksId, int theamId, int studentid) {
         Student student = (Student) DataBaseInf.getStudentHashMap().get(studentid);
-        Theams tempTheam = TheamFunction.gettheamById(theamId);
+        Theams tempTheam = TheamService.gettheamById(theamId);
         for (int tempId : tempMarksId) {
             Mark markforDelete = student.getListOfMark().get(tempTheam).stream().filter(mark -> mark.getId() == tempId).findAny().get();
             student.getListOfMark().get(tempTheam).remove(markforDelete);
@@ -61,7 +61,7 @@ public class MarkFunction {
         Student student = (Student) RepositoryFactory.getRepository().allStudent().get(studentId);
         for (Map.Entry<Integer, Integer> entry : markIdMarkValue.entrySet()) {
             Mark tempMark = student.getListOfMark()
-                    .get(TheamFunction.gettheamById(theamId))
+                    .get(TheamService.gettheamById(theamId))
                     .stream().filter(mark -> mark.getId() == entry.getKey()).findAny().get();
             log.info("Old mark id and value = {}", tempMark.getId() + " value: " + tempMark.getValuesOfMark());
             tempMark.setValuesOfMark(entry.getValue());

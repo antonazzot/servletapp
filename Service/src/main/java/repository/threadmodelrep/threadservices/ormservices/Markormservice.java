@@ -7,6 +7,7 @@ import threadmodel.Theams;
 import users.Student;
 
 import java.util.*;
+
 @Slf4j
 public class Markormservice {
     public static Map<Theams, List<Mark>> getTheamsListHashMap(int studentId, Set<Theams> theams) {
@@ -24,6 +25,7 @@ public class Markormservice {
         }
         return theams;
     }
+
     public static List<Mark> dogetMarkListbyTheam(Theams theam, int studentId) {
         List<Mark> marks = new ArrayList<>();
         log.info("In getMarkListMethd getTheam method = {}", theam.getTheamName() + studentId);

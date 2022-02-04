@@ -1,4 +1,4 @@
-package repository.config;
+package repository.springmvcconfig;
 
 import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
@@ -13,7 +13,6 @@ import javax.sql.DataSource;
 
 @PropertySource("classpath:app.properties")
 @Configuration
-
 @RequiredArgsConstructor
 public class EntityManagerConfig {
     @Value("${postgres.driver}")
@@ -24,13 +23,14 @@ public class EntityManagerConfig {
     private String URL;
     @Value("${postgres.password}")
     private String PASSWORD;
+
     @Bean
-    public org.hibernate.cfg.Configuration configuration () {
+    public org.hibernate.cfg.Configuration configuration() {
         return new org.hibernate.cfg.Configuration().configure();
     }
 
     @Bean
-    public SessionFactory sessionFactory (@Autowired org.hibernate.cfg.Configuration configuration) {
+    public SessionFactory sessionFactory(@Autowired org.hibernate.cfg.Configuration configuration) {
         return configuration.buildSessionFactory();
     }
 

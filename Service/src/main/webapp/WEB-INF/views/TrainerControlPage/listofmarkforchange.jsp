@@ -21,6 +21,7 @@
     <form id="data" method = "post"  action="/web/mvc/trainer/dochangemark">
     <input type="hidden" name="studentId" value="${student.id}"/>
     <input type="hidden" name="thId" value="${th.id}"/>
+    <input type="hidden" name="groupId" value="${groupT}"/>
 
     <c:forEach var = "entry" items="${markIDListbyTheam}">
     <c:out value = "Текущее значение оценки" /> <br>

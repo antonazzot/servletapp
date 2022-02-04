@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class StudentServiceMemory {
     public static Map<Integer, UserImpl> getallStudent() {
-        return  DataBaseInf.getStudentHashMap();
+        return DataBaseInf.getStudentHashMap();
     }
 
     public static List<Student> studentFromGroup(Integer groupId) {

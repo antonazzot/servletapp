@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class SalaryFunction {
+public class SalaryService {
 
     public static Map<Trainer, List<Salary>> gettrainerSalary() {
         Map<Trainer, List<Salary>> result = new HashMap<>();

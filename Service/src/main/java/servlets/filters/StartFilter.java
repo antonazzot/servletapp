@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Properties;
 
-@WebFilter(urlPatterns = {"/checkUser", "/mvc/views/checkUser","/mvc/checkUser" })
+@WebFilter(urlPatterns = {"/checkUser", "/mvc/views/checkUser", "/mvc/checkUser"})
 public class StartFilter extends AbstractFilter {
     private static final Logger log = LoggerFactory.getLogger(StartFilter.class);
 
@@ -57,20 +57,20 @@ public class StartFilter extends AbstractFilter {
         HttpSession session = request.getSession();
         session.setAttribute("repostype", properties.getProperty("repository.type"));
 //        if (user != null) {
-            session.setAttribute("user", user);
-            log.info("SessionWithUserCreate = {}", user);
-            if (rememberMe!=null && !rememberMe.equals("")) {
-                Cookie[] cookies = request.getCookies();
-                for (Cookie cookie :cookies) {
-                    log.info("Cookie name={}", cookie.getName());
-                    log.info("Cookie domain={}", cookie.getDomain());
-                    log.info("Cookie path={}", cookie.getPath());
-                    log.info("Cookie value={}", cookie.getValue());
-                    log.info("Cookie version={}", cookie.getVersion());
-                }
-
-                session.setAttribute("cookie",cookies);
+        session.setAttribute("user", user);
+        log.info("SessionWithUserCreate = {}", user);
+        if (rememberMe != null && !rememberMe.equals("")) {
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie : cookies) {
+                log.info("Cookie name={}", cookie.getName());
+                log.info("Cookie domain={}", cookie.getDomain());
+                log.info("Cookie path={}", cookie.getPath());
+                log.info("Cookie value={}", cookie.getValue());
+                log.info("Cookie version={}", cookie.getVersion());
             }
+
+            session.setAttribute("cookie", cookies);
+        }
         request.getRequestDispatcher("/mvc/checkUser").forward(request, response);
 //        } else
 ////            response.sendRedirect(request.getContextPath()+"exception");
@@ -93,7 +93,7 @@ public class StartFilter extends AbstractFilter {
     }
 
     private UserImpl itRightCondition(String login, String password) {
-        log.info("in start filter before check = {}", "login: " + login +"  " + "password: " +password );
+        log.info("in start filter before check = {}", "login: " + login + "  " + "password: " + password);
         return RepositoryFactory.getRepository().allUser().values().stream()
                 .filter(u -> u.getLogin().equals(login) && u.getPassword().equals(password))
                 .findFirst().orElse(null);

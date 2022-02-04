@@ -17,7 +17,8 @@ import java.util.Map;
 public class StratagyForAutorithate {
     public static String authorizationStratagy(HttpSession session, Model model) {
         String result = "exception";
-        UserImpl user = (UserImpl) session.getAttribute("user");
+        UserImpl user = (UserImpl) model.getAttribute("userbylogin");
+        session.setAttribute("user", user);
         log.info("user Autorithate ={}", "--->>>" + user.getInf());
         if (Role.ADMINISTRATOR.equals(user.getRole())) {
             model.addAttribute("admin", user);
@@ -40,12 +41,13 @@ public class StratagyForAutorithate {
                             .findFirst()
                             .get();
                     log.info("user Autorithate trainer ={}", "--->>>" + user.getInf());
+                    session.setAttribute("groupT", group);
+                    session.setAttribute("trainerT", group);
                     model.addAttribute("groupT", group);
                     model.addAttribute("trainer", user);
                     result = "TrainerControlPage/trainerstartpage";
-                }
-                else
-                result = "TrainerControlPage/groupnotexist";
+                } else
+                    result = "TrainerControlPage/groupnotexist";
             } catch (IllegalArgumentException e) {
                 log.error(e.getMessage());
                 result = "TrainerControlPage/groupnotexist";

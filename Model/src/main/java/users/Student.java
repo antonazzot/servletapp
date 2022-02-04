@@ -22,24 +22,24 @@ import java.util.*;
                 @NamedQuery(name = "studenById", query = "select s from Student s where s.id = :id")
         }
 )
-public class Student extends UserImpl  {
+public class Student extends UserImpl {
     @ManyToMany
-    @JoinTable   (
+    @JoinTable(
             name = "student_group",
-            joinColumns = @JoinColumn (name = "student_id"),
-            inverseJoinColumns = @JoinColumn (name = "group_id")
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id")
     )
     @JsonIgnore
-    private Set <Group> groupSet;
+    private Set<Group> groupSet;
     @OneToMany
     @JoinTable(
             name = "student_mark",
-            joinColumns = @JoinColumn (name = "student_id"),
-            inverseJoinColumns = @JoinColumn (name = "mark_id")
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "mark_id")
     )
     @MapKey
     @JsonIgnore
-    private Map <Integer, Mark> markMap = new HashMap<>();
+    private Map<Integer, Mark> markMap = new HashMap<>();
     @Transient
     @JsonIgnore
     private Map<Theams, List<Mark>> listOfMark;

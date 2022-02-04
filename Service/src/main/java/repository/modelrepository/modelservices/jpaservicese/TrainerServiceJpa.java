@@ -18,19 +18,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class TrainerServiceJpa {
-//    @Autowired
-//    static Configuration configuration;
-//    @Autowired
-//    private static final SessionFactory sessionFactory = configuration.buildSessionFactory() ;
 
     @Autowired
-    private final  SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
-    public  Map<Integer, UserImpl> getallTrainer() {
+    public Map<Integer, UserImpl> getallTrainer() {
         Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
@@ -48,7 +45,7 @@ public class TrainerServiceJpa {
         return result;
     }
 
-    public  Map<Integer, UserImpl> freeTrainer() {
+    public Map<Integer, UserImpl> freeTrainer() {
         if (ThreadRepositoryFactory.getRepository().allGroup().isEmpty())
             return getallTrainer();
         else {
@@ -59,7 +56,7 @@ public class TrainerServiceJpa {
         }
     }
 
-    private  Map<Integer, UserImpl> freeTrainerexecute(List<UserImpl> busyTrainer) {
+    private Map<Integer, UserImpl> freeTrainerexecute(List<UserImpl> busyTrainer) {
         Map<Integer, UserImpl> result = new HashMap<>(getallTrainer());
         for (UserImpl alltrainer :
                 getallTrainer().values()) {
@@ -71,7 +68,7 @@ public class TrainerServiceJpa {
         return result;
     }
 
-    public  Trainer doGetTrainerById(int id) {
+    public Trainer doGetTrainerById(int id) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();

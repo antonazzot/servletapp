@@ -14,7 +14,7 @@
 
 <br>
 <form  action="/web/mvc/logout">
-    <input type="submit" value="Logout">
+    <input type="submit" value="LogOut">
 </form>
 
 </body>

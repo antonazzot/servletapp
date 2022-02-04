@@ -96,4 +96,7 @@ public class UsersServiceMemory {
     }
 
 
+    public static UserImpl getUserByLogin(String login) {
+        return getallUser().values().stream().filter(user -> user.getLogin().equalsIgnoreCase(login)).findFirst().orElse(null);
+    }
 }

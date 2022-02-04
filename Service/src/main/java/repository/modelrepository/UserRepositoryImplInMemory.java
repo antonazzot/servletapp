@@ -14,6 +14,7 @@ import users.UserImpl;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 @Repository("Memory")
 @Slf4j
 public class UserRepositoryImplInMemory implements UserRepository {
@@ -41,6 +42,11 @@ public class UserRepositoryImplInMemory implements UserRepository {
     @Override
     public UserImpl getUserById(Integer id) {
         return UsersServiceMemory.getUserById(id);
+    }
+
+    @Override
+    public UserImpl getUserByLogin(String login) {
+        return UsersServiceMemory.getUserByLogin(login);
     }
 
     @Override

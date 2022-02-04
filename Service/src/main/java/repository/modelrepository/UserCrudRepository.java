@@ -1,10 +1,10 @@
 package repository.modelrepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import repository.RepositoryFactory;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.AdministratorCrudRepository;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.StudentCrudRepository;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.TrainerCrudRepository;
@@ -16,17 +16,12 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Repository("Crud")
-public class UserCrudRepository implements UserRepository{
+public class UserCrudRepository implements UserRepository {
 
-    @Autowired
     private final StudentCrudRepository studentCrudRepository;
-    @Autowired
     private final AdministratorCrudRepository administratorCrudRepository;
-    @Autowired
     private final TrainerCrudRepository trainerCrudRepository;
-    @Autowired
     private final TheamCrudRepository theamCrudRepository;
-    @Autowired
     private final GroupCrudRepository groupCrudRepository;
 
     @Transactional
@@ -66,9 +61,16 @@ public class UserCrudRepository implements UserRepository{
     }
 
     @Override
+    public UserImpl getUserByLogin(String login) {
+        Optional<UserImpl> tempUser = RepositoryFactory.getRepository().allUser().values().
+                stream().filter(user -> user.getLogin().equalsIgnoreCase(login)).findFirst();
+        return tempUser.orElse(null);
+    }
+
+    @Override
     public int saveUser(UserImpl user) {
         if (user.getRole().equals(Role.ADMINISTRATOR))
-            administratorCrudRepository.save((Administrator)user);
+            administratorCrudRepository.save((Administrator) user);
         else if (user.getRole().equals(Role.TRAINER))
             trainerCrudRepository.save((Trainer) user);
         else studentCrudRepository.save((Student) user);
@@ -78,7 +80,7 @@ public class UserCrudRepository implements UserRepository{
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-        CrudRepository <?, Integer> repositoryForDelete = changeStrategyForDelete(entity);
+        CrudRepository<?, Integer> repositoryForDelete = changeStrategyForDelete(entity);
         repositoryForDelete.deleteById(id);
         return Optional.empty();
     }
@@ -97,7 +99,7 @@ public class UserCrudRepository implements UserRepository{
     @Override
     public UserImpl updateUser(UserImpl user) {
         if (user.getRole().equals(Role.ADMINISTRATOR))
-            administratorCrudRepository.save((Administrator)user);
+            administratorCrudRepository.save((Administrator) user);
         else if (user.getRole().equals(Role.TRAINER))
             trainerCrudRepository.save((Trainer) user);
         else studentCrudRepository.save((Student) user);
@@ -107,6 +109,7 @@ public class UserCrudRepository implements UserRepository{
 
         return user;
     }
+
     private CrudRepository<?, Integer> changeStrategyByRole(Role role) {
         Map<Role, CrudRepository> map = Map.of(
                 Role.STUDENT, studentCrudRepository,
@@ -115,11 +118,12 @@ public class UserCrudRepository implements UserRepository{
         );
         return map.get(role);
     }
+
     @Override
     public Map<Integer, UserImpl> freeTrainer() {
         Map<Integer, UserImpl> result = new HashMap<>();
         Collection<UserImpl> all = allTrainer().values();
-        List <Trainer> busy = new ArrayList<>();
+        List<Trainer> busy = new ArrayList<>();
         groupCrudRepository.findAll().forEach(group -> busy.add(group.getTrainer()));
         all.removeAll(busy);
         all.forEach(trainer -> result.put(trainer.getId(), trainer));
@@ -128,21 +132,21 @@ public class UserCrudRepository implements UserRepository{
 
     @Override
     public List<Student> studentFromGroup(Integer groupId) {
-       return (List<Student>) groupCrudRepository.findById(groupId).get().getStudentMap().values();
+        return (List<Student>) groupCrudRepository.findById(groupId).get().getStudentMap().values();
     }
 
     @Override
     public Trainer getTrainerById(int id) {
-       return trainerCrudRepository.findById(id).get();
+        return trainerCrudRepository.findById(id).get();
     }
 
     @Override
     public Administrator getAdministratorById(int id) {
-      return   administratorCrudRepository.findById(id).get();
+        return administratorCrudRepository.findById(id).get();
     }
 
     @Override
     public Student getStudentById(int id) {
-       return studentCrudRepository.findById(id).get();
+        return studentCrudRepository.findById(id).get();
     }
 }

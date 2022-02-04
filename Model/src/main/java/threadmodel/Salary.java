@@ -12,15 +12,15 @@ import java.math.BigDecimal;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table (name = "salary")
+@Table(name = "salary")
 public class Salary {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column (name = "salary_value")
+    @Column(name = "salary_value")
     private BigDecimal bigDecimalSalary;
     @ManyToOne
-    @JoinColumn (name = "trainer_id")
+    @JoinColumn(name = "trainer_id")
     private Trainer trainer;
 
     public Salary withValue(Integer value) {
@@ -28,7 +28,7 @@ public class Salary {
         return this;
     }
 
-    public Salary withTrainer (Trainer trainer) {
+    public Salary withTrainer(Trainer trainer) {
         setTrainer(trainer);
         return this;
     }

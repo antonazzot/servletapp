@@ -2,7 +2,7 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-package controller.interceptors;
+package repository.interceptors;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;

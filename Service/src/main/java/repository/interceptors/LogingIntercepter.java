@@ -1,4 +1,4 @@
-package controller.interceptors;
+package repository.interceptors;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +17,6 @@ public class LogingIntercepter extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-        log.info("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY={}", "ttttttttttttttttttttttttttt");
         LoggingURL(request);
         LoggingBody(request);
         LogingHeders(request);
@@ -27,10 +25,10 @@ public class LogingIntercepter extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info("postHandle={}", "!!!!");
+
         ContentCachingResponseWrapper responseWrapper = (ContentCachingResponseWrapper) response;
         String body = new String(responseWrapper.getContentAsByteArray(), response.getCharacterEncoding());
-        log.info("*************Response Body***************: \n {}", body);
+        log.info("***Response Body***: \n {}", body);
     }
 
     private void LogingHeders(HttpServletRequest request) {
@@ -45,11 +43,11 @@ public class LogingIntercepter extends HandlerInterceptorAdapter {
     private void LoggingBody(HttpServletRequest request) {
         RealContentCashingWrapper reqWrapper = (RealContentCashingWrapper) request;
         String body = new String(reqWrapper.getContentAsByteArray(), request.getCharacterEncoding());
-        log.info("*************Request Body***************: \n {}", body);
+        log.info("***Request Body***: \n {}", body);
     }
 
     private void LoggingURL(HttpServletRequest request) {
-        log.info("->>>>>>>>> {}, {}", request.getMethod(), ServletUriComponentsBuilder.fromRequest(request).toUriString());
+        log.info("-> {}, {}", request.getMethod(), ServletUriComponentsBuilder.fromRequest(request).toUriString());
     }
 
 }

@@ -16,21 +16,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class UserServiceJpa {
 
     @Autowired
-    private final  SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
-    public  UserImpl getUserById(Integer id) {
+    public UserImpl getUserById(Integer id) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
-            return em.find(Student.class,id);
+            return em.find(Student.class, id);
         } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
@@ -39,15 +40,15 @@ public class UserServiceJpa {
         return null;
     }
 
-    public  Map<Integer, UserImpl> getAllUser() {
+    public Map<Integer, UserImpl> getAllUser() {
         Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
-            List <UserImpl> resultList = em.createQuery("select s from Student s").getResultList();
-           resultList.forEach(user -> result.put(user.getId(), user));
+            List<UserImpl> resultList = em.createQuery("select s from Student s").getResultList();
+            resultList.forEach(user -> result.put(user.getId(), user));
             return result;
         } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
@@ -58,7 +59,7 @@ public class UserServiceJpa {
     }
 
     //    @JpaTransaction
-    public  int doSaveUser(UserImpl user) {
+    public int doSaveUser(UserImpl user) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -74,7 +75,7 @@ public class UserServiceJpa {
         return user.getId();
     }
 
-    public  Optional<UserImpl> doRemoveUser(Integer id, String entity) {
+    public Optional<UserImpl> doRemoveUser(Integer id, String entity) {
         EntityManager em = sessionFactory.createEntityManager();
         DeleteStratageJPA deleteStratageJPA = changeStratageForDelete(entity);
         deleteStratageJPA.doDeleteEntity(id, em);
@@ -92,7 +93,7 @@ public class UserServiceJpa {
         return stratageMap.get(entity);
     }
 
-    public  UserImpl doUpdateUser(UserImpl user) {
+    public UserImpl doUpdateUser(UserImpl user) {
         UserImpl userForChange = getUserById(user.getId());
         userForChange
                 .withLogin(user.getLogin())
@@ -113,5 +114,9 @@ public class UserServiceJpa {
             JpaUtils.closeQuietly(em);
         }
         return userForChange;
+    }
+
+    public UserImpl getUserByLogin(String login) {
+        return getAllUser().values().stream().filter(user -> user.getLogin().equalsIgnoreCase(login)).findFirst().orElse(null);
     }
 }

@@ -8,10 +8,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString (exclude = "student")
-@EqualsAndHashCode (exclude = "student")
+@ToString(exclude = "student")
+@EqualsAndHashCode(exclude = "student")
 @Entity
 @Table(name = "mark")
+
 @NamedQueries(
         {
                 @NamedQuery(name = "getMarkById", query = "select m from Mark m where m.id = :id")
@@ -26,12 +27,12 @@ public class Mark {
     @ManyToOne
     @JoinTable(
             name = "student_mark",
-            joinColumns = @JoinColumn (name = "mark_id"),
-            inverseJoinColumns = @JoinColumn (name = "student_id")
+            joinColumns = @JoinColumn(name = "mark_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
     )
     private Student student;
     @ManyToOne
-    @JoinColumn (name = "theam_id")
+    @JoinColumn(name = "theam_id")
     private Theams theams;
 
     public Mark withId(Integer id) {
@@ -44,12 +45,12 @@ public class Mark {
         return this;
     }
 
-    public Mark withStudent (Student student) {
+    public Mark withStudent(Student student) {
         setStudent(student);
         return this;
     }
 
-    public Mark withTheam (Theams theam) {
+    public Mark withTheam(Theams theam) {
         setTheams(theam);
         return this;
     }

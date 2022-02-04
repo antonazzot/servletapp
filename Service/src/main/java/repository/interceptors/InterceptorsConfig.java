@@ -1,4 +1,4 @@
-package controller.interceptors;
+package repository.interceptors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

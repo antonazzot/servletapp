@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -24,7 +25,7 @@ public class TheamServiceJpa {
     @Autowired
     private final SessionFactory sessionFactory;
 
-    public  Map<Integer, Theams> getallTheams() {
+    public Map<Integer, Theams> getallTheams() {
         Map<Integer, Theams> result = new HashMap<>();
         EntityManager em = null;
         try {
@@ -39,7 +40,7 @@ public class TheamServiceJpa {
         return result;
     }
 
-    public  Theams gettheamById(Integer id) {
+    public Theams gettheamById(Integer id) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -55,11 +56,11 @@ public class TheamServiceJpa {
 
     }
 
-    public  Set<Theams> gettheamFromGroup(Integer groupId) {
+    public Set<Theams> gettheamFromGroup(Integer groupId) {
         return ThreadRepositoryFactory.getRepository().allGroup().get(groupId).getTheamsSet();
     }
 
-    public  void doaddTheam(String theam) {
+    public void doaddTheam(String theam) {
         if (!getallTheams().values().stream().map(Theams::getTheamName)
                 .collect(Collectors.toList()).contains(theam) &&
                 getallTheams().values().stream().map(Theams::getTheamName)
@@ -80,7 +81,7 @@ public class TheamServiceJpa {
         }
     }
 
-    public  Map<Integer, Theams> getfreeTheams() {
+    public Map<Integer, Theams> getfreeTheams() {
         Map<Integer, Theams> busyTheam = getBuzyTeam();
         Map<Integer, Theams> freeTh = new HashMap<>(getallTheams());
         log.info("free Start {}", busyTheam.values());
@@ -101,7 +102,7 @@ public class TheamServiceJpa {
         }
     }
 
-    private  Map<Integer, Theams> getBuzyTeam() {
+    private Map<Integer, Theams> getBuzyTeam() {
         Map<Integer, Theams> busyTheam = new HashMap<>();
         Set<Theams> theamsSet = new HashSet<>();
         ThreadRepositoryFactory.getRepository().allGroup().values()
@@ -112,7 +113,7 @@ public class TheamServiceJpa {
         return busyTheam;
     }
 
-    public  void doupdateTheam(int theamId, String theamName) {
+    public void doupdateTheam(int theamId, String theamName) {
         Theams theams = getTheamById(theamId);
         theams.withValue(theamName);
         EntityManager em = null;
@@ -129,7 +130,7 @@ public class TheamServiceJpa {
         }
     }
 
-    private  Theams getTheamById(int id) {
+    private Theams getTheamById(int id) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();

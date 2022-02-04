@@ -9,9 +9,16 @@ import java.util.List;
 public class GroupAdderService {
     public static List<UserImpl> studentList(String[] studentMass) {
         List<UserImpl> studentList = new ArrayList<>();
-        for (String mass : studentMass) {
-            studentList.add(RepositoryFactory.getRepository().getStudentById(Integer.parseInt(mass)));
+        try {
+            for (String mass : studentMass) {
+                studentList.add(RepositoryFactory.getRepository().getStudentById(Integer.parseInt(mass)));
+            }
         }
+        catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("not parse string");
+        }
+
+
         return studentList;
     }
 }

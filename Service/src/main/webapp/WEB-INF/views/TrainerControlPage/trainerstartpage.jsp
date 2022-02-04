@@ -33,7 +33,7 @@
         <option value="change">Change MARK</option>
         <option value="watch">Watch  MARK</option>
         </select>
-
+     <p> <input name="groupId" type="hidden" value="${groupT.id}"/></p>
      <p><input name="mark" type="text" placeholder="ADD MARK"/><p>
      <p><input type="submit" value="Отправить"></p>
     </form>

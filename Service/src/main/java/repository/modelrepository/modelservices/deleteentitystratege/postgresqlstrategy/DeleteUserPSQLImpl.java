@@ -14,11 +14,10 @@ public class DeleteUserPSQLImpl implements DeleteEntityPSQL {
     public void removeEntity(int id, Connection connection) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = connection.prepareStatement("DELETE FROM users where id = ?");
+            ps = connection.prepareStatement("DELETE FROM persons where id = ?");
             ps.setInt(1, id);
             ps.executeUpdate();
-        }
-        catch (MySqlException e) {
+        } catch (MySqlException e) {
             log.info("removeUser exception = {}", e.getMessage());
             e.printStackTrace();
         } finally {

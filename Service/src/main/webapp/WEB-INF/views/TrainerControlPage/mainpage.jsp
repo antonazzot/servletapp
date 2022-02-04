@@ -13,7 +13,7 @@
 <body>
 
 <br>
-<form  action="/web/mvc/hello">
+<form  action="/web/mvc/trainer/prepare">
     <input type="submit" value="Main Page">
 </form>
 

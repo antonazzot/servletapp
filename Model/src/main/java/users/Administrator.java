@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ToString (callSuper = true)
+@ToString(callSuper = true)
 @Entity
 @Table(name = "persons")
 @NamedQueries(

@@ -15,13 +15,14 @@
  <p>Name: ${student.name} </p>
   <p>Оценки Студента:</p>
   <p></p>
- <form id="data" action="/web/mvc/hello">
+ <form id="data" action="/web/mvc/trainer/prepare">
          <c:forEach var = "entry" items="${mapWithTheamAndMark}">
          <c:out value = "${entry.key.theamName}" /> <br>
           <c:forEach var = "list" items="${entry.value}">
            <c:out value = "${list.valuesOfMark}" /> <br>
             </c:forEach>
           </c:forEach>
+          <input type="hidden" name="groupId" value="${groupId}"/>
      <p><input type="submit" form="data" value="Вернуться на главную страницу"></p>
   </form>
 <br>

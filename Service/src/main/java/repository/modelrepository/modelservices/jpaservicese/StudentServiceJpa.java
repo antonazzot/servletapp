@@ -17,17 +17,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class StudentServiceJpa {
-    //    @Autowired
-//    public static Configuration configuration;
-//    @Autowired
-//    public   SessionFactory sessionFactory;
-    @Autowired
-    private final  SessionFactory sessionFactory;
 
-    public  Map<Integer, UserImpl> getAllStudent() {
+    @Autowired
+    private final SessionFactory sessionFactory;
+
+    public Map<Integer, UserImpl> getAllStudent() {
         Map<Integer, UserImpl> result = new HashMap<>();
         EntityManager em = null;
         try {
@@ -46,7 +44,7 @@ public class StudentServiceJpa {
         return result;
     }
 
-    public  List<Student> getStudentFromGroup(Integer groupId) {
+    public List<Student> getStudentFromGroup(Integer groupId) {
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();
@@ -62,14 +60,11 @@ public class StudentServiceJpa {
         return null;
     }
 
-    public  Student doGetStudentById(int id) {
+    public Student doGetStudentById(int id) {
         EntityManager em = null;
         Student student = null;
         try {
             em = sessionFactory.createEntityManager();
-//        TypedQuery <Student> query = em.createNamedQuery("studenById", Student.class);
-//        query.setParameter("id", id);
-//        return query.getSingleResult();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
             student = em.find(Student.class, id);

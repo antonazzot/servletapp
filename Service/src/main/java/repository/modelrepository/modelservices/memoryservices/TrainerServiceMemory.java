@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class TrainerServiceMemory {
 
     public static Map<Integer, UserImpl> getallTrainer() {
-        return  DataBaseInf.getTrainerHashMap();
+        return DataBaseInf.getTrainerHashMap();
     }
 
     public static Map<Integer, UserImpl> getfreeTrainer() {

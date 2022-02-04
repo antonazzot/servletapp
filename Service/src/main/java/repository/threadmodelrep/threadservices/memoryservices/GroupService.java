@@ -12,15 +12,15 @@ import users.UserImpl;
 import java.util.*;
 
 @Slf4j
-public class GroupFunction {
+public class GroupService {
 
     public static Map<Integer, Group> getAllGroup() {
-        return  DataBaseInf.getGroupHashMap();
+        return DataBaseInf.getGroupHashMap();
     }
 
     public static Map<Integer, Student> getstudentsFromGroup(int groupId) {
         Group group = DataBaseInf.getGroupHashMap().get(groupId);
-        return  group.getStudentMap();
+        return group.getStudentMap();
     }
 
     public static void doaddGroup(List<UserImpl> studentList, List<Integer> theamsIdList, Integer trainerId) {
@@ -32,14 +32,14 @@ public class GroupFunction {
             Student student = (Student) user;
             for (Integer theamId :
                     theamsIdList) {
-                Theams tempTheam = TheamFunction.gettheamById(theamId);
+                Theams tempTheam = TheamService.gettheamById(theamId);
                 student.addTheam(tempTheam);
             }
             students.put(student.getId(), student);
         }
         for (Integer theamId :
                 theamsIdList) {
-            theams.add(TheamFunction.gettheamById(theamId));
+            theams.add(TheamService.gettheamById(theamId));
         }
         group.withId(IdFactory.idBuilder())
                 .withName("Groups_" + group.getId())

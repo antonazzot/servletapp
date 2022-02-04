@@ -1,4 +1,4 @@
-package springmvcconfig;
+package repository.springmvcconfig;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +8,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import repository.RepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryFactory;
@@ -23,51 +27,17 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @RequiredArgsConstructor
-@EnableAspectJAutoProxy
+@EnableWebSecurity
+@EnableAspectJAutoProxy(exposeProxy = true)
 @EnableTransactionManagement
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableJpaRepositories(basePackages = "repository", entityManagerFactoryRef = "factoryBean")
 @PropertySource("classpath:app.properties")
 @Import({RepositoryFactory.class, ThreadRepositoryFactory.class})
-public class SpringConfig  implements WebMvcConfigurer {
+public class SpringConfig implements WebMvcConfigurer {
+
     private final ApplicationContext applicationContext;
     private final DataSource dataSource;
-//    @Value("${postgres.driver}")
-//    private final String DRIVER;
-//    @Value("${postgres.name}")
-//    private final String NAME;
-//    @Value("${postgres.url}")
-//    private final String URL;
-//    @Value("${postgres.password}")
-//    private final String PASSWORD;
-    @Bean
-    public InternalResourceViewResolver internalResourceViewResolver (){
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setApplicationContext(applicationContext);
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        WebMvcConfigurer.super.addResourceHandlers(registry);
-//        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/static/css");
-//        registry.addResourceHandler("/static/**").addResourceLocations("/css");
-//        registry.addResourceHandler("/webapp/resources/**").addResourceLocations("/resources/static/css");
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/.jsp").addResourceLocations("/WEB-INF/views/");
-    }
-    //    @Bean
-//    public DataSource dataSource () {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName(DRIVER);
-//        dataSource.setUrl(URL);
-//        dataSource.setUsername(NAME);
-//        dataSource.setPassword(PASSWORD);
-//
-//        return  dataSource;
-//    }
-
 
     @Primary
     @Bean
@@ -112,20 +82,37 @@ public class SpringConfig  implements WebMvcConfigurer {
         return factoryBean.getNativeEntityManagerFactory().createEntityManager();
     }
 
+    @Bean
+    public InternalResourceViewResolver internalResourceViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setApplicationContext(applicationContext);
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        return resolver;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/.jsp").addResourceLocations("/WEB-INF/views/");
+    }
+
+    //    @Bean
+//    public DataSource dataSource () {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName(DRIVER);
+//        dataSource.setUrl(URL);
+//        dataSource.setUsername(NAME);
+//        dataSource.setPassword(PASSWORD);
+//
+//        return  dataSource;
+//    }
+
 //    @Bean
 //    public JdbcTemplate jdbcTemplate (@Autowired DataSource dataSource) {
 //        return new JdbcTemplate(dataSource);
 //    }
-//    @Bean
-//    public org.hibernate.cfg.Configuration configuration () {
-//        org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration().configure();
-//        return configuration;
-//    }
-//
-//    @Bean
-//    public SessionFactory sessionFactory () {
-//        return configuration().buildSessionFactory();
-//    }
+
 //    @Bean
 //    public SpringResourceTemplateResolver templateResolver() {
 //        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
@@ -149,4 +136,10 @@ public class SpringConfig  implements WebMvcConfigurer {
 //        resolver.setTemplateEngine(templateEngine());
 //        registry.viewResolver(resolver);
 //    }
+//@Override
+//public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//
+//        configurer.enable("/**");
+//    configurer.enable();
+//}
 }

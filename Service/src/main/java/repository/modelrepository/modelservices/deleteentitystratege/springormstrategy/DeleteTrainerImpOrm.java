@@ -9,15 +9,17 @@ import repository.RepositoryFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 @Transactional(propagation = Propagation.REQUIRED)
 @RequiredArgsConstructor
 @Component
 public class DeleteTrainerImpOrm implements DeleteStratageOrm {
     @Autowired
     @PersistenceContext
-    private final   EntityManager em;
+    private final EntityManager em;
+
     @Override
     public void doDeleteEntity(int id) {
-       em.remove(RepositoryFactory.getRepository().getTrainerById(id));
+        em.remove(RepositoryFactory.getRepository().getTrainerById(id));
     }
 }
