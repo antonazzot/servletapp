@@ -1,83 +1,100 @@
 package repository.modelrepository;
 
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import repository.modelrepository.modelfunction.functionpostgress.AdminFunctionPostgres;
-import repository.modelrepository.modelfunction.functionpostgress.StudentFunctionPostgres;
-import repository.modelrepository.modelfunction.functionpostgress.TrainerFunctionPostgres;
-import repository.modelrepository.modelfunction.functionpostgress.UsersFunctionPostgres;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import repository.modelrepository.modelservices.postgresservices.AdminServicePostgres;
+import repository.modelrepository.modelservices.postgresservices.StudentServicePostgres;
+import repository.modelrepository.modelservices.postgresservices.TrainerServicePostgres;
+import repository.modelrepository.modelservices.postgresservices.UsersServicePostgres;
+import users.Administrator;
+import users.Student;
+import users.Trainer;
 import users.UserImpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-
+@Repository("Postgres")
 @Slf4j
+@RequiredArgsConstructor
 public class UserRepositoryImplPostgres implements UserRepository {
 
-    private static volatile UserRepositoryImplPostgres instance;
+    private final AdminServicePostgres adminServicePostgres;
+    private final TrainerServicePostgres trainerServicePostgres;
+    private final StudentServicePostgres studentServicePostgres;
+    private final UsersServicePostgres usersServicePostgres;
 
-    private UserRepositoryImplPostgres() {
-    }
-
-    public static UserRepositoryImplPostgres getInstance() {
-        if (instance == null) {
-            synchronized (UserRepositoryImplPostgres.class) {
-                if (instance == null) {
-                    instance = new UserRepositoryImplPostgres();
-                }
-            }
-        }
-        return instance;
+    @Override
+    public Map<Integer, UserImpl> allUser() {
+        return usersServicePostgres.allUser();
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allUser() {
-        return UsersFunctionPostgres.allUser();
+    public Map<Integer, UserImpl> allTrainer() {
+        return trainerServicePostgres.getallTrainer();
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allTrainer() {
-        return TrainerFunctionPostgres.getallTrainer();
+    public Map<Integer, UserImpl> allStudent() {
+        return studentServicePostgres.allStudent();
     }
 
     @Override
-    public HashMap<Integer, UserImpl> allStudent() {
-        return StudentFunctionPostgres.allStudent();
-    }
-
-    @Override
-    public HashMap<Integer, UserImpl> allAdmin() {
-        return AdminFunctionPostgres.allAdmin();
+    public Map<Integer, UserImpl> allAdmin() {
+        return adminServicePostgres.allAdmin();
     }
 
     @Override
     public UserImpl getUserById(Integer id) {
-        return UsersFunctionPostgres.getUserById(id);
+        return usersServicePostgres.getUserById(id);
+    }
+
+    @Override
+    public UserImpl getUserByLogin(String login) {
+        return usersServicePostgres.getUserByLogin(login);
     }
 
     @Override
     public int saveUser(UserImpl user) {
-        return UsersFunctionPostgres.saveUser(user);
+        return usersServicePostgres.saveUser(user);
     }
 
     @Override
     public Optional<UserImpl> removeUser(Integer id, String entity) {
-        return UsersFunctionPostgres.removeUser(id, entity);
+        return usersServicePostgres.removeUser(id, entity);
     }
 
     @Override
     public UserImpl updateUser(UserImpl user) {
-        return UsersFunctionPostgres.updateUser(user);
+        return usersServicePostgres.updateUser(user);
     }
 
     @Override
-    public HashMap<Integer, UserImpl> freeTrainer() {
-        return TrainerFunctionPostgres.freeTrainer();
+    public Map<Integer, UserImpl> freeTrainer() {
+        return trainerServicePostgres.freeTrainer();
     }
 
     @Override
-    public ArrayList<UserImpl> studentFromGroup(Integer groupId) {
-        return StudentFunctionPostgres.studentFromGroup(groupId);
+    public List<Student> studentFromGroup(Integer groupId) {
+        return studentServicePostgres.studentFromGroup(groupId);
+    }
+
+    @Override
+    public Trainer getTrainerById(int id) {
+        return trainerServicePostgres.getTrainerById(id);
+    }
+
+    @Override
+    public Administrator getAdministratorById(int id) {
+     return    adminServicePostgres.getAdminById(id) ;
+    }
+
+    @Override
+    public Student getStudentById(int id)  {
+      return   studentServicePostgres.getStudentById(id);
     }
 
 }

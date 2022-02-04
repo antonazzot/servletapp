@@ -1,9 +1,10 @@
 package users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import threadmodel.Salary;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +14,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode(callSuper = true)
-@ToString
+@EqualsAndHashCode(callSuper = true, exclude = "salarylist")
+@ToString(callSuper = true, exclude = "salarylist")
 @Entity
+@Table(name = "persons")
+@NamedQueries(
+        {
+                @NamedQuery(name = "trainerById", query = "select t from Trainer t where t.id = :id")
+        }
+)
 public class Trainer extends UserImpl {
-
+    @OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Salary> salarylist = new ArrayList<>();
 
     public Trainer withName(String name) {

@@ -6,13 +6,22 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 @Entity
+@Table(name = "persons")
+@NamedQueries(
+        {
+                @NamedQuery(name = "adminById", query = "select a from Administrator a where a.id = :id")
+        }
+)
 public class Administrator extends UserImpl {
 
     public Administrator withName(String name) {

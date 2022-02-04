@@ -9,15 +9,22 @@ import javax.persistence.*;
 @Data
 @EqualsAndHashCode
 @ToString
-@Entity
-@Table(name = "users")
+@MappedSuperclass
+
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@NamedQueries(
+//        {
+//                @NamedQuery(name = "all", query = "select t from Trainer t where t.role = :role_id")
+//        }
+//)
+
 public class UserImpl implements User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "role_id")
-    @OneToOne
+    @Enumerated(EnumType.ORDINAL)
     private Role role;
     @Column(name = "name")
     private String name;

@@ -1,5 +1,8 @@
 package repository;
 
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,45 +13,31 @@ import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+@Component
+@AllArgsConstructor
 public class RepositoryDatasourse implements DataSource {
-    private static volatile RepositoryDatasourse instance;
-    private final String DRIVER;
-    private final String URL;
-    private final String NAME;
-    private final String PASSWWORD;
+    //    private static volatile RepositoryDatasourse instance;
+    private String DRIVER;
+    private String URL;
+    private String NAME;
+    private String PASSWWORD;
 
-    private RepositoryDatasourse(String driver, String url, String passwword, String name) {
-        this.DRIVER = driver;
-        this.NAME = name;
-        this.PASSWWORD = passwword;
-        this.URL = url;
+    private RepositoryDatasourse() {
+        Properties properties = new Properties();
         try {
-            Class.forName(driver);
+            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.DRIVER = properties.getProperty("postgres.driver");
+        this.NAME = properties.getProperty("postgres.name");
+        this.PASSWWORD = properties.getProperty("postgres.password");
+        this.URL = properties.getProperty("postgres.url");
+        try {
+            Class.forName(DRIVER);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    public static RepositoryDatasourse getInstance() {
-        if (instance == null) {
-            synchronized (RepositoryDatasourse.class) {
-                if (instance == null) {
-                    Properties properties = new Properties();
-                    try {
-                        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("app.properties"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    instance = new RepositoryDatasourse(
-                            properties.getProperty("postgres.driver"),
-                            properties.getProperty("postgres.url"),
-                            properties.getProperty("postgres.password"),
-                            properties.getProperty("postgres.name")
-                    );
-                }
-            }
-        }
-        return instance;
     }
 
     @Override

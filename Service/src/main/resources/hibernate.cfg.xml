@@ -22,8 +22,15 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
         <!-- mapping files -->
-<!--        <mapping class="Model.threadmodel.Theams"/>-->
-            <mapping  resource="Theams.hbm.xml"/>
+        <mapping class="threadmodel.Theams"/>
+        <mapping class="users.Trainer"/>
+        <mapping class="threadmodel.Salary"/>
+        <mapping class="threadmodel.Group"/>
+        <mapping class="threadmodel.Mark"/>
+        <mapping class="users.Student"/>
+        <mapping class="users.Administrator"/>
+
+<!--            <mapping  resource="Theams.hbm.xml"/>-->
     </session-factory>
 
 </hibernate-configuration>

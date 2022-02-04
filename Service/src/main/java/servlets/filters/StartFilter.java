@@ -10,13 +10,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Properties;
 
-@WebFilter("/checkUser")
+@WebFilter(urlPatterns = {"/checkUser", "/mvc/views/checkUser", "/mvc/checkUser"})
 public class StartFilter extends AbstractFilter {
     private static final Logger log = LoggerFactory.getLogger(StartFilter.class);
 
@@ -43,6 +44,9 @@ public class StartFilter extends AbstractFilter {
             doesItLogin = true;
         }
         String password = request.getParameter("password");
+        String rememberMe = request.getParameter("remember_me");
+        log.info("Enter by pass = {}", password);
+
         if (doesItLogin) {
             //Authentication by login
             user = checkUser(login, password);
@@ -52,11 +56,25 @@ public class StartFilter extends AbstractFilter {
 
         HttpSession session = request.getSession();
         session.setAttribute("repostype", properties.getProperty("repository.type"));
-        if (user != null) {
-            session.setAttribute("user", user);
-            log.info("SessionWithUserCreate = {}", user);
-            request.getRequestDispatcher("/checkUser").forward(request, response);
-        } else request.getRequestDispatcher("exeception.jsp").forward(request, response);
+//        if (user != null) {
+        session.setAttribute("user", user);
+        log.info("SessionWithUserCreate = {}", user);
+        if (rememberMe != null && !rememberMe.equals("")) {
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie : cookies) {
+                log.info("Cookie name={}", cookie.getName());
+                log.info("Cookie domain={}", cookie.getDomain());
+                log.info("Cookie path={}", cookie.getPath());
+                log.info("Cookie value={}", cookie.getValue());
+                log.info("Cookie version={}", cookie.getVersion());
+            }
+
+            session.setAttribute("cookie", cookies);
+        }
+        request.getRequestDispatcher("/mvc/checkUser").forward(request, response);
+//        } else
+////            response.sendRedirect(request.getContextPath()+"exception");
+//            request.getRequestDispatcher("/mvc/exception").forward(request, response);
         filterChain.doFilter(request, response);
     }
 
@@ -69,16 +87,15 @@ public class StartFilter extends AbstractFilter {
     }
 
     private UserImpl itRightCondition(int id, String password) {
-
         return RepositoryFactory.getRepository().allUser().values().stream()
                 .filter(u -> u.getId() == id && u.getPassword().equals(password))
                 .findFirst().orElse(null);
     }
 
     private UserImpl itRightCondition(String login, String password) {
+        log.info("in start filter before check = {}", "login: " + login + "  " + "password: " + password);
         return RepositoryFactory.getRepository().allUser().values().stream()
                 .filter(u -> u.getLogin().equals(login) && u.getPassword().equals(password))
                 .findFirst().orElse(null);
-
     }
 }

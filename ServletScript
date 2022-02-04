@@ -1,0 +1,155 @@
+create table users (
+id serial not null primary key,
+name varchar (50) not null,
+login varchar (50),
+password varchar (50),
+age int,
+role_id int references role (id)
+);
+
+create table role (
+id serial not null primary key,
+role_name varchar (50) not null
+);
+
+create table theam (
+id serial not null primary key,
+theam_name varchar,
+mark_id int references mark (id)
+);
+
+create table mark (
+id serial not null primary key,
+mark_value int,
+student_id int references users(id)
+);
+
+create table salary (
+id serial not null primary key,
+salary_value int,
+trainer_id int references users(id)
+);
+
+create table "group" (
+name varchar (50) not null,
+user_id int references users (id),
+theam_id int references theam (id) 
+);
+
+insert into "role" (role_name) values 
+('administrator'),
+('trainer'),
+('student');
+
+insert into users (name, login,"password",age,role_id) values
+ ('Anton','admin','pass',28, 1),
+	('Sergey','serg','srg',30,3),
+	('Alex','ale','pppas',35,2),
+	('Masha','mash','msh',25,3);
+
+insert into theam (theam_name) values 
+('Math'),
+('Music');
+
+insert into salary (salary_value) values 
+(1000);
+
+update salary set trainer_id = (select id from users where name='Alex')
+where id = 1;
+
+select * from salary s ;
+
+insert into mark (mark_value) values
+(70);
+
+update mark set student_id = (select id from users where "name" = 'Sergey');
+
+update theam set mark_id  = 
+(select mark.id from mark 
+join users 
+on mark.student_id = users.id 
+where users."name" ='Sergey'
+);
+
+select * from theam t ;
+
+select * from  mark m ;
+
+alter table theam drop column mark_id;
+
+alter table mark add column theam_id int;
+
+alter table mark add constraint mark_theam_id_fkey foreign key (theam_id) references theam (id);
+
+insert into mark  (mark_value) values
+(50);
+ 
+delete from mark where mark_value = 50;
+
+select * from  mark m ;
+
+insert into mark (student_id) 
+select users.id from users where name = 'Sergey';
+
+update mark set theam_id  = 
+(select id from theam where theam_name = 'Math')
+where student_id = ( select users.id from users where name = 'Sergey' )
+;
+select * from mark m ;
+update mark set mark_value = 100
+where student_id = (select users.id from users where name = 'Sergey' );
+
+insert into mark  (mark_value, student_id, theam_id) values
+(60, 2, 2);
+
+select * from mark m ;
+
+select (theam_name) from theam t 
+join mark m on m.theam_id = t.id 
+where student_id= (select id from users u where u."name"='Sergey');
+
+create table "group" ( 
+	id  serial not null primary key,
+ 	"name" varchar  (50),
+ 	 trainer_id int references users (id)
+    );	
+   select * from salary;
+  
+  delete  from users ;
+ delete from theam  cascade ;
+delete  from theam_group;
+delete  from  student_group;
+delete from salary cascade;
+delete from mark cascade;
+delete from "group" cascade;
+
+select * from users u where name = 'Anton'
+and "password" = 'pass' ;
+
+select * from salary s ;
+
+select * from users u ;
+
+insert into salary (trainer_id);
+
+
+ALTER TABLE public.mark ADD CONSTRAINT mark_fk FOREIGN KEY (student_id) REFERENCES public.users(id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE public.mark DROP CONSTRAINT mark_student_id_fkey;
+ALTER TABLE public.mark ADD CONSTRAINT mark_fk_1 FOREIGN KEY (theam_id) REFERENCES public.theam(id) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE public.mark DROP CONSTRAINT mark_theam_id_fkey;
+
+select * from mark m ;
+select * from mark where student_id = 89 and theam_id = 32;
+update mark set mark_value = 50 where student_id = 89 and theam_id = 32;
+insert into mark (mark_value, student_id, theam_id) values (30, 89, 32);
+                    values (82);
+                   delete from salary ;
+
+                  select * from salary s where trainer_id = 84 ;
+                 
+select * from users u;
+select * from "group" g ;
+select * from student_group sg ;
+delete from users u where u.id = 102;
+
+                  
