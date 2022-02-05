@@ -2,6 +2,7 @@ package controller.viewscontrollers;
 
 import controller.serviseforcontroller.actadminstrategy.MVCAdminActStratagy;
 import controller.serviseforcontroller.viewsservises.*;
+import helperutils.myexceptionutils.AppValidException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
@@ -49,7 +50,7 @@ public class AdminController {
                            @RequestParam(required = false, name = "age") int age,
                            Model model
     ) {
-        if (ContentInParamChecker.checkParam(name, login, password)) {
+        if (ContentInParamChecker.checkParam(name, login, password) || age<0 || age>100) {
             String massage = "not right condition for user save";
             model.addAttribute("message", massage);
             return "exception";
@@ -68,7 +69,7 @@ public class AdminController {
                     .addGroup(GroupAdderService.studentList(studentId),
                             ParserStringToInt.parseArrayStringToListInteger(theamId),
                             trId);
-        } catch (IllegalArgumentException e) {
+        } catch (AppValidException e) {
             log.error(e.getMessage());
             String massage = "not right condition for add group, please try again";
             model.addAttribute("message", massage);
@@ -94,8 +95,8 @@ public class AdminController {
             ThreadRepositoryFactory.getRepository().addSalaryToTrainer(Integer.parseInt(trainerId), Integer.parseInt(salValue));
             return "adminControl/adminActList";
         } else {
-            String massage = "salary must be upper then null";
-            model.addAttribute("massage", massage);
+            String message = "salary must be upper then null";
+            model.addAttribute("message", message);
             return "exception";
         }
     }
@@ -116,18 +117,19 @@ public class AdminController {
     public String avarageSalary(@RequestParam("trId") int trainerId,
                                 @RequestParam("period") int period,
                                 Model model) {
-        if (period > 0) {
-            long avaragesalary = AvarageSalaryCalculate.avarageSalaryCalc(
-                    RepositoryFactory.getRepository().getTrainerById(trainerId).getSalarylist(),
-                    period);
-            model.addAttribute("avarage", avaragesalary);
-            return "adminControl/avaragesalarywatch";
-        } else {
-            String massage = "period must be upper then null";
-            model.addAttribute("message", massage);
-            return "exception";
-        }
-
+            try {
+                long avaragesalary = AvarageSalaryCalculate.avarageSalaryCalc(
+                        RepositoryFactory.getRepository().getTrainerById(trainerId).getSalarylist(),
+                        period);
+                model.addAttribute("avarage", avaragesalary);
+            }
+            catch (AppValidException e) {
+                String message = e.getMessage();
+                log.error(message);
+                model.addAttribute("message", message);
+                return "exception";
+            }
+        return "adminControl/avaragesalarywatch";
     }
 
     @PostMapping("/updateUser")
@@ -148,13 +150,20 @@ public class AdminController {
                                    @RequestParam(required = false, name = "name") String name,
                                    @RequestParam(required = false, name = "login") String login,
                                    @RequestParam(required = false, name = "password") String password,
-                                   @RequestParam(required = false, name = "age") String age
+                                   @RequestParam(required = false, name = "age") String age,
+                                   Model model
     ) {
-        RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(id, name, login, password, age));
-        return "adminControl/adminActList";
+        try {
+            RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(id, name, login, password, age));
+            return "adminControl/adminActList";
+        }
+        catch (AppValidException e) {
+            String message = e.getMessage();
+            model.addAttribute("message", message);
+            return "exception";
+        }
     }
 
-    //
     @PostMapping("/changetheam")
     public String changeTheam(@RequestParam("theamid") int id,
                               @RequestParam(required = false, name = "newName") String name

@@ -1,6 +1,7 @@
 package controller.serviseforcontroller.viewsservises;
 
 
+import helperutils.myexceptionutils.AppValidException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class ParserStringToInt {
                 result[i] = Integer.parseInt(str[i]);
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
+                throw new AppValidException("parser exception");
             }
         }
         return result;
@@ -28,13 +30,14 @@ public class ParserStringToInt {
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> parseArraySIntegerToListInteger(int[] integers) {
+    public static List<Integer> parseArraySIntegerToListInteger(int[] integers) throws AppValidException {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < integers.length; i++) {
             try {
                 result.add(integers[i]);
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
+                throw new AppValidException("parser exception");
             }
         }
         return result;
@@ -46,6 +49,7 @@ public class ParserStringToInt {
             result = Integer.parseInt(str);
         } catch (IllegalArgumentException e) {
             log.error(e.getMessage());
+            throw new AppValidException("parser exception");
         }
         return result;
     }

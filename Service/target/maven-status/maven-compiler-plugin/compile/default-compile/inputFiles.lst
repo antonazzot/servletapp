@@ -82,6 +82,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\crudthreadservices\GroupCrudRepository.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepository.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\crudthreadservices\SalaryCrudRepository.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexceptionutils\AppValidException.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\crudrepositorislikeservice\AdministratorCrudRepository.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\jpaservicese\AdminServiceJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\jpaservices\SalaryServiceJpa.java

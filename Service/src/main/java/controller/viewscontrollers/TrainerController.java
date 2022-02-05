@@ -1,9 +1,10 @@
 package controller.viewscontrollers;
 
 import controller.serviseforcontroller.acttrainerstratagy.MVCTrainerActStratagy;
-import controller.serviseforcontroller.viewsservises.ChangeTrinerActStratagy;
+import controller.serviseforcontroller.viewsservises.ChangeTrinerActStrategy;
 import controller.serviseforcontroller.viewsservises.MarkIdMarkValueIntegration;
 import controller.serviseforcontroller.viewsservises.ParserStringToInt;
+import helperutils.myexceptionutils.AppValidException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -30,15 +31,15 @@ public class TrainerController {
             @RequestParam("groupId") Integer groupId,
             Model model
     ) {
-
-        if (studentId == null || studentId.equals("") || thId == null || thId.equals("")) {
-            String massage = "field are not valid";
-            model.addAttribute("massage", massage);
+        try {
+            MVCTrainerActStratagy strategy = ChangeTrinerActStrategy.getStrategy(act);
+            return strategy.doAct(studentId, thId, mark, model, groupId);
+        }
+        catch (AppValidException e) {
+            String message = e.getMessage();
+            model.addAttribute("message", message);
             return "exception";
         }
-
-        MVCTrainerActStratagy stratagy = ChangeTrinerActStratagy.getStratagy(act);
-        return stratagy.doAct(studentId, thId, mark, model, groupId);
     }
 
     @PostMapping("/dodeletemark")
@@ -55,14 +56,15 @@ public class TrainerController {
                     ParserStringToInt.parseArrayString(markId),
                     ParserStringToInt.simpleParserStringToInt(thId),
                     ParserStringToInt.simpleParserStringToInt(studentId));
-        } catch (IllegalArgumentException e) {
-            log.error(e.getMessage());
-            String massage = "data for delete are not valid";
-            model.addAttribute("massage", massage);
+
+            model.addAttribute("groupT", ThreadRepositoryFactory.getRepository().allGroup().get(groupId));
+            return "TrainerControlPage/trainerstartpage";
+        } catch (AppValidException e) {
+            String message = e.getMessage();
+            log.error(message);
+            model.addAttribute("massage", message);
             return "exception";
         }
-        model.addAttribute("groupT", ThreadRepositoryFactory.getRepository().allGroup().get(groupId));
-        return "TrainerControlPage/trainerstartpage";
     }
 
     @PostMapping("/dochangemark")
@@ -75,18 +77,17 @@ public class TrainerController {
             @RequestParam("groupId") Integer groupId,
             Model model
     ) {
-        log.info("change controller={}", studentId);
         try {
             ThreadRepositoryFactory.getRepository().changeMark(MarkIdMarkValueIntegration.doIntegration(markValue, markId),
                     ParserStringToInt.simpleParserStringToInt(studentId), ParserStringToInt.simpleParserStringToInt(thId));
-        } catch (IllegalArgumentException e) {
-            log.error(e.getMessage());
-            String massage = "mark for change not valid";
-            model.addAttribute("massage", massage);
+            model.addAttribute("groupT", ThreadRepositoryFactory.getRepository().allGroup().get(groupId));
+            return "TrainerControlPage/trainerstartpage";
+        } catch (AppValidException e) {
+            String message = e.getMessage();
+            model.addAttribute("massage", message);
             return "exception";
         }
-        model.addAttribute("groupT", ThreadRepositoryFactory.getRepository().allGroup().get(groupId));
-        return "TrainerControlPage/trainerstartpage";
+
     }
 
     @GetMapping("/prepare")

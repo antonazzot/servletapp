@@ -29,6 +29,7 @@ public class Student extends UserImpl {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
+    
     @JsonIgnore
     private Set<Group> groupSet;
     @OneToMany

@@ -1,5 +1,6 @@
 package controller.serviseforcontroller.viewsservises;
 
+import helperutils.myexceptionutils.AppValidException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -7,7 +8,7 @@ import java.util.Map;
 
 @Slf4j
 public class MarkIdMarkValueIntegration {
-    public static Map<Integer, Integer> doIntegration(String[] marks, String[] markId) {
+    public static Map<Integer, Integer> doIntegration(String[] marks, String[] markId) throws AppValidException {
         Map<Integer, Integer> markIdMarkValue = new HashMap<>();
 
         for (int i = 0; i < markId.length; i++) {
@@ -19,7 +20,7 @@ public class MarkIdMarkValueIntegration {
                     markIdMarkValue.put(tempMarkId, tempMarkValue);
                 } catch (IllegalArgumentException e) {
                     log.error(e.getMessage());
-                    throw new IllegalArgumentException("mark for change not valid");
+                    throw new AppValidException("mark for change not valid");
                 }
             }
 

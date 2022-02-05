@@ -59,10 +59,11 @@ public class UserSpringOrmRepository implements UserRepository {
         allAdmin.getResultList().forEach(administrator -> result.put(administrator.getId(), administrator));
         return result;
     }
+
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public UserImpl getUserById(Integer id) {
-        return em.find(UserImpl.class, id);
+        return allUser().get(id);
     }
 
     @Override

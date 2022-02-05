@@ -5,8 +5,8 @@ import controller.serviseforcontroller.acttrainerstratagy.*;
 
 import java.util.Map;
 
-public class ChangeTrinerActStratagy {
-    public static MVCTrainerActStratagy getStratagy(String act) {
+public class ChangeTrinerActStrategy {
+    public static MVCTrainerActStratagy getStrategy(String act) {
         Map<String, MVCTrainerActStratagy> stratagyMap = Map.of(
                 "create", new MVCTrainerActCreateStratagyImpl(),
                 "delete", new MVCTrainerActDeleteStratagyImpl(),
