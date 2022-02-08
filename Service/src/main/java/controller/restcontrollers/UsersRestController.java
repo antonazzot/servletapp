@@ -5,6 +5,7 @@ import controller.serviseforcontroller.restsservice.ChangeUserToAgregateMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import repository.RepositoryFactory;
 import users.Role;
@@ -22,6 +23,7 @@ public class UsersRestController {
 
     @GetMapping(path = "/users/{entity}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
+    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
     public Map<Integer, UserImpl> users(@PathVariable String entity) {
         return ChangeUserToAgregateMap.mapToChange(entity);
     }

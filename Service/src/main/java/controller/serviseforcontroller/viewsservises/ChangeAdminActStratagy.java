@@ -6,12 +6,12 @@ import controller.serviseforcontroller.actadminstrategy.*;
 import java.util.Map;
 
 public class ChangeAdminActStratagy {
-    public static MVCAdminActStratagy getStratagy(String act) {
-        Map<String, MVCAdminActStratagy> stratagyMap = Map.of(
-                "create", new MVCAdminActCreateStratagyImpl(),
-                "delete", new MVCAdminActDeleteStratagyImpl(),
-                "change", new MVCAdminActChangeStratagyImpl(),
-                "watch", new MVCAdminActWatchStratagyImpl());
+    public static MVCAdminActStrategy getStratagy(String act) {
+        Map<String, MVCAdminActStrategy> stratagyMap = Map.of(
+                "create", new MVCAdminActCreateStrategyImpl(),
+                "delete", new MVCAdminActDeleteStrategyImpl(),
+                "change", new MVCAdminActChangeStrategyImpl(),
+                "watch", new MVCAdminActWatchStrategyImpl());
         return stratagyMap.get(act);
     }
 }

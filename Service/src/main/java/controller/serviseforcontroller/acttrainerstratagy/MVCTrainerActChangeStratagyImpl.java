@@ -17,7 +17,6 @@ public class MVCTrainerActChangeStratagyImpl implements MVCTrainerActStratagy {
         if (studentId == null || studentId.equals("") || thId == null || thId.equals(""))
             throw new AppValidException("field are not valid");
 
-
         int stId = ParserStringToInt.simpleParserStringToInt(studentId);
         Student student = RepositoryFactory.getRepository().getStudentById(stId);
         Theams theams = ThreadRepositoryFactory.getRepository().theamById(Integer.parseInt(thId));

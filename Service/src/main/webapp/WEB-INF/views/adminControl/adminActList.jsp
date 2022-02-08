@@ -31,10 +31,7 @@
     </select>
 
     <br>
-    Enter User ID for delete: <input name ="id", type="number"> <br>
-    <br>
-
-    <br>
+    </hr>
 
     <input type="submit" form="data" value="  Do act   ">
 

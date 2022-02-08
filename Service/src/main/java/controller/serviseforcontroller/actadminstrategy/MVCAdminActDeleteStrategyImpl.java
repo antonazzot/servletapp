@@ -5,14 +5,14 @@ import controller.serviseforcontroller.restsservice.ChangeUserToAgregateMap;
 import org.springframework.ui.Model;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 
-public class MVCAdminActDeleteStratagyImpl implements MVCAdminActStratagy {
+public class MVCAdminActDeleteStrategyImpl implements MVCAdminActStrategy {
     @Override
-    public String watchEntity(String entity, Model model, String deleteId) {
+    public String prepareEntity(String entity, Model model) {
 
         if (!entity.equals("group") && !entity.equals("theam")) {
             model.addAttribute("map", ChangeUserToAgregateMap.mapToChange(entity));
             model.addAttribute("entity", entity);
-            return "adminControl/userdeletepage";
+            return "adminControl/userdeleteP";
         } else if (!entity.equals("theam")) {
             model.addAttribute("map", ThreadRepositoryFactory.getRepository().allGroup());
             model.addAttribute("entity", entity);

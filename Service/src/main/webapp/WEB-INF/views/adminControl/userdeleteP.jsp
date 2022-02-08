@@ -14,25 +14,26 @@
 <br> <br/>
 <section class="container">
 <div class="login">
+
+<form id="deleteentity" method = "post"  action="/web/mvc/views/dodeleteentity">
  <c:forEach var = "entry" items="${map}">
-<div>
-
-   <p> ID:    <c:out value = "${entry.key}" /> </p>
-
+    <div>
+   <p> ID:    <c:out value = "${entry.key}" />
+   <input type="checkbox"  name="entityId"  value="${entry.key}"> <br>  </p>
    <p> Name:      <c:out value = "${entry.value.name}" /> </p>
    <p> Login:      <c:out value = "${entry.value.login}" /> </p>
-   <p> Password:     <c:out value = "${entry.value.password}" /> </p>
     <p> Age:     <c:out value = "${entry.value.age}" /> </p>
+    <br>
+    <hr>
+    <hr>
+  </c:forEach>
 
-    <form id="deleteentity" method = "get"  action="/web/mvc/views/dodeleteentity">
-    <input type="hidden" name="entityId" value="${entry.value.id}">
     <input type="hidden" name="entity"  value="${entity}">
-      <p><input type="submit" form="deleteentity" value="Delete this"></p>
-    </form>
+      <p><input type="submit" form="deleteentity" value="Delete"></p>
+
+</form>
 </div>
 <hr>
-<hr>
-  </c:forEach>
 
 <br>
  <jsp:include page="mainpage.jsp" />

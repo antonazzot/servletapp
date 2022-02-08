@@ -10,11 +10,15 @@
 <body>
 <section class="container">
 <div class="login">
+
+<form id="deleteentity" method = "get"  action="/web/mvc/views/dodeleteentity">
+
  <c:forEach var = "entry" items="${map}">
  <div>
 
        <p> Название группы: </p>
        <c:out value = "${entry.value.name}" />
+       <input type="checkbox" name="entityId" value="${entry.value.id}"> </p>
        <p> Id группы: </p>
        <c:out value = "${entry.key}" />
        <p> Тренер группы: </p>
@@ -30,17 +34,17 @@
                                   <c:out value = "${studentmap.value.name}" /> <br>
                           </c:forEach>
 
-        <form id="deleteentity" method = "get"  action="/web/mvc/views/dodeleteentity">
-        <input type="hidden" name="entityId" value="${entry.value.id}">
-        <input type="hidden" name="entity"  value="${entity}">
-        <p><input type="submit" form="deleteentity" value="Delete this"></p>
-        </form>
+
                            <hr/>
                           <hr/>
    </div>
    <hr>
-  </c:forEach>
 
+</c:forEach>
+
+        <p><input type="submit" form="deleteentity" value="Delete"></p>
+        <input type="hidden" name="entity"  value="${entity}">
+        </form>
   <jsp:include page="mainpage.jsp" />
      </div>
     </section>

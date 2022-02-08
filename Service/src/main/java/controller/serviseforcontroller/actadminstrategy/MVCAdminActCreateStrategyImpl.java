@@ -8,19 +8,16 @@ import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Theams;
 
 @Slf4j
-public class MVCAdminActCreateStratagyImpl implements MVCAdminActStratagy {
+public class MVCAdminActCreateStrategyImpl implements MVCAdminActStrategy {
     @Override
-    public String watchEntity(String entity, Model model, String deleteId) {
+    public String prepareEntity(String entity, Model model) {
         if (!entity.equals("group") && !entity.equals("theam")) {
             model.addAttribute("role", entity);
-//            model.addAttribute("userImpl", new UserImpl().withRole(RoleIDParametrCheker.getRoleByString(entity)));
             return "adminControl/adduserpage";
         } else if (!entity.equals("theam")) {
-            log.info("Create group ={}", entity);
             model.addAttribute("mapIS", RepositoryFactory.getRepository().allStudent());
             model.addAttribute("mapITr", RepositoryFactory.getRepository().freeTrainer());
             model.addAttribute("mapITe", ThreadRepositoryFactory.getRepository().freeTheams());
-//            model.addAttribute("group", new Group());
             return "adminControl/addgroup";
         } else {
             model.addAttribute("theam", new Theams());

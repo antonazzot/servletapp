@@ -16,14 +16,19 @@
   <form id="data" method = "post"  action="/web/mvc/views/resultchangeuser">
    <p>Внесите данные для изменения</p>
     <input name="id" type="hidden"  value = "${userForChange.id}" /> <br>
+
         <select name="role", form="data">
             <option value="student">Student</option>
             <option value="trainer">Trainer</option>
             <option value="administrator">Administrator</option>
-           </select> <br>
-    <input name="login" type="text" placeholder="${userForChange.login}"  />
-    <input name="password" type="text" placeholder="${userForChange.password}"  />
+         </select> <br>
+    Enter name: <br>
     <input name="name" type="text" placeholder="${userForChange.name}"  />
+    Enter login: <br>
+    <input name="login" type="text" placeholder="${userForChange.login}"  />
+    Enter password: <br>
+    <input name="password" type="text" placeholder="password"  />
+    Enter age: <br>
     <input name="age" type="number" placeholder="${userForChange.age}"  />
 
    <p><input type="submit" form="data" value="Отправить"></p>

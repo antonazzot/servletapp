@@ -1,6 +1,6 @@
 package controller.viewscontrollers;
 
-import controller.serviseforcontroller.actadminstrategy.MVCAdminActStratagy;
+import controller.serviseforcontroller.actadminstrategy.MVCAdminActStrategy;
 import controller.serviseforcontroller.viewsservises.*;
 import helperutils.myexceptionutils.AppValidException;
 import lombok.RequiredArgsConstructor;
@@ -36,10 +36,9 @@ public class AdminController {
     @PostMapping("/adminact")
     public String adminAct(@RequestParam("entity") String entity,
                            @RequestParam("act") String act,
-                           @RequestParam(required = false) String id,
                            Model model) {
-        MVCAdminActStratagy strategy = ChangeAdminActStratagy.getStratagy(act);
-        return strategy.watchEntity(entity, model, id);
+        MVCAdminActStrategy strategy = ChangeAdminActStratagy.getStratagy(act);
+        return strategy.prepareEntity(entity, model);
     }
 
     @PostMapping("/saveuser")
@@ -147,6 +146,7 @@ public class AdminController {
 
     @PostMapping("/resultchangeuser")
     public String resultChangeUser(@RequestParam("id") int id,
+                                   @RequestParam("role") String role,
                                    @RequestParam(required = false, name = "name") String name,
                                    @RequestParam(required = false, name = "login") String login,
                                    @RequestParam(required = false, name = "password") String password,
@@ -154,7 +154,7 @@ public class AdminController {
                                    Model model
     ) {
         try {
-            RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(id, name, login, password, age));
+            RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(id, name, login, password, age, role));
             return "adminControl/adminActList";
         }
         catch (AppValidException e) {
@@ -193,14 +193,14 @@ public class AdminController {
         return "adminControl/adminActList";
     }
 
-    @GetMapping("/dodeleteentity")
+    @PostMapping("/dodeleteentity")
     public String dodeleteentity(
-            @RequestParam("entityId") int entityId,
+            @RequestParam("entityId") Integer [] entityId,
             @RequestParam(required = false, name = "entity") String entity,
             Model model
     ) {
-        RepositoryFactory.getRepository().removeUser(entityId, entity);
-        return adminAct(entity, "delete", String.valueOf(entityId), model);
+        RemoveEntityIdIterator.iterateAndDeleteEntity(entityId, entity);
+        return "adminControl/adminActList";
     }
 
     @GetMapping("/prepare")

@@ -10,23 +10,27 @@
 <body>
 <section class="container">
 <div class="login">
+
+
+<form id="deleteentity" method = "post"  action="/web/mvc/views/dodeleteentity">
  <c:forEach var = "entry" items="${map}">
  <div>
-
      <p> Id темы:
-       <c:out value = "${entry.key}" /> <br>
+       <c:out value = "${entry.key}" />
+       <input type="checkbox"  name="entityId"  value="${entry.key}">  <br>
        Название темы:
        <c:out value = "${entry.value.theamName}" /> </p>
 
-        <form id="deleteentity" method = "get"  action="/web/mvc/views/dodeleteentity">
-      <input type="hidden" name="entityId" value="${entry.key}">
+</hr>
+</hr>
+  </c:forEach>
+
       <input type="hidden" name="entity"  value="${entity}">
       <p><input type="submit" form="deleteentity" value="Delete this"></p>
 
      </form>
      <hr />
    </div>
-  </c:forEach>
 
 <br>
  </div>

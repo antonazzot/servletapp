@@ -6,10 +6,9 @@ import org.springframework.ui.Model;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 
 @Slf4j
-public class MVCAdminActChangeStratagyImpl implements MVCAdminActStratagy {
+public class MVCAdminActChangeStrategyImpl implements MVCAdminActStrategy {
     @Override
-    public String watchEntity(String entity, Model model, String deleteId) {
-        log.info("Entity for change ={}", entity);
+    public String prepareEntity(String entity, Model model) {
 
         if (!entity.equals("group") && !entity.equals("theam")) {
             model.addAttribute("map", ChangeUserToAgregateMap.mapToChange(entity));

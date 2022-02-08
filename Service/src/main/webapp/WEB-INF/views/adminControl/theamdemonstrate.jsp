@@ -10,15 +10,16 @@
 <body>
 <section class="container">
 <div class="login">
- <c:forEach var = "entry" items="${map}">
+
+<c:forEach var = "entry" items="${map}">
      <p> Id темы:
        <c:out value = "${entry.key}" /> <br>
        Название темы:
        <c:out value = "${entry.value.theamName}" /> </p>
            <hr />
   </c:forEach>
-
 <br>
+
  </div>
   </section>
 <br>
