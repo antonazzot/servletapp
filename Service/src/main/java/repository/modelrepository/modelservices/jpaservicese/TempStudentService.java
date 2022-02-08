@@ -2,39 +2,32 @@ package repository.modelrepository.modelservices.jpaservicese;
 
 import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import threadmodel.Group;
-import users.Role;
-import users.Student;
-import users.UserImpl;
+import users.TempStudent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-public class StudentServiceJpa {
-
+public class TempStudentService {
     private final SessionFactory sessionFactory;
 
-    public Map<Integer, UserImpl> getAllStudent() {
-        Map<Integer, UserImpl> result = new HashMap<>();
+    public List<TempStudent> getAllTempStudent() {
+        List<TempStudent> result = new ArrayList<>();
         EntityManager em = null;
         try {
-
             em = sessionFactory.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
-            TypedQuery<Student> allst = em.createQuery("select s from Student s where s.role = :role", Student.class);
-            allst.setParameter("role", Role.STUDENT);
-            allst.getResultList().forEach(student -> result.put(student.getId(), student));
+            TypedQuery<TempStudent> allst = em.createQuery("select t from TempStudent t", TempStudent.class);
+            result.addAll(allst.getResultList());
         } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
@@ -43,35 +36,52 @@ public class StudentServiceJpa {
         return result;
     }
 
-    public List<Student> getStudentFromGroup(Integer groupId) {
+    public TempStudent doGetTempStudentById(Integer id) {
         EntityManager em = null;
-        try {
-            em = sessionFactory.createEntityManager();
-            Group group = em.find(Group.class, groupId);
-            List<Student> students = new ArrayList<>();
-            group.getStudentMap().values().forEach(student -> students.add(student));
-            return students;
-        } catch (Exception e) {
-            JpaUtils.rollBackQuietly(em, e);
-        } finally {
-            JpaUtils.closeQuietly(em);
-        }
-        return null;
-    }
-
-    public Student doGetStudentById(int id) {
-        EntityManager em = null;
-        Student student = null;
+        TempStudent student = null;
         try {
             em = sessionFactory.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
-            student = em.find(Student.class, id);
+            student = em.find(TempStudent.class, id);
         } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);
         } finally {
             JpaUtils.closeQuietly(em);
         }
         return student;
+    }
+
+    public void doRemoveTempstudent(Integer id) {
+        EntityManager em = null;
+        TempStudent student = null;
+        try {
+            em = sessionFactory.createEntityManager();
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            em.remove(doGetTempStudentById(id));
+            transaction.commit();
+        } catch (Exception e) {
+            JpaUtils.rollBackQuietly(em, e);
+        } finally {
+            JpaUtils.closeQuietly(em);
+        }
+    }
+    public int doSaveTempstudent(TempStudent tempStudent) {
+        EntityManager em = null;
+        TempStudent student = null;
+        try {
+            em = sessionFactory.createEntityManager();
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            em.persist(tempStudent);
+            transaction.commit();
+
+        } catch (Exception e) {
+            JpaUtils.rollBackQuietly(em, e);
+        } finally {
+            JpaUtils.closeQuietly(em);
+        }
+        return tempStudent.getId();
     }
 }

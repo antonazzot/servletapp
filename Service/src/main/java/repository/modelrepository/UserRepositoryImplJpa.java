@@ -2,14 +2,8 @@ package repository.modelrepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import repository.modelrepository.modelservices.jpaservicese.AdminServiceJpa;
-import repository.modelrepository.modelservices.jpaservicese.StudentServiceJpa;
-import repository.modelrepository.modelservices.jpaservicese.TrainerServiceJpa;
-import repository.modelrepository.modelservices.jpaservicese.UserServiceJpa;
-import users.Administrator;
-import users.Student;
-import users.Trainer;
-import users.UserImpl;
+import repository.modelrepository.modelservices.jpaservicese.*;
+import users.*;
 
 import java.util.List;
 import java.util.Map;
@@ -23,6 +17,7 @@ public class UserRepositoryImplJpa implements UserRepository {
     private final StudentServiceJpa studentServiceJpa;
     private final TrainerServiceJpa trainerServiceJpa;
     private final UserServiceJpa userServiceJpa;
+    private final TempStudentService tempStudentService;
 
     @Override
     public Map<Integer, UserImpl> allUser() {
@@ -92,5 +87,25 @@ public class UserRepositoryImplJpa implements UserRepository {
     @Override
     public Student getStudentById(int id) {
         return studentServiceJpa.doGetStudentById(id);
+    }
+
+    @Override
+    public int saveTempStudent(TempStudent tempStudent) {
+        return tempStudentService.doSaveTempstudent(tempStudent);
+    }
+
+    @Override
+    public List<TempStudent> findAllTempSstudent() {
+        return tempStudentService.getAllTempStudent();
+    }
+
+    @Override
+    public TempStudent getTempUserById(Integer id) {
+        return tempStudentService.doGetTempStudentById(id);
+    }
+
+    @Override
+    public void removeTempStudent(Integer id) {
+    tempStudentService.doRemoveTempstudent(id);
     }
 }

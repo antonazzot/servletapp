@@ -6,8 +6,10 @@ users\UserImpl.class
 threadmodel\Salary.class
 database\DataBaseInf.class
 threadmodel\Mark.class
+users\TempStudent.class
 threadmodel\Theams.class
 users\Trainer.class
 users\User.class
 action\IdFactory.class
 users\Student.class
+users\TempStudent$TempStudentBuilder.class

@@ -25,7 +25,13 @@
             </br>
              <form  action="/web/mvc/student">
                       <input type="submit" value="Enter Like Student">
-                  </form>
+              </form>
+              </br>
+              </br>
+              </hr>
+             <form  action="/web/mvc/registrate">
+                      <input type="submit" value="Registrate like new student">
+              </form>
     </div>
 
     <div class="login-help">

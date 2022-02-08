@@ -9,10 +9,7 @@ import repository.modelrepository.modelservices.postgresservices.AdminServicePos
 import repository.modelrepository.modelservices.postgresservices.StudentServicePostgres;
 import repository.modelrepository.modelservices.postgresservices.TrainerServicePostgres;
 import repository.modelrepository.modelservices.postgresservices.UsersServicePostgres;
-import users.Administrator;
-import users.Student;
-import users.Trainer;
-import users.UserImpl;
+import users.*;
 
 import java.util.List;
 import java.util.Map;
@@ -95,6 +92,26 @@ public class UserRepositoryImplPostgres implements UserRepository {
     @Override
     public Student getStudentById(int id)  {
       return   studentServicePostgres.getStudentById(id);
+    }
+
+    @Override
+    public int saveTempStudent(TempStudent tempStudent) {
+        return studentServicePostgres.saveTempStudent(tempStudent);
+    }
+
+    @Override
+    public List<TempStudent> findAllTempSstudent() {
+        return studentServicePostgres.findAllTempStudent();
+    }
+
+    @Override
+    public TempStudent getTempUserById(Integer id) {
+        return studentServicePostgres.getTempStudentById();
+    }
+
+    @Override
+    public void removeTempStudent(Integer id) {
+    studentServicePostgres.removeTempStudent();
     }
 
 }

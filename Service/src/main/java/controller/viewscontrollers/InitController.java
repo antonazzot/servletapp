@@ -1,27 +1,33 @@
 package controller.viewscontrollers;
 
+import controller.serviseforcontroller.viewsservises.CheckTempUserParameters;
 import controller.serviseforcontroller.viewsservises.StartService;
 import controller.serviseforcontroller.viewsservises.StratagyForAutorithate;
+import helperutils.myexceptionutils.AppValidException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import repository.RepositoryFactory;
+import users.TempStudent;
 import users.UserImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @SessionAttributes("user")
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/mvc")
 public class InitController {
+
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/hello")
     public String hello(HttpSession session, Model model) {
@@ -64,6 +70,43 @@ public class InitController {
 //            }
 //        }
         return "redirect:/mvc/hello";
+    }
+
+    @GetMapping ("/registrate")
+    public String registrte() {
+        return "regitrteform";
+    }
+
+    @PostMapping ("/tempstudent")
+    public String tempstudentRegistrate (
+            @RequestParam(required = false, name = "name") String name,
+            @RequestParam(required = false, name = "login") String login,
+            @RequestParam(required = false, name = "password") String password,
+            @RequestParam(required = false, name = "age") int age,
+            @RequestParam(required = false, name = "remember_me") String rememberMe,
+            Model model,
+            HttpServletRequest request
+    ) {
+        try {
+            CheckTempUserParameters.checkParameters(name, login, password, age);
+            TempStudent tempStudent = TempStudent.builder()
+                    .name(name)
+                    .login(login)
+                    .password(passwordEncoder.encode(password))
+                    .age(age)
+                    .build();
+        RepositoryFactory.getRepository().saveTempStudent(tempStudent);
+        if (rememberMe!=null && !rememberMe.equals("")) {
+            request.getCookies();
+        }
+        }
+        catch (AppValidException e) {
+            String message = e.getMessage();
+            log.error(message);
+            model.addAttribute("message", message);
+            return "exception";
+        }
+        return "str";
     }
 
     @GetMapping("/exception")

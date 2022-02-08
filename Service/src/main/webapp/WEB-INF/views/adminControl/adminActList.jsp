@@ -41,6 +41,10 @@
 
 <br>
 
+<form action="/web/mvc/views/propose">
+<input type="submit" value="watch propose">
+</form>
+<br>
 
 <form action="/web/mvc/views/addsalary">
 <input type="submit" value="ADD SALARY">

@@ -1,9 +1,6 @@
 package repository.modelrepository;
 
-import users.Administrator;
-import users.Student;
-import users.Trainer;
-import users.UserImpl;
+import users.*;
 
 import java.util.List;
 import java.util.Map;
@@ -37,5 +34,13 @@ public interface UserRepository {
     Administrator getAdministratorById (int id);
 
     Student getStudentById (int id);
+
+    int saveTempStudent (TempStudent tempStudent);
+
+    List <TempStudent> findAllTempSstudent();
+
+    TempStudent getTempUserById (Integer id);
+
+    void removeTempStudent (Integer id);
 
 }

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import repository.RepositoryFactory;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.AdministratorCrudRepository;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.StudentCrudRepository;
+import repository.modelrepository.modelservices.crudrepositorislikeservice.TempStudentCrudRepoitory;
 import repository.modelrepository.modelservices.crudrepositorislikeservice.TrainerCrudRepository;
 import repository.threadmodelrep.threadservices.crudthreadservices.GroupCrudRepository;
 import repository.threadmodelrep.threadservices.crudthreadservices.TheamCrudRepository;
@@ -23,6 +24,7 @@ public class UserCrudRepository implements UserRepository {
     private final TrainerCrudRepository trainerCrudRepository;
     private final TheamCrudRepository theamCrudRepository;
     private final GroupCrudRepository groupCrudRepository;
+    private final TempStudentCrudRepoitory tempStudentCrudRepoitory;
 
     @Transactional
     @Override
@@ -148,5 +150,27 @@ public class UserCrudRepository implements UserRepository {
     @Override
     public Student getStudentById(int id) {
         return studentCrudRepository.findById(id).get();
+    }
+
+    @Override
+    public int saveTempStudent(TempStudent tempStudent) {
+        TempStudent save = tempStudentCrudRepoitory.save(tempStudent);
+       return save.getId();
+    }
+
+    @Override
+    public List<TempStudent> findAllTempSstudent() {
+        return (List<TempStudent>) tempStudentCrudRepoitory.findAll();
+    }
+
+    @Override
+    public TempStudent getTempUserById(Integer id) {
+        Optional<TempStudent> byId = tempStudentCrudRepoitory.findById(id);
+        return byId.orElse(null);
+    }
+
+    @Override
+    public void removeTempStudent(Integer id) {
+       tempStudentCrudRepoitory.deleteById(id);
     }
 }

@@ -49,7 +49,7 @@ public class AdminController {
                            @RequestParam(required = false, name = "age") int age,
                            Model model
     ) {
-        if (ContentInParamChecker.checkParam(name, login, password) || age<0 || age>100) {
+        if (ContentInParamChecker.checkParam(name, login, password) || age < 0 || age > 100) {
             String massage = "not right condition for user save";
             model.addAttribute("message", massage);
             return "exception";
@@ -116,18 +116,17 @@ public class AdminController {
     public String avarageSalary(@RequestParam("trId") int trainerId,
                                 @RequestParam("period") int period,
                                 Model model) {
-            try {
-                long avaragesalary = AvarageSalaryCalculate.avarageSalaryCalc(
-                        RepositoryFactory.getRepository().getTrainerById(trainerId).getSalarylist(),
-                        period);
-                model.addAttribute("avarage", avaragesalary);
-            }
-            catch (AppValidException e) {
-                String message = e.getMessage();
-                log.error(message);
-                model.addAttribute("message", message);
-                return "exception";
-            }
+        try {
+            long avaragesalary = AvarageSalaryCalculate.avarageSalaryCalc(
+                    RepositoryFactory.getRepository().getTrainerById(trainerId).getSalarylist(),
+                    period);
+            model.addAttribute("avarage", avaragesalary);
+        } catch (AppValidException e) {
+            String message = e.getMessage();
+            log.error(message);
+            model.addAttribute("message", message);
+            return "exception";
+        }
         return "adminControl/avaragesalarywatch";
     }
 
@@ -156,8 +155,7 @@ public class AdminController {
         try {
             RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(id, name, login, password, age, role));
             return "adminControl/adminActList";
-        }
-        catch (AppValidException e) {
+        } catch (AppValidException e) {
             String message = e.getMessage();
             model.addAttribute("message", message);
             return "exception";
@@ -195,7 +193,7 @@ public class AdminController {
 
     @PostMapping("/dodeleteentity")
     public String dodeleteentity(
-            @RequestParam("entityId") Integer [] entityId,
+            @RequestParam("entityId") Integer[] entityId,
             @RequestParam(required = false, name = "entity") String entity,
             Model model
     ) {
@@ -215,6 +213,22 @@ public class AdminController {
         }
         model.addAttribute("admin", user);
         return "adminControl/adminActList";
-
     }
+
+    @GetMapping("/propose")
+    public String proposeStudent(Model model) {
+        model.addAttribute("list", RepositoryFactory.getRepository().findAllTempSstudent());
+        return "adminControl/tempstudentact";
+    }
+
+    @PostMapping("/doactwithtempstudent")
+    public String actWithTemp(
+            @RequestParam("act") String act,
+            @RequestParam("entityId") Integer[] id,
+            Model model) {
+
+        ActWithTempUser.doAct(act, id);
+        return "adminControl/tempstudentact";
+    }
+
 }

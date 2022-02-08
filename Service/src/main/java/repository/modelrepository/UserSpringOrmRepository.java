@@ -151,4 +151,30 @@ public class UserSpringOrmRepository implements UserRepository {
     public Student getStudentById(int id) {
         return em.find(Student.class, id);
     }
+
+    @Transactional
+    @Override
+    public int saveTempStudent(TempStudent tempStudent) {
+        em.persist(tempStudent);
+        return tempStudent.getId();
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    @Override
+    public List<TempStudent> findAllTempSstudent() {
+        TypedQuery<TempStudent> allTempStudent =  em.createQuery("select t from TempStudent t", TempStudent.class);
+        return  allTempStudent.getResultList();
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    @Override
+    public TempStudent getTempUserById(Integer id) {
+        return em.find(TempStudent.class, id);
+    }
+
+    @Transactional
+    @Override
+    public void removeTempStudent(Integer id) {
+        em.remove(getTempUserById(id));
+    }
 }

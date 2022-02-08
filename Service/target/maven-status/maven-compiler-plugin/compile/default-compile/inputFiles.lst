@@ -19,6 +19,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\jpastrategy\DeleteGroupImpJPA.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\springormstrategy\DeleteStratageOrm.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\memoryservices\UsersServiceMemory.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ActWithTempUser.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\StudentFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\memoryservices\TrainerServiceMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\springmvcconfig\MySpringMVCDispatcherServletInit.java
@@ -61,6 +62,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\viewsco
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\ormservices\Markormservice.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\postgresservices\GroupServicesPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTrainerChange.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\crudrepositorislikeservice\TempStudentCrudRepoitory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexceptionutils\ControllerException.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexceptionutils\MySqlException.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\acttrainerstratagy\MVCTrainerActCreateStratagyImpl.java
@@ -116,6 +118,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\postgresqlstrategy\DeleteGroupPSQLImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\start\Main.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryFactory.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\CheckTempUserParameters.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\memoryservices\TheamService.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActStrategy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\SaverService.java
@@ -134,6 +137,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\springm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\RepositoryFactory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserRepositoryImplInMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\acttrainerstratagy\MVCTrainerActDeleteStratagyImpl.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\jpaservicese\TempStudentService.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyImplJpaTheamDelete.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\AvarageSalaryCalculate.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserCrudRepository.java

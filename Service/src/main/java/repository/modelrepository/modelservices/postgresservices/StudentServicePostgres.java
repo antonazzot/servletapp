@@ -10,6 +10,7 @@ import repository.RepositoryDatasourse;
 import repository.modelrepository.modelservices.comoonservice.RoleIDParametrCheker;
 import users.Role;
 import users.Student;
+import users.TempStudent;
 import users.UserImpl;
 
 import java.sql.Connection;
@@ -126,5 +127,52 @@ public class StudentServicePostgres {
             e.printStackTrace();
         }
         return student;
+    }
+
+    public int saveTempStudent(TempStudent tempStudent) {
+        return 0;
+    }
+
+    public List<TempStudent> findAllTempStudent() {
+        List<TempStudent> students = new ArrayList<>();
+        try (Connection connection = datasourse.getConnection()) {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            try {
+                ps = connection.prepareStatement("select * from temp_student");
+                rs = ps.executeQuery();
+                while (rs.next()) {
+
+                        int studentId = rs.getInt("id");
+                            students.add(
+                                    TempStudent.builder()
+                                            .Id(studentId)
+                                            .login(rs.getString("login"))
+                                            .password(rs.getString("password"))
+                                            .name(rs.getString("name"))
+                                            .age(rs.getInt("age"))
+                                            .build()
+                            );
+                    }
+
+            } catch (MySqlException e) {
+                log.info("AllStudent exception = {}", e.getMessage());
+                e.printStackTrace();
+            } finally {
+                PostgresSQLUtils.closeQuietly(ps);
+                PostgresSQLUtils.closeQuietly(rs);
+            }
+        } catch (SQLException e) {
+            log.info("AllStudent connection exception = {}", e.getMessage());
+            e.printStackTrace();
+        }
+        return students;
+    }
+
+    public TempStudent getTempStudentById() {
+        return null;
+    }
+
+    public void removeTempStudent() {
     }
 }

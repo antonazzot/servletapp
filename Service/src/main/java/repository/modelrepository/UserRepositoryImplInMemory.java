@@ -6,10 +6,7 @@ import repository.modelrepository.modelservices.memoryservices.AdminServiceMemor
 import repository.modelrepository.modelservices.memoryservices.StudentServiceMemory;
 import repository.modelrepository.modelservices.memoryservices.TrainerServiceMemory;
 import repository.modelrepository.modelservices.memoryservices.UsersServiceMemory;
-import users.Administrator;
-import users.Student;
-import users.Trainer;
-import users.UserImpl;
+import users.*;
 
 import java.util.List;
 import java.util.Map;
@@ -87,5 +84,25 @@ public class UserRepositoryImplInMemory implements UserRepository {
     @Override
     public Student getStudentById(int id) {
         return null;
+    }
+
+    @Override
+    public int saveTempStudent(TempStudent tempStudent) {
+        return 0;
+    }
+
+    @Override
+    public List<TempStudent> findAllTempSstudent() {
+        return null;
+    }
+
+    @Override
+    public TempStudent getTempUserById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public void removeTempStudent(Integer id) {
+
     }
 }
