@@ -29,8 +29,8 @@ public class TrainerController {
             @RequestParam("act") String act,
             @RequestParam(required = false, value = "mark") String mark,
             @RequestParam("groupId") Integer groupId,
-            Model model
-    ) {
+            Model model )
+    {
         try {
             MVCTrainerActStratagy strategy = ChangeTrinerActStrategy.getStrategy(act);
             return strategy.doAct(studentId, thId, mark, model, groupId);
@@ -49,8 +49,8 @@ public class TrainerController {
             @RequestParam("student") String studentId,
             @RequestParam("act") String act,
             @RequestParam("groupId") Integer groupId,
-            Model model
-    ) {
+            Model model )
+    {
         try {
             ThreadRepositoryFactory.getRepository().deleteMarksById(
                     ParserStringToInt.parseArrayString(markId),
@@ -62,21 +62,20 @@ public class TrainerController {
         } catch (AppValidException e) {
             String message = e.getMessage();
             log.error(message);
-            model.addAttribute("massage", message);
+            model.addAttribute("message", message);
             return "exception";
         }
     }
 
     @PostMapping("/dochangemark")
     public String dochangemark(
-
             @RequestParam("thId") String thId,
             @RequestParam("studentId") String studentId,
             @RequestParam(required = false, value = "markId") String[] markId,
             @RequestParam(required = false, value = "markValue") String[] markValue,
             @RequestParam("groupId") Integer groupId,
-            Model model
-    ) {
+            Model model )
+    {
         try {
             ThreadRepositoryFactory.getRepository().changeMark(MarkIdMarkValueIntegration.doIntegration(markValue, markId),
                     ParserStringToInt.simpleParserStringToInt(studentId), ParserStringToInt.simpleParserStringToInt(thId));
@@ -84,7 +83,7 @@ public class TrainerController {
             return "TrainerControlPage/trainerstartpage";
         } catch (AppValidException e) {
             String message = e.getMessage();
-            model.addAttribute("massage", message);
+            model.addAttribute("message", message);
             return "exception";
         }
 

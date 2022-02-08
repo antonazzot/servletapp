@@ -10,10 +10,10 @@ import javax.persistence.EntityTransaction;
 public class DeleteTheamImpJPA implements DeleteStratageJPA {
     @Override
     public void doDeleteEntity(int id, EntityManager em) {
-        Theams theams = ThreadRepositoryFactory.getRepository().theamById(id);
         try {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
+            Theams theams = em.find(Theams.class, id);
             em.remove(theams);
             transaction.commit();
         } catch (Exception e) {

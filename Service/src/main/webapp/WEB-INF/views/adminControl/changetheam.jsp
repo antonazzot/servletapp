@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Group create Page</title>
+    <title>Theam change page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/css/style.css" rel="stylesheet"/>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -14,7 +14,6 @@
 <section class="container">
 <div class="login">
 <h1> Update theam </h1>
-   <p>Внесите данные для изменения</p>
     <form id="data" method = "post"  action="/web/mvc/views/changetheam">
     <p>Темы группы, выберите тему для внесения изменений  </p>
       <c:forEach var = "entry" items="${map}">

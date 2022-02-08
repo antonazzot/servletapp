@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Page</title>
+    <title>Average salary page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/css/style.css" rel="stylesheet"/>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -12,9 +12,9 @@
 <br>
 <section class="container">
 <div class="login">
-<h1> Avarage salary list </h1>
+<h1> Average salary list </h1>
 
-<p>Name: ${trainer.name}  have got avarage salary ${avarage} </p>
+<p>Name: ${trainer.name}  have got average salary ${avarage} </p>
 <br>
 <jsp:include page="mainpage.jsp" />
    </div>

@@ -29,6 +29,7 @@
     <br>
     <input type="submit" form="data" />
 <br>
+</form>
       </div>
           </section>
 

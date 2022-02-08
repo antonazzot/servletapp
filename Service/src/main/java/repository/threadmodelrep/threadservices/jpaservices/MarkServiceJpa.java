@@ -4,7 +4,6 @@ import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.RepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryFactory;
@@ -22,7 +21,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @Slf4j
 public class MarkServiceJpa {
-    @Autowired
+
     private final SessionFactory sessionFactory;
 
     public Map<UserImpl, Map<Theams, List<Mark>>> getstudentTheamMark(int studentId) {
@@ -92,13 +91,12 @@ public class MarkServiceJpa {
     public void dodeleteMarksById(int[] tempMarksId, int theamId, int studentid) {
         EntityManager em = null;
         for (int i : tempMarksId) {
-
             try {
                 em = sessionFactory.createEntityManager();
                 EntityTransaction transaction = em.getTransaction();
                 transaction.begin();
-//                log.info("MARK By ID ={}", "  " + markById.getId()+" " + markById.getValuesOfMark());
-                em.remove(getMarkById(i));
+                Mark mark = em.find(Mark.class, i);
+                em.remove(mark);
                 transaction.commit();
             } catch (Exception e) {
                 JpaUtils.rollBackQuietly(em, e);

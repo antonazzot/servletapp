@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <meta charset="UTF-8">
-    <title>Demonstrate theam  page</title>
+    <title>Delete theam  page</title>
 <link href="/css/style.css" rel="stylesheet"/>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
@@ -13,6 +13,7 @@
 
 
 <form id="deleteentity" method = "post"  action="/web/mvc/views/dodeleteentity">
+<p> Выбирите тему для удаления </p>
  <c:forEach var = "entry" items="${map}">
  <div>
      <p> Id темы:

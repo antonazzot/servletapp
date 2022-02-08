@@ -10,10 +10,10 @@ import javax.persistence.EntityTransaction;
 public class DeleteAdminImpJPA implements DeleteStratageJPA {
     @Override
     public void doDeleteEntity(int id, EntityManager em) {
-        Administrator administrator = RepositoryFactory.getRepository().getAdministratorById(id);
         try {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
+            Administrator administrator = em.find(Administrator.class, id);
             em.remove(administrator);
             transaction.commit();
         } catch (Exception e) {

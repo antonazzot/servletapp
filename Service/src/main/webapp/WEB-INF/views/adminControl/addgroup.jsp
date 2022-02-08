@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Group create Page</title>
+    <title>Group create page</title>
 <link href="/css/style.css" rel="stylesheet"/>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
@@ -33,7 +33,7 @@
              </c:forEach>
 
 
-   <p><input type="submit" value="Отправить"></p>
+   <p><input type="submit" value="Создать группу"></p>
   </form>
 <jsp:include page="mainpage.jsp" />
      </div>

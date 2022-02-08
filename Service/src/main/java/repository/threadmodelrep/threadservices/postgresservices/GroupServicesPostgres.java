@@ -4,7 +4,6 @@ import helperutils.closebaseconnection.PostgresSQLUtils;
 import helperutils.myexceptionutils.MySqlException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.RepositoryDatasourse;
 import repository.RepositoryFactory;
@@ -30,7 +29,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class GroupServicesPostgres {
 
-    @Autowired
     private final RepositoryDatasourse datasourse;
 
     public Map<Integer, Group> getAllGroup() {
@@ -39,7 +37,7 @@ public class GroupServicesPostgres {
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                ps = connection.prepareStatement("select * from \"gr_oup\"");
+                ps = connection.prepareStatement("select * from gr_oup");
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     int groupId = rs.getInt("id");
@@ -99,7 +97,7 @@ public class GroupServicesPostgres {
             int groupId = 0;
             try {
                 ps = connection.prepareStatement(
-                        "INSERT INTO \"gr_oup\" (name, trainer_id)" +
+                        "INSERT INTO gr_oup (name, trainer_id)" +
                                 "Values (?,?) returning id"
                 );
                 ps.setString(1, trainerId.toString() + "'s_Group");

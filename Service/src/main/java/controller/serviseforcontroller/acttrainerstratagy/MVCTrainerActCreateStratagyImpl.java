@@ -13,10 +13,10 @@ public class MVCTrainerActCreateStratagyImpl implements MVCTrainerActStratagy {
         if (mark == null || mark.equals("") || studentId == null || studentId.equals("") || thId == null || thId.equals(""))
            throw new AppValidException("field are not valid");
 
-        int markInt = Integer.parseInt(mark);
+        int markInt = ParserStringToInt.simpleParserStringToInt(mark);
 
-        if (markInt < 0)
-            throw new AppValidException("mark must be valid, mark<0");
+        if (markInt < 0 || markInt>100)
+            throw new AppValidException("mark must be upper then 0 and lower 100");
 
         ThreadRepositoryFactory.getRepository().addMarkToStudent(
                 ParserStringToInt.simpleParserStringToInt(studentId),

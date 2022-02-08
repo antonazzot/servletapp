@@ -10,10 +10,10 @@ import javax.persistence.EntityTransaction;
 public class DeleteGroupImpJPA implements DeleteStratageJPA {
     @Override
     public void doDeleteEntity(int id, EntityManager em) {
-        Group group = ThreadRepositoryFactory.getRepository().allGroup().get(id);
         try {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
+            Group group = em.find(Group.class, id);
             em.remove(group);
             transaction.commit();
         } catch (Exception e) {

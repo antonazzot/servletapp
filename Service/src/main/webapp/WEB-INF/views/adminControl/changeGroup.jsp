@@ -17,7 +17,7 @@
          <c:out value = "${entry.value.name}" />
          <input type="radio" name="groupid" value="${entry.key}" > <br>
           </c:forEach>
-     <p><input type="submit" form="data" value="Отправить"></p>
+     <p><input type="submit" form="data" value="Выбрать"></p>
   </form>
 <br>
 <jsp:include page="mainpage.jsp" />

@@ -11,7 +11,7 @@
 <section class="container">
 <div class="login">
 
-<form id="deleteentity" method = "get"  action="/web/mvc/views/dodeleteentity">
+<form id="deleteentity" method = "post"  action="/web/mvc/views/dodeleteentity">
 
  <c:forEach var = "entry" items="${map}">
  <div>

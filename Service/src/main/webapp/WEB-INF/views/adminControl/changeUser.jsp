@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>This Page</title>
+    <title>Change user for update page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/css/style.css" rel="stylesheet"/>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -19,7 +19,7 @@
          <input type="radio" name="userid" value="${entry.key}" > <br>
           </c:forEach>
 
-     <p><input type="submit" form="data" value="Отправить"></p>
+     <p><input type="submit" form="data" value="Выбрать"></p>
   </form>
 <br>
 <jsp:include page="mainpage.jsp" />

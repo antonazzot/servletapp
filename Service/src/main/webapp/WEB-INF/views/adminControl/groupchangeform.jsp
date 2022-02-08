@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Group create Page</title>
+    <title>Group change Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/css/style.css" rel="stylesheet"/>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">

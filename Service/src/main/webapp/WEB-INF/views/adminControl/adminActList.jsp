@@ -42,16 +42,16 @@
 <br>
 
 <form action="/web/mvc/views/propose">
-<input type="submit" value="watch propose">
+<input type="submit" value="Candidate form">
 </form>
 <br>
 
 <form action="/web/mvc/views/addsalary">
-<input type="submit" value="ADD SALARY">
+<input type="submit" value="Add salary">
 </form>
 
 <form action="/web/mvc/views/avarageSalary">
-<input type="submit" value="AVERAGE SALARY">
+<input type="submit" value="Average salary">
 </form>
 
 <br>

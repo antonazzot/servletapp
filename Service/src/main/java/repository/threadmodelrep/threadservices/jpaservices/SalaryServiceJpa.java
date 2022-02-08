@@ -4,7 +4,6 @@ import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.RepositoryFactory;
 import threadmodel.Salary;
@@ -20,7 +19,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Slf4j
 public class SalaryServiceJpa {
-    @Autowired
     private final SessionFactory sessionFactory;
 
     public Map<Trainer, List<Salary>> gettrainerSalary() {
@@ -50,12 +48,5 @@ public class SalaryServiceJpa {
         } finally {
             JpaUtils.closeQuietly(em);
         }
-//        EntityManager em1 = sessionFactory.createEntityManager();
-//        EntityTransaction transaction2 = em.getTransaction();
-//        transaction2.begin();
-//        trainer.addSalary(salary);
-//        em.merge(trainer);
-//        transaction2.commit();
-//        em1.close();
     }
 }

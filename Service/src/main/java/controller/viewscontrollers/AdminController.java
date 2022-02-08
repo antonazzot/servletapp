@@ -226,9 +226,8 @@ public class AdminController {
             @RequestParam("act") String act,
             @RequestParam("entityId") Integer[] id,
             Model model) {
-
         ActWithTempUser.doAct(act, id);
-        return "adminControl/tempstudentact";
+        return "adminControl/adminActList";
     }
 
 }

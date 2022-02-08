@@ -5,7 +5,6 @@ import helperutils.myexceptionutils.MyJpaException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.RepositoryFactory;
 import repository.threadmodelrep.ThreadRepositoryFactory;
@@ -26,7 +25,6 @@ import java.util.*;
 @Slf4j
 @RequiredArgsConstructor
 public class GroupServiceJpa {
-    @Autowired
     private final SessionFactory sessionFactory;
 
     public Map<Integer, Group> getAllGroup() {

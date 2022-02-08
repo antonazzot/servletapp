@@ -18,7 +18,7 @@
  <jsp:include page="mainpage.jsp" />
 <br>
 <form  action="logout">
-    <input type="submit" value="LogIN page!">
+    <input type="submit" value="LogOut">
 </form>
    </div>
   </section>

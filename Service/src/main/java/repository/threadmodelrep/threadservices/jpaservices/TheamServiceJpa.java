@@ -4,7 +4,6 @@ import helperutils.closebaseconnection.JpaUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.threadmodelrep.ThreadRepositoryFactory;
 import threadmodel.Theams;
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class TheamServiceJpa {
-    @Autowired
+
     private final SessionFactory sessionFactory;
 
     public Map<Integer, Theams> getallTheams() {
@@ -141,8 +140,5 @@ public class TheamServiceJpa {
             JpaUtils.closeQuietly(em);
         }
         return null;
-//        TypedQuery <Theams> query = em.createNamedQuery("getTheamById", Theams.class);
-//        query.setParameter("id", id);
-//        return query.getSingleResult();
     }
 }

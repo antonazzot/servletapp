@@ -1,14 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ page import="java.util.*" %>
-
-<head>
+<html>
     <meta charset="UTF-8">
+    <title>Delete theam  page</title>
 <link href="/css/style.css" rel="stylesheet"/>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-    <title>Demo page</title>
 </head>
 <body>
 <br> <br/>
@@ -16,6 +13,9 @@
 <div class="login">
 
 <form id="deleteentity" method = "post"  action="/web/mvc/views/dodeleteentity">
+<p> Выбирите пользователя для удаления</p>
+<br>
+
  <c:forEach var = "entry" items="${map}">
     <div>
    <p> ID:    <c:out value = "${entry.key}" />

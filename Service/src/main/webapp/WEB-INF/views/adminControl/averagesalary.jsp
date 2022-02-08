@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Page</title>
+    <title>Average salary choose page</title>
 <link href="/css/style.css" rel="stylesheet"/>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
@@ -14,6 +14,8 @@
 <h1> Add salary list </h1>
 
 <form id="data" action="/web/mvc/views/avarageCalc">
+ <h1><p>Выбирите тренера и введите колличество месяцев
+ для расчета средней зарплаты </p></h1>
 
          <c:forEach var = "entry" items="${allTrainer}">
          <c:out value = "${entry.key.name}" />  <input type="radio" name="trId" value="${entry.key.id}" >
@@ -21,11 +23,12 @@
           <c:forEach var = "list" items="${entry.value}">
            <c:out value = "${list.bigDecimalSalary}" /> <br>
             </c:forEach>
+            </hr>
           </c:forEach>
 
-    <br>  <p><h1> Введите колличество месяцев для расчета средней зарплаты </h1>
-    <p><input type="text" name="period" ></p>
-     <p><input type="submit" form="data" value="Отправить"></p>
+    <br>
+    <p><input type="text" name="period" placeholder="Enter calculate period"></p>
+     <p><input type="submit" form="data" value="Рассчитать"></p>
 </form>
 <jsp:include page="mainpage.jsp" />
      </div>

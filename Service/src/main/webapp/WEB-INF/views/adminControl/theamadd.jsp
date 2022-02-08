@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Add page</title>
+    <title>Add theam page</title>
     <link href="/css/style.css" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
@@ -17,14 +17,13 @@
 
 <form id="data" method = "post" action="/web/mvc/views/savetheam" >
     <br>
-    Enter THEAM NAME: <input  name="theam", type="text"> <br>
+    Enter theam name for add it:
+     <input  name="theam", type="text"> placeholder="theam name" <br>
       <br>
     <br>
     <input type="submit" form="data" />
+
 <br>
-  <form  action="hello">
-      <input type="submit" value="Go to Main Admin!">
-  </form>
 <jsp:include page="mainpage.jsp" />
        </div>
       </section>

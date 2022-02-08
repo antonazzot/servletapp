@@ -13,7 +13,7 @@
 <body>
 <section class="container">
 <div class="login">
-<h1> Registrte form for new student </h1>
+<h1> Registrate form for new student </h1>
 
 <form id="data" method = "post" action="/web/mvc/tempstudent" >
 
@@ -33,9 +33,6 @@
       </div>
           </section>
 
-
-<br>
-<jsp:include page="mainpage.jsp" />
 <br>
  <jsp:include page="logout.jsp" />
 </body>

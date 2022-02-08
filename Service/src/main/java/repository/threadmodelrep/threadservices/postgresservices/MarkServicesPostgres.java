@@ -4,7 +4,6 @@ import helperutils.closebaseconnection.PostgresSQLUtils;
 import helperutils.myexceptionutils.MySqlException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.RepositoryDatasourse;
 import repository.RepositoryFactory;
@@ -23,7 +22,7 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class MarkServicesPostgres {
-    @Autowired
+
     private final RepositoryDatasourse datasourse;
 
     public Map<UserImpl, Map<Theams, List<Mark>>> getstudentTheamMark(int studentId) {

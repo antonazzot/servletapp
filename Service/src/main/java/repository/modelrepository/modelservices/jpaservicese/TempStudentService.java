@@ -9,6 +9,7 @@ import users.TempStudent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,12 +55,12 @@ public class TempStudentService {
 
     public void doRemoveTempstudent(Integer id) {
         EntityManager em = null;
-        TempStudent student = null;
         try {
             em = sessionFactory.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
-            em.remove(doGetTempStudentById(id));
+            TempStudent tempStudent = em.find(TempStudent.class, id);
+            em.remove(tempStudent);
             transaction.commit();
         } catch (Exception e) {
             JpaUtils.rollBackQuietly(em, e);

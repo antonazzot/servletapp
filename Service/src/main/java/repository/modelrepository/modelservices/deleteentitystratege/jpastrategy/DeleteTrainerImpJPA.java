@@ -10,10 +10,10 @@ import javax.persistence.EntityTransaction;
 public class DeleteTrainerImpJPA implements DeleteStratageJPA {
     @Override
     public void doDeleteEntity(int id, EntityManager em) {
-        Trainer trainer = RepositoryFactory.getRepository().getTrainerById(id);
         try {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
+            Trainer trainer = em.find(Trainer.class, id);
             em.remove(trainer);
             transaction.commit();
         } catch (Exception e) {
