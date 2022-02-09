@@ -18,7 +18,7 @@ import javax.persistence.*;
                 @NamedQuery(name = "getMarkById", query = "select m from Mark m where m.id = :id")
         }
 )
-public class Mark {
+public class  Mark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
