@@ -1,4 +1,5 @@
 controller\restcontrollers\ThreadRestController.class
+controller\serviseforcontroller\SenderService.class
 repository\modelrepository\UserRepositoryImplInMemory.class
 controller\serviseforcontroller\viewsservises\RemoveEntityIdIterator.class
 controller\serviseforcontroller\viewsservises\GroupAdderService.class
@@ -10,6 +11,7 @@ controller\serviseforcontroller\viewsservises\SaverService.class
 repository\threadmodelrep\threadservices\updategroupstratagy\postgressupdatestratage\UpdateGroupStratagyPostgressImplTrainerChange.class
 repository\modelrepository\modelservices\postgresservices\TrainerServicePostgres.class
 controller\serviseforcontroller\actadminstrategy\MVCAdminActDeleteStrategyImpl.class
+repository\springmvcconfig\EmailConfig.class
 controller\serviseforcontroller\actadminstrategy\MVCAdminActWatchStrategyImpl.class
 repository\modelrepository\modelservices\jpaservicese\AdminServiceJpa.class
 repository\threadmodelrep\threadservices\ormservices\Markormservice.class

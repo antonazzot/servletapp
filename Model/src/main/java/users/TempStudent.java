@@ -21,6 +21,7 @@ public class TempStudent implements User {
     private String login;
     private String password;
     private int age;
+    private String gmail;
 
 
     @Override

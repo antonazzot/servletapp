@@ -40,6 +40,10 @@
 </section>
 
 <br>
+<form action="/web/mvc/views/sender">
+<input type="submit" value="Email sender">
+</form>
+<br>
 
 <form action="/web/mvc/views/propose">
 <input type="submit" value="Candidate form">

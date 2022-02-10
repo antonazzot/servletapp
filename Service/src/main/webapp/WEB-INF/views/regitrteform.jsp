@@ -22,6 +22,7 @@
     Enter your Login: <input  name="login", type="text"> <br>
     Enter your Password: <input  name="password", type="text"> <br>
     Enter your age: <input  name="age", type="text"> <br>
+    Enter your EMAIL: <input  name="email", type="text"> <br>
           <label>
             <input type="checkbox" name="remember_me" id="remember_me">
             Remember me on this computer

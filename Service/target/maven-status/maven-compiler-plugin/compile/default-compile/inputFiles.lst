@@ -34,6 +34,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActCreateStrategyImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\postgresservices\SalaryServicesPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\springormstrategy\DeleteStudentImpOrm.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\springmvcconfig\EmailConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ContentInParamChecker.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\closebaseconnection\PostgresSQLUtils.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\acttrainerstratagy\MVCTrainerActWatchStratagyImpl.java
@@ -99,6 +100,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\postgresservices\TrainerServicePostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\interceptors\RealContentCashingWrapper.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\LogOutFilter.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\SenderService.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\updategroupstratagy\UpdateStratageJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\RequsetLoggingFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\postgresqlstrategy\DeleteTheamPSQLImpl.java

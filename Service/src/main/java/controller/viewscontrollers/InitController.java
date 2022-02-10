@@ -83,17 +83,19 @@ public class InitController {
             @RequestParam(required = false, name = "login") String login,
             @RequestParam(required = false, name = "password") String password,
             @RequestParam(required = false, name = "age") int age,
+            @RequestParam(required = false, name = "email") String email,
             @RequestParam(required = false, name = "remember_me") String rememberMe,
             Model model,
             HttpServletRequest request
     ) {
         try {
-            CheckTempUserParameters.checkParameters(name, login, password, age);
+            CheckTempUserParameters.checkParameters(name, login, password, age, email);
             TempStudent tempStudent = TempStudent.builder()
                     .name(name)
                     .login(login)
                     .password(passwordEncoder.encode(password))
                     .age(age)
+                    .gmail(email)
                     .build();
         RepositoryFactory.getRepository().saveTempStudent(tempStudent);
         if (rememberMe!=null && !rememberMe.equals("")) {

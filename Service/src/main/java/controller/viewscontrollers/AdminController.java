@@ -1,5 +1,6 @@
 package controller.viewscontrollers;
 
+import controller.serviseforcontroller.SenderService;
 import controller.serviseforcontroller.actadminstrategy.MVCAdminActStrategy;
 import controller.serviseforcontroller.viewsservises.*;
 import helperutils.myexceptionutils.AppValidException;
@@ -27,6 +28,8 @@ import java.util.ArrayList;
 public class AdminController {
 
     private final PasswordEncoder passwordEncoder;
+    private final SenderService senderService;
+    private final ActWithTempUser actWithTempUser;
 
     @GetMapping("/mainadmin")
     public String helloadmin() {
@@ -226,8 +229,17 @@ public class AdminController {
             @RequestParam("act") String act,
             @RequestParam("entityId") Integer[] id,
             Model model) {
-        ActWithTempUser.doAct(act, id);
+        actWithTempUser.doAct(act, id);
+
         return "adminControl/adminActList";
     }
+
+    @GetMapping("/sender")
+    public String actWithTemp(
+            Model model) {
+    senderService.sendMail("qwsaqwsaqwsa1221@gmail.com","ssubject", "body");
+        return "adminControl/adminActList";
+    }
+
 
 }
