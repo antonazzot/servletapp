@@ -13,20 +13,16 @@
 <body>
 <section class="container">
 <div class="login">
-<h1> Registrate form for new student </h1>
+<h1> Reset your passswword </h1>
 
-<form id="data" method = "post" action="/web/mvc/tempstudent" >
+<form id="data" method = "post" action="/web/mvc/resetpassword" >
 
     <br>
-    Enter your NAME: <input  name="name", type="text"> <br>
     Enter your Login: <input  name="login", type="text"> <br>
-    Enter your Password: <input  name="password", type="text"> <br>
-    Enter your age: <input  name="age", type="text"> <br>
     Enter your EMAIL: <input  name="email", type="text"> <br>
-          <label>
-            <input type="checkbox" name="remember_me" id="remember_me">
-            Remember me on this computer
-          </label>
+    Enter new Password: <input  name="password", type="text"> <br>
+    Repeat new Password: <input  name="repeatpassword", type="text"> <br>
+
     <br>
     <br>
     <input type="submit" form="data" />

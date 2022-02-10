@@ -95,12 +95,12 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadm
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\springmvcconfig\EntityManagerConfig.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryImplPostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\jpaservicese\StudentServiceJpa.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\CheckParametrForResetPassword.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\jpastrategy\DeleteTrainerImpJPA.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\memoryservices\AdminServiceMemory.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\postgresservices\TrainerServicePostgres.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\interceptors\RealContentCashingWrapper.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\LogOutFilter.java
-C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\SenderService.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\updategroupstratagy\UpdateStratageJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\servlets\filters\RequsetLoggingFilter.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\postgresqlstrategy\DeleteTheamPSQLImpl.java
@@ -117,6 +117,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelre
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\helperutils\myexceptionutils\MyJpaException.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\updategroupstratagy\jpaupdatestratage\UpdateGroupStratagyJpaStudentAdd.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\UserSpringOrmRepository.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\senderservice\PrepareToSend.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\deleteentitystratege\postgresqlstrategy\DeleteGroupPSQLImpl.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\start\Main.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\ThreadRepositoryFactory.java
@@ -124,6 +125,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\servise
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\memoryservices\TheamService.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\actadminstrategy\MVCAdminActStrategy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\SaverService.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\senderservice\SenderService.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\updategroupstratagy\crudstrategygroupupdate\UpdateGroupStrategyCrudTheamAdd.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\restsservice\ChangeUserToAgregateMap.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\memoryservices\SalaryService.java
@@ -133,6 +135,7 @@ C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\auth\Us
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\updategroupstratagy\crudstrategygroupupdate\UpdateGroupStrategyCrudStudentDelete.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ChangeTrinerActStrategy.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\ChangeUser.java
+C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\controller\serviseforcontroller\viewsservises\EmailValidator.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\threadmodelrep\threadservices\crudthreadservices\MarkCrudRepository.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\modelrepository\modelservices\jpaservicese\TrainerServiceJpa.java
 C:\Users\Joker\IdeaProjects\servletsapp\Service\src\main\java\repository\springmvcconfig\SpringConfig.java

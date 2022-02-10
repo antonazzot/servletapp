@@ -28,8 +28,11 @@
     <input name="login" type="text" placeholder="${userForChange.login}"  />
     Enter password: <br>
     <input name="password" type="text" placeholder="password"  />
+    Enter email: <br>
+    <input name="email" type="text" placeholder="email"  />
     Enter age: <br>
     <input name="age" type="number" placeholder="${userForChange.age}"  />
+
 
    <p><input type="submit" form="data" value="Отправить"></p>
   </form>

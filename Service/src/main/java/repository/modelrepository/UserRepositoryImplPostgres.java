@@ -45,6 +45,11 @@ public class UserRepositoryImplPostgres implements UserRepository {
     }
 
     @Override
+    public Map<Integer, TempStudent> allTemp() {
+        return null;
+    }
+
+    @Override
     public UserImpl getUserById(Integer id) {
         return usersServicePostgres.getUserById(id);
     }

@@ -1,10 +1,12 @@
 package controller.viewscontrollers;
 
 import controller.serviseforcontroller.acttrainerstratagy.MVCTrainerActStratagy;
+import controller.serviseforcontroller.senderservice.SenderService;
 import controller.serviseforcontroller.viewsservises.ChangeTrinerActStrategy;
 import controller.serviseforcontroller.viewsservises.MarkIdMarkValueIntegration;
 import controller.serviseforcontroller.viewsservises.ParserStringToInt;
 import helperutils.myexceptionutils.AppValidException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -16,11 +18,14 @@ import threadmodel.Group;
 import javax.servlet.http.HttpSession;
 
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/mvc/trainer")
 @Scope("session")
 @SessionAttributes("user")
 public class TrainerController {
+
+    private final SenderService senderService;
 
     @PostMapping("/traineract")
     public String traineract(
@@ -33,7 +38,7 @@ public class TrainerController {
     {
         try {
             MVCTrainerActStratagy strategy = ChangeTrinerActStrategy.getStrategy(act);
-            return strategy.doAct(studentId, thId, mark, model, groupId);
+            return strategy.doAct(studentId, thId, mark, model, groupId, senderService);
         }
         catch (AppValidException e) {
             String message = e.getMessage();

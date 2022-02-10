@@ -7,7 +7,7 @@ import users.Role;
 import users.UserImpl;
 
 public class ChangeUser {
-    public static UserImpl userForChange(int id, String name, String login, String password, String age, String role) throws AppValidException {
+    public static UserImpl userForChange(int id, String name, String login, String password, String age, String role, String email) throws AppValidException {
         int tempAge=0;
         if (age!=null && !age.equals(""))
             tempAge = Integer.parseInt(age);
@@ -19,6 +19,7 @@ public class ChangeUser {
         login = login.equals("") ? user.getLogin() : login;
         password = password.equals("") ? user.getPassword() : password;
         name = name.equals("") ? user.getName() : name;
+        email = email.equals("") ? user.getEmail() : email;
         int ageInt = age.equals("") ? user.getAge() : tempAge;
 
         return user
@@ -26,6 +27,7 @@ public class ChangeUser {
                 .withLogin(login)
                 .withName(name)
                 .withPassword(password)
-                .withAge(ageInt);
+                .withAge(ageInt)
+                .withEmail(email);
     }
 }

@@ -35,7 +35,7 @@
     </div>
 
     <div class="login-help">
-      <p>Forgot your password? <a href="index.html">Click here to reset it</a>.</p>
+      <p>Forgot your password? <a href="/web/mvc/resetpassword">Click here to reset it</a>.</p>
     </div>
   </section>
 

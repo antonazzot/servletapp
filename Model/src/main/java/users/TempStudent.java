@@ -31,4 +31,9 @@ public class TempStudent implements User {
                 "Login: " + getLogin() +
                 "age: " + getAge();
     }
+
+    @Override
+    public String getEmail() {
+        return getGmail();
+    }
 }

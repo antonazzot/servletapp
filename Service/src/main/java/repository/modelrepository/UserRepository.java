@@ -15,6 +15,8 @@ public interface UserRepository {
 
     Map<Integer, UserImpl> allAdmin();
 
+    Map<Integer, TempStudent> allTemp();
+
     UserImpl getUserById(Integer id);
 
     UserImpl getUserByLogin (String login);

@@ -20,6 +20,7 @@
    <p> Name:      <c:out value = "${entry.value.name}" /> </p>
    <p> Login:      <c:out value = "${entry.value.login}" /> </p>
     <p> Age:     <c:out value = "${entry.value.age}" /> </p>
+    <p> Email:     <c:out value = "${entry.value.email}" /> </p>
 </div>
 <br>
 <hr>

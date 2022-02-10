@@ -20,6 +20,7 @@ import users.Trainer;
 import users.UserImpl;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -58,7 +59,12 @@ public class ThreadRepositoryCrud implements ThreadRepository {
     public Map<UserImpl, Map<Theams, List<Mark>>> studentTheamMark(int StudentId) {
         Map<UserImpl, Map<Theams, List<Mark>>> result = new HashMap<>();
         Student student = (Student) RepositoryFactory.getRepository().getUserById(StudentId);
-        result.put(student, student.getListOfMark());
+        Set<Theams> teams = student.getMarkMap().values().stream().map(Mark::getTheams).collect(Collectors.toSet());
+        Map<Theams, List<Mark>> tempResultMap = new HashMap<>();
+        for (Theams team : teams) {
+            tempResultMap.put(team, student.getMarkMap().values().stream().filter(mark -> mark.getTheams().getId()==team.getId()).collect(Collectors.toList()));
+        }
+        result.put(student, tempResultMap);
         return result;
 
     }

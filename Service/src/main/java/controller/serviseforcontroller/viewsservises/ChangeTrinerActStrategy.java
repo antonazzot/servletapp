@@ -2,6 +2,7 @@ package controller.serviseforcontroller.viewsservises;
 
 
 import controller.serviseforcontroller.acttrainerstratagy.*;
+import controller.serviseforcontroller.senderservice.SenderService;
 
 import java.util.Map;
 

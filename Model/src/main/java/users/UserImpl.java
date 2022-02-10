@@ -34,6 +34,7 @@ public class UserImpl implements User {
     private String password;
     @Column(name = "age")
     private int age;
+    private String email;
 
     public UserImpl withId(Integer id) {
         setId(id);
@@ -42,6 +43,10 @@ public class UserImpl implements User {
 
     public UserImpl withRole(Role role) {
         setRole(role);
+        return this;
+    }
+    public UserImpl withEmail(String email) {
+        setEmail(email);
         return this;
     }
 

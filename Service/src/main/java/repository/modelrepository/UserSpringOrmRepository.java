@@ -59,6 +59,14 @@ public class UserSpringOrmRepository implements UserRepository {
         allAdmin.getResultList().forEach(administrator -> result.put(administrator.getId(), administrator));
         return result;
     }
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    @Override
+    public Map<Integer, TempStudent> allTemp() {
+        Map<Integer, TempStudent> result = new HashMap<>();
+        TypedQuery<TempStudent> allTemp = em.createQuery("select t from TempStudent t", TempStudent.class);
+        allTemp.getResultList().forEach(tempStudent -> result.put(tempStudent.getId(), tempStudent));
+        return result;
+    }
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     @Override

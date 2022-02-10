@@ -1,5 +1,6 @@
 package controller.serviseforcontroller.acttrainerstratagy;
 
+import controller.serviseforcontroller.senderservice.SenderService;
 import controller.serviseforcontroller.viewsservises.ParserStringToInt;
 import helperutils.myexceptionutils.AppValidException;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 public class MVCTrainerActWatchStratagyImpl implements MVCTrainerActStratagy {
     @Override
-    public String doAct(String studentId, String thId, String mark, Model model, Integer groupId) throws AppValidException {
+    public String doAct(String studentId, String thId, String mark, Model model, Integer groupId, SenderService senderService) throws AppValidException {
         Student student = RepositoryFactory.getRepository().getStudentById(ParserStringToInt.simpleParserStringToInt(studentId));
         Theams theams = ThreadRepositoryFactory.getRepository().theamById(ParserStringToInt.simpleParserStringToInt(thId));
         model.addAttribute("student", student);

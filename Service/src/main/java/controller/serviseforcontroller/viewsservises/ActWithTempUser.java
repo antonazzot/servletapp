@@ -1,9 +1,8 @@
 package controller.serviseforcontroller.viewsservises;
 
-import controller.serviseforcontroller.SenderService;
+import controller.serviseforcontroller.senderservice.SenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import repository.RepositoryFactory;
 import users.Role;
 import users.Student;
@@ -24,6 +23,7 @@ public class ActWithTempUser {
                         .withName(tempUserById.getName())
                         .withLogin(tempUserById.getLogin())
                         .withPassword(tempUserById.getPassword())
+                        .withEmail(tempUserById.getGmail())
                         .withAge(tempUserById.getAge());
                 RepositoryFactory.getRepository().saveUser(student);
                 RepositoryFactory.getRepository().removeTempStudent(integer);

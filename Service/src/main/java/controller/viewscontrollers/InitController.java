@@ -1,8 +1,7 @@
 package controller.viewscontrollers;
 
-import controller.serviseforcontroller.viewsservises.CheckTempUserParameters;
-import controller.serviseforcontroller.viewsservises.StartService;
-import controller.serviseforcontroller.viewsservises.StratagyForAutorithate;
+import controller.serviseforcontroller.senderservice.SenderService;
+import controller.serviseforcontroller.viewsservises.*;
 import helperutils.myexceptionutils.AppValidException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +27,7 @@ import javax.servlet.http.HttpSession;
 public class InitController {
 
     private final PasswordEncoder passwordEncoder;
+    private final SenderService senderService;
 
     @GetMapping("/hello")
     public String hello(HttpSession session, Model model) {
@@ -50,31 +50,22 @@ public class InitController {
         String name = auth.getName();
         UserImpl user = null;
         if (name != null && name != "") {
-            log.info("auth name = {}", name);
             user = RepositoryFactory.getRepository().getUserByLogin(name);
-            log.info("user by login! ={}", user.getInf());
-            log.info("user autority! ={}", auth.getAuthorities().stream().findFirst().get().getAuthority());
             model.addAttribute("userbylogin", user);
             session.setAttribute("user1", user);
             return StratagyForAutorithate.authorizationStratagy(session, model);
         }
-
-//        log.info("auth = {}", auth.getDetails(), auth.getName(), auth.getCredentials(), auth.getPrincipal());
-//        if (session != null ) {
-//            if (session.getAttribute("user")==null) {
-//                return "exception";
-//            }
-//            else {
-//                model.addAttribute("user", session.getAttribute("user"));
-//                return StratagyForAutorithate.authorizationStratagy(session, model);
-//            }
-//        }
         return "redirect:/mvc/hello";
     }
 
     @GetMapping ("/registrate")
     public String registrte() {
         return "regitrteform";
+    }
+
+    @GetMapping ("/resetpassword")
+    public String resetPassword() {
+        return "resetPasswordForm";
     }
 
     @PostMapping ("/tempstudent")
@@ -120,5 +111,29 @@ public class InitController {
     public String logOut(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
         return "redirect:/logout";
+    }
+
+    @PostMapping("/resetpassword")
+    public String resetPassword(
+            @RequestParam(required = false, name = "login") String login,
+            @RequestParam(required = false, name = "password") String password,
+            @RequestParam(required = false, name = "repeatpassword") String repassword,
+            @RequestParam(required = false, name = "email") String email,
+            Model model
+    ) {
+        try {
+            CheckParametrForResetPassword.checkParameters(repassword,login, password, email);
+            UserImpl userByLogin = RepositoryFactory.getRepository().getUserByLogin(login);
+            CheckParametrForResetPassword.checkUserParameters(userByLogin.getEmail(), userByLogin.getLogin(), login, email);
+            RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(userByLogin.getId(), userByLogin.getName(), login, passwordEncoder.encode(password), Integer.toString(userByLogin.getAge()), userByLogin.getRole().name(), email));
+            senderService.sendMail(email, "Password change", "Your password was sucsesfull change. New password: " +password);
+        }
+        catch (AppValidException e) {
+            String message = e.getMessage();
+            log.error(message);
+            model.addAttribute("message", message);
+            return "exception";
+        }
+        return "redirect:/mvc/str";
     }
 }

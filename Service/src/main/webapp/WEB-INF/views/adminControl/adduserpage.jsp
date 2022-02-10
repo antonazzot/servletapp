@@ -24,6 +24,7 @@
     Enter User Login: <input  name="login", type="text"> <br>
     Enter User Password: <input  name="password", type="text"> <br>
     Enter User age: <input  name="age", type="text"> <br>
+    Enter User email: <input  name="email", type="text"> <br>
 
     <br>
     <br>

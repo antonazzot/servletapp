@@ -40,6 +40,11 @@ public class UserRepositoryImplJpa implements UserRepository {
     }
 
     @Override
+    public Map<Integer, TempStudent> allTemp() {
+        return null;
+    }
+
+    @Override
     public UserImpl getUserById(Integer id) {
         return userServiceJpa.getUserById(id);
     }

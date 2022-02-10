@@ -1,6 +1,7 @@
 package controller.viewscontrollers;
 
-import controller.serviseforcontroller.SenderService;
+import controller.serviseforcontroller.senderservice.PrepareToSend;
+import controller.serviseforcontroller.senderservice.SenderService;
 import controller.serviseforcontroller.actadminstrategy.MVCAdminActStrategy;
 import controller.serviseforcontroller.viewsservises.*;
 import helperutils.myexceptionutils.AppValidException;
@@ -18,6 +19,7 @@ import users.UserImpl;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 @SessionAttributes("user")
 @Controller
@@ -50,14 +52,19 @@ public class AdminController {
                            @RequestParam(required = false, name = "login") String login,
                            @RequestParam(required = false, name = "password") String password,
                            @RequestParam(required = false, name = "age") int age,
+                           @RequestParam(required = false, name = "email") String email,
                            Model model
     ) {
-        if (ContentInParamChecker.checkParam(name, login, password) || age < 0 || age > 100) {
-            String massage = "not right condition for user save";
-            model.addAttribute("message", massage);
+        try {
+            CheckTempUserParameters.checkParameters(name,login,password,age,email);
+            RepositoryFactory.getRepository().saveUser(SaverService.userForSave(role, name, login, passwordEncoder.encode(password), age, email));
+        }
+        catch (AppValidException e) {
+            String message = e.getMessage();
+            log.error(message);
+            model.addAttribute("message", message);
             return "exception";
-        } else
-            RepositoryFactory.getRepository().saveUser(SaverService.userForSave(role, name, login, passwordEncoder.encode(password), age));
+        }
         return "adminControl/adminActList";
     }
 
@@ -67,10 +74,7 @@ public class AdminController {
                            @RequestParam("tr") Integer trId,
                            Model model) {
         try {
-            ThreadRepositoryFactory.getRepository()
-                    .addGroup(GroupAdderService.studentList(studentId),
-                            ParserStringToInt.parseArrayStringToListInteger(theamId),
-                            trId);
+            ThreadRepositoryFactory.getRepository().addGroup(GroupAdderService.studentList(studentId), ParserStringToInt.parseArrayStringToListInteger(theamId), trId);
         } catch (AppValidException e) {
             log.error(e.getMessage());
             String massage = "not right condition for add group, please try again";
@@ -143,6 +147,7 @@ public class AdminController {
     public String saveTheam(@RequestParam("theam") String theamName) {
         if (theamName != null && !theamName.equals(""))
             ThreadRepositoryFactory.getRepository().addTheam(theamName);
+        else return "exception";
         return "adminControl/adminActList";
     }
 
@@ -153,10 +158,11 @@ public class AdminController {
                                    @RequestParam(required = false, name = "login") String login,
                                    @RequestParam(required = false, name = "password") String password,
                                    @RequestParam(required = false, name = "age") String age,
+                                   @RequestParam(required = false, name = "email") String email,
                                    Model model
     ) {
         try {
-            RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(id, name, login, password, age, role));
+            RepositoryFactory.getRepository().updateUser(ChangeUser.userForChange(id, name, login, password, age, role, email));
             return "adminControl/adminActList";
         } catch (AppValidException e) {
             String message = e.getMessage();
@@ -190,7 +196,13 @@ public class AdminController {
                                     @RequestParam("act") String act,
                                     @RequestParam(required = false, value = "entytiIdforact") String[] entytiIdforact
     ) {
-        ThreadRepositoryFactory.getRepository().updateGroup(id, act, ParserStringToInt.parseArrayString(entytiIdforact));
+        try {
+            ThreadRepositoryFactory.getRepository().updateGroup(id, act, ParserStringToInt.parseArrayString(entytiIdforact));
+        }
+        catch (AppValidException e) {
+            log.error(e.getMessage());
+            return "exception";
+        }
         return "adminControl/adminActList";
     }
 
@@ -230,15 +242,49 @@ public class AdminController {
             @RequestParam("entityId") Integer[] id,
             Model model) {
         actWithTempUser.doAct(act, id);
-
         return "adminControl/adminActList";
+    }
+
+    @PostMapping("/messager")
+    public String messager(
+            @RequestParam("tousers") String tousers,
+            @RequestParam(required = false, name = "theam") String theam,
+            @RequestParam(required = false, name = "message") String message,
+            Model model) {
+        if (!tousers.equals("oneuser")){
+            List<String> sendTo = PrepareToSend.getUserTo(tousers);
+            for (String s : sendTo) {
+                senderService.sendMail(s, theam, message);
+            }
+            return "adminControl/adminActList";
+        }
+        else {
+            model.addAttribute("allAdmin", RepositoryFactory.getRepository().allAdmin());
+            model.addAttribute("allTrainer", RepositoryFactory.getRepository().allTrainer());
+            model.addAttribute("allStudent", RepositoryFactory.getRepository().allStudent());
+            model.addAttribute("theam", theam);
+            model.addAttribute("message", message);
+            return "adminControl/choseUserForSend";
+        }
+    }
+
+    @PostMapping("/individualsend")
+    public String individualSend(
+            @RequestParam(required = false , name = "id") int []  id,
+            @RequestParam(required = false, name = "theam") String theam,
+            @RequestParam(required = false, name = "message") String message,
+            Model model) {
+        for (int i : id) {
+            String email = RepositoryFactory.getRepository().getUserById(i).getEmail();
+            senderService.sendMail(email, theam, message);
+        }
+        return "adminControl/senderform";
     }
 
     @GetMapping("/sender")
     public String actWithTemp(
             Model model) {
-    senderService.sendMail("qwsaqwsaqwsa1221@gmail.com","ssubject", "body");
-        return "adminControl/adminActList";
+        return "adminControl/senderform";
     }
 
 

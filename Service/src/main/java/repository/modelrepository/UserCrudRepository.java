@@ -58,6 +58,13 @@ public class UserCrudRepository implements UserRepository {
     }
 
     @Override
+    public Map<Integer, TempStudent> allTemp() {
+        Map<Integer, TempStudent> result = new HashMap<>();
+        tempStudentCrudRepoitory.findAll().forEach(user -> result.put(user.getId(), user));
+        return result;
+    }
+
+    @Override
     public UserImpl getUserById(Integer id) {
         return allUser().get(id);
     }

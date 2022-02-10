@@ -100,7 +100,8 @@ public class UserServiceJpa {
                 .withPassword(user.getPassword())
                 .withName(user.getName())
                 .withAge(user.getAge())
-                .withRole(user.getRole());
+                .withRole(user.getRole())
+                .withEmail(user.getEmail());
         EntityManager em = null;
         try {
             em = sessionFactory.createEntityManager();

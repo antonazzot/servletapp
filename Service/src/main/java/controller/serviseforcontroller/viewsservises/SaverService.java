@@ -15,26 +15,29 @@ public class SaverService {
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
-    public static UserImpl userForSave(String role, String name, String login, String password, int age) {
+    public static UserImpl userForSave(String role, String name, String login, String password, int age, String email) {
         Map<String, UserImpl> userMap = new HashMap<>(Map.of(
                 "administrator", new Administrator()
                         .withRole(Role.ADMINISTRATOR)
                         .withName(name)
                         .withLogin(login)
                         .withPassword(password)
-                        .withAge(age),
+                        .withAge(age)
+                        .withEmail(email),
                 "trainer", new Trainer()
                         .withRole(Role.TRAINER)
                         .withName(name)
                         .withLogin(login)
                         .withPassword(password)
-                        .withAge(age),
+                        .withAge(age)
+                        .withEmail(email),
                 "student", new Student()
                         .withRole(Role.STUDENT)
                         .withName(name)
                         .withLogin(login)
                         .withPassword(password)
                         .withAge(age)
+                        .withEmail(email)
         ));
         return userMap.get(role);
     }
