@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import repository.modelrepository.modelservices.jpaservicese.*;
 import users.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -41,7 +42,9 @@ public class UserRepositoryImplJpa implements UserRepository {
 
     @Override
     public Map<Integer, TempStudent> allTemp() {
-        return null;
+        Map<Integer, TempStudent> result = new HashMap<>();
+        tempStudentService.getAllTempStudent().forEach(tempStudent -> result.put(tempStudent.getId(), tempStudent));
+        return  result;
     }
 
     @Override
